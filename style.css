@@ -5,7 +5,7 @@
 body {
   
   
-  background: url(/background.gif);
+  background: url(main/background.gif);
   background-size: cover;
   color: black;
 }
@@ -27,7 +27,7 @@ video::-webkit-media-controls {
 /* fonts */
 @font-face {
     font-family: 'Segoe UI';
-    src: url(SegoeUI.ttf);
+    src: url(main/SegoeUI.ttf);
 }
   
 h2 {
