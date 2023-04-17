@@ -1,0 +1,7 @@
+#twitter-timeline {
+    float: right;
+    margin-right: 100px;
+}
+
+/* or an inline style */
+style="float: right; margin-right: 100px;"
