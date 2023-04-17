@@ -1,0 +1,22 @@
+  #inner {  
+}
+
+#outer {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+
+.window {
+  width: -550px;
+  height: -150px;
+  box-shadow: 0 0 0 250px rgba(255, 255, 255, .25)
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

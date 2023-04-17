@@ -2,17 +2,26 @@
    HTML content. To learn how to do something, just try searching Google for questions like
    "how to change link color." */
 
+
+
 body {
-  
-  
-  background: url(main/background.gif);
-  background-size: cover;
-  color: black;
+	position: relative;
+	min-width: 100%;
+	min-height: 100%;
+	font-family: 'SegoeUI', sans-serif;
+	background-image: url('main/bg.png');
+	background-size: cover;
+	background-attachment: fixed;
+	margin: 0;
+	padding: 0;
+	background-repeat: repeat-x;
+	animation: panorama 60s linear infinite;
 }
 
 video::-webkit-media-controls {
   display:none !important;
 }
+
 #background-video {
   position: fixed;
   z-index: -1;
@@ -41,4 +50,14 @@ p {
 }
 li {
     font-family: 'Segoe UI';
+}
+
+@keyframes panorama {
+	0% {
+		background-position: 0;
+	}
+	
+	100% {
+		background-position: calc(100vh / 144 * -820);
+	}
 }
