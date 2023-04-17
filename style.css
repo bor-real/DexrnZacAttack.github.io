@@ -18,6 +18,11 @@ body {
 	animation: panorama 60s linear infinite;
 }
 
+.twitterembed {
+    color: #fff;
+    float: right;
+}
+
 video::-webkit-media-controls {
   display:none !important;
 }
