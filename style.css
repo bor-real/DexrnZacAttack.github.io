@@ -1,9 +1,3 @@
-/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
-   HTML content. To learn how to do something, just try searching Google for questions like
-   "how to change link color." */
-
-
-
 body {
 	position: relative;
 	min-width: 100%;
@@ -44,16 +38,7 @@ video::-webkit-media-controls {
     src: url(main/SegoeUI.ttf);
 }
   
-h2 {
-    font-family: 'Segoe UI';
-}
-h1 {
-    font-family: 'Segoe UI';
-}
-p {
-    font-family: 'Segoe UI';
-}
-li {
+h2, h1, p, li {.
     font-family: 'Segoe UI';
 }
 
