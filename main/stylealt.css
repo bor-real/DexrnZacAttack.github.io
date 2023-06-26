@@ -40,7 +40,7 @@ video::-webkit-media-controls {
   
 h2, h1, p, li {.
     font-family: 'Segoe UI';
-    color: white;
+    color: black;
 }
 
 @keyframes panorama {
