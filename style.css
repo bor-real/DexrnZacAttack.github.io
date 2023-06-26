@@ -38,8 +38,9 @@ video::-webkit-media-controls {
     src: url(main/SegoeUI.ttf);
 }
   
-h2, h1, p, li {.
+h2, h1, p, li, title {.
     font-family: 'Segoe UI';
+    color: white;
 }
 
 @keyframes panorama {
