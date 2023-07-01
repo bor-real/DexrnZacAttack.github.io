@@ -42,17 +42,22 @@
 
 <body>
 
-<img src="main/loading.gif" id="myGif">
+
   <div id="myDiv">
-    <img src="main/stone.png">
+    <img src="main/portal.gif">
     
   </div>
-
+    <audio controls autoplay style="display:none;">
+  <source src="trigger.mp3" type="audio/mpeg">
+  Something failed on your side, this isnt a problem though. (portalaudio_fail)
+</audio>
  
 
   <script>
+setTimeout(function() {
           var url= "index2.html";
    window.location = url;
+}, 4000);
   </script>
 </body>
 </html>
