@@ -52,9 +52,10 @@ h2, h1, p, li, title {.
 		background-position: calc(100vh / 144 * -820);
 	}
 
-	body, html {
-cursor: url(cursor.gif), pointer;
-                   }
+body, html {
+  cursor: url(https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/cf86296a5a2fdefba6aedab60130febc51e76c0e/cursor.gif), pointer;
+  height: 100%;
+}
 
 
 }
