@@ -1,4 +1,5 @@
 body {
+        cursor: url(cursors/cursor.gif) 9 10, auto;
 	position: relative;
 	min-width: 100%;
 	min-height: 100%;
@@ -52,10 +53,7 @@ h2, h1, p, li, title {.
 		background-position: calc(100vh / 144 * -820);
 	}
 
-body, html {
-  cursor: url(icons.cur), pointer;
-  height: 100%;
-}
+
 
 
 }
