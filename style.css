@@ -53,7 +53,7 @@ h2, h1, p, li, title {.
 	}
 
 body, html {
-  cursor: url(https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/cf86296a5a2fdefba6aedab60130febc51e76c0e/cursor.gif), pointer;
+  cursor: url(icons.cur), pointer;
   height: 100%;
 }
 
