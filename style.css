@@ -51,4 +51,10 @@ h2, h1, p, li, title {.
 	100% {
 		background-position: calc(100vh / 144 * -820);
 	}
+
+	body, html {
+cursor: url(cursor.gif), pointer;
+                   }
+
+
 }
