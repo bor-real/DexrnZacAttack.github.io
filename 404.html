@@ -13,17 +13,6 @@
     <meta name="description" content="What the FUCK am I doing">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="css/main.css">
-    <style>
-        .bg {
-	background-image: url('assets/panorama.png');
-	background-size: cover;
-	background-attachment: fixed;
-	margin: 0;
-	padding: 0;
-	background-repeat: repeat-x;
-	animation: panorama 60s linear infinite;
-        }
-    </style>
     <script>
         document.onkeydown = (e) => {
             if (e.key == 123) {
@@ -42,6 +31,33 @@
                 e.preventDefault();
             }
         };
+	function setBackground() {
+            let now = new Date();
+            let hour = now.getHours();
+            let bgElement = document.querySelector('.bg');
+        
+            if (bgElement) {
+                if (hour >= 6 && hour < 20) {
+                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
+                } else {
+                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
+                }
+            }
+        }
+        window.onload = setBackground;
+        
+        let style = document.createElement('style');
+        style.innerHTML = `
+        .bg {
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            background-repeat: repeat-x;
+            animation: panorama 60s linear infinite;
+        }
+        `;
+        document.head.appendChild(style);
     </script>
 </head>
 <body oncontextmenu="return false">
