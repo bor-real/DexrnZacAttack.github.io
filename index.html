@@ -42,6 +42,17 @@
                 e.preventDefault();
             }
         };
+	function setBackground() {
+    		let now = new Date();
+    		let hour = now.getHours();
+
+    		if (hour >= 6 && hour < 20) {
+        		document.body.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
+    		} else {
+        		document.body.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
+    		}
+	}
+	window.onload = setBackground;
     </script>
 </head>
 <body oncontextmenu="return false">
