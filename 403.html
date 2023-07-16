@@ -1,23 +1,61 @@
 <!DOCTYPE html>
-<html>
-  <head>
-          <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Not Found</title>
-    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
-  </head>
-  <body>
-      
-     <audio controls autoplay style="display:none;">
-  <source src="/main//Villager_deny1.ogg" type="audio/ogg">
-</audio>
-
-   <img src="/main/errorc.png">
-    <h1>It no worky :(</h1>
-    <p>Error 403 (Forbidden) :sad:</p>
-    <p>Return to <a href=index2.html>home</a></p>
-  </body>
+<html lang="en">
+<head>
+    <title>Dexrn's Hell Hole</title>
+    <script defer src="js/lanyard.js"></script>
+    <meta content="Dexrn's Hell Hole" property="og:title" />
+    <meta content="What the FUCK am I doing" property="og:description" />
+    <meta content="https://DexrnZacAttack.github.io" property="og:url" />
+    <meta content="Placeholder" property="og:image" />
+    <meta content="#0078D7" data-react-helmet="true" name="theme-color"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="What the FUCK am I doing">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .bg {
+	background-image: url('assets/panorama.png');
+	background-size: cover;
+	background-attachment: fixed;
+	margin: 0;
+	padding: 0;
+	background-repeat: repeat-x;
+	animation: panorama 60s linear infinite;
+        }
+    </style>
+    <script>
+        document.onkeydown = (e) => {
+            if (e.key == 123) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.key == 'U') {
+                e.preventDefault();
+            }
+        };
+    </script>
+</head>
+<body oncontextmenu="return false">
+    <!-- 404 -->
+    <div class="bg" id="homepage">
+        <div class="wrapper">
+            <div class="card" id="normalmode">
+                <div class="card-title">@Dexrn > 403</div>
+                <div style="font-size:3vh; text-align:center">
+                    Hey! You're not supposed to be here!
+                </div>
+                <center><button class="button" onclick="history.go(-1);">Go back</button><button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io";'>Home</button></center>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
