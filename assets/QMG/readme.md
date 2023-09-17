@@ -1,2 +1,2 @@
 # Contributers
-### TYSofficial
+### TYSofficial - SM-S766C
