@@ -3,6 +3,7 @@
 <head>
     <title>Dexrn的地狱洞 > QMG</title>
     <meta content="Dexrn的地狱洞 > QMG" property="og:title" />
+	<script defer src="../js/lang.js"></script>
     <meta content="我他妈在做什么" property="og:description" />
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
     <meta content="Placeholder" property="og:image" />
@@ -13,24 +14,29 @@
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
     <link rel="stylesheet" href="https://dexrnzacattack.github.io/css/main.css">
     <script>
-        document.onkeydown = (e) => {
-            if (e.key == 123) {
-                e.preventDefault();
+        // Retrieving the User's Language Preference
+        function getLanguageFromCookie() {
+          const cookies = document.cookie.split(';');
+          for (const cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'userLanguage') {
+              return value;
             }
-            if (e.ctrlKey && e.shiftKey && e.key == 'I') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key == 'C') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key == 'J') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && e.key == 'U') {
-                e.preventDefault();
-            }
-        };
-	function setBackground() {
+          }
+          return null; // Cookie not found
+        }
+        
+        // Redirect to /zh-CN/ if language is set to zh-CN
+        function redirectIfEnglish() {
+          const userLanguage = getLanguageFromCookie();
+          if (userLanguage === 'en-US') {
+            window.location.href = '/QMG/';
+          }
+        }
+        
+        redirectIfEnglish();
+
+		function setBackground() {
             let now = new Date();
             let hour = now.getHours();
             let bgElement = document.querySelector('.bg');
