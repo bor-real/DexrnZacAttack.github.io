@@ -71,7 +71,7 @@ body {
 }
 
 .card {
-    background: rgba(60, 59, 59, 0.6);
+    background: rgba(15, 15, 15, 0.6);
     box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
@@ -132,7 +132,7 @@ body {
     top: 0px;
     right: 0px;
     transform: translate(50%, -50%);
-    border: 2px solid rgba(60, 59, 59, 0.3);
+    border: 2px solid rgba(15, 15, 15, 0.3);
 }
 
 #username {
@@ -177,7 +177,7 @@ body {
    bottom: -20%;
     right: 0px;
     transform: translate(50%, -50%);
-    border: 2px solid rgba(60, 59, 59, 0.3);
+    border: 2px solid rgba(15, 15, 15, 0.3);
 }
 
 #activity-name {
