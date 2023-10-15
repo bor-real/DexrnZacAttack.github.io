@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
     <link rel="stylesheet" href="../css/big.css">
     <script>
-        // Retrieving the User's Language Preference
+        // P: Retrieving the User's Language Preference
         function getLanguageFromCookie() {
           const cookies = document.cookie.split(';');
           for (const cookie of cookies) {
@@ -23,10 +23,10 @@
               return value;
             }
           }
-          return null; // Cookie not found
+          return null; // P: Cookie not found
         }
         
-        // Redirect to /zh-CN/ if language is set to zh-CN
+        // P: Redirect to /zh-CN/ if language is set to zh-CN
         function redirectIfChinese() {
           const userLanguage = getLanguageFromCookie();
           if (userLanguage === 'zh-CN') {
@@ -81,6 +81,8 @@
 		                 <h2>If you have ANY information about either of both versions of the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></h2>
 				 <h2>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></h3>
 				 <br>
+				 <h1>---------------------</h1>
+				 <h1>10/14/2023</h1>
 		    					  <h1>Me and a few others found out how to get readable image data from the static QMG file (header with QG)</h1>
 					  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
 <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
@@ -92,76 +94,179 @@
 <br>
 
 <h1>We are still working on finding out how to get proper colors and getting animations as well.</h1>
-					  <h2 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h2>
+					  <h2><a href=https://github.com/DexrnZacAttack/QmageDecoder>https://github.com/DexrnZacAttack/QmageDecoder</a></h2>
 		    <br>
 		    					  <h1>---------------------</h1>
 		    		<h1>6/28/2023</h1>
 		    <br>
-				    <!--- Header Info --->
+				    <!--- D: Header Info --->
 				      <h1>Header</h1>
 				      <h2>The header of a QMG file contains basic information like the resolution, quality, and version.</h2>
 					  <h3>Note: this seems to be the header for the static version of the QMG format, I will try to update this and add/replace with the animation version's header.</h3>
-					     <!--- ewwww --->
-					     <table style="border-collapse: collapse; border: none; table-layout: fixed; width: 100%;"><colgroup><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody>
-                         <tr style="height: 21pt;"><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Magic</span></div>
-						 </td><td colspan="3" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Version</span></div>
-						 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Flags</span></div>
-					 	 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-					   	 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Qual.</span></div>
-						 </td><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Width</span></div>
-						 </td><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Height</span></div>
-						 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Extra</span></div>
-						 </td></tr>
-						 <tr style="height: 0pt;"><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">'Q'</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">'G'</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x28</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x5B</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x58</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x58</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x00</span></div>
-						 </td></tr>
-						 <tr style="height: 21pt;"><td colspan="12" style="background-color: #efefef; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">Interpreted as:</span></div>
-						 </td></tr>
-						 <tr style="height: 21pt;"><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">QG</span></div>
-						 </td><td colspan="3" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">1.1.1</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x28</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">91</span></div>
-						 </td><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">344</span></div>
-						 </td><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">344</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0</span></div>
-						 </td></tr>
-						 </tbody></table>
+					     <!--- D: ewwww --->
+						 <!--- D: It's a little bit better now... --->
+						 <table style="border-collapse: collapse; border: none; table-layout: fixed; width: 100%;">
+							<colgroup>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+							</colgroup>
+							<tbody>
+								<tr style="height: 21pt;">
+									<td colspan="2" style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Magic</span>
+										</div>
+									</td>
+									<td colspan="3" style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Version</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Flags</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Qual.</span>
+										</div>
+									</td>
+									<td colspan="2" style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Width</span>
+										</div>
+									</td>
+									<td colspan="2" style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Height</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Extra</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 0pt;">
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">'Q'</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">'G'</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x28</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x5B</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x58</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x58</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0x00</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 21pt;">
+									<td colspan="12" style="background-color: #efefef; color:black; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black;">Interpreted as:</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 21pt;">
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">QG</span>
+										</div>
+									</td>
+									<td colspan="3" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">1.1.1</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class "a">0x28</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">91</span>
+										</div>
+									</td>
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">344</span>
+										</div>
+									</td>
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">344</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span class="a">0</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
 					  <h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></h3>
 					  <br>
 		    					  <h1>---------------------</h1>
