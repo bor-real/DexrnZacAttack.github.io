@@ -6,35 +6,85 @@
     box-sizing: border-box;
 }
 
+/* Make theme turn white when user is using light mode on their OS */
+@media (prefers-color-scheme: light) {
+    .card {
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
+        color: #000;
+    }
+
+    .button:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #000;
+    }
+    
+    .button {
+        color: black;
+    }
+
+    .body {
+        color: #000;
+    }
+
+    .a {
+        color: black;
+    }
+}
+
+/* Same as above but for dark mode */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(15, 15, 15, 0.6);
+        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
+        color: #fff;
+    }
+
+    .button:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #fff;
+    }
+    
+    .button {
+        color: #fff;
+    }
+
+    .body {
+        color: #fff;
+    }
+
+    .a {
+        color: white;
+    }
+}
+
 .about-me {
     margin-left: 2%;
 }
 
 .button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 6px;
-  backdrop-filter: blur(1000px);
-  cursor: pointer;
-  margin: 1%;
+    background-color: transparent;
+    backdrop-filter: blur(1000px);
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1%;
 }
 
 @keyframes panorama {
-	0% {
-		background-position: 0;
-	}
-	
-	100% {
-		background-position: calc(100vh / 144 * -820);
-	}
-}
+    0% {
+        background-position: 0;
+    }
 
+    100% {
+        background-position: calc(100vh / 144 * -820);
+    }
+}
 
 .button:hover {
     box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
@@ -47,10 +97,10 @@
 
 @keyframes fadeIn {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
     100% {
-      opacity: 1;
+        opacity: 1;
     }
 }
 
@@ -60,19 +110,17 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: #fff;
+    /* color: #fff; */
     height: 100%;
-    width: 100%
+    width: 100%;
 }
 
-
 .hidden {
-  display: none;
+    display: none;
 }
 
 .card {
-    background: rgba(15, 15, 15, 0.6);
-    box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
+    /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     border-radius: 10px;
@@ -110,19 +158,23 @@ body {
     display: flex;
     gap: 1em;
 }
+
 .Profile-pic {
     position: relative;
 }
+
 #pfp {
     width: 128px;
     height: 128px;
     border-radius: 10%;
 }
+
 #pfp2 {
     width: 128px;
     height: 128px;
     border-radius: 10%;
 }
+
 #status-dot {
     border-radius: 50%;
     width: 20px;
@@ -139,6 +191,7 @@ body {
     font-size: 28px;
     font-weight: bold;
 }
+
 #status2,
 #status {
     opacity: 0.5;
@@ -174,7 +227,7 @@ body {
     width: 40px;
     height: 40px;
     position: absolute;
-   bottom: -20%;
+    bottom: -20%;
     right: 0px;
     transform: translate(50%, -50%);
     border: 2px solid rgba(15, 15, 15, 0.3);
@@ -210,6 +263,7 @@ body {
     cursor: pointer;
     font-size: small;
 }
+
 /* \ Activity / */
 
 .heading {
@@ -221,17 +275,19 @@ body {
     .card {
         width: 98%;
     }
+
     .heading {
         font-size: 30px;
     }
-
 }
+
 ul,
 li {
     padding: 0%;
     margin: 0;
     list-style: none;
 }
+
 .connections {
     display: flex;
     align-items: center;
@@ -269,11 +325,12 @@ li {
 
 .bottomright {
     position: fixed;
-	opacity: 0.5;
-    right: 0px; bottom: 0px;
-	color: #FFFFFF;
-	text-decoration: none;
-	border:none;
+    opacity: 0.5;
+    right: 0px;
+    bottom: 0px;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: none;
     width: 325px;
     height: 28px;
     padding: 5px;
@@ -282,34 +339,34 @@ li {
 
 a {
     text-decoration: none !important;
-	color: white; 
-}	
+}
 
 .topright {
     position: fixed;
-    right: 0px; top: 0px;
+    right: 0px;
+    top: 0px;
     width: 100px;
     height: 5%;
     padding: 5px;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #222222; 
+    background: #222222;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #5c5c5c; 
-  border-radius: 100vh;
-  margin-block: 10em;
+    background: #5c5c5c;
+    border-radius: 100vh;
+    margin-block: 10em;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #363636; 
+    background: #363636;
 }

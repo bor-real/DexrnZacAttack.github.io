@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dexrn的地狱洞 > QMG</title>
-    <meta content="Dexrn的地狱洞 > QMG" property="og:title" />
+    <title>Dexrn的地狱之穴 > QMG</title>
+    <meta content="Dexrn的地狱之穴 > QMG" property="og:title" />
 	<script defer src="../js/lang.js"></script>
-    <meta content="我他妈在做什么" property="og:description" />
+    <meta content="QMG文件格式逆向工程项目" property="og:description" />
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
-    <meta content="Placeholder" property="og:image" />
+    <meta content="占位符" property="og:image" />
     <meta content="#0078D7" data-react-helmet="true" name="theme-color"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="我他妈在做什么">
+    <meta name="description" content="QMG文件格式逆向工程项目">
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
-    <link rel="stylesheet" href="https://dexrnzacattack.github.io/css/main.css">
+    <link rel="stylesheet" href="../css/big.css">
     <script>
-        // Retrieving the User's Language Preference
         function getLanguageFromCookie() {
           const cookies = document.cookie.split(';');
           for (const cookie of cookies) {
@@ -23,18 +22,17 @@
               return value;
             }
           }
-          return null; // Cookie not found
+          return null;
         }
         
-        // Redirect to /zh-CN/ if language is set to zh-CN
-        function redirectIfEnglish() {
+        function redirectIfChinese() {
           const userLanguage = getLanguageFromCookie();
-          if (userLanguage === 'en-US') {
-            window.location.href = '/QMG/';
+          if (userLanguage === 'zh-CN') {
+            window.location.href = '/zh-CN/QMG/';
           }
         }
         
-        redirectIfEnglish();
+        redirectIfChinese();
 
 		function setBackground() {
             let now = new Date();
@@ -68,116 +66,222 @@
 <body>
     <div class="bg">
         <div class="wrapper" id="wrapper">
-            <div class="card" style="cursor: pointer;" onclick='window.location.href = "https://dexrnzacattack.github.io/zh-CN";'>
-                <div class="back"><-- Back</div>
+            <div class="card" style="cursor: pointer;" onclick='window.location.href = "../index.html";'>
+                <div class="back"><-- 返回</div>
             </div>
             <div class="card">
                 <div class="card-title">@Dexrn > QMG</div>
-		<h2>请注意，此页面是使用翻译器翻译的。</h2>
-                <h1>简介</h1>
-		<h2>QMG 是 Quram 制作的一种文件格式，它是一种更快、更节省空间的 PNG 替代品，其主要卖点之一是在不严重损失分辨率的情况下进行压缩。</h1>
-		<h3>此调查正在进行中，当我们发现新情况时，更多信息将添加到此网页。</h3>
-		<h3>本次调查也主要针对 QMG 的动画版本，标题为 QM 而不是 QG。</h3>
-		<h2>如果您有关于 QMG 格式的两个版本之一的任何信息，请在此处与我联系：<a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA 开发者论坛 </a></h2>
-		<h2>我们获得的许多信息都来自此<a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">网站。 </a></h3>
-		<br>
-		<!--- 标头信息 --->
-		<h1>标题</h1>
-		<h2>QMG 文件的标头包含分辨率、质量和版本等基本信息。</h2>
-		<h3>注意：这似乎是 QMG 格式静态版本的标头，我将尝试更新它并添加/替换为动画版本的标头。</h3>
-					     <!--- ewwww --->
-					     <table style="border-collapse: collapse; border: none; table-layout: fixed; width: 100%;"><colgroup><col><col><col><col><col><col><col><col><col><col><col><col></colgroup><tbody>
-                         <tr style="height: 21pt;"><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">魔数</span></div>
-						 </td><td colspan="3" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">版本</span></div>
-						 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">标志</span></div>
-					 	 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-					   	 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">质量</span></div>
-						 </td><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">宽度</span></div>
-						 </td><td colspan="2" style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">高度</span></div>
-						 </td><td style="background-color: #d9d9d9; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">额外的</span></div>
-						 </td></tr>
-						 <tr style="height: 0pt;"><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">'Q'</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">'G'</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x28</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x5B</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x58</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x58</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x01</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x00</span></div>
-						 </td></tr>
-						 <tr style="height: 21pt;"><td colspan="12" style="background-color: #efefef; border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">解释为：</span></div>
-						 </td></tr>
-						 <tr style="height: 21pt;"><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">QG</span></div>
-						 </td><td colspan="3" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">1.1.1</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0x28</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">91</span></div>
-						 </td><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">344</span></div>
-						 </td><td colspan="2" style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">344</span></div>
-						 </td><td style="border-bottom: solid #000000 1pt; border-left: solid #000000 1pt; border-right: solid #000000 1pt; border-top: solid #000000 1pt; overflow-wrap: break-word; overflow: hidden; padding: 5pt 5pt 5pt 5pt; vertical-align: top;"><div dir="ltr" style="line-height: 1.2; margin-bottom: 0pt; margin-top: 0pt; text-align: center;">
-						 <span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 11pt; font-style: normal; font-variant: normal; font-weight: 400; text-decoration: none; vertical-align: baseline;">0</span></div>
-						 </td></tr>
-						 </tbody></table>
-					  <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">原始文件</a></h3>
+				   <h1>---------------------</h1>
+				   <h1>10/14/2023</h1>
+                 	<h1>介绍</h1>
+				 	<h2>QMG是由Quram制作的文件格式，旨在成为PNG的更快、占用更少空间的替代品，其中主要卖点之一是在不丧失分辨率的情况下进行压缩。</h1>
+				 	<h3>此调查正在进行中，随着我们发现新信息，将会在此网页上添加更多信息。</h3>
+				 	<h3>此调查主要涉及带有QG头部而不是QG头部的QMG的动画版本。</h3>
+		            <h2>如果您有关于QMG格式的任何版本的信息，请在这里联系我：<a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers论坛</a></h2>
+				 	<h2>我们获得的许多信息来自于这个<a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">网站。</a></h3>
+				 	  <br>
+		    		  <h1>我和其他一些人找出如何从静态QMG文件（带有QG头部）中获取可读的图像数据</h1>
+					  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
+					  <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">原始QMG文件</a></h3>
 					  <br>
-					  <h2>SM-T280的bootsamsung.qmg</h2>
-					  <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="SM-T280的bootsamsung.qmg">
-				  <h1>我们如何尝试读取 QMG 动画文件？</h1>
-<h2>首先，要获得动画帧的“预览”，我们可以在<a href=https://rawpixels.net>原始数据到图像查看器</a><h2>中打开文件
-                    <h3>确保使用以下设置：RGB565、Little Endian</h3>
-<br>
-<h2>这是我们这样做的结果</h2>
-<img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png>
-<h2>它可能看起来不太像，但紫色和橙色像素是动画，不幸的是它们被压缩了什么的......</h2>
-<h3>注意：由于完整图像非常高，所以我没有显示完整图像</h3>
-<br>
-<h2>我决定尝试不同的 QMG 文件...这次来自 Note 5。</h2>
-<h2>我发现 QMG 启动动画文件有不同版本，其中 SM-T280 是 bootsamsungmini.qmg 的变体（或最相似）</h2>
+					  <h2>如何从静态QMG文件获取可读图像</h2>
+					  <h3>1 - 选择您的QMG文件，必须以QG开头</h3>
+					  <h3>2 - 使用zlib-flate解压缩</h3>
+					  <h3>3 - 将其放入 https://rawpixels.net/ 以查看图像数据。</h3>
+					  <br>
+					  <h1>我们仍在努力找出如何获得适当的颜色和获取动画。</h1>
+					  <h2 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h2>
+		   			  <br>
+	    	  	     <h1>---------------------</h1>
+		    		 <h1>6/28/2023</h1>
+		 			  <br>
+				      <h1>头部</h1>
+				      <h2>QMG文件的头部包含基本信息，如分辨率、质量和版本。</h2>
+					  <h3>注意：这似乎是QMG格式的静态版本的头部，我将尝试更新并添加/替换为动画版本的头部。</h3>					
+					  <h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">来源</a></h3>
+						 <table style="border-collapse: collapse; border: none; table-layout: fixed; width: 100%;">
+							<colgroup>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+							</colgroup>
+							<tbody>
+								<tr style="height: 21pt;">
+									<td colspan="2" style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">魔数</span>
+										</div>
+									</td>
+									<td colspan="3" style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">版本号</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">标志</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">质量</span>
+										</div>
+									</td>
+									<td colspan="2" style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">宽度</span>
+										</div>
+									</td>
+									<td colspan="2" style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">高度</span>
+										</div>
+									</td>
+									<td style="background-color: #d9d9d9; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">附加项</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 0pt;">
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">'Q'</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">'G'</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x28</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x28</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x01</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x00</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 21pt;">
+									<td colspan="12" style="background-color: #efefef; border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">解释为:</span>
+										</div>
+									</td>
+								</tr>
+								<tr style="height: 21pt;">
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">'QG'</span>
+										</div>
+									</td>
+									<td colspan="3" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">1.1.1</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0x28</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">91</span>
+										</div>
+									</td>
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">344</span>
+										</div>
+									</td>
+									<td colspan="2" style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">344</span>
+										</div>
+									</td>
+									<td style="border: solid #000000 1pt; padding: 5pt; vertical-align: top;">
+										<div dir="ltr" style="line-height: 1.2; text-align: center;">
+											<span style="background-color: transparent; color: black; font-family: 'arial'; font-size: 11pt; font-weight: 400;">0</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<br>
+				 <h1>---------------------</h1>
+				 <h1>7/9/2023</h1>
+  				  <br>
+				  <h2>来自SM-T280的bootsamsung.qmg头部</h2>
+				  <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="来自SM-T280的bootsamsung.qmg头部">
+				  <h2>如何尝试阅读QMG动画文件？</h1>
+				  <h2>首先，要获得动画帧的“预览”，我们可以在<a href=https://rawpixels.net>原始数据到图像查看器</a>中打开文件<h2>
+				  <h3>确保使用这些设置：RGB565，小端</h3>
+				  <br>
+				  <h2>这是我们从中获得的内容</h2>
+				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png>
+				  <h2>可能看起来不多，但紫色和橙色像素是动画，不幸的是它们经过了压缩或其他处理...（是的，它是... 感谢NedTheNerd！）</h2>
+	 	  		  <h3>注意：我没有展示完整的图像，因为完整的图像非常高</h3>
+				  <br>
+				  <h2>我决定尝试不同的QMG文件... 这次是来自Note 5。</h2>
+				  <h2>我发现QMG启动动画文件有不同的版本，其中SM-T280的版本与bootsamsungmini.qmg相似或最相似</h2>
 				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png>
-	<br>
-<br>
-<h1>我和其他一些人找到了一种方法，可以从静态QMG文件（带有QG标头）中获取可读的图像数据</h1>
-<img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
-<h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg>原始文件</a></h3>
-<br>
-<h2>如何从静态QMG文件中获取可读的图像</h2>
-<h3>1 - 选择您喜欢的QMG文件，必须以QG开头。</h3>
-<h3>2 - 使用zlib-flate进行解压</h3>
-<h3>3 - 将其放入https://rawpixels.net/ 以查看图像数据。</h3>
-<br>
-<h1>我们仍在努力找出如何获得正确的颜色和动画。</h1>
-<h2 href=https://dexrnzacattack.github.io/zh-CN/QMG>https://dexrnzacattack.github.io/zh-CN/QMG</h2>
-
-			</div>  
-        </div>
-    </div>
+				  <br>
+				 <h1>---------------------</h1>
+				 <h1>10/14/2023</h1>
+				  <br>
+				  <h2>发现QMG文件（至少是静态文件）使用ZLib压缩。（感谢NedTheNerd）</h1>
+				  <h3>我们能够解压它并获得一种可读的图像</h2>
+				  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
+				  <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">原始QMG文件</a></h3>
+				  <h3>我们甚至能够看到图像，这对我来说是令人难以置信的。</h2>
+				  <h3>如您所见，它略有扭曲，因为我们还不知道如何获得颜色。</h2>
+			     <h1 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h1>
+  </div>  
+</div>
+</div>
 </body>
 </html>

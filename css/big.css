@@ -10,10 +10,66 @@
     margin-left: 2%;
 }
 
+
+
+/* Make theme turn white when user is using light mode on their OS */
+@media (prefers-color-scheme: light) {
+    .card {
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.212);
+        color: #000;
+    }
+
+    .button:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #000;
+    }
+    
+    .button {
+        color: black;
+    }
+
+    .body {
+        color: #000;
+    }
+
+    .a {
+        color: black;
+    }
+}
+
+/* Same as above but for dark mode */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(15, 15, 15, 0.6);
+        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.212);
+        color: #fff;
+    }
+
+    .button:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #fff;
+    }
+    
+    .button {
+        color: #fff;
+    }
+
+    .body {
+        color: #fff;
+    }
+
+    .a {
+        color: white;
+    }
+}
+
 .button {
   background-color: transparent;
   border: none;
-  color: white;
+  /* color: white; */
   padding: 12px 20px;
   text-align: center;
   text-decoration: none;
@@ -37,7 +93,7 @@
 
 
 .button:hover {
-    box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+    /* box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3); */
     transform: scale(1.05);
 }
 
@@ -60,7 +116,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    color: #fff;
+    /* color: #fff; */
     height: 100%;
     width: 100%
 }
@@ -71,12 +127,12 @@ body {
 }
 
 .card {
-    background: rgba(15, 15, 15, 0.6);
-    box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
+    /* background: rgba(15, 15, 15, 0.6); */
+    /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.212);
+    /* border: 1px solid rgba(255, 255, 255, 0.212); */
     padding: 12px;
     width: 95%;
     animation: 1s ease-out 0s 1 fadeIn;
@@ -282,7 +338,7 @@ li {
 
 a {
     text-decoration: none !important;
-	color: white; 
+	/* color: white;  */
 }	
 
 .topright {
