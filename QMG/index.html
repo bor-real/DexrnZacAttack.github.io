@@ -4,7 +4,7 @@
     <title>Dexrn's Hell Hole > QMG</title>
     <meta content="Dexrn's Hell Hole > QMG" property="og:title" />
 	<script defer src="../js/lang.js"></script>
-    <meta content="What the FUCK am I doing" property="og:description" />
+    <meta content="The QMG File Format Reverse Engineering Project" property="og:description" />
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
     <meta content="Placeholder" property="og:image" />
     <meta content="#0078D7" data-react-helmet="true" name="theme-color"/>
@@ -81,6 +81,22 @@
 		                 <h2>If you have ANY information about either of both versions of the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></h2>
 				 <h2>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></h3>
 				 <br>
+		    					  <h1>Me and a few others found out how to get readable image data from the static QMG file (header with QG)</h1>
+					  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
+<h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
+					  <br>
+<h2>How to get a sort of readable image from a Static QMG file</h2>
+<h3>1 - Grab your QMG of choice, must start with QG in the header.</h3>
+<h3>2 - Flate' it with zlib-flate</h3>
+<h3>3 - Put it into https://rawpixels.net/ to see the image data.</h3>
+<br>
+
+<h1>We are still working on finding out how to get proper colors and getting animations as well.</h1>
+					  <h2 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h2>
+		    <br>
+		    <br>
+		    		<h1>6/28/2023</h1>
+		    <br>
 				    <!--- Header Info --->
 				      <h1>Header</h1>
 				      <h2>The header of a QMG file contains basic information like the resolution, quality, and version.</h2>
@@ -148,34 +164,36 @@
 						 </tbody></table>
 					  <h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></h3>
 					  <br>
+		 				  <h1>7/9/2023</h1>
+		    <br>
 					  <h2>Header of bootsamsung.qmg from the SM-T280</h2>
 					  <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="Header of bootsamsung.qmg from the SM-T280">
-				  <h1>How can we attempt to read a QMG Animation file?</h1>
+				  <h2>How can we attempt to read a QMG Animation file?</h1>
 				  <h2>First, to get a "preview" of the animation's frames, we can open the file in a <a href=https://rawpixels.net>raw data to image viewer</a><h2>
                   <h3>Make sure you use these settings: RGB565, Little Endian</h3>
 			      <br>
 				  <h2>Here is what we got from doing that</h2>
 				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png>
-				  <h2>It may not look like much, but the purple and orange pixels are the animation, unfortunately they are compressed or something...</h2>
+				  <h2>It may not look like much, but the purple and orange pixels are the animation, unfortunately they are compressed or something... (Yep it is... Thanks NedTheNerd!)</h2>
 				  <h3>Note: I didn't show the full image due to the full image being very tall</h3>
 				  <br>
 				  <h2>I decided to try a different QMG file... this time from the Note 5.</h2>
 				  <h2>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</h2>
 				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png>
 					  <br>
+					  <h1>10/14/2023</h1>
 					  <br>
-					  <h1>Me and a few others found out how to get readable image data from the static QMG file (header with QG)</h1>
-					  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
+					  <br>
+					  <h2>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NedTheNerd)</h1>
+					  <h3>We were able to uncompress it and got a sort of readable image</h2>
+<img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
 <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
-					  <br>
-<h2>How to get a sort of readable image from a Static QMG file</h2>
-<h3>1 - Grab your QMG of choice, must start with QG in the header.</h3>
-<h3>2 - Flate' it with zlib-flate</h3>
-<h3>3 - Put it into https://rawpixels.net/ to see the image data.</h3>
-<br>
-<h1>We are still working on finding out how to get proper colors and getting animations as well.</h1>
-					  <h2 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h2>
+					  <h3>The fact that we can even see the image is insane to me.</h2>
+					  <h3>As you can see it is a little distorted though, since we do not yet know how to get the colors.</h2>
+
+
 					  
+					    <h1 href=https://dexrnzacattack.github.io/QMG>https://dexrnzacattack.github.io/QMG</h1>
 			</div>  
         </div>
     </div>
