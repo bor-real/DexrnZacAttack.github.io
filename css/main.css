@@ -33,7 +33,7 @@
 
     #normalmode {
         background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png');
-        background-color: rgb(225, 225, 225);
+       /* background-color: rgb(225, 225, 225); */
     }
 }
 
@@ -64,7 +64,7 @@
 
     #normalmode {
         background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
-        background-color: rgb(12, 12, 12);
+        /* background-color: rgb(12, 12, 12); */ 
     }
 }
 
