@@ -104,6 +104,15 @@
     }
 }
 
+/* this looks kinda cool, might change or remove later tho. */
+#normalmode {
+    background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: rgb(12, 12, 12);
+}
+
 body {
     margin: 0;
     padding: 0;
