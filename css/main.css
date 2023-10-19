@@ -30,6 +30,11 @@
     .a {
         color: black;
     }
+
+    #normalmode {
+        background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png');
+        background-color: rgb(225, 225, 225);
+    }
 }
 
 /* Same as above but for dark mode */
