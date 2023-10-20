@@ -56,7 +56,7 @@ function readfile(data) {
 
     // define shit
     majorversion = data[2];
-    constminorversion = data[3];
+    minorversion = data[3];
     revision = data[4];
     const format = magic;
     const width = (data[7 + offset] | (data[8 + offset] << 8));
