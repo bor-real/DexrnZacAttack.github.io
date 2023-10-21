@@ -80,12 +80,27 @@
 		                <h2>If you have ANY information about the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></h2>
 				 <h2>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></h3>
 				 <br>
-		    <h2>As of 10/16/2023 there is now code in the repo to find and extract all ZLib headers and decompress them.</h2>
-<h3><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></h3>
-		    <br>
-		    					  <h1>as of 10/14/2023, I and a few others found out how to get readable image data from the static QMG file (header with QG)</h1>
-					  <img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
+		    		    				  <h1>---------------------</h1>
+					  <h1>10/20/2023</h1>
+		   	 <br>
+		    <h2>Animated QM files can now be decoded! (Thanks NedTheNerd!)
+		    <h2>Currently the code isnt finished so if you build and test it there might be some issues, but the fact that it works is insane and so amazing to me.</h2>
+		    <img src="https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bootsamsung.gif?raw=true" width="400" height="640"></img>
+		    				  <h1>---------------------</h1>
+					  <h1>10/16/2023</h1>
+					  <br>
+						  <h2>There is now code in the repo to find and extract all ZLib headers and decompress them.</h2>
+<h2><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></h2>
+					  <h3>Note: this extractor is made with some ChatGPT and some of me trying to understand what the fuck I am doing, all at 5 AM. I'm not very good at C/C++.</h3>
+		    					  <h1>---------------------</h1>
+					  <h1>10/14/2023</h1>
+					  <br>
+					  <h2>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NedTheNerd)</h1>
+					  <h3>We were able to uncompress it and got a sort of readable image</h2>
+<img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
 <h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
+					  <h3>The fact that we can even see the image is insane to me.</h2>
+					  <h3>As you can see it is a little distorted though, since we do not yet know how to get the colors.</h2>
 					  <br>
 <h2>How to get a sort of readable image from a Static QMG file</h2>
 <h3>1 - Grab your QMG of choice, must start with QG in the header.</h3>
@@ -94,8 +109,25 @@
 <br>
 
 <h1>We are still working on finding out how to get proper colors and getting animations as well.</h1>
-					  <h2><a href=https://github.com/DexrnZacAttack/QmageDecoder>https://github.com/DexrnZacAttack/QmageDecoder</a></h2>
+		    		    					  <h1>---------------------</h1>
+		 				  <h1>7/9/2023</h1>
 		    <br>
+					  <h2>Header of bootsamsung.qmg from the SM-T280</h2>
+					  <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="Header of bootsamsung.qmg from the SM-T280">
+				  <h2>How can we attempt to read a QMG Animation file?</h1>
+				  <h2>First, to get a "preview" of the animation's frames, we can open the file in a <a href=https://rawpixels.net>raw data to image viewer</a><h2>
+                  <h3>Make sure you use these settings: RGB565, Little Endian</h3>
+			      <br>
+				  <h2>Here is what we got from doing that</h2>
+				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png>
+				  <h2>It may not look like much, but the purple and orange pixels are the animation, unfortunately they are compressed or something... (Yep it is... Thanks NedTheNerd!)</h2>
+				  <h3>Note: I didn't show the full image due to the full image being very tall</h3>
+				  <br>
+				  <h2>I decided to try a different QMG file... this time from the Note 5.</h2>
+				  <h2>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</h2>
+				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png>
+					  <br>
+
 		    					  <h1>---------------------</h1>
 		    		<h1>6/28/2023</h1>
 		    <br>
@@ -269,40 +301,7 @@
 						
 					  <h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></h3>
 					  <br>
-		    					  <h1>---------------------</h1>
-		 				  <h1>7/9/2023</h1>
-		    <br>
-					  <h2>Header of bootsamsung.qmg from the SM-T280</h2>
-					  <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="Header of bootsamsung.qmg from the SM-T280">
-				  <h2>How can we attempt to read a QMG Animation file?</h1>
-				  <h2>First, to get a "preview" of the animation's frames, we can open the file in a <a href=https://rawpixels.net>raw data to image viewer</a><h2>
-                  <h3>Make sure you use these settings: RGB565, Little Endian</h3>
-			      <br>
-				  <h2>Here is what we got from doing that</h2>
-				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png>
-				  <h2>It may not look like much, but the purple and orange pixels are the animation, unfortunately they are compressed or something... (Yep it is... Thanks NedTheNerd!)</h2>
-				  <h3>Note: I didn't show the full image due to the full image being very tall</h3>
-				  <br>
-				  <h2>I decided to try a different QMG file... this time from the Note 5.</h2>
-				  <h2>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</h2>
-				  <img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png>
-					  <br>
-					  <h1>---------------------</h1>
-					  <h1>10/14/2023</h1>
-					  <br>
-					  <h2>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NedTheNerd)</h1>
-					  <h3>We were able to uncompress it and got a sort of readable image</h2>
-<img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
-<h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
-					  <h3>The fact that we can even see the image is insane to me.</h2>
-					  <h3>As you can see it is a little distorted though, since we do not yet know how to get the colors.</h2>
-					  <br>
-				  <h1>---------------------</h1>
-					  <h1>10/16/2023</h1>
-					  <br>
-						  <h2>There is now code in the repo to find and extract all ZLib headers and decompress them.</h2>
-<h2><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></h2>
-					  <h3>Note: this extractor is made with some ChatGPT and some of me trying to understand what the fuck I am doing, all at 5 AM. I'm not very good at C/C++.</h3>
+
 
 
 					  <br>
