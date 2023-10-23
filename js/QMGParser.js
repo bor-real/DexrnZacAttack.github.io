@@ -61,7 +61,11 @@ function readfile(data) {
     const format = magic;
     const width = (data[7 + offset] | (data[8 + offset] << 8));
     const height = (data[9 + offset] | (data[10 + offset] << 8));
-    const framecount = (data[16]);
+    const framecount = (data[16] | (data[17]));
+    const padding = (data[10]);
+    const animation = (data[4]);
+    const encmode = (data[5]);
+    const alphapos = (data[12] | (data[13] << 8));
 
     // show data, if it is QG, do not show frame count cuz it ain't animation
     const version = `${majorversion}.${minorversion}.${revision}`;
@@ -80,6 +84,10 @@ function readfile(data) {
             `Version: ${version} (Not sure if QM uses version or not, so may mean nothing or is something else entirely)\n` +
             `Width: ${width}\n` +
             `Height: ${height}\n` +
+            `Padding: ${padding}\n` +
+            `Alpha Position(?): ${alphapos}\n` +
+            `Animation(?): ${animation}\n` +
+            `Encoder Mode(?): ${encmode}\n` +
             // apparently there are animated AND static version of QM... ugh.
             // Hopefully we can take the easy way out since it seems the ones that are static always have a framecount of 5.
             `Frame Count: ${framecount}`;
@@ -99,6 +107,9 @@ function readfile(data) {
             `Quality: ${qual}\n` +
             `Width: ${width}\n` +
             `Height: ${height}\n` +
+            `Alpha Position(?): ${alphapos}\n` +
+            `Animation(?): ${animation}\n` +
+            `Encoder Mode(?): ${encmode}\n` +
             `Frame Count: ${framecount}`;
     }
 
