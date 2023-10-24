@@ -96,7 +96,12 @@ function readfile(data) {
             `Format: ${format} (appears to be a static image)\n` +
             `Version: ${version} (Not sure if QM uses version or not, so may mean nothing or is something else entirely)\n` +
             `Width: ${width}\n` +
-            `Height: ${height}`;
+            `Height: ${height}` +
+            `Padding: ${padding}\n` +
+            `Alpha Position(?): ${alphapos}\n` +
+            `Animation(?): ${animation}\n` +
+            `Encoder Mode(?): ${encmode}\n` +
+            `ZLib stream count: ${zlibstreamcount}`;
     } else if (magic === 'IM' || magic === 'QC') {
         document.getElementById('output').textContent =
             `You have an unknown version of the QMG format, please contact dexrn on Discord, as we currently don't have this version yet.\n` +
