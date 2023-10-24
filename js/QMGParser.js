@@ -78,7 +78,7 @@ function readfile(data) {
             `Width: ${width}\n` +
             `Height: ${height}\n` +
             `ZLib stream count: ${zlibstreamcount}`
-    } else if (magic === 'QM' && framecount != 5) {
+    } else if (magic === 'QM') {
         document.getElementById('output').textContent =
             `Format: ${format} (appears to be an animation)\n` +
             `Version: ${version} (Not sure if QM uses version or not, so may mean nothing or is something else entirely)\n` +
@@ -91,12 +91,12 @@ function readfile(data) {
             // apparently there are animated AND static version of QM... ugh.
             // Hopefully we can take the easy way out since it seems the ones that are static always have a framecount of 5.
             `Frame Count: ${framecount}`;
-    } else if (magic === 'QM') {
+    } else if (magic === 'QM' && animation != 128) {
         document.getElementById('output').textContent =
             `Format: ${format} (appears to be a static image)\n` +
             `Version: ${version} (Not sure if QM uses version or not, so may mean nothing or is something else entirely)\n` +
             `Width: ${width}\n` +
-            `Height: ${height}` +
+            `Height: ${height}\n` +
             `Padding: ${padding}\n` +
             `Alpha Position(?): ${alphapos}\n` +
             `Animation(?): ${animation}\n` +
