@@ -36,40 +36,20 @@
         
         // Usage:
         redirectIfChinese();
-
-		function setBackground() {
-            let now = new Date();
-            let hour = now.getHours();
-            let bgElement = document.querySelector('.bg');
-        
-            if (bgElement) {
-                if (hour >= 6 && hour < 20) {
-                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
-                } else {
-                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
-                }
-            }
-        }
-        window.onload = setBackground;
-        
-        let style = document.createElement('style');
-        style.innerHTML = `
-        .bg {
-            background-size: cover;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-            background-repeat: repeat-x;
-            animation: panorama 60s linear infinite;
-        }
-        `;
-        document.head.appendChild(style);
 	</script>
+	<script src="../js/background.js"></script>
+	<script src="../js/fadeout.js"></script>
 </head>
 <body>
+	<div class="loadingcontainer">
+		<div class="loading">
+			<img id="pfp" src="../assets/loader.gif">
+		</div>
+	</div>
+<div class="contentcontainer">
     <div class="bg">
         <div class="wrapper" id="wrapper">
-            <div class="card" style="cursor: pointer;" onclick='window.location.href = "../index.html";'>
+            <div class="card" style="cursor: pointer;" id="back" linkto="../index.html">
                 <div class="back"><-- Back</div>
             </div>
             <div class="card">
@@ -307,5 +287,6 @@
 			</div>  
         </div>
     </div>
+</div>
 </body>
 </html>
