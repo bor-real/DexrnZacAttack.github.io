@@ -13,30 +13,6 @@
 	<meta name="description" content="The QMG File Format Reverse Engineering Project">
 	<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
 	<link rel="stylesheet" href="../css/big.css">
-	<script>
-        // P: Retrieving the User's Language Preference
-        function getLanguageFromCookie() {
-          const cookies = document.cookie.split(';');
-          for (const cookie of cookies) {
-            const [name, value] = cookie.trim().split('=');
-            if (name === 'userLanguage') {
-              return value;
-            }
-          }
-          return null; // P: Cookie not found
-        }
-        
-        // P: Redirect to /zh-CN/ if language is set to zh-CN
-        function redirectIfChinese() {
-          const userLanguage = getLanguageFromCookie();
-          if (userLanguage === 'zh-CN') {
-            window.location.href = '/zh-CN/QMG/';
-          }
-        }
-        
-        // Usage:
-        redirectIfChinese();
-	</script>
 	<script src="../js/background.js"></script>
 	<script src="../js/fadeout.js"></script>
 </head>
