@@ -18,6 +18,23 @@ function onfileselected(event) {
         reader.readAsArrayBuffer(file);
     }
 }
+document.addEventListener("dragover", (e) => {
+    e.preventDefault();
+});
+document.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+        const data = new Uint8Array(event.target.result);
+        readfile(data);
+        const fileInput = document.getElementById('fileInput');
+        fileInput.dispatchEvent(new Event('change'));
+        };
+        reader.readAsArrayBuffer(file);
+    }
+});
 
 function readfile(data) {
     // if the file doesn't have at least 12 bytes, it can't even fit the header lmao
