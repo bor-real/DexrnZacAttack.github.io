@@ -5,12 +5,20 @@ const pfp2 = document.getElementById('pfp2');
 const status = document.getElementById('status');
 const statusDot = document.getElementById('status-dot');
 const status2 = document.getElementById('status2');
+const status3 = document.getElementById('status3');
+// const status4 = document.getElementById('status4');
 const username = document.getElementById('username');
 const bigImage = document.getElementById('activity-big-image');
 const smallImage = document.getElementById('activity-small-image');
 const name = document.getElementById('activity-name');
 const state = document.getElementById('activity-state');
 const details = document.getElementById('activity-detail');
+// Dexrn -----
+// It is currently 10:09 PM as I am writing this.
+// Wanted to have more info about my Discord status on the website.
+var disc_status;
+var disc_platform;
+var disc_isOffline;
 async function fetchResponse(userId) {
     try {
         const res = await fetch(`${API_URL}/users/${userId}`);
@@ -27,47 +35,80 @@ async function setAvatar() {
             }
         }
     } = await fetchResponse(USERID);
-    const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=256`;
+    const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=512`;
     pfp.src = fullUrl;
     pfp2.src = fullUrl;
 }
 async function setAvatarFrame() {
     const {
         data: {
-            discord_status
+            discord_status,
+            active_on_discord_mobile,
+            active_on_discord_web,
+            active_on_discord_desktop
+            // custom
         }
     } = await fetchResponse(USERID);
+    // Dexrn: Jank incoming!
     switch (discord_status) {
     case 'online':
         statusDot.style.background =
             '#3ba45d';
-        statusDot.title = 'Online';
         status2.innerHTML = 'Online';
         status2.style.cssText = 'color: #3ba45d; opacity: 1;';
+        status3.style.cssText = 'color: #3ba45d; opacity: 1;';
         break;
     case 'dnd':
         statusDot.style.background =
             '#ed4245';
-        statusDot.title = 'Do not disturb';
         status2.innerHTML = 'Do not disturb';
         status2.style.cssText = 'color: #ed4245; opacity: 1;';
+        status3.style.cssText = 'color: #ed4245; opacity: 1;';
         break;
     case 'idle':
         statusDot.style.background =
             '#faa81a';
-        statusDot.title = 'Idle';
-        status2.innerHTML = "Idle";
+        status2.innerHTML = 'Idle';
         status2.style.cssText = 'color: #faa81a; opacity: 1;';
+        status3.style.cssText = 'color: #faa81a; opacity: 1;';
         break;
     case 'offline':
         statusDot.style.background =
             '#747e8c';
         statusDot.title = 'Offline';
-        status2.innerHTML = "<br><br>";
+        status2.innerHTML = "Offline";
         status2.style.cssText = 'color: unset; opacity: 0.5;';
+        disc_isOffline = true;
         break;
     }
+
+const platformarray = [];
+
+// Dexrn: I should make it show pictures instead.
+if (active_on_discord_web == true) {
+    platformarray.push(" Web");
 }
+
+if (active_on_discord_mobile == true) {
+    platformarray.push(" Mobile");
+}
+
+if (active_on_discord_desktop == true) {
+    platformarray.push(" Desktop");
+}
+
+disc_platform = platformarray;
+
+if (disc_isOffline != true)
+    // Dexrn: Best way I could think of doing it.
+    status3.innerHTML = `Platforms in use: ${disc_platform}`
+}
+
+// Dexrn: Maybe I'll get this working one day.
+/* if (custom) {
+    status4.innerHTML = `Custom Status: ${custom}`
+} */
+
 async function setStatus() {
     const {
         data: {
