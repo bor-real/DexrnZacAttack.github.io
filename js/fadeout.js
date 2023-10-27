@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const topright = document.querySelector(".topright");
 
     function handleClick(button) {
-        const delay = 300;
+        const delay = 350;
         const loadingContainer = document.querySelector('.loadingcontainer');
 
         loadingContainer.style.display = 'flex';
