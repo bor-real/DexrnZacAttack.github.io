@@ -45,7 +45,8 @@ function readfile(data) {
 
     // Check if the first 2 bytes are QM or QG or one of the unknown ones
     const magic = String.fromCharCode(data[0], data[1]);
-    if (magic !== 'QM' && magic !== 'QG' && magic !== 'IM' && magic !== 'QC') {
+    const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
+    if (magic !== 'QM' && magic !== 'QG' && magic !== 'IM' && magic !== 'QC' && magicraw !== '14 00') {
         document.getElementById('output').textContent = 'Invalid file: Invalid magic.';
         return;
     }
@@ -63,7 +64,7 @@ function readfile(data) {
         }
     }
 
-    if (magic === 'QG' || magic === 'IM' || magic === 'QC') {
+    if (magic === 'QG' || magic === 'IM' || magic === 'QC' || magicraw === '14 00') {
         flags = data[5];
         qual = data[6];
     } else if (magic === 'QM') {
@@ -133,6 +134,21 @@ function readfile(data) {
             `Animation(?): ${animation}\n` +
             `Encoder Mode(?): ${encmode}\n` +
             `Frame Count: ${framecount}`;
-    }
+    } else if (magicraw === '14 00') {
+    document.getElementById('output').textContent =
+        `This is an SPI file, Not too much is known about this format.\n` +
+        `Most information shown WILL be inaccurate.\n` +
+        `Format: SPI\n` +
+        `Version: ${version}\n` +
+        `Flags: ${flags}\n` +
+        `Quality: ${qual}\n` +
+        `Width: ${width}\n` +
+        `Height: ${height}\n` +
+        `Alpha Position(?): ${alphapos}\n` +
+        `Animation(?): ${animation}\n` +
+        `Encoder Mode(?): ${encmode}\n` +
+        `Frame Count: ${framecount}`;
+}
+
 
 }
