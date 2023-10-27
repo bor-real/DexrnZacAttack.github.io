@@ -43,9 +43,13 @@
     <script src="js/background.js"></script>
     <script src="js/fadeout.js"></script>
     <style>
-                @media (max-width: 768px) {
+            /* hide on mobile devices or devices with a small screen. */
+                @media (max-width: 700px) {
             .connection-icon2 {
-                display: none; /* hide on mobile devices or devices with a small screen. */
+                display: none; 
+            }
+            #normalmode {
+                background-image: none;
             }
         }
     </style>
@@ -121,9 +125,10 @@
         </div>
     </div>
 	<div class="bottomright">
-        <!-- hidden while I figure out how to not make it show during the animation -->
+        <!-- hidden while I figure out how to not make it show during the animation and so that mobile looks better -->
         <!-- <a href="https://itzpeto.com">Thanks to ItzPeto for helping me set this up!</a> -->
     </div>
+    <!-- These look bad on mobile devices and HiDPI devices. -->
     <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
 </body>
 </html>
