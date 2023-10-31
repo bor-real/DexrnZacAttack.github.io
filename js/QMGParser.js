@@ -53,7 +53,7 @@ function readfile(data, filename) {
     console.log(`Checking magic...`)
     const magic = String.fromCharCode(data[0], data[1]);
     const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
-    if (magic !== 'QM' && magic !== 'QG' && magic !== 'IM' && magic !== 'QC' && magicraw !== '14 00' && magic !== 'QW') {
+    if (magic !== 'QM' && magic !== 'QG' && magic !== 'IM' && magic !== 'QC' && magicraw !== '14 00' && magic !== 'QW' && magic !== 'IF' && magic !== 'IT' && magic !== 'PF' && magic !== 'AU' && magic !== 'NQ') {
         console.log(`The parser encountered an error: Invalid file: Invalid magic. Expected one of: QM, QG, IM, QC, '14 00', got "${magic}" (${magicraw}) instead.`);
         document.getElementById('output').textContent = `Invalid file: Invalid magic.\n` +
         `Expected one of: QM, QG, IM, QC, QW, '14 00', got "${magic}" (${magicraw}) instead.`;
@@ -267,7 +267,7 @@ function readfile(data, filename) {
             `Alpha Position(?): ${alphapos}\n` +
             `Encoder Mode (raw): ${encmode}\n` +
             `ZLib stream count: ${zlibstreamcount}`;
-    } else if (magic === 'IM' || magic === 'QC' || magic === 'QW') {
+    } else if (magic === 'IM' || magic === 'QC' || magic === 'QW' || magic === 'IT' || magic === 'IF' || magic === 'PF' || magic === 'AU' || magic === 'NQ') {
         document.getElementById('output').textContent =
             `You have an unknown version of the QMG format, please contact dexrn on Discord, as we currently don't have this version yet.\n` +
             `This also means we know nothing about it, Since this file will be treated as a QMG, most if not all information shown WILL be inaccurate.\n` +
