@@ -12,18 +12,19 @@ function backgroundfade() {
         }
         maincontainer.style.display = 'none';
         const bgImage = new Image();
-        bgImage.src = bgElement.style.backgroundImage.slice(5, -2); 
+        bgImage.src = bgElement.style.backgroundImage.slice(5, -2);
+
         function loadingfade() {
-            loadingcontainer.style.opacity = 0; 
+            loadingcontainer.style.opacity = 0;
             setTimeout(() => {
-                loadingcontainer.style.display = 'none'; 
-            }, 500); 
+                loadingcontainer.style.display = 'none';
+            }, 500);
         }
+
         bgImage.onload = function () {
             maincontainer.style.display = 'block';
             loadingfade();
-
-            const duration = 1000; 
+            const duration = 1000;
             const startTime = performance.now();
             bgElement.style.opacity = 0;
 
@@ -40,4 +41,6 @@ function backgroundfade() {
         };
     }
 }
+
+
 window.onload = backgroundfade;
