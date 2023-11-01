@@ -5,12 +5,16 @@ const pfp2 = document.getElementById('pfp2');
 const status = document.getElementById('status');
 const statusDot = document.getElementById('status-dot');
 const status2 = document.getElementById('status2');
+const status3 = document.getElementById('status3');
 const username = document.getElementById('username');
 const bigImage = document.getElementById('activity-big-image');
 const smallImage = document.getElementById('activity-small-image');
 const name = document.getElementById('activity-name');
 const state = document.getElementById('activity-state');
 const details = document.getElementById('activity-detail');
+var disc_status;
+var disc_platform;
+var disc_isOffline;
 async function fetchResponse(userId) {
     try {
         const res = await fetch(`${API_URL}/users/${userId}`);
@@ -34,39 +38,66 @@ async function setAvatar() {
 async function setAvatarFrame() {
     const {
         data: {
-            discord_status
+            discord_status,
+            active_on_discord_mobile,
+            active_on_discord_web,
+            active_on_discord_desktop
+            // custom
         }
     } = await fetchResponse(USERID);
+    // Dexrn: Jank incoming!
     switch (discord_status) {
     case 'online':
         statusDot.style.background =
             '#3ba45d';
-        statusDot.title = '在线的';
-        status2.innerHTML = '在线的';
+        status2.innerHTML = '在线';
         status2.style.cssText = 'color: #3ba45d; opacity: 1;';
+        status3.style.cssText = 'color: #3ba45d; opacity: 1;';
         break;
     case 'dnd':
         statusDot.style.background =
             '#ed4245';
-        statusDot.title = '请勿打扰';
         status2.innerHTML = '请勿打扰';
         status2.style.cssText = 'color: #ed4245; opacity: 1;';
+        status3.style.cssText = 'color: #ed4245; opacity: 1;';
         break;
     case 'idle':
         statusDot.style.background =
             '#faa81a';
-        statusDot.title = '闲置的';
-        status2.innerHTML = "闲置的";
+        status2.innerHTML = '空闲';
         status2.style.cssText = 'color: #faa81a; opacity: 1;';
+        status3.style.cssText = 'color: #faa81a; opacity: 1;';
         break;
     case 'offline':
         statusDot.style.background =
             '#747e8c';
         statusDot.title = '离线';
-        status2.innerHTML = "<br><br>";
+        status2.innerHTML = "离线";
         status2.style.cssText = 'color: unset; opacity: 0.5;';
+        disc_isOffline = true;
         break;
     }
+
+const platformarray = [];
+
+// Dexrn: I should make it show pictures instead.
+if (active_on_discord_desktop == true) {
+    platformarray.push(" 桌面客户端");
+}
+
+if (active_on_discord_mobile == true) {
+    platformarray.push(" 移动客户端");
+}
+
+if (active_on_discord_web == true) {
+    platformarray.push(" 网页客户端");
+}
+
+disc_platform = platformarray;
+
+if (disc_isOffline != true)
+    // Dexrn: Best way I could think of doing it.
+    status3.innerHTML = `平台使用中： ${disc_platform}`
 }
 async function setStatus() {
     const {

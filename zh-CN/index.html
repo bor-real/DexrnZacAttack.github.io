@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="我他妈在做什么">
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
-    <link rel="stylesheet" href="../css/mainzh.css">
+    <link rel="stylesheet" href="../css/main.css">
     <script>
         // Retrieving the User's Language Preference
         function getLanguageFromCookie() {
@@ -36,37 +36,34 @@
         
         redirectIfEnglish();
 
-        function setBackground() {
-            let now = new Date();
-            let hour = now.getHours();
-            let bgElement = document.querySelector('.bg');
-        
-            if (bgElement) {
-                if (hour >= 6 && hour < 20) {
-                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
-                } else {
-                    bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
-                }
+        // Dexrn: This is for the text that shows on the loading screen.
+        setTimeout(function() {
+            var loadingText = document.querySelector('.loadingtextzh');
+            if (loadingText) {
+                loadingText.classList.remove('hidden');
             }
-        }
-        window.onload = setBackground;
-        
-        let style = document.createElement('style');
-        style.innerHTML = `
-        .bg {
-            background-size: cover;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-            background-repeat: repeat-x;
-            animation: panorama 60s linear infinite;
-        }
-        `;
-        document.head.appendChild(style);
+        }, 5000); 
+
+        // setTimeout(function() {
+        //     var loadingText = document.querySelector('.loadingtextzhhid');
+        //     if (loadingText) {
+        //         loadingText.classList.remove('hidden');
+        //     }
+        // }, 10000); 
     </script>
     <script src="../js/fadeout.js"></script>
+    <script src="../js/background.js"></script>
 </head>
 <body>
+    <div class="loadingcontainer">
+        <div class="loading">
+            <img id="loading" src="../assets/loader.gif">
+            <h1 class="loadingtextzh hidden">您可能需要使用VPN来加载背景。</h1>
+            <!-- Dexrn : I should make this work. -->
+            <!-- <h1 class="loadingtextzhhid hidden" onclick="skiploading(event)">跳过加载背景</h1>  -->
+        </div>
+    </div>
+<div class="contentcontainer" id="content2">
     <div class="bg" id="homepage">
         <div class="wrapper">
             <div class="card" id="normalmode">
@@ -77,9 +74,10 @@
                         <div id="status-dot"></div>
                     </div>
                     <div class="user-info">
-                        <div id="username">Dexrn</div>
+                        <div id="username">Dexrn ZacAttack</div>
                         <div id="status"></div>
                         <div id="status2">加载中...</div>
+                        <div id="status3"></div>
                         <div class="connections">
 						    <a title="YouTube" href="https://youtube.com/@DZac"><img class="connection-icon" src="../assets/connections/youtube.png" alt="YouTube"></a>
                             <a title="Discord" href="https://discord.com/users/485504221781950465/"><img class="connection-icon" src="../assets/connections/discord.svg" alt="Discord"></a>
@@ -119,8 +117,8 @@
                     <div class="card-title">@Dexrn > 随机的东西</div>
                         <div class="about-me">
                             <div class="bio">
-                                <button class="button" onclick='window.location.href = "../QMG/index.html";'>QMG研究</button>
-                                <button class="button" onclick='window.location.href = "../QMGHeaderParser/index.html";'>QMG头部解析器</button>
+                                <button class="button" linkto="../QMG/index.html">QMG研究</button>
+                                <button class="button" linkto="../QMGHeaderParser/index.html">QMG头部解析器</button>
                                 <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"我很闷"</button> -->
                             </div>
                         </div>
@@ -128,10 +126,7 @@
                 </div>
             </div>
         </div>
+        <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
     </div>
-    <div class="bottomright">
-    如果您看不到背景，请尝试使用 VPN。
-    </div>
-    <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
 </body>
 </html>

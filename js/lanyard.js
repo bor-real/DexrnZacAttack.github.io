@@ -85,16 +85,16 @@ async function setAvatarFrame() {
 const platformarray = [];
 
 // Dexrn: I should make it show pictures instead.
-if (active_on_discord_web == true) {
-    platformarray.push(" Web");
+if (active_on_discord_desktop == true) {
+    platformarray.push(" Desktop");
 }
 
 if (active_on_discord_mobile == true) {
     platformarray.push(" Mobile");
 }
 
-if (active_on_discord_desktop == true) {
-    platformarray.push(" Desktop");
+if (active_on_discord_web == true) {
+    platformarray.push(" Web");
 }
 
 disc_platform = platformarray;

@@ -117,6 +117,7 @@
 .button {
     background-color: transparent;
     backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
     border: none;
     padding: 12px 20px;
     text-align: center;
@@ -131,6 +132,7 @@
 .button2 {
     background-color: transparent;
     backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
     border: none;
     padding: 12px 20px;
     text-align: center;

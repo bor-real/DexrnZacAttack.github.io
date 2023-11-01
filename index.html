@@ -39,40 +39,23 @@
         // Usage:
         redirectIfChinese();
         
+    // Dexrn: This is for the text that shows on the loading screen.
+    setTimeout(function() {
+        var loadingText = document.querySelector('.loadingtext');
+        if (loadingText) {
+            loadingText.classList.remove('hidden');
+        }
+    }, 5000); 
+
     </script>
     <script src="js/background.js"></script>
     <script src="js/fadeout.js"></script>
-    <style>
-            /* hide on mobile devices or devices with a small screen. */
-        @media (max-width: 1200px) {
-            .connection-icon2 {
-                display: none; 
-            }
-        }
-        @media (max-width: 1100px) {
-            #normalmode {
-                background-image: none;
-            }
-        }
-
-        @media (max-height: 665px) {
-            #normalmode2 {
-                display: none;
-            }
-        }
-
-        @media (max-height: 450px) {
-            #normalmode1 {
-                display: none;
-            }
-        }
-
-    </style>
 </head>
 <body>
 <div class="loadingcontainer">
     <div class="loading">
         <img id="loading" src="assets/loader.gif">
+        <h1 class="loadingtext hidden">Waiting for the background to load...</h1>
     </div>
 </div>
     <div class="contentcontainer" id="content2">
@@ -86,7 +69,7 @@
                             <div id="status-dot"></div>
                         </div>
                         <div class="user-info">
-                            <div id="username">Dexrn</div>
+                            <div id="username">Dexrn ZacAttack</div>
                             <div id="status"></div>
                             <div id="status2">Loading...</div>
                             <div id="status3"></div>
@@ -109,7 +92,6 @@
                             <img id="activity-big-image" src="assets/loader.gif" alt="">
                             <img id="activity-small-image" src="assets/loader.gif" alt="">
                         </div>
-
                         <div class="activity-info">
                             <div id="activity-name">Loading...</div>
                             <div id="activity-state">Loading...</div>
@@ -138,12 +120,12 @@
                 </div>
             </div>
         </div>
+        <!-- These look bad on mobile devices and HiDPI devices. -->
+    <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
     </div>
 	<div class="bottomright">
         <!-- hidden while I figure out how to not make it show during the animation and so that mobile looks better -->
         <!-- <a href="https://itzpeto.com">Thanks to ItzPeto for helping me set this up!</a> -->
     </div>
-    <!-- These look bad on mobile devices and HiDPI devices. -->
-    <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
 </body>
 </html>
