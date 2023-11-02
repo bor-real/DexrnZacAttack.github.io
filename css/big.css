@@ -35,6 +35,15 @@
         color: black;
     }
 
+    .loadingcontainer .loading #loading-light {
+        display: none;
+    }
+    
+    .loadingcontainer .loading #loading-dark {
+        display: block;
+        animation: 1s ease-out 0s 1 fadeIn;
+    }
+
     body {
         background-color: white;
     }
@@ -66,6 +75,15 @@
         color: #fff;
     }
 
+    .loadingcontainer .loading #loading-light {
+        display: block;
+        animation: 1s ease-out 0s 1 fadeIn;
+    }
+    
+    .loadingcontainer .loading #loading-dark {
+        display: none;
+    }
+
     body {
         background-color: black;
     }
@@ -74,6 +92,14 @@
         color: white;
     }
 }
+
+.loadingcontainer .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
 #loading {
     width: 128px;

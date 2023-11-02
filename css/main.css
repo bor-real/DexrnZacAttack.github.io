@@ -61,6 +61,15 @@
         color: black;
     }
 
+    .loadingcontainer .loading #loading-light {
+        display: none;
+    }
+    
+    .loadingcontainer .loading #loading-dark {
+        display: block;
+        animation: 1s ease-out 0s 1 fadeIn;
+    }
+
     #normalmode {
         background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png');
        /* background-color: rgb(225, 225, 225); */
@@ -97,11 +106,28 @@
         color: white;
     }
 
+    .loadingcontainer .loading #loading-light {
+        display: block;
+        animation: 1s ease-out 0s 1 fadeIn;
+    }
+    
+    .loadingcontainer .loading #loading-dark {
+        display: none;
+    }
+
     #normalmode {
         background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
         /* background-color: rgb(12, 12, 12); */ 
     }
 }
+
+.loadingcontainer .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
 .bg {
     background-size: cover;
@@ -362,7 +388,7 @@ body {
     margin-left: 15px;
 }
 
-.showmore {
+/* .showmore {
     opacity: 0.5;
     margin-top: 10px;
     cursor: pointer;
@@ -374,7 +400,7 @@ body {
     margin-top: 10px;
     cursor: pointer;
     font-size: small;
-}
+} */
 
 /* \ Activity / */
 
