@@ -308,7 +308,7 @@ function readfile(data, filename) {
         `Frame Count: ${framecount}\n`;
         `Current Frame Count: ${currentFramecount}\n` +
         `Delay Time: ${delayTime}\n` +
-        `noRepeat: ${noRepeat}\n`;
+        `No Repeat: ${noRepeat}\n`;
 }
 
 
