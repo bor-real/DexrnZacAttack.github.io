@@ -1,7 +1,7 @@
 const API_URL = 'https://api.lanyard.rest/v1';
 const USERID = '485504221781950465';
 const pfp = document.getElementById('pfp');
-const pfp2 = document.getElementById('pfp2');
+// const pfp2 = document.getElementById('pfp2');
 const status = document.getElementById('status');
 const statusDot = document.getElementById('status-dot');
 const status2 = document.getElementById('status2');
@@ -37,7 +37,7 @@ async function setAvatar() {
     } = await fetchResponse(USERID);
     const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=512`;
     pfp.src = fullUrl;
-    pfp2.src = fullUrl;
+    // pfp2.src = fullUrl;
 }
 async function setAvatarFrame() {
     const {
@@ -116,16 +116,22 @@ async function setStatus() {
             activities
         }
     } = await fetchResponse(USERID);
-    if (discord_status == 'offline')
-        return;
-    const {
-        state
-    } = activities.find(m => m.type == 4);
-    if (!state) {
+
+    if (discord_status == 'offline') {
         return;
     }
-    status.innerHTML = `${state}`;
+
+    if (activities) {
+        const activityOfType4 = activities.find(m => m.type == 4);
+        if (activityOfType4) {
+            const { state } = activityOfType4;
+            if (state) {
+                status.innerHTML = `${state}`;
+            }
+        }
+    }
 }
+
 async function setActivityBigImage() {
     const {
         data: {

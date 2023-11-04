@@ -5,6 +5,7 @@
 
 
 
+
 document.getElementById('fileInput').addEventListener('change', onfileselected);
 
 function onfileselected(event) {
@@ -39,6 +40,16 @@ document.addEventListener("drop", (e) => {
 
 
 function readfile(data, filename) {
+    const unknownversions = [
+        'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ'
+    ];
+    const magictypes = [
+        'QM', 'QG', 'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ', 'SP'
+    ];
+
+
+
+
     console.log(`File: ${filename}`)
     console.log(`Parsing started...`)
     // if the file doesn't have at least 12 bytes, it can't even fit the header lmao
@@ -53,12 +64,14 @@ function readfile(data, filename) {
     console.log(`Checking magic...`)
     const magic = String.fromCharCode(data[0], data[1]);
     const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
-    if (magic !== 'QM' && magic !== 'QG' && magic !== 'IM' && magic !== 'QC' && magicraw !== '14 00' && magic !== 'QW' && magic !== 'IF' && magic !== 'IT' && magic !== 'PF' && magic !== 'AU' && magic !== 'NQ') {
+
+    if (!magictypes.includes(magic) && magicraw !== '14 00') {
         console.log(`The parser encountered an error: Invalid file: Invalid magic. Expected one of: QM, QG, IM, QC, '14 00', got "${magic}" (${magicraw}) instead.`);
         document.getElementById('output').textContent = `Invalid file: Invalid magic.\n` +
-        `Expected one of: QM, QG, IM, QC, QW, '14 00', got "${magic}" (${magicraw}) instead.`;
-        throw new Error("Invalid file: Invalid magic")
+            `Expected one of: QM, QG, IM, QC, QW, '14 00', got "${magic}" (${magicraw}) instead.`;
+        throw new Error("Invalid file: Invalid magic");
     }
+    
     console.log(`Magic is ${magic}`)
     console.log(`Magic (raw) is ${magicraw}`)
 
@@ -68,6 +81,7 @@ function readfile(data, filename) {
     let offset = 0;
     let zlibstreamcount = 0;
     let zliboffset = 0; 
+    // let sprfiletype;
     if (magic != "QM") {
         console.log(`Looking for ZLib streams`);
         for (let i = 0; i < data.length - 1; i++) {
@@ -82,7 +96,7 @@ function readfile(data, filename) {
     
 
     console.log(`Setting variables...`)
-    if (magic === 'QG' || magic === 'IM' || magic === 'QC' || magicraw === '14 00' || magic === 'QW') {
+    if (magic === 'QG' || magic === 'IM' || magic === 'QC' || magicraw === '14 00' || magic === 'QW' || magic === 'SP') {
         flags = data[5].toString(16).padStart(2, '0');
         console.log(`flags: ${flags}`)
         qual = data[6];
@@ -106,7 +120,7 @@ function readfile(data, filename) {
         console.log(`offset (for the parser): ${offset}`)
     }   
 
-    if (magic != "QG") {
+    if (magic == "QM") {
         animated = (flag1noraw >> 7) != 0;
         console.log(`animated: ${animated}`)
     } else {
@@ -123,7 +137,7 @@ function readfile(data, filename) {
     const noRepeat = data[22];
     const padding = (data[10]);
     const encmode = data[5].toString(16).padStart(2, '0');
-
+    
 
 
     // console.log((flag1noraw >> 7));
@@ -267,7 +281,7 @@ function readfile(data, filename) {
             `Alpha Position(?): ${alphapos}\n` +
             `Encoder Mode (raw): ${encmode}\n` +
             `ZLib stream count: ${zlibstreamcount}`;
-    } else if (magic === 'IM' || magic === 'QC' || magic === 'QW' || magic === 'IT' || magic === 'IF' || magic === 'PF' || magic === 'AU' || magic === 'NQ') {
+    } else if (unknownversions.includes(magic)) {
         document.getElementById('output').textContent =
             `You have an unknown version of the QMG format, please contact dexrn on Discord, as we currently don't have this version yet.\n` +
             `This also means we know nothing about it, Since this file will be treated as a QMG, most if not all information shown WILL be inaccurate.\n` +
@@ -309,7 +323,28 @@ function readfile(data, filename) {
         `Current Frame Count: ${currentFramecount}\n` +
         `Delay Time: ${delayTime}\n` +
         `noRepeat: ${noRepeat}\n`;
-}
+    } else if (magic === 'SP') {
+        document.getElementById('output').textContent =
+        `This is an SPR-type file, Not too much is known about this format.\n` +
+        `Since this file will be treated as a QMG, most if not all information shown WILL be inaccurate.\n` +
+        `Format: ${magic}\n` +
+        `Version: ${version}\n` +
+        `Type: ${type}\n` +
+        `Pixel Format: ${pixelformat}\n` +
+        `Transparent: ${transparency}\n` +
+        `Bits Per Pixel (BPP): ${bpp}\n` +
+        `Raw Type: ${raw_type}\n` +
+        `Flags (raw): ${flags}\n` +
+        `Quality: ${qual}\n` +
+        `Width: ${width}\n` +
+        `Height: ${height}\n` +
+        `Alpha Position(?): ${alphapos}\n` +
+        `Encoder Mode (raw): ${encmode}\n` +
+        `Frame Count: ${framecount}\n`;
+        `Current Frame Count: ${currentFramecount}\n` +
+        `Delay Time: ${delayTime}\n` +
+        `noRepeat: ${noRepeat}\n`;
+    }
 
 
 }

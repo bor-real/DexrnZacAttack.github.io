@@ -22,27 +22,34 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = targetURL;
         }, delay);
     }
+
     buttons.forEach(button => {
         button.addEventListener("click", (e) => {
             e.preventDefault(); 
             handleClick(button);
         });
     });
-    backbutton.addEventListener("click", () => {
-        handleClick(backbutton);
-    });
+
+    if (backbutton) {
+        backbutton.addEventListener("click", () => {
+            handleClick(backbutton);
+        });
+    }
 });
 
 function fade(element) {
-    let opacity = 1;
-    const duration = 300; 
-    const interval = 10;
-    const timer = setInterval(function () {
-        if (opacity <= 0) {
-            clearInterval(timer);
-            element.style.display = 'none';
-        }
-        element.style.opacity = opacity;
-        opacity -= 1 / (duration / interval);
-    }, interval);
+    if (element) {
+        let opacity = 1;
+        const duration = 300;
+        const interval = 10;
+        const timer = setInterval(function () {
+            if (opacity <= 0) {
+                clearInterval(timer);
+                element.style.display = 'none';
+            }
+            element.style.opacity = opacity;
+            opacity -= 1 / (duration / interval);
+        }, interval);
+    }
 }
+
