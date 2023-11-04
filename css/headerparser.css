@@ -56,7 +56,9 @@
     }
 }
 
-
+#headercard {
+    height: auto;
+}
 
 /* Same as above but for dark mode */
 @media (prefers-color-scheme: dark) {

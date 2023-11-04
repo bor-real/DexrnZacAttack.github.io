@@ -3,9 +3,16 @@
 // Saw that vlOd made a header parser in C# and decided to make one in JS so that people who don't run Windows can run this straight in their browser.
 // This script is JANK.
 
-
-
-
+const unknownversions = [
+    'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ'
+];
+const magictypes = [
+    'QM', 'QG', 'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ', 'SP'
+];
+// Dexrn: this probably won't be used.
+const knownversions = [
+    'QM', 'QG', 'SP'
+]
 document.getElementById('fileInput').addEventListener('change', onfileselected);
 
 function onfileselected(event) {
@@ -38,21 +45,64 @@ document.addEventListener("drop", (e) => {
     }
 });
 
+// Dexrn: TODO: make this work.
+// function createtable(data) {
+//     const container1 = document.getElementById('header');
+//     container1.innerHTML = '';
+//     const container = document.createElement('div');
+//     container.style.display = 'flex';
+//     const rawdatatable = document.createElement('table');
+//     rawdatatable.style.borderCollapse = 'collapse';
+//     rawdatatable.style.width = '50%'; 
+
+
+//     for (let rowindex = 0; rowindex < 2; rowindex++) {
+//         const rawdatarow = document.createElement('tr');
+//         for (let i = 0; i < 16; i++) {
+//             const rawdataindex = rowindex * 16 + i;
+//             const rawdatacell = document.createElement('td');
+//             const value = rawdataindex < 32 ? data[rawdataindex] : null;
+//             rawdatacell.textContent = value !== null ? value.toString(16).padStart(2, '0') : '';
+//             rawdatacell.style.border = '1px solid #FFF';
+//             rawdatacell.style.width = '30px';
+//             rawdatacell.style.padding = '5px';
+//             rawdatarow.appendChild(rawdatacell);
+//         }
+//         rawdatatable.appendChild(rawdatarow);
+//     }
+
+
+//     const texttable = document.createElement('table');
+//     texttable.style.borderCollapse = 'collapse';
+//     texttable.style.width = '50%'; 
+    
+
+//     for (let rowindex = 0; rowindex < 2; rowindex++) {
+//         const textrow = document.createElement('tr');
+//         for (let i = 0; i < 16; i++) {
+//             const rawdataindex = rowindex * 16 + i;
+//             const textcell = document.createElement('td');
+//             const value = rawdataindex < 32 ? data[rawdataindex] : null;
+//             textcell.textContent = value !== null ? String.fromCharCode(value) : '';
+//             textcell.style.border = '1px solid #FFF';
+//             textcell.style.width = '30px'; 
+//             textcell.style.padding = '5px';
+//             textrow.appendChild(textcell);
+//         }
+//         texttable.appendChild(textrow);
+//     }
+    
+
+//     container.appendChild(rawdatatable);
+//     container.appendChild(texttable);
+//     container1.appendChild(container);
+// }
 
 function readfile(data, filename) {
-    const unknownversions = [
-        'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ'
-    ];
-    const magictypes = [
-        'QM', 'QG', 'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ', 'SP'
-    ];
-
-
-
 
     console.log(`File: ${filename}`)
     console.log(`Parsing started...`)
-    // if the file doesn't have at least 12 bytes, it can't even fit the header lmao
+    // Dexrn: if the file doesn't have at least 12 bytes, it can't even fit the header lmao
     if (data.length < 12) {
         console.log(`The parser encountered an error: Invalid file: File is too small, Must be atleast 12 bytes in length. File size was ${data.length}`);
         document.getElementById('output').textContent = `Invalid file: File is too small, Must be atleast 12 bytes in length.\n` +
@@ -60,7 +110,7 @@ function readfile(data, filename) {
         throw new Error("Invalid file: File is too small")
     }
 
-    // Check if the first 2 bytes are QM or QG or one of the unknown ones
+    // Dexrn: Check if the first 2 bytes are QM or QG or one of the unknown ones
     console.log(`Checking magic...`)
     const magic = String.fromCharCode(data[0], data[1]);
     const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
@@ -75,12 +125,20 @@ function readfile(data, filename) {
     console.log(`Magic is ${magic}`)
     console.log(`Magic (raw) is ${magicraw}`)
 
-    // THE JANKNESS STARTS HERE!
-    // parse
+    // Dexrn: THE JANKNESS STARTS HERE!
+    // Dexrn: parse
     let majorversion, minorversion, revision;
     let offset = 0;
     let zlibstreamcount = 0;
     let zliboffset = 0; 
+    const type = data[3];
+    const format = magic;
+    const framecount = (data[16] | (data[17] << 8));
+    const currentFramecount = (data[18] | (data[19] << 8));
+    const delayTime = (data[20] | (data[21] << 8));
+    const noRepeat = data[22];
+    const padding = (data[10]);
+    const encmode = data[5].toString(16).padStart(2, '0');
     // let sprfiletype;
     if (magic != "QM") {
         console.log(`Looking for ZLib streams`);
@@ -108,7 +166,7 @@ function readfile(data, filename) {
         revision = data[4];
         console.log(`revision: ${revision}`)
     } else if (magic === 'QM') {
-        // this is jank
+        // Dexrn: this is jank
         flag1 = data[4].toString(16).padStart(2, '0');
         console.log(`flag1: ${flag1}`)
         flag1noraw = data[4];
@@ -116,9 +174,12 @@ function readfile(data, filename) {
         console.log(`flag2: ${flag2}`)
         majorversion = data[2];
         console.log(`majorversion: ${majorversion}`)
-        offset = -1; // Offset because I originally had this and don't want to redo this yet.
+        offset = -1; // Dexrn: Offset because I originally had this and don't want to redo this yet.
         console.log(`offset (for the parser): ${offset}`)
     }   
+
+    const width = (data[7 + offset] | (data[8 + offset] << 8));
+    const height = (data[9 + offset] | (data[10 + offset] << 8));
 
     if (magic == "QM") {
         animated = (flag1noraw >> 7) != 0;
@@ -126,19 +187,6 @@ function readfile(data, filename) {
     } else {
         animated = 0;  
     }
-
-    const type = data[3];
-    const format = magic;
-    const width = (data[7 + offset] | (data[8 + offset] << 8));
-    const height = (data[9 + offset] | (data[10 + offset] << 8));
-    const framecount = (data[16] | (data[17] << 8));
-    const currentFramecount = (data[18] | (data[19] << 8));
-    const delayTime = (data[20] | (data[21] << 8));
-    const noRepeat = data[22];
-    const padding = (data[10]);
-    const encmode = data[5].toString(16).padStart(2, '0');
-    
-
 
     // console.log((flag1noraw >> 7));
     // console.log((flag1noraw & 128) != 0);
@@ -172,70 +220,106 @@ function readfile(data, filename) {
     console.log(`Detecting image pixel format...`)
     switch (type) {
         case 0:
-            console.log(`case 0`)
             pixelformat = "RGB565";
             transparency = "false";
             bpp = "0x10";
             raw_type = "QM_RAW_RGB565";
+            console.log(`case 0\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 1:
-            console.log(`case 1`)
             pixelformat = "RGB888";
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_RGB888";
+            console.log(`case 1\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 2:
-            console.log(`case 2`)
             pixelformat = "BGR888";
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_BGR888";
+            console.log(`case 2\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 3:
-            console.log(`case 3`)
             pixelformat = "RGBA5658";
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_RGBA5658";
+            console.log(`case 3\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 4:
-            console.log(`case 4`)
             pixelformat = "ARGB8565";
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_ARGB8565";
+            console.log(`case 4\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 5:
-            console.log(`case 5`)
             pixelformat = "ARGB8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_ARGB8888";
+            console.log(`case 5\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 6:
-            console.log(`case 6`)
             pixelformat = "RGBA8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_RGBA8888";
+            console.log(`case 6\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         case 7:
-            console.log(`case 7`)
             pixelformat = "BGRA8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_BGRA8888";
+            console.log(`case 7\n
+            pixelformat = ${pixelformat}\n
+            transparency = ${transparency}\n
+            bpp = ${bpp}\n
+            raw_type = ${raw_type}`)
             break;
         default:
-            console.log(`unknown`)
+            console.log(`Unknown`)
             pixelformat = "Unknown";
             transparency = "Unknown";
             bpp = "Unknown";
             raw_type = "Unknown";
     }
     
-    // show data, if it is QG, do not show frame count cuz it ain't animation
+        // Dexrn: this creates a table showing the header.
+        // createtable(data);
+    
+
+    // Dexrn: show data, if it is QG, do not show frame count cuz it ain't animation
     const version = `${majorversion}.${minorversion}.${revision}`;
     if (magic === 'QG') {
         document.getElementById('output').textContent =
