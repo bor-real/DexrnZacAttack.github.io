@@ -38,34 +38,34 @@
 			<h2>If you have ANY information about the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></h2>
 			<h2>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></h3>
 		    <h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
-		<hr>
+		<hr id="dark">
 		<h1>11/02/2023</h1>
-		      <br>
+		<hr id="dotted">
 		      <h2>We found about a new file format, SPR (Thanks GenericPnPMonitor)</h2>
 		      <h2>There is also a propriatary BMP format they use which also uses the same SPR header.</h2>
 		      <h3>By the looks of it, Skia should be able to decode it too...</h3>
 		      <h3>However our current code doesnt seem to work with it.</h3>
-		<hr>
+		<hr id="full">
 		<h1>10/28/2023</h1>
-		      <br>
+		<hr id="dotted">
 		      <h2>We now have access to aarch64 and aarch32 hardware!
 		      <h3>Thanks CarPBon and NeRdTheNed!</h3>
-		<hr>
+		<hr id="full">
 		<h1>10/20/2023</h1>
-			<br>
+		<hr id="dotted">
 			<h2>Animated QM files can now be decoded! (Thanks NeRdTheNed!)
 			<h2>Currently the code isnt finished so if you build and test it there might be some issues, but the fact that it works is insane and so amazing to me.</h2>
 			<img src="https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bootsamsung.gif?raw=true" width="400" height="640"></img>
 			<h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
-		<hr>
+		<hr id="full">
 		<h1>10/16/2023</h1>
-			<br>
+		<hr id="dotted">
 			<h2>There is now code in the repo to find and extract all ZLib headers and decompress them.</h2>
 			<h2><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></h2>
 			<h3>Note: this extractor is made with some ChatGPT and some of me trying to understand what the fuck I am doing, all at 5 AM. I'm not very good at C/C++.</h3>
-		<hr>
+		<hr id="full">
 		<h1>10/14/2023</h1>
-			<br>
+		<hr id="dotted">
 			<h2>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NeRdTheNed)</h1>
 			<h3>We were able to uncompress it and got a sort of readable image</h2>
 			<img src=https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true>
@@ -79,9 +79,9 @@
 			<h3>3 - Put it into https://rawpixels.net/ to see the image data.</h3>
 			<br>
 			<h1>We are still working on finding out how to get proper colors and getting animations as well.</h1>
-		<hr>
+		<hr id="full">
 		<h1>7/9/2023</h1>
-		    	<br>
+		<hr id="dotted">
 			<h2>Header of bootsamsung.qmg from the SM-T280</h2>
 			<img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="Header of bootsamsung.qmg from the SM-T280">
 			<h2>How can we attempt to read a QMG Animation file?</h1>
@@ -96,10 +96,9 @@
 			<h2>I decided to try a different QMG file... this time from the Note 5.</h2>
 			<h2>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</h2>
 			<img src=https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png>
-			<br>
-		<hr>
+		<hr id="full">
 		<h1>6/28/2023</h1>
-		   	<br>
+		<hr id="dotted">
 			<!--- D: Header Info --->
 			<h1>Header</h1>
 			<h2>The header of a QMG file contains basic information like the resolution, quality, and version.</h2>
@@ -269,9 +268,7 @@
 						</table>
 						
 			<h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></h3>
-			<br>
-
-			<br>
+			<hr id="dark">
 			<h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
 			</div>  
         </div>

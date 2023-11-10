@@ -211,6 +211,27 @@ body {
     width: 100%;
 }
 
+#dotted {
+    height: 1px;
+    border: none;
+    border-top: 1px dashed #333; 
+    margin: 20px 0; 
+}
+
+#dark {
+    height: 1px;
+    border: none;
+    border-top: 2px ridge #333; 
+    margin: 20px 0; 
+}
+
+#full {
+    height: 1px;
+    border: none;
+    border-top: 1px ridge #333; 
+    margin: 20px 0; 
+}
+
 .card-title {
     font-size: 12px;
     font-weight: thin;
