@@ -282,6 +282,7 @@ body {
 #pfp {
     width: 128px;
     height: 128px;
+    transition: box-shadow 0.3s ease, border 0.3s ease;
     border-radius: 10%;
 }
 
