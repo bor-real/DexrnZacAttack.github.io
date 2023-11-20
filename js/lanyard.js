@@ -55,12 +55,16 @@ async function setAvatarFrame() {
         statusDot.style.background =
             '#3ba45d';
         status2.innerHTML = 'Online';
+	 pfp.style.border = '2px solid #3ba45d';
+        pfp.style.boxShadow = '0 0 20px #3ba45d';
         status2.style.cssText = 'color: #3ba45d; opacity: 1;';
         status3.style.cssText = 'color: #3ba45d; opacity: 1;';
         break;
     case 'dnd':
         statusDot.style.background =
             '#ed4245';
+	 pfp.style.border = '2px solid #ed4245';
+        pfp.style.boxShadow = '0 0 20px #ed4245';
         status2.innerHTML = 'Do not disturb';
         status2.style.cssText = 'color: #ed4245; opacity: 1;';
         status3.style.cssText = 'color: #ed4245; opacity: 1;';
@@ -69,6 +73,8 @@ async function setAvatarFrame() {
         statusDot.style.background =
             '#faa81a';
         status2.innerHTML = 'Idle';
+	 pfp.style.border = '2px solid #faa81a';
+        pfp.style.boxShadow = '0 0 20px #faa81a';
         status2.style.cssText = 'color: #faa81a; opacity: 1;';
         status3.style.cssText = 'color: #faa81a; opacity: 1;';
         break;
@@ -77,6 +83,8 @@ async function setAvatarFrame() {
             '#747e8c';
         statusDot.title = 'Offline';
         status2.innerHTML = "Offline";
+	 pfp.style.border = '2px solid #747e8c';
+        pfp.style.boxShadow = '0 0 20px #747e8c';
         status2.style.cssText = 'color: unset; opacity: 0.5;';
         disc_isOffline = true;
         break;
