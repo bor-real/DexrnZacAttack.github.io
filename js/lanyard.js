@@ -13,6 +13,7 @@ const smallImage = document.getElementById('activity-small-image');
 const name = document.getElementById('activity-name');
 const state = document.getElementById('activity-state');
 const details = document.getElementById('activity-detail');
+const elapsed = document.getElementById('activity-elapsed');
 // Dexrn -----
 // It is currently 10:09 PM as I am writing this.
 // Wanted to have more info about my Discord status on the website.
@@ -208,6 +209,16 @@ async function setActivityState() {
     }
     state.style.display = 'block';
     state.innerHTML = mostRecent.state;
+
+    const current = new Date().getTime();
+    const diff = current - created;
+    
+    const seconds = Math.floor(diff / 1000) % 60;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    
+    const formattime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    elapsed.innerHTML = 'Time Elapsed: ' + formattime;
 }
 async function setActivityDetails() {
     const response = await fetchResponse(USERID);
