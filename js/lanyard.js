@@ -187,7 +187,7 @@ async function setActivitySmallImage() {
 	smallImage.style.display = 'block';
        smallImage.src = imageLink;
 	smallImage.title = mostRecent.assets.small_text;
-}
+}}
 async function setActivityName() {
     const {
         data: {
