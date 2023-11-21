@@ -121,17 +121,17 @@ const platformarray = [];
 
 // Dexrn: I should make it show pictures instead.
 if (active_on_discord_desktop == true) {
-	DexrnsFunnyLogger('Desktop');
+	DexrnsFunnyLogger('Platform(s): Desktop');
        platformarray.push(" Desktop");
 }
 
 if (active_on_discord_mobile == true) {
-    DexrnsFunnyLogger('Mobile');
+    DexrnsFunnyLogger('Platform(s): Mobile');
     platformarray.push(" Mobile");
 }
 
 if (active_on_discord_web == true) {
-    DexrnsFunnyLogger('Web');
+    DexrnsFunnyLogger('Platform(s): Web');
     platformarray.push(" Web");
 }
 
@@ -207,6 +207,9 @@ async function setActivitySmallImage() {
     const mostRecent = activities.filter(m => m.type !== 4).shift();
     if (!mostRecent?.assets?.small_image || mostRecent.assets.large_image.includes("spotify")) {
         smallImage.style.display = 'none';
+	 DexrnsFunnyLogger('small_image false or large_image includes \"spotify\"');
+	 // Dexrn: I was a dumbass and forgot to also not display if smallImage is false.
+	 smallImageAlt.style.display = 'none';
         return;
     }
 	DexrnsFunnyLogger('small_image true');
