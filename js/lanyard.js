@@ -7,11 +7,11 @@ const statusDot = document.getElementById('status-dot');
 const status2 = document.getElementById('status2');
 const status3 = document.getElementById('status3');
 // const status4 = document.getElementById('status4');
-const smallImageAlt = document.getElementById('activity-small-image-alt');
 const username = document.getElementById('username');
 const bigImage = document.getElementById('activity-big-image');
 const smallImage = document.getElementById('activity-small-image');
 const name = document.getElementById('activity-name');
+const smallImageAlt = document.getElementById('activity-small-image-alt');
 const state = document.getElementById('activity-state');
 const details = document.getElementById('activity-detail');
 const elapsed = document.getElementById('activity-elapsed');
@@ -183,11 +183,14 @@ async function setActivitySmallImage() {
         smallImageAlt.src = imageLink;
         smallImageAlt.title = mostRecent.assets.small_text;
         smallImage.style.display = 'none';
+	 console.log(mostRecent.assets.large_image)
+	console.log('show small image as large.')
 	} else {
 	smallImageAlt.style.display = 'none';
 	smallImage.style.display = 'block';
        smallImage.src = imageLink;
 	smallImage.title = mostRecent.assets.small_text;
+	console.log('show small image on top of large image.')
 }}
 async function setActivityName() {
     const {
