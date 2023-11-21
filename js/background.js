@@ -1,3 +1,11 @@
+let DLog = false;
+console.log('background.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
+function DexrnsFunnyLogger(message) {
+	if (DLog) {
+		console.log('background.js: ' + message);
+	}
+}
+
 function backgroundfade() {
     let now = new Date();
     let hour = now.getHours();
@@ -6,8 +14,10 @@ function backgroundfade() {
     let loadingcontainer = document.querySelector('.loadingcontainer');
     if (bgElement) {
         if (hour >= 6 && hour < 20) {
+            DexrnsFunnyLogger(day time);
             bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
         } else {
+            DexrnsFunnyLogger(night time);
             bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
         }
         maincontainer.style.display = 'none';
