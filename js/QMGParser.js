@@ -4,7 +4,7 @@
 // This script is JANK.
 
 let DLog = false;
-console.log('Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
+console.log('QMGParser.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
 function DexrnsFunnyLogger(message) {
 	if (DLog) {
 		console.log('QMGParser.js: ' + message);
