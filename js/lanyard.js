@@ -1,8 +1,8 @@
 let DLog = false;
-console.log('Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
+console.log('lanyard.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
 function DexrnsFunnyLogger(message) {
 	if (DLog) {
-		console.log('in lanyard.js: ' + message);
+		console.log('lanyard.js: ' + message);
 	}
 }
 
