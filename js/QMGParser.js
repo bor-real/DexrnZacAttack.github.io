@@ -7,7 +7,7 @@ let DLog = false;
 console.log('Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
 function DexrnsFunnyLogger(message) {
 	if (DLog) {
-		console.log('in QMGParser.js: ' + message);
+		console.log('QMGParser.js: ' + message);
 	}
 }
 
