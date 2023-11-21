@@ -183,7 +183,7 @@ async function setActivitySmallImage() {
         smallImageAlt.src = imageLink;
         smallImageAlt.title = mostRecent.assets.small_text;
         smallImage.style.display = 'none';
-	}
+	} else {
 	smallImage.style.display = 'block';
        smallImage.src = imageLink;
 	smallImage.title = mostRecent.assets.small_text;
