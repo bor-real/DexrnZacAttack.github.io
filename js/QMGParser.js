@@ -3,7 +3,7 @@
 // Saw that vlOd made a header parser in C# and decided to make one in JS so that people who don't run Windows can run this straight in their browser.
 // This script is JANK.
 
-let DLog = false;
+var DLog = false;
 console.log('QMGParser.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
 function DexrnsFunnyLogger(message) {
 	if (DLog) {
