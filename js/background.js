@@ -14,10 +14,10 @@ function backgroundfade() {
     let loadingcontainer = document.querySelector('.loadingcontainer');
     if (bgElement) {
         if (hour >= 6 && hour < 20) {
-            DexrnsFunnyLogger(day time);
+            DexrnsFunnyLogger('day time');
             bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/day')";
         } else {
-            DexrnsFunnyLogger(night time);
+            DexrnsFunnyLogger('night time');
             bgElement.style.backgroundImage = "url('https://api.itzpeto.com/dexrn/night')";
         }
         maincontainer.style.display = 'none';
