@@ -3,6 +3,14 @@
 // Saw that vlOd made a header parser in C# and decided to make one in JS so that people who don't run Windows can run this straight in their browser.
 // This script is JANK.
 
+let DLog = false;
+console.log('Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
+function DexrnsFunnyLogger(message) {
+	if (DLog) {
+		console.log('in QMGParser.js: ' + message);
+	}
+}
+
 const unknownversions = [
     'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ'
 ];
@@ -100,30 +108,30 @@ document.addEventListener("drop", (e) => {
 
 function readfile(data, filename) {
 
-    console.log(`File: ${filename}`)
-    console.log(`Parsing started...`)
+    DexrnsFunnyLogger(`File: ${filename}`)
+    DexrnsFunnyLogger(`Parsing started...`);
     // Dexrn: if the file doesn't have at least 12 bytes, it can't even fit the header lmao
     if (data.length < 12) {
-        console.log(`The parser encountered an error: Invalid file: File is too small, Must be atleast 12 bytes in length. File size was ${data.length}`);
+        DexrnsFunnyLogger(`The parser encountered an error: Invalid file: File is too small, Must be atleast 12 bytes in length. File size was ${data.length}`);
         document.getElementById('output').textContent = `Invalid file: File is too small, Must be atleast 12 bytes in length.\n` +
         `File size was ${data.length}`;
         throw new Error("Invalid file: File is too small")
     }
 
     // Dexrn: Check if the first 2 bytes are QM or QG or one of the unknown ones
-    console.log(`Checking magic...`)
+    DexrnsFunnyLogger(`Checking magic...`)
     const magic = String.fromCharCode(data[0], data[1]);
     const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
 
     if (!magictypes.includes(magic) && magicraw !== '14 00') {
-        console.log(`The parser encountered an error: Invalid file: Invalid magic. Expected one of: QM, QG, IM, QC, '14 00', got "${magic}" (${magicraw}) instead.`);
+        DexrnsFunnyLogger(`The parser encountered an error: Invalid file: Invalid magic. Expected one of: QM, QG, IM, QC, '14 00', got "${magic}" (${magicraw}) instead.`);
         document.getElementById('output').textContent = `Invalid file: Invalid magic.\n` +
             `Expected one of: QM, QG, IM, QC, QW, '14 00', got "${magic}" (${magicraw}) instead.`;
         throw new Error("Invalid file: Invalid magic");
     }
     
-    console.log(`Magic is ${magic}`)
-    console.log(`Magic (raw) is ${magicraw}`)
+    DexrnsFunnyLogger(`Magic is ${magic}`)
+    DexrnsFunnyLogger(`Magic (raw) is ${magicraw}`)
 
     // Dexrn: THE JANKNESS STARTS HERE!
     // Dexrn: parse
@@ -141,41 +149,41 @@ function readfile(data, filename) {
     const encmode = data[5].toString(16).padStart(2, '0');
     // let sprfiletype;
     if (magic != "QM") {
-        console.log(`Looking for ZLib streams`);
+        DexrnsFunnyLogger(`Looking for ZLib streams`);
         for (let i = 0; i < data.length - 1; i++) {
             if (data[i] === 0x78 && data[i + 1] === 0xDA) {
                 zlibstreamcount++;
-                console.log(`ZLib stream found at offset ${zliboffset}`);
+                DexrnsFunnyLogger(`ZLib stream found at offset ${zliboffset}`);
             }
             zliboffset++;
         }
-        console.log(`ZLib Stream Count: ${zlibstreamcount}`);
+        DexrnsFunnyLogger(`ZLib Stream Count: ${zlibstreamcount}`);
     }
     
 
-    console.log(`Setting variables...`)
+    DexrnsFunnyLogger(`Setting variables...`)
     if (magic === 'QG' || magic === 'IM' || magic === 'QC' || magicraw === '14 00' || magic === 'QW' || magic === 'SP') {
         flags = data[5].toString(16).padStart(2, '0');
-        console.log(`flags: ${flags}`)
+        DexrnsFunnyLogger(`flags: ${flags}`)
         qual = data[6];
-        console.log(`qual: ${qual}`)
+        DexrnsFunnyLogger(`qual: ${qual}`)
         majorversion = data[2];
-        console.log(`majorversion: ${majorversion}`)
+        DexrnsFunnyLogger(`majorversion: ${majorversion}`)
         minorversion = data[3];
-        console.log(`minorversion: ${minorversion}`)
+        DexrnsFunnyLogger(`minorversion: ${minorversion}`)
         revision = data[4];
-        console.log(`revision: ${revision}`)
+        DexrnsFunnyLogger(`revision: ${revision}`)
     } else if (magic === 'QM') {
         // Dexrn: this is jank
         flag1 = data[4].toString(16).padStart(2, '0');
-        console.log(`flag1: ${flag1}`)
+        DexrnsFunnyLogger(`flag1: ${flag1}`)
         flag1noraw = data[4];
         flag2 = data[5].toString(16).padStart(2, '0');
-        console.log(`flag2: ${flag2}`)
+        DexrnsFunnyLogger(`flag2: ${flag2}`)
         majorversion = data[2];
-        console.log(`majorversion: ${majorversion}`)
+        DexrnsFunnyLogger(`majorversion: ${majorversion}`)
         offset = -1; // Dexrn: Offset because I originally had this and don't want to redo this yet.
-        console.log(`offset (for the parser): ${offset}`)
+        DexrnsFunnyLogger(`offset (for the parser): ${offset}`)
     }   
 
     const width = (data[7 + offset] | (data[8 + offset] << 8));
@@ -183,48 +191,48 @@ function readfile(data, filename) {
 
     if (magic == "QM") {
         animated = (flag1noraw >> 7) != 0;
-        console.log(`animated: ${animated}`)
+        DexrnsFunnyLogger(`animated: ${animated}`)
     } else {
         animated = 0;  
     }
 
-    // console.log((flag1noraw >> 7));
-    // console.log((flag1noraw & 128) != 0);
-    // console.log((flag1noraw >> 7) != 0);
-    // console.log(`animated == ${animated}`);
-    // console.log(`currentFramecount == ${currentFramecount}`);
-    // console.log(`majorversion == ${majorversion}`);
-    // console.log(`flag1noraw == ${flag1noraw}`);
-    // console.log(`flag1test == ${flag1test}`);
-    // console.log(`flag1 == ${flag1}`);
+    // DexrnsFunnyLogger((flag1noraw >> 7));
+    // DexrnsFunnyLogger((flag1noraw & 128) != 0);
+    // DexrnsFunnyLogger((flag1noraw >> 7) != 0);
+    // DexrnsFunnyLogger(`animated == ${animated}`);
+    // DexrnsFunnyLogger(`currentFramecount == ${currentFramecount}`);
+    // DexrnsFunnyLogger(`majorversion == ${majorversion}`);
+    // DexrnsFunnyLogger(`flag1noraw == ${flag1noraw}`);
+    // DexrnsFunnyLogger(`flag1test == ${flag1test}`);
+    // DexrnsFunnyLogger(`flag1 == ${flag1}`);
 
 
     // Dexrn: this might not work...
-    console.log(`Checking version... (to see if we have to offset alphapos)`)
+    DexrnsFunnyLogger(`Checking version... (to see if we have to offset alphapos)`)
     if (majorversion > 11 && animated != 0 && currentFramecount <= 2) {
-        console.log(`offset alphapos`)
+        DexrnsFunnyLogger(`offset alphapos`)
         alphapos = (data[12] | (data[13] << 8)) << 2;
-        console.log(`alphapos: ${alphapos}`)
+        DexrnsFunnyLogger(`alphapos: ${alphapos}`)
         // alphaposver12 = true;
     } else {
-        console.log(`don't offset alphapos`)
+        DexrnsFunnyLogger(`don't offset alphapos`)
         alphapos = (data[12] | (data[13] << 8));
-        console.log(`alphapos: ${alphapos}`)
+        DexrnsFunnyLogger(`alphapos: ${alphapos}`)
         // alphaposver12 = false;
     }
 
-    // console.log(`alphaposver12 == ${alphaposver12}`);
+    // DexrnsFunnyLogger(`alphaposver12 == ${alphaposver12}`);
 
 
     // Dexrn: pixel format detection
-    console.log(`Detecting image pixel format...`)
+    DexrnsFunnyLogger(`Detecting image pixel format...`)
     switch (type) {
         case 0:
             pixelformat = "RGB565";
             transparency = "false";
             bpp = "0x10";
             raw_type = "QM_RAW_RGB565";
-            console.log(`case 0\n
+            DexrnsFunnyLogger(`case 0\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -235,7 +243,7 @@ function readfile(data, filename) {
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_RGB888";
-            console.log(`case 1\n
+            DexrnsFunnyLogger(`case 1\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -246,7 +254,7 @@ function readfile(data, filename) {
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_BGR888";
-            console.log(`case 2\n
+            DexrnsFunnyLogger(`case 2\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -257,7 +265,7 @@ function readfile(data, filename) {
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_RGBA5658";
-            console.log(`case 3\n
+            DexrnsFunnyLogger(`case 3\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -268,7 +276,7 @@ function readfile(data, filename) {
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_ARGB8565";
-            console.log(`case 4\n
+            DexrnsFunnyLogger(`case 4\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -279,7 +287,7 @@ function readfile(data, filename) {
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_ARGB8888";
-            console.log(`case 5\n
+            DexrnsFunnyLogger(`case 5\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -290,7 +298,7 @@ function readfile(data, filename) {
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_RGBA8888";
-            console.log(`case 6\n
+            DexrnsFunnyLogger(`case 6\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
@@ -301,14 +309,14 @@ function readfile(data, filename) {
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_BGRA8888";
-            console.log(`case 7\n
+            DexrnsFunnyLogger(`case 7\n
             pixelformat = ${pixelformat}\n
             transparency = ${transparency}\n
             bpp = ${bpp}\n
             raw_type = ${raw_type}`)
             break;
         default:
-            console.log(`Unknown`)
+            DexrnsFunnyLogger(`Unknown`)
             pixelformat = "Unknown";
             transparency = "Unknown";
             bpp = "Unknown";
