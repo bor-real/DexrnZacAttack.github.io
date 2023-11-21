@@ -7,6 +7,7 @@ const statusDot = document.getElementById('status-dot');
 const status2 = document.getElementById('status2');
 const status3 = document.getElementById('status3');
 // const status4 = document.getElementById('status4');
+const smallImageAlt = document.getElementById('activity-small-image-alt');
 const username = document.getElementById('username');
 const bigImage = document.getElementById('activity-big-image');
 const smallImage = document.getElementById('activity-small-image');
@@ -177,8 +178,14 @@ async function setActivitySmallImage() {
         return;
     }
     const imageLink = mostRecent.assets.small_image.includes("external") ? `https://media.discordapp.net/external/${mostRecent.assets.small_image.split("mp:external/")[1]}` : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.small_image}.png?size=256`;
-    smallImage.style.display = 'block';
-    smallImage.src = imageLink;
+        if (!mostRecent.assets.large_image) {
+        smallImageAlt.style.display = 'block';
+        smallImageAlt.src = imageLink;
+        smallImageAlt.title = mostRecent.assets.small_text;
+        smallImage.style.display = 'none';
+	}
+	smallImage.style.display = 'block';
+       smallImage.src = imageLink;
 	smallImage.title = mostRecent.assets.small_text;
 }
 async function setActivityName() {
