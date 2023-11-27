@@ -259,6 +259,7 @@ async function setActivityState() {
     state.innerHTML = mostRecent.state;
 
     const current = new Date().getTime();
+    if (created) {
     const diff = current - created;
     
     const seconds = Math.floor(diff / 1000) % 60;
@@ -267,7 +268,7 @@ async function setActivityState() {
     
     const formattime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     elapsed.innerHTML = 'Time Elapsed: ' + formattime;
-}
+}}
 async function setActivityDetails() {
     const response = await fetchResponse(USERID);
 
