@@ -246,11 +246,11 @@ async function setActivityName() {
 async function setActivityState() {
     const response = await fetchResponse(USERID);
     const activities = response.data.activities.filter(m => m.type !== 4);
+    const mostRecent = activities.shift();
     if (!activities.length) {
         state.style.display = 'none';
         return;
     }
-    const mostRecent = activities.shift();
     if (!mostRecent.state) {
         state.style.display = 'none';
         return;
@@ -261,7 +261,6 @@ async function setActivityState() {
 
     const current = new Date().getTime();
     const diff = current - created;
-    
     
     const seconds = Math.floor(diff / 1000) % 60;
     const minutes = Math.floor(diff / (1000 * 60)) % 60;
