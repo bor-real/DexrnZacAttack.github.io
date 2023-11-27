@@ -179,11 +179,6 @@ async function setActivityBigImage() {
         }
     } = await fetchResponse(USERID);
     const mostRecent = activities.filter(m => m.type !== 4).shift();
-    if (!mostRecent?.assets?.large_image) {
-	 DexrnsFunnyLogger('No large_image');
-        bigImage.style.display = 'none';
-        return;
-    }
     if (mostRecent.assets.large_image.includes("spotify")) {
 	 DexrnsFunnyLogger('spotify');
         bigImage.style.display = 'block';
@@ -193,10 +188,16 @@ async function setActivityBigImage() {
         return;
     }
     const imageLink = mostRecent.assets.large_image.includes("external") ? `https://media.discordapp.net/external/${mostRecent.assets.large_image.split("mp:external/")[1]}` :  `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.large_image}.png?size=256`;
-    bigImage.style.display = 'block';
-    DexrnsFunnyLogger('large_image set');
-    bigImage.src = imageLink;
-	bigImage.title = mostRecent.assets.large_text;
+    if (!mostRecent?.assets?.large_image) {
+	DexrnsFunnyLogger('No large_image');
+        bigImage.style.display = 'none';
+        return;
+    } else {
+    	bigImage.style.display = 'block';
+    	DexrnsFunnyLogger('large_image set');
+    	bigImage.src = imageLink;
+    	bigImage.title = mostRecent.assets.large_text;
+    }
 }
 async function setActivitySmallImage() {
     const {
@@ -214,7 +215,7 @@ async function setActivitySmallImage() {
     }
 	DexrnsFunnyLogger('small_image true');
     const imageLink = mostRecent.assets.small_image.includes("external") ? `https://media.discordapp.net/external/${mostRecent.assets.small_image.split("mp:external/")[1]}` : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.small_image}.png?size=256`;
-        if (!mostRecent.assets.large_image) {
+        if (!mostRecent.assets.large_image && mostRecent.assets.small_image) {
         smallImageAlt.style.display = 'block';
         smallImageAlt.src = imageLink;
         smallImageAlt.title = mostRecent.assets.small_text;
