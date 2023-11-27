@@ -396,6 +396,11 @@ body {
     margin-left: 15px;
 }
 
+#activity-elapsed {
+    opacity: 0.5;
+    margin-left: 15px;
+}
+
 /* .showmore {
     opacity: 0.5;
     margin-top: 10px;
