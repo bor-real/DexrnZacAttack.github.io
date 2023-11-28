@@ -204,29 +204,35 @@ async function setActivitySmallImage() {
             activities
         }
     } = await fetchResponse(USERID);
+
     const mostRecent = activities.filter(m => m.type !== 4).shift();
-    if (!mostRecent.assets.small_image || mostRecent.assets.small_image.includes("spotify")) {
+
+    if (!mostRecent || !mostRecent?.assets?.small_image || mostRecent.assets.small_image.includes("spotify")) {
         smallImage.style.display = 'none';
-	 DexrnsFunnyLogger('small_image false or large_image includes \"spotify\"');
-	 // Dexrn: I was a dumbass and forgot to also not display if smallImage is false.
-	    smallImageAlt.style.display = 'none';
+        DexrnsFunnyLogger('small_image false or large_image includes "spotify"');
+        // Dexrn: I was a dumbass and forgot to also not display if smallImage is false.
+        smallImageAlt.style.display = 'none';
         return;
     }
-	DexrnsFunnyLogger('small_image true');
+
+    DexrnsFunnyLogger('small_image true');
     const imageLink = mostRecent.assets.small_image.includes("external") ? `https://media.discordapp.net/external/${mostRecent.assets.small_image.split("mp:external/")[1]}` : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.small_image}.png?size=256`;
+
     if (!mostRecent.assets.large_image && mostRecent.assets.small_image) {
         smallImageAlt.style.display = 'block';
         smallImageAlt.src = imageLink;
         smallImageAlt.title = mostRecent.assets.small_text;
         smallImage.style.display = 'none';
-	DexrnsFunnyLogger('show small image as large.');
-	} else {
-	smallImageAlt.style.display = 'none';
-	smallImage.style.display = 'block';
-    smallImage.src = imageLink;
-	smallImage.title = mostRecent.assets.small_text;
-	DexrnsFunnyLogger('show small image on top of large image.');
-}}
+        DexrnsFunnyLogger('show small image as large.');
+    } else {
+        smallImageAlt.style.display = 'none';
+        smallImage.style.display = 'block';
+        smallImage.src = imageLink;
+        smallImage.title = mostRecent.assets.small_text;
+        DexrnsFunnyLogger('show small image on top of large image.');
+    }
+}
+
 async function setActivityName() {
     const {
         data: {
