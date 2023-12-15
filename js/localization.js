@@ -5,10 +5,10 @@ function checkLang() {
 
     switch (lang) {
     case 'zh-CN':
-        langFilePath = "/assets/lang/zh-CN.json";
+        langFilePath = "assets/lang/zh-CN.json";
         break;
     case 'en-US':
-        langFilePath = "/assets/lang/en-US.json";
+        langFilePath = "assets/lang/en-US.json";
         break;
     default:
         langFilePath = "/assets/lang/en-US.json";
@@ -67,6 +67,12 @@ function setLang(langFilePath) {
             checkIfExists('404msg', data.NotFoundErrorText)
             checkIfExists('homebtn', data.HomeButton);
             checkIfExists('403msg', data.ForbiddenErrorText)
+            checkIfExists('selopt', data.SelectOptionText);
+            checkIfExists('selopt2', data.SelectOptionText);
+            checkIfExists('darkthmopt', data.DarkThemeOption);
+            checkIfExists('lightthmopt', data.LightThemeOption);
+            checkIfExists('themetxt', data.ThemeText);
+            checkIfExists('ftlThemeTxt', data.FirstTimeLoadThemeText);
         })
         .catch(error => console.error('Error whilst loading lang file:', error));
 }
@@ -78,3 +84,42 @@ function checkIfExists(elementId, value) {
         element.textContent = value;
     }
 }
+
+
+        function setTheme(theme) {
+            var expirationDate = new Date('Fri, 31 Dec 9999 23:59:59 GMT');
+            document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;            
+
+            applyTheme(theme);
+        }
+
+        function applyTheme(theme) {
+            const stylesheetElement = document.getElementById('theme');
+            switch (theme) {
+                case 'default-dark':
+                stylesheetElement.href = 'css/default.css';
+                break;
+                case 'default-light':
+                stylesheetElement.href = 'css/default-light.css';
+                break;
+                default:
+                stylesheetElement.href = 'css/default.css';
+                break;
+            }
+        }
+
+        function getThemeCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (const cookie of cookies) {
+                const [cookieName, cookieValue] = cookie.trim().split('=');
+                if (cookieName === name) {
+                    return cookieValue;
+                }
+            }
+            return null;
+        }
+
+        const savedTheme = getThemeCookie('Theme');
+
+        applyTheme(savedTheme);
+        

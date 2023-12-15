@@ -30,150 +30,72 @@
         display: none;
     }
 }
-    
 
-/* Make theme turn white when user is using light mode on their OS */
-@media (prefers-color-scheme: light) {
-    .loadingcontainer {
-        background: rgba(255, 255, 255, 1);
-    }
-
-    body {
-        background-color: white;
-        color: black;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
-        color: #000;
-    }
-    
-    .topcard {
-        background: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
-        color: #000;
-    }
-
-    .button:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #000;
-    }
-
-    .buttonalt:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #000;
-    }
-    
-    .buttonalt2:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #000;
-    }
-
-    .drpdwnbtn {
-        color: black !important; 
-    }
-      
-    .drpdwnbtn option {
-        color: white; 
-    }
-
-    .buttonalt {
-        color: black;
-        background: rgba(255, 255, 255, 0.5);
-    }
-
-    .a {
-        color: black;
-    }
-
-    .loadingcontainer .loading #loading-light {
-        display: none;
-    }
-    
-    .loadingcontainer .loading #loading-dark {
-        display: block;
-        animation: 1s ease-out 0s 1 fadeIn;
-    }
-
-    #normalmode {
-        background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png');
-       /* background-color: rgb(225, 225, 225); */
-    }
+.loadingcontainer {
+    background: rgba(255, 255, 255, 1);
 }
 
-/* Same as above but for dark mode */
-@media (prefers-color-scheme: dark) {
-    .loadingcontainer {
-        background: rgba(0, 0, 0, 1);
-    }
+body {
+    background-color: white;
+    color: black;
+}
 
-    body {
-        background-color: black;
-        color: white;
-    }
+.card {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
+    color: #000;
+}
 
-    .card {
-        background: rgba(15, 15, 15, 0.6);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
-        color: #fff;
-    }
+.topcard {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
+    color: #000;
+}
 
-    .topcard {
-        background: rgba(15, 15, 15, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
-        color: #fff;
-    }
+.button:hover {
+    box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+    color: #000;
+}
 
-    .button:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #fff;
-    }
+.buttonalt:hover {
+    box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+    color: #000;
+}
 
-    .buttonalt:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #fff;
-    }
+.buttonalt2:hover {
+    box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+    color: #000;
+}
 
-    .buttonalt2:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #fff;
-    }
-    
-    .button {
-        color: #fff;
-    }
+.drpdwnbtn {
+    color: black !important; 
+}
+  
+.drpdwnbtn option {
+    color: white; 
+}
 
-    .drpdwnbtn {
-        color: white !important; 
-    }
-      
-    .drpdwnbtn option {
-        color: initial; 
-    }
+.buttonalt {
+    color: black;
+    background: rgba(255, 255, 255, 0.5);
+}
 
-    .buttonalt {
-        color: #fff;
-        background: rgba(000, 000, 000, 0.2);
-    }
+.a {
+    color: black;
+}
 
-    .a {
-        color: white;
-    }
+.loadingcontainer .loading #loading-light {
+    display: none;
+}
 
-    .loadingcontainer .loading #loading-light {
-        display: block;
-        animation: 1s ease-out 0s 1 fadeIn;
-    }
-    
-    .loadingcontainer .loading #loading-dark {
-        display: none;
-    }
+.loadingcontainer .loading #loading-dark {
+    display: block;
+    animation: 1s ease-out 0s 1 fadeIn;
+}
 
-    #normalmode {
-        background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
-        /* background-color: rgb(12, 12, 12); */ 
-    }
+#normalmode {
+    background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png');
+   /* background-color: rgb(225, 225, 225); */
 }
 
 .loadingcontainer .loading {
@@ -228,6 +150,7 @@
 }
 
 .buttonalt2 {
+    color: black;
     background-color: transparent;
     backdrop-filter: blur(1000px);
     -webkit-backdrop-filter: blur(1000px);
@@ -359,6 +282,30 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.212);
     padding: 12px;
     width: 100%;
+}
+
+.center {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+.button2 {
+    background-color: transparent;
+    backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1%;
 }
 
 .card-title {

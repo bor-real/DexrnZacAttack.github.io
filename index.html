@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="What the FUCK am I doing">
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
-    <link rel="stylesheet" href="css/main.css">
+    <link id="theme" rel="stylesheet" href="">
     <a rel="me" href="https://mastodon.social/@Dexrn" class="mastodon">Mastodon</a>
     <script src="js/background.js"></script>
     <script src="js/localization.js"></script>
@@ -57,12 +57,17 @@
     <div class="loading">
         <img id="loading-light" src="assets/loader.gif">
         <img id="loading-dark" src="assets/loader-dark.gif">
-        <h1 class="loadingtext hidden"></h1>
+        <h1 class="loadingtext hidden" id="loadingtext"></h1>
         <div class="card" id="firsttimeload" style="height: 300px; width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <label for="language" id="ftlLanguageTxt" style="margin-bottom: 10px;"></label>
             <select id="language" class="drpdwnbtn" name="language" style="margin-bottom: 10px;">
                 <option value="en-US">English</option>
                 <option value="zh-CN">中文</option>
+            </select>
+            <h3 id="ftlThemeTxt"></h3>
+            <select id="themeoption2" class="drpdwnbtn" name="themeoption2">
+                <option value="default-dark">Dark</option>
+                <option value="default-light">Light</option>
             </select>
             <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
         </div>        
@@ -70,11 +75,12 @@
     <script>        
     document.getElementById('ftlcbtn-1').addEventListener('click', function() {
         var selectedLanguage = document.getElementById('language').value;
+        var selectedTheme = document.getElementById('themeoption2').value;
 
         var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
         document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-        console.log(selectedLanguage);
-        location.reload()
+        setTheme(selectedTheme);
+        backgroundfade(true);
     });</script>
 </div>
     <div class="contentcontainer" id="content2">
@@ -142,25 +148,42 @@
                 <div id="settings" style="height: 350px;">
                 <div class="topcard" style="cursor: pointer; width: 300px; margin-bottom: 8px;" id="settingsclose">
                     <div class="back" id="backbtn"></div></div>
-                    <div class="card" style="width: 300px; height: 300px;">
+                    <div class="card" style="width: 300px; height: 350px;">
                         <div class="card-title" id="settings-path"></div>
                         <div class="options" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                         <h3 id="languagetxt"></h3>
                         <select id="language2" class="drpdwnbtn" name="language2">
+                            <option value="" disabled selected id="selopt"></option>
                             <option value="en-US">English</option>
                             <option value="zh-CN">中文</option>
+                        </select>
+                        <h3 id="themetxt"></h3>
+                        <select id="themeoption" class="drpdwnbtn" name="themeoption">
+                            <option value="" disabled selected id="selopt2"></option>
+                            <option value="default-dark" id="darkthmopt"></option>
+                            <option value="default-light" id="lightthmopt"></option>
                         </select>
                         <button class="buttonalt2" id="savebtn" style="position: absolute; bottom: 0;"></button>
                     </div>
                     </div>      
                     </div>                                                          
-
                         <script>        
                             document.getElementById('savebtn').addEventListener('click', function() {
                                 var selectedLanguage = document.getElementById('language2').value;
-                
+                                var selectedTheme = document.getElementById('themeoption').value;
+                                var currentTheme = getThemeCookie('Theme');
+                                var currentLanguage = getLanguageFromCookie();
+                                if (selectedLanguage !== getLanguageFromCookie()) {
                                 var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
                                 document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+                                } else {
+                                }
+                                if (selectedTheme !== getThemeCookie('Theme')) {
+                                setTheme(selectedTheme);
+                                } else {
+
+                                }
+
                                 location.reload()
                             });
                         </script>
@@ -217,10 +240,6 @@
         
             
     </div>
-    </div>
-	<div class="bottomright">
-        <!-- hidden while I figure out how to not make it show during the animation and so that mobile looks better -->
-        <!-- <a href="https://itzpeto.com">Thanks to ItzPeto for helping me set this up!</a> -->
     </div>
 </body>
 </html>

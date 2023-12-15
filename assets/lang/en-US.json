@@ -20,7 +20,7 @@
     "SettingsPath": "@Dexrn > Settings",
     "LanguageText": "Language",
     "SettingsButton": "Settings",
-    "FirstTimeLoadLanguageText": "Choose a Language",
+    "FirstTimeLoadLanguageText": "Choose a language",
     "FirstTimeLoadButton1": "Confirm",
     "QMGResearchPath": "@Dexrn > QMG Research",
     "NotFoundErrorText": "You look lost... Are you sure this is the right page?",
@@ -31,6 +31,11 @@
     "IdleText": "Idle",
     "DoNotDisturbText": "Do not disturb",
     "OfflineText": "Offline",
-    "NoActivityText": "No activity"
+    "NoActivityText": "No activity",
+    "LightThemeOption": "Light",
+    "DarkThemeOption": "Dark",
+    "SelectOptionText": "Select an option",
+    "ThemeText": "Theme",
+    "FirstTimeLoadThemeText": "Choose a theme"
 }
   

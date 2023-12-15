@@ -6,64 +6,38 @@
     box-sizing: border-box;
 }
 
-/* Make theme turn white when user is using light mode on their OS */
-@media (prefers-color-scheme: light) {
+/* hide on mobile devices or devices with a small screen. */
+@media (max-width: 1200px) {
+    .connection-icon2 {
+        display: none; 
+    }
+}
+
+@media (max-width: 1100px) {
+    #normalmode {
+        background-image: none !important;
+    }
+}
+    
+@media (max-height: 665px) {
+    #normalmode2 {
+        display: none;
+    }
+}
+    
+@media (max-height: 450px) {
+    #normalmode1 {
+        display: none;
+    }
+}
+
     .loadingcontainer {
-        background: rgba(255, 255, 255, 1);
+        background: rgba(0, 0, 0, 1);
     }
 
     body {
-        background-color: white;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
-        color: #000;
-    }
-
-    .topcard {
-        background: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
-        color: #000;
-    }
-
-
-    .button:hover {
-        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
-        color: #000;
-    }
-
-    .loadingcontainer .loading #loading-light {
-        display: none;
-    }
-    
-    .loadingcontainer .loading #loading-dark {
-        display: block;
-        animation: 1s ease-out 0s 1 fadeIn;
-    }
-    
-    .button {
-        color: black;
-    }
-
-    .body {
-        color: #000;
-    }
-
-    .a {
-        color: black;
-    }
-}
-
-#headercard {
-    height: auto;
-}
-
-/* Same as above but for dark mode */
-@media (prefers-color-scheme: dark) {
-    .loadingcontainer {
-        background: rgba(0, 0, 0, 1);
+        background-color: black;
+        color: white;
     }
 
     .card {
@@ -71,21 +45,47 @@
         box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1);
         color: #fff;
     }
-    
+
     .topcard {
         background: rgba(15, 15, 15, 0.5);
         box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);
         color: #fff;
     }
 
-
     .button:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #fff;
+    }
+
+    .buttonalt:hover {
+        box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
+        color: #fff;
+    }
+
+    .buttonalt2:hover {
         box-shadow: 0 0 32px 0 rgba(0, 120, 215, 0.3);
         color: #fff;
     }
     
     .button {
         color: #fff;
+    }
+
+    .drpdwnbtn {
+        color: white !important; 
+    }
+      
+    .drpdwnbtn option {
+        color: initial; 
+    }
+
+    .buttonalt {
+        color: #fff;
+        background: rgba(000, 000, 000, 0.2);
+    }
+
+    .a {
+        color: white;
     }
 
     .loadingcontainer .loading #loading-light {
@@ -97,14 +97,10 @@
         display: none;
     }
 
-    body {
-        background-color: black;
+    #normalmode {
+        background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
+        /* background-color: rgb(12, 12, 12); */ 
     }
-
-    .a {
-        color: white;
-    }
-}
 
 .loadingcontainer .loading {
     display: flex;
@@ -113,20 +109,6 @@
     justify-content: center;
     text-align: center;
   }
-
-.loadingcontainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.5s;
-}
 
 .bg {
     background-size: cover;
@@ -157,7 +139,22 @@
     margin: 1%;
 }
 
-.button2 {
+.buttonalt {
+    backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1%;
+}
+
+.buttonalt2 {
+    color: white;
     background-color: transparent;
     backdrop-filter: blur(1000px);
     -webkit-backdrop-filter: blur(1000px);
@@ -172,13 +169,44 @@
     margin: 1%;
 }
 
-.center {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+.drpdwnbtn {
+    background-color: transparent;
+    backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
+    border: none;
+    padding: 12px 20px;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1%;
+}
+
+.loadingcontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.topcard {
+    /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.212);
+    padding: 12px;
+    width: 55%;
+    animation: 1s ease-out 0s 1 fadeIn;
 }
 
 @keyframes panorama {
@@ -209,6 +237,13 @@
     }
 }
 
+/* this looks kinda cool, might change or remove later tho. */
+#normalmode {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -224,25 +259,6 @@ body {
     display: none;
 }
 
-#normalmode {
-    background-image: url('https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-color: rgb(12, 12, 12);
-}
-
-.topcard {
-    /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.212);
-    padding: 12px;
-    width: 55%;
-    animation: 1s ease-out 0s 1 fadeIn;
-}
-
 .card {
     /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
     backdrop-filter: blur(3px);
@@ -250,16 +266,50 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.212);
     padding: 12px;
-    height: 500px;
-    width: 55%;
+    width: 50%;
     animation: 1s ease-out 0s 1 fadeIn;
 }
+
+.mastodon {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 
 .subcard {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.212);
     padding: 12px;
     width: 100%;
+}
+
+.center {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+.button2 {
+    background-color: transparent;
+    backdrop-filter: blur(1000px);
+    -webkit-backdrop-filter: blur(1000px);
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1%;
 }
 
 .card-title {
@@ -288,8 +338,31 @@ body {
     position: relative;
 }
 
-#loading {
+#pfp {
     width: 128px;
+    height: 128px;
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+    border-radius: 10%;
+}
+
+.loadingtextzh {
+    animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.loadingtextzhhid {
+    animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.loadingtext {
+    animation: 1s ease-out 0s 1 fadeIn;
+}
+
+
+#loading {
+    text-align: center;
+    width: 128px;
+    display: block;
+    margin: 0 auto;
     height: 128px;
     border-radius: 10%;
     transition: opacity 0.5s;
@@ -342,17 +415,6 @@ body {
     position: relative;
 }
 
-.mastodon {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-}
-
-
 #activity-big-image {
     width: 128px;
     height: 128px;
@@ -368,6 +430,12 @@ body {
     right: 0px;
     transform: translate(50%, -50%);
     border: 2px solid rgba(15, 15, 15, 0.3);
+}
+
+#activity-small-image-alt {
+    width: 128px;
+    height: 128px;
+    border-radius: 10%;
 }
 
 #activity-name {
@@ -387,7 +455,12 @@ body {
     margin-left: 15px;
 }
 
-.showmore {
+#activity-elapsed {
+    opacity: 0.7;
+    margin-left: 15px;
+}
+
+/* .showmore {
     opacity: 0.5;
     margin-top: 10px;
     cursor: pointer;
@@ -399,7 +472,7 @@ body {
     margin-top: 10px;
     cursor: pointer;
     font-size: small;
-}
+} */
 
 /* \ Activity / */
 
@@ -434,6 +507,11 @@ li {
 }
 
 .connection-icon {
+    height: 30px;
+    width: auto;
+}
+
+.connection-icon2 {
     height: 30px;
     width: auto;
 }
