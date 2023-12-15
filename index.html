@@ -16,17 +16,9 @@
     <link rel="stylesheet" href="css/main.css">
     <a rel="me" href="https://mastodon.social/@Dexrn" class="mastodon">Mastodon</a>
     <script src="js/background.js"></script>
+    <script src="js/localization.js"></script>
     <script>
-        function getLanguageFromCookie() {
-            const cookies = document.cookie.split(';');
-            for (const cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'lang') {
-                    return value;
-                }
-            }
-            return null; // Cookie not found
-        }
+
 
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -45,61 +37,7 @@
             }
         });
 
-        function checkLang() {
-            const lang = getLanguageFromCookie();
-            console.log(lang);
-            let langFilePath;
 
-            switch (lang) {
-            case 'zh-CN':
-                langFilePath = "assets/lang/zh-CN.json";
-                break;
-            case 'en-US':
-                langFilePath = "assets/lang/en-US.json";
-                break;
-            default:
-                langFilePath = "assets/lang/en-US.json";
-                break;
-            }
-            setLang(langFilePath);
-        }
-
-        checkLang();
-
-        
-
-
-
-        // Dexrn: Localization! (Kinda janky.)
-        // Dexrn: TODO: Make this it's own JS file.
-        function setLang(langFilePath) {
-        fetch(langFilePath)
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector('.loadingtext').textContent = data.LoadingText;
-                document.getElementById('status2').textContent = data.Status2;
-                document.getElementById('activity-name').textContent = data.ActivityName;
-                document.getElementById('activity-state').textContent = data.ActivityState;
-                document.getElementById('activity-detail').textContent = data.ActivityDetail;
-                document.getElementById('activity-path').textContent = data.ActivityPath;
-                document.getElementById('home-path').textContent = data.HomePath;
-                document.getElementById('about-path').textContent = data.AboutPath;
-                document.getElementById('stuff-path').textContent = data.LinksPath;
-                document.getElementById('mainbtn-1').textContent = data.MainPageButton1;
-                document.getElementById('mainbtn-2').textContent = data.MainPageButton2;
-                document.getElementById('abm-1').textContent = data.AboutMeTxt1;
-                document.getElementById('abm-2').textContent = data.AboutMeTxt2;
-                document.getElementById('savebtn').textContent = data.SettingsSaveButton;
-                document.getElementById('settings-path').textContent = data.SettingsPath;
-                document.getElementById('backbtn').textContent = data.BackButton;
-                document.getElementById('languagetxt').textContent = data.LanguageText;
-                document.getElementById('settingsbtn').textContent = data.SettingsButton;
-                document.getElementById('ftlLanguageTxt').textContent = data.FirstTimeLoadLanguageText;
-                document.getElementById('ftlcbtn-1').textContent = data.FirstTimeLoadButton1;
-
-            })
-            .catch(error => console.error('Error whilst loading lang file:', error));
-        }
         
     // Dexrn: This is for the text that shows on the loading screen.
     function showLoadingText() {
@@ -136,7 +74,7 @@
         var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
         document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
         console.log(selectedLanguage);
-        backgroundfade(true);
+        location.reload()
     });</script>
 </div>
     <div class="contentcontainer" id="content2">
@@ -223,7 +161,6 @@
                 
                                 var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
                                 document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-                                console.log(selectedLanguage);
                                 location.reload()
                             });
                         </script>

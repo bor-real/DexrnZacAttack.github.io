@@ -15,58 +15,7 @@
     <link rel="stylesheet" href="../css/headerparser.css">
     <script src="../js/background.js"></script>
     <script src="../js/fadeout.js"></script>
-    <script>
-        function getLanguageFromCookie() {
-            const cookies = document.cookie.split(';');
-            for (const cookie of cookies) {
-                const [name, value] = cookie.trim().split('=');
-                if (name === 'userLanguage') {
-                    return value;
-                }
-            }
-            return null; // Cookie not found
-        }
-
-        // Redirect to /zh-CN if language is set to zh-CN
-        function checkLang() {
-            const userLanguage = getLanguageFromCookie();
-            console.log(userLanguage);
-            let langFilePath;
-
-            switch (userLanguage) {
-            case 'zh-CN':
-                langFilePath = "../assets/lang/zh-CN.json";
-                break;
-            case 'en-US':
-                langFilePath = "../assets/lang/en-US.json";
-                break;
-            default:
-                langFilePath = "../assets/lang/en-US.json";
-                break;
-            }
-            setLang(langFilePath);
-        }
-
-        // Usage:
-        checkLang();
-
-        
-
-
-
-        // Dexrn: Localization! (Kinda janky.)
-        function setLang(langFilePath) {
-        fetch(langFilePath)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('backbtn').textContent = data.BackButton;
-                document.getElementById('qmghp-path').textContent = data.QMGHeaderParserPath;
-                document.getElementById('fileselectbtn').textContent = data.FileSelectButton;
-                document.getElementById('output').textContent = data.QMGHPOutputText;
-            })
-            .catch(error => console.error('Error whilst loading lang file:', error));
-        }
-    </script>
+    <script src="../js/localization.js"></script>
 </head>
 <body>
     <div class="loadingcontainer">

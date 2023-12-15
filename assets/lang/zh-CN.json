@@ -21,6 +21,15 @@
     "LanguageText": "语言",
     "SettingsButton": "设置",
     "FirstTimeLoadLanguageText": "选择语言",
-    "FirstTimeLoadButton1": "确认"
-
+    "FirstTimeLoadButton1": "确认",
+    "QMGResearchPath": "@Dexrn > QMG 研究",
+    "NotFoundErrorText": "您看起来迷失了方向... 您确定这是正确的页面吗？",
+    "BackButtonAlt": "返回",
+    "HomeButton": "首页",
+    "ForbiddenErrorText": "嘿！你不应该在这里！",
+    "OnlineText": "在线",
+    "IdleText": "离开",
+    "DoNotDisturbText": "请勿打扰",
+    "OfflineText": "离线",
+    "NoActivityText": "无活动"
 }
