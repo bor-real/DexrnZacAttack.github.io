@@ -6,7 +6,9 @@ function DexrnsFunnyLogger(message) {
 	}
 }
 
-function backgroundfade() {
+function backgroundfade(bgload) {
+    if (bgload == true) {
+    DexrnsFunnyLogger("bgload is true");
     let now = new Date();
     let hour = now.getHours();
     let bgElement = document.querySelector('.bg');
@@ -49,8 +51,12 @@ function backgroundfade() {
             }
             requestAnimationFrame(animate);
         };
+    } else {
+        console.error("background.js: No bgElement!!!")
     }
+} else {
+    return;
 }
-
+}
 
 window.onload = backgroundfade;

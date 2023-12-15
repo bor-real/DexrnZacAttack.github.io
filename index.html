@@ -15,40 +15,103 @@
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
     <link rel="stylesheet" href="css/main.css">
     <a rel="me" href="https://mastodon.social/@Dexrn" class="mastodon">Mastodon</a>
+    <script src="js/background.js"></script>
     <script>
-        // Retrieving the User's Language Preference
         function getLanguageFromCookie() {
             const cookies = document.cookie.split(';');
             for (const cookie of cookies) {
                 const [name, value] = cookie.trim().split('=');
-                if (name === 'userLanguage') {
+                if (name === 'lang') {
                     return value;
                 }
             }
             return null; // Cookie not found
         }
 
-        // Redirect to /zh-CN if language is set to zh-CN
-        function redirectIfChinese() {
-            const userLanguage = getLanguageFromCookie();
-            if (userLanguage === 'zh-CN') {
-                window.location.href = 'zh-CN/index.html';
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if the cookie is set
+            languageValue = getLanguageFromCookie();
+            if (languageValue === null || languageValue === undefined || languageValue === "undefined") {
+                console.log("Setting up for first time load");
+                document.getElementById('firsttimeload').style.display = 'flex';
+                document.getElementById('loading-light').style.display = 'none';
+                document.getElementById('loading-dark').style.display = 'none';
+                backgroundfade(false);
+            } else if (languageValue !== null) {
+                document.getElementById('firsttimeload').style.display = 'none';
+                showLoadingText();
+                backgroundfade(true);
             }
+        });
+
+        function checkLang() {
+            const lang = getLanguageFromCookie();
+            console.log(lang);
+            let langFilePath;
+
+            switch (lang) {
+            case 'zh-CN':
+                langFilePath = "assets/lang/zh-CN.json";
+                break;
+            case 'en-US':
+                langFilePath = "assets/lang/en-US.json";
+                break;
+            default:
+                langFilePath = "assets/lang/en-US.json";
+                break;
+            }
+            setLang(langFilePath);
         }
 
-        // Usage:
-        redirectIfChinese();
+        checkLang();
+
+        
+
+
+
+        // Dexrn: Localization! (Kinda janky.)
+        // Dexrn: TODO: Make this it's own JS file.
+        function setLang(langFilePath) {
+        fetch(langFilePath)
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.loadingtext').textContent = data.LoadingText;
+                document.getElementById('status2').textContent = data.Status2;
+                document.getElementById('activity-name').textContent = data.ActivityName;
+                document.getElementById('activity-state').textContent = data.ActivityState;
+                document.getElementById('activity-detail').textContent = data.ActivityDetail;
+                document.getElementById('activity-path').textContent = data.ActivityPath;
+                document.getElementById('home-path').textContent = data.HomePath;
+                document.getElementById('about-path').textContent = data.AboutPath;
+                document.getElementById('stuff-path').textContent = data.LinksPath;
+                document.getElementById('mainbtn-1').textContent = data.MainPageButton1;
+                document.getElementById('mainbtn-2').textContent = data.MainPageButton2;
+                document.getElementById('abm-1').textContent = data.AboutMeTxt1;
+                document.getElementById('abm-2').textContent = data.AboutMeTxt2;
+                document.getElementById('savebtn').textContent = data.SettingsSaveButton;
+                document.getElementById('settings-path').textContent = data.SettingsPath;
+                document.getElementById('backbtn').textContent = data.BackButton;
+                document.getElementById('languagetxt').textContent = data.LanguageText;
+                document.getElementById('settingsbtn').textContent = data.SettingsButton;
+                document.getElementById('ftlLanguageTxt').textContent = data.FirstTimeLoadLanguageText;
+                document.getElementById('ftlcbtn-1').textContent = data.FirstTimeLoadButton1;
+
+            })
+            .catch(error => console.error('Error whilst loading lang file:', error));
+        }
         
     // Dexrn: This is for the text that shows on the loading screen.
-    setTimeout(function() {
-        var loadingText = document.querySelector('.loadingtext');
-        if (loadingText) {
-            loadingText.classList.remove('hidden');
-        }
-    }, 5000); 
+    function showLoadingText() {
+        setTimeout(function() {
+            var loadingText = document.querySelector('.loadingtext');
+            if (loadingText) {
+                loadingText.classList.remove('hidden');
+            }
+        }, 5000); 
+    }
 
     </script>
-    <script src="js/background.js"></script>
     <script src="js/fadeout.js"></script>
 </head>
 <body>
@@ -56,23 +119,40 @@
     <div class="loading">
         <img id="loading-light" src="assets/loader.gif">
         <img id="loading-dark" src="assets/loader-dark.gif">
-        <h1 class="loadingtext hidden">Waiting for the background to load...</h1>
+        <h1 class="loadingtext hidden"></h1>
+        <div class="card" id="firsttimeload" style="height: 300px; width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <label for="language" id="ftlLanguageTxt" style="margin-bottom: 10px;"></label>
+            <select id="language" class="drpdwnbtn" name="language" style="margin-bottom: 10px;">
+                <option value="en-US">English</option>
+                <option value="zh-CN">中文</option>
+            </select>
+            <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
+        </div>        
     </div>
+    <script>        
+    document.getElementById('ftlcbtn-1').addEventListener('click', function() {
+        var selectedLanguage = document.getElementById('language').value;
+
+        var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
+        document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+        console.log(selectedLanguage);
+        backgroundfade(true);
+    });</script>
 </div>
     <div class="contentcontainer" id="content2">
         <div class="bg" id="homepage">
             <div class="wrapper">
                 <div class="card" id="normalmode">
-                    <div class="card-title">@Dexrn > Home</div>
+                    <div class="card-title" id="home-path"></div>
                     <div class="user-profile">
                         <div class="Profile-pic">
                             <img id="pfp" src="assets/loader.gif" alt="">
                             <div id="status-dot"></div>
                         </div>
                         <div class="user-info">
-                            <div id="username">Dexrn ZacAttack</div>
+                            <div id="username">Dexrn ZacAttack</div> <!--Dexrn: Do not localize this... this is a username!-->
                             <div id="status"></div>
-                            <div id="status2">Loading...</div>
+                            <div id="status2"></div>
                             <div id="status3"></div>
                             <!-- <div id="status4"></div> -->
                             <div class="connections">
@@ -87,7 +167,7 @@
                     </div>
                 </div>
                 <div class="activity card" id="normalmode1">
-                    <div class="card-title">@Dexrn > Activity</div>
+                    <div class="card-title" id="activity-path"></div>
                     <div class="activity-wrapper">
                         <div class="activity-images">
                             <img id="activity-big-image" src="assets/loader.gif" alt="">
@@ -95,36 +175,111 @@
 				<img id="activity-small-image-alt" src="assets/loader.gif" alt="">
                         </div>
                         <div class="activity-info">
-                            <div id="activity-name">Loading...</div>
-                            <div id="activity-state">Loading...</div>
-                            <div id="activity-detail">Loading...</div>
+                            <div id="activity-name"></div>
+                            <div id="activity-state"></div>
+                            <div id="activity-detail"></div>
 				<div id="activity-elapsed"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card" id="normalmode2">
-                    <div class="card-title">@Dexrn > About</div>
+                    <div class="card-title" id="about-path"></div>
                     <div class="about-me">
                         <ul>
-                            <li>🚮 Professional Dumbass</li>
-                            <li>🥱 I am very bored.</li>
+                            <li id="abm-1"></li>
+                            <li id="abm-2"></li>
                         </ul>
                     </div>
                 </div>
                 <div class="card" id="normalmode3">
-                    <div class="card-title">@Dexrn > Random shit</div>
+                    <div class="card-title" id="stuff-path"></div>
                     <div class="about-me">
                         <div class="bio">
-                            <button class="button" linkto="QMGHeaderParser/index.html">QMG Header Parser</button>
-                            <button class="button" linkto="QMG/index.html">QMG Research</button>
+                            <button class="button" linkto="QMGHeaderParser/index.html" id="mainbtn-1"></button>
+                            <button class="button" linkto="QMG/index.html" id="mainbtn-2"></button>
                             <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"I was bored"</button>  -->
                         </div>
                     </div>
                 </div>
+                <div id="settings" style="height: 350px;">
+                <div class="topcard" style="cursor: pointer; width: 300px; margin-bottom: 8px;" id="settingsclose">
+                    <div class="back" id="backbtn"></div></div>
+                    <div class="card" style="width: 300px; height: 300px;">
+                        <div class="card-title" id="settings-path"></div>
+                        <div class="options" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <h3 id="languagetxt"></h3>
+                        <select id="language2" class="drpdwnbtn" name="language2">
+                            <option value="en-US">English</option>
+                            <option value="zh-CN">中文</option>
+                        </select>
+                        <button class="buttonalt2" id="savebtn" style="position: absolute; bottom: 0;"></button>
+                    </div>
+                    </div>      
+                    </div>                                                          
+
+                        <script>        
+                            document.getElementById('savebtn').addEventListener('click', function() {
+                                var selectedLanguage = document.getElementById('language2').value;
+                
+                                var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
+                                document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+                                console.log(selectedLanguage);
+                                location.reload()
+                            });
+                        </script>
+                                  <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        var toggleButton = document.getElementById('settingsbtn');
+                                        var normalmode = document.querySelector('#normalmode');
+                                        var normalmode1 = document.querySelector('#normalmode1');
+                                        var normalmode2 = document.querySelector('#normalmode2');
+                                        var normalmode3 = document.querySelector('#normalmode3');
+                                        var closesettingsbtn = document.getElementById('settingsclose');
+                                        var settingsPage = document.getElementById('settings');
+                                
+                                        settingsPage.style.display = 'none';
+                                
+                                        closesettingsbtn.addEventListener('click', function() {
+                                            normalmode.style.display = 'block';
+                                            normalmode1.style.display = 'block';
+                                            normalmode2.style.display = 'block';
+                                            normalmode3.style.display = 'block';
+                                            toggleButton.style.display = 'block';
+                                            settingsPage.style.display = 'none';
+                                        });
+                                    });
+                                </script>
+                </div>
             </div>
         </div>
+    </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->
-    <div class="topright"><img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=zh-CN; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/china.png" alt=""> <img style="height:80%;cursor: pointer;" onclick="document.cookie = `userLanguage=en-US; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;location.reload();" src="assets/usa.png" alt=""></div>
+    <div class="topright">
+          <button class="buttonalt" id="settingsbtn"></button>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var normalmode = document.querySelector('#normalmode');
+                var normalmode1 = document.querySelector('#normalmode1');
+                var normalmode2 = document.querySelector('#normalmode2');
+                var normalmode3 = document.querySelector('#normalmode3');
+                var toggleButton = document.getElementById('settingsbtn');
+                var settingsPage = document.getElementById('settings');
+        
+                settingsPage.style.display = 'none';
+        
+                toggleButton.addEventListener('click', function() {
+                    normalmode.style.display = 'none';
+                    normalmode1.style.display = 'none';
+                    normalmode2.style.display = 'none';
+                    normalmode3.style.display = 'none';
+                    toggleButton.style.display = 'none';
+                    settingsPage.style.display = 'block';
+                });
+            });
+        </script>
+        
+            
+    </div>
     </div>
 	<div class="bottomright">
         <!-- hidden while I figure out how to not make it show during the animation and so that mobile looks better -->

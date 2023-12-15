@@ -1,0 +1,26 @@
+{
+    "LoadingText": "等待背景加载中...",
+    "ActivityName": "加载中...",
+    "ActivityState": "加载中...",
+    "ActivityDetail": "加载中...",
+    "Status2": "加载中...",
+    "ActivityPath": "@Dexrn > 活动",
+    "HomePath": "@Dexrn > 主页",
+    "AboutPath": "@Dexrn > 关于",
+    "LinksPath": "@Dexrn > 随机内容",
+    "MainPageButton1": "QMG 头部解析器",
+    "MainPageButton2": "QMG 研究",
+    "AboutMeTxt1": "🚮 职业傻瓜",
+    "AboutMeTxt2": "🥱 我很无聊。",
+    "BackButton": "<-- 返回",
+    "QMGHeaderParserPath": "@Dexrn > QMG 头部解析器",
+    "FileSelectButton": "选择一个 .qmg 文件",
+    "QMGHPOutputText": "请选择一个文件。",
+    "SettingsSaveButton": "保存",
+    "SettingsPath": "@Dexrn > 设置",
+    "LanguageText": "语言",
+    "SettingsButton": "设置",
+    "FirstTimeLoadLanguageText": "选择语言",
+    "FirstTimeLoadButton1": "确认"
+
+}

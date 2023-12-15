@@ -1,0 +1,27 @@
+{
+    "LoadingText": "Waiting for the background to load...",
+    "ActivityName": "Loading...",
+    "ActivityState": "Loading...",
+    "ActivityDetail": "Loading...",
+    "Status2": "Loading...",
+    "ActivityPath": "@Dexrn > Activity",
+    "HomePath": "@Dexrn > Home",
+    "AboutPath": "@Dexrn > About",
+    "LinksPath": "@Dexrn > Random shit",
+    "MainPageButton1": "QMG Header Parser",
+    "MainPageButton2" : "QMG Research",
+    "AboutMeTxt1": "🚮 Professional Dumbass",
+    "AboutMeTxt2": "🥱 I am very bored.",
+    "BackButton": "<-- Back",
+    "QMGHeaderParserPath": "@Dexrn > QMG Header Parser",
+    "FileSelectButton": "Select a .qmg File",
+    "QMGHPOutputText": "Please select a file.",
+    "SettingsSaveButton": "Save",
+    "SettingsPath": "@Dexrn > Settings",
+    "LanguageText": "Language",
+    "SettingsButton": "Settings",
+    "FirstTimeLoadLanguageText": "Choose a Language",
+    "FirstTimeLoadButton1": "Confirm"
+
+}
+  

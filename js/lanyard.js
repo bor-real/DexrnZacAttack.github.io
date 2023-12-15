@@ -276,7 +276,7 @@ async function setActivityState() {
     
     const formattime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     elapsed.innerHTML = 'Time Elapsed: ' + formattime;
-    DexrnsFunnyLogger(`Start Time ` + ${created});
+    DexrnsFunnyLogger(`Start Time ` + {created});
     } catch {
     DexrnsFunnyLogger('No start time');
     }
