@@ -177,6 +177,7 @@
                                 if (selectedLanguage !== getLanguageFromCookie()) {
                                 var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
                                 document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+                                checkLang();
                                 } else {
                                 }
                                 if (selectedTheme !== getThemeCookie('Theme')) {
@@ -184,8 +185,6 @@
                                 } else {
 
                                 }
-
-                                location.reload()
                             });
                         </script>
                                   <script>
@@ -201,6 +200,14 @@
                                         settingsPage.style.display = 'none';
                                 
                                         closesettingsbtn.addEventListener('click', function() {
+                                            normalmode.style.display = 'block';
+                                            normalmode1.style.display = 'block';
+                                            normalmode2.style.display = 'block';
+                                            normalmode3.style.display = 'block';
+                                            toggleButton.style.display = 'block';
+                                            settingsPage.style.display = 'none';
+                                        });
+                                        savebtn.addEventListener('click', function() {
                                             normalmode.style.display = 'block';
                                             normalmode1.style.display = 'block';
                                             normalmode2.style.display = 'block';
