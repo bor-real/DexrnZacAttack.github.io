@@ -80,6 +80,7 @@
         var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
         document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
         setTheme(selectedTheme);
+        checkLang();
         backgroundfade(true);
     });</script>
 </div>
