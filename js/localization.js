@@ -5,10 +5,10 @@ function checkLang() {
 
     switch (lang) {
     case 'zh-CN':
-        langFilePath = "assets/lang/zh-CN.json";
+        langFilePath = "/assets/lang/zh-CN.json";
         break;
     case 'en-US':
-        langFilePath = "assets/lang/en-US.json";
+        langFilePath = "/assets/lang/en-US.json";
         break;
     default:
         langFilePath = "/assets/lang/en-US.json";
