@@ -97,13 +97,13 @@ function checkIfExists(elementId, value) {
             const stylesheetElement = document.getElementById('theme');
             switch (theme) {
                 case 'default-dark':
-                stylesheetElement.href = 'css/default.css';
+                stylesheetElement.href = '/css/default.css';
                 break;
                 case 'default-light':
-                stylesheetElement.href = 'css/default-light.css';
+                stylesheetElement.href = '/css/default-light.css';
                 break;
                 default:
-                stylesheetElement.href = 'css/default.css';
+                stylesheetElement.href = '/css/default.css';
                 break;
             }
         }
