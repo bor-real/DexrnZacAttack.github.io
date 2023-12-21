@@ -15,7 +15,7 @@
 
 @media (max-width: 1100px) {
   #normalmode {
-    background-image: none !important;
+    background-image: none;
   }
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .drpdwnbtn {
-  color: white !important;
+  color: white;
 }
 
 .drpdwnbtn option {
@@ -591,7 +591,12 @@ li {
 }
 
 a {
-  text-decoration: none !important;
+    color: #109fff;
+    text-decoration: underline !important;
+}
+
+a:hover {
+    color: #0b6cac;
 }
 
 .topright {
