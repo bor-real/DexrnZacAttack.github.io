@@ -1,3 +1,40 @@
+        function setTheme(theme) {
+            var expirationDate = new Date('Fri, 31 Dec 9999 23:59:59 GMT');
+            document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;            
+
+            applyTheme(theme);
+        }
+
+        function applyTheme(theme) {
+            const stylesheetElement = document.getElementById('theme');
+            switch (theme) {
+                case 'default-dark':
+                stylesheetElement.href = '/css/default.css';
+                break;
+                case 'default-light':
+                stylesheetElement.href = '/css/default-light.css';
+                break;
+                default:
+                stylesheetElement.href = '/css/default.css';
+                break;
+            }
+        }
+
+        function getThemeCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (const cookie of cookies) {
+                const [cookieName, cookieValue] = cookie.trim().split('=');
+                if (cookieName === name) {
+                    return cookieValue;
+                }
+            }
+            return null;
+        }
+
+        const savedTheme = getThemeCookie('Theme');
+
+        applyTheme(savedTheme);
+
 function checkLang() {
     const lang = getLanguageFromCookie();
     console.log(lang);
@@ -86,40 +123,5 @@ function checkIfExists(elementId, value) {
 }
 
 
-        function setTheme(theme) {
-            var expirationDate = new Date('Fri, 31 Dec 9999 23:59:59 GMT');
-            document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;            
 
-            applyTheme(theme);
-        }
-
-        function applyTheme(theme) {
-            const stylesheetElement = document.getElementById('theme');
-            switch (theme) {
-                case 'default-dark':
-                stylesheetElement.href = '/css/default.css';
-                break;
-                case 'default-light':
-                stylesheetElement.href = '/css/default-light.css';
-                break;
-                default:
-                stylesheetElement.href = '/css/default.css';
-                break;
-            }
-        }
-
-        function getThemeCookie(name) {
-            const cookies = document.cookie.split(';');
-            for (const cookie of cookies) {
-                const [cookieName, cookieValue] = cookie.trim().split('=');
-                if (cookieName === name) {
-                    return cookieValue;
-                }
-            }
-            return null;
-        }
-
-        const savedTheme = getThemeCookie('Theme');
-
-        applyTheme(savedTheme);
         
