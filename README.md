@@ -2,4 +2,5 @@
 # DexrnZacAttack.github.io
 
 
-### Thank you to ItzPeto for helping me setup the new design and learn a little more about HTML, CSS, JS.
+## This is my website.
+### I am still learning Web Development, so the code might not look good or be effecient.

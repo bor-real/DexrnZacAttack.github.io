@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Dexrn's Hell Hole</title>
-    <link id="theme" rel="stylesheet" href="">
-    <meta charset="utf-8">
-    <script src="js/localization.js"></script>
-    <script defer src="js/lanyard.js"></script>
-    <script defer src="js/lang.js"></script>
-    <meta content="Dexrn's Hell Hole" property="og:title" />
-    <meta content="What the FUCK am I doing" property="og:description" />
-    <meta content="https://DexrnZacAttack.github.io" property="og:url" />
-    <meta content="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png" property="og:image" />
-    <meta content="#0078D7" data-react-helmet="true" name="theme-color"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="What the FUCK am I doing">
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
-    <a rel="me" href="https://mastodon.social/@Dexrn" class="mastodon">Mastodon</a>
-    <script src="js/background.js"></script>
-    <script>
+<html>
+    <head>
+        <title>Dexrn's Hell Hole</title>
+        <link id="theme" rel="stylesheet" href="">
+        <script src="/js/settings.js"></script>
+        <meta charset="utf-8">
+        <script defer src="js/lanyard.js"></script>
+        <meta content="Dexrn's Hell Hole" property="og:title">
+        <meta content="What the FUCK am I doing" property="og:description">
+        <meta content="https://DexrnZacAttack.github.io" property="og:url">
+        <meta content="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png" property="og:image">
+        <meta content="#0078D7" data-react-helmet="true" name="theme-color">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="What the FUCK am I doing">
+        <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
+        <script src="js/background.js"></script>
+        <script>
 
 
 
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Check if the cookie is set
-            languageValue = getLanguageFromCookie();
+            languageValue = getLang();
             if (languageValue === null || languageValue === undefined || languageValue === "undefined") {
                 console.log("Setting up for first time load");
                 document.getElementById('firsttimeload').style.display = 'flex';
@@ -38,204 +36,239 @@
         });
 
 
-        
-    // Dexrn: This is for the text that shows on the loading screen.
-    function showLoadingText() {
-        setTimeout(function() {
-            var loadingText = document.querySelector('.loadingtext');
-            if (loadingText) {
-                loadingText.classList.remove('hidden');
-            }
-        }, 5000); 
-    }
 
-    </script>
-    <script src="js/fadeout.js"></script>
-</head>
-<body>
-<div class="loadingcontainer">
-    <div class="loading">
-        <img id="loading-light" src="assets/loader.gif">
-        <img id="loading-dark" src="assets/loader-dark.gif">
-        <h1 class="loadingtext hidden" id="loadingtext"></h1>
-        <div class="card" id="firsttimeload" style="height: 300px; width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <label for="language" id="ftlLanguageTxt" style="margin-bottom: 10px;"></label>
-            <select id="language" class="drpdwnbtn" name="language" style="margin-bottom: 10px;">
-                <option value="en-US">English</option>
-                <option value="zh-CN">中文</option>
-            </select>
-            <h3 id="ftlThemeTxt"></h3>
-            <select id="themeoption2" class="drpdwnbtn" name="themeoption2">
-                <option value="default-dark">Dark</option>
-                <option value="default-light">Light</option>
-            </select>
-            <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
-        </div>        
-    </div>
-    <script>        
-    document.getElementById('ftlcbtn-1').addEventListener('click', function() {
-        var selectedLanguage = document.getElementById('language').value;
-        var selectedTheme = document.getElementById('themeoption2').value;
+        // Dexrn: This is for the text that shows on the loading screen.
+        function showLoadingText() {
+            setTimeout(function () {
+                var loadingText = document.querySelector('.loadingtext');
+                if (loadingText) {
+                    loadingText.classList.remove('hidden');
+                }
+            }, 5000);
+        }
+        </script>
+        <script src="js/fadeout.js"></script>
+    </head>
+    <body>
+        <div class="loadingcontainer">
+            <div class="loading">
+                <img id="loading-light" src="assets/loader.gif">
+                <img id="loading-dark" src="assets/loader-dark.gif">
+                <h1 class="loadingtext hidden" id="loadingtext"></h1>
+                <div id="ftlloading" class="ftlloading" style="height: 350px; width: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; position: fixed; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 9999; border-radius: 10px; animation: 1s ease-out 0s 1 fadeIn;">
+                    <img id="loading-light" src="assets/loader.gif">
+                    <img id="loading-dark" src="assets/loader-dark.gif">
+                </div>
+                <div class="card" id="firsttimeload" style="height: 350px; width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <h3 id="ftlLanguageTxt"></h3>
+                    <select
+                        id="language"
+                        class="drpdwnbtn"
+                        name="language"
+                        style="margin-bottom: 10px;"
+                    >
+                        <option value="en-US">English</option>
+                        <option value="zh-CN">中文</option>
+                    </select>
+                    <h3 id="ftlThemeTxt"></h3>
+                    <select id="themeoption2" class="drpdwnbtn" name="themeoption2">
+                        <option value="default-dark">Dark</option>
+                        <option value="default-light">Light</option>
+                    </select>
+                    <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
+                </div>
+            </div>
+            <script>
+            document.getElementById('ftlcbtn-1').addEventListener('click', function () {
+                var selectedLanguage = document.getElementById('language').value;
+                var selectedTheme = document.getElementById('themeoption2').value;
 
-        var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
-        document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-        setTheme(selectedTheme);
-        checkLang();
-        backgroundfade(true);
-    });</script>
-</div>
-    <div class="contentcontainer" id="content2">
-        <div class="bg" id="homepage">
-            <div class="wrapper">
-                <div class="card" id="normalmode">
-                    <div class="card-title" id="home-path"></div>
-                    <div class="user-profile">
-                        <div class="Profile-pic">
-                            <img id="pfp" src="assets/loader.gif" alt="">
-                            <div id="status-dot"></div>
-                        </div>
-                        <div class="user-info">
-                            <div id="username">Dexrn ZacAttack</div> <!--Dexrn: Do not localize this... this is a username!-->
-                            <div id="status"></div>
-                            <div id="status2"></div>
-                            <div id="status3"></div>
-                            <!-- <div id="status4"></div> -->
-                            <div class="connections">
-                                <a title="YouTube" href="https://youtube.com/@DZac"><img class="connection-icon" src="assets/connections/youtube.png" alt="YouTube"></a>
-                                <a title="Discord" href="https://discord.com/users/485504221781950465/"><img class="connection-icon" src="assets/connections/discord.svg" alt="Discord"></a>
-                                <a title="GitHub" href="https://github.com/DexrnZacAttack/"><img class="connection-icon" src="assets/connections/github.svg" alt="GitHub"></a>
-                                <a title="Twitter" href="https://twitter.com/DexrnZacAttack/"><img class="connection-icon" src="assets/connections/twitter.png" alt="Twitter"></a>
-                                <a title="Steam" href="https://steamcommunity.com/id/Dexrn"><img class="connection-icon2" src="assets/connections/steam.png" alt="Steam"></a>
-                                <a title="Archive.org" href="https://archive.org/details/@dexrnzacattack"><img class="connection-icon2" src="assets/connections/archive.org.png" alt="Archive.org"></a>
+                var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
+                document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+                actuallySetLanguage();
+                checkLang();
+                document.querySelector('.ftlloading').style.display = 'flex';
+                backgroundfade(true);
+                setTheme(selectedTheme);
+            });
+            </script>
+        </div>
+        <div class="contentcontainer" id="content2">
+            <div class="bg" id="homepage">
+                <div class="wrapper">
+                    <div class="card" id="normalmode">
+                        <div class="card-title" id="home-path"></div>
+                        <div class="user-profile">
+                            <div class="Profile-pic">
+                                <img id="pfp" src="assets/loader.gif" alt="">
+                                <div id="status-dot"></div>
+                            </div>
+                            <div class="user-info">
+                                <div id="username">Dexrn ZacAttack</div>
+                                <!--Dexrn: Do not localize this... this is a username!-->
+                                <div id="status"></div>
+                                <div id="status2"></div>
+                                <div id="status3"></div>
+                                <!-- <div id="status4"></div> -->
+                                <div class="connections">
+                                    <a title="YouTube" href="https://youtube.com/@DZac">
+                                        <img class="connection-icon" src="assets/icons/youtube.png" alt="YouTube">
+                                    </a>
+                                    <a title="Discord" href="https://discord.com/users/485504221781950465/">
+                                        <img class="connection-icon" src="assets/icons/discord.svg" alt="Discord">
+                                    </a>
+                                    <a title="GitHub" href="https://github.com/DexrnZacAttack/">
+                                        <img class="connection-icon" src="assets/icons/github.svg" alt="GitHub">
+                                    </a>
+                                    <a title="Twitter" href="https://twitter.com/DexrnZacAttack/">
+                                        <img class="connection-icon" src="assets/icons/twitter.png" alt="Twitter">
+                                    </a>
+                                    <a title="Steam" href="https://steamcommunity.com/id/Dexrn">
+                                        <img class="connection-icon2" src="assets/icons/steam.png" alt="Steam">
+                                    </a>
+                                    <a title="Archive.org" href="https://archive.org/details/@dexrnzacattack">
+                                        <img class="connection-icon2" src="assets/icons/archive.org.png" alt="Archive.org">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="activity card" id="normalmode1">
-                    <div class="card-title" id="activity-path"></div>
-                    <div class="activity-wrapper">
-                        <div class="activity-images">
-                            <img id="activity-big-image" src="assets/loader.gif" alt="">
-                            <img id="activity-small-image" src="assets/loader.gif" alt="">
-				<img id="activity-small-image-alt" src="assets/loader.gif" alt="">
-                        </div>
-                        <div class="activity-info">
-                            <div id="activity-name"></div>
-                            <div id="activity-state"></div>
-                            <div id="activity-detail"></div>
-				<div id="activity-elapsed"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" id="normalmode2">
-                    <div class="card-title" id="about-path"></div>
-                    <div class="about-me">
-                        <ul>
-                            <li id="abm-1"></li>
-                            <li id="abm-2"></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card" id="normalmode3">
-                    <div class="card-title" id="stuff-path"></div>
-                    <div class="about-me">
-                        <div class="bio">
-                            <button class="button" linkto="QMGHeaderParser/index.html" id="mainbtn-1"></button>
-                            <button class="button" linkto="QMG/index.html" id="mainbtn-2"></button>
-                            <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"I was bored"</button>  -->
+                    <div class="activity card" id="normalmode1">
+                        <div class="card-title" id="activity-path"></div>
+                        <div class="activity-wrapper">
+                            <div class="activity-images">
+                                <img id="activity-big-image" src="assets/loader.gif" alt="">
+                                <img id="activity-small-image" src="assets/loader.gif" alt="">
+                                <img id="activity-small-image-alt" src="assets/loader.gif" alt="">
+                            </div>
+                            <div class="activity-info">
+                                <div id="activity-name"></div>
+                                <div id="activity-state"></div>
+                                <div id="activity-detail"></div>
+                                <div id="activity-elapsed"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="settings" style="height: 350px;">
-                <div class="topcard" style="cursor: pointer; width: 300px; margin-bottom: 8px;" id="settingsclose">
-                    <div class="back" id="backbtn"></div></div>
-                    <div class="card" style="width: 300px; height: 350px;">
-                        <div class="card-title" id="settings-path"></div>
-                        <div class="options" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                        <h3 id="languagetxt"></h3>
-                        <select id="language2" class="drpdwnbtn" name="language2">
-                            <option value="" disabled selected id="selopt"></option>
-                            <option value="en-US">English</option>
-                            <option value="zh-CN">中文</option>
-                        </select>
-                        <h3 id="themetxt"></h3>
-                        <select id="themeoption" class="drpdwnbtn" name="themeoption">
-                            <option value="" disabled selected id="selopt2"></option>
-                            <option value="default-dark" id="darkthmopt"></option>
-                            <option value="default-light" id="lightthmopt"></option>
-                        </select>
-                        <button class="buttonalt2" id="savebtn" style="position: absolute; bottom: 0;"></button>
+                    <div class="card" id="normalmode2">
+                        <div class="card-title" id="about-path"></div>
+                        <div class="about-me">
+                            <ul>
+                                <li id="abm-1"></li>
+                                <li id="abm-2"></li>
+                            </ul>
+                        </div>
                     </div>
-                    </div>      
-                    </div>                                                          
-                        <script>        
-                            document.getElementById('savebtn').addEventListener('click', function() {
-                                var selectedLanguage = document.getElementById('language2').value;
-                                var selectedTheme = document.getElementById('themeoption').value;
-                                var currentTheme = getThemeCookie('Theme');
-                                var currentLanguage = getLanguageFromCookie();
-                                if (selectedLanguage !== getLanguageFromCookie()) {
-                                var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
-                                document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-                                checkLang();
-                                } else {
-                                }
-                                if (selectedTheme !== getThemeCookie('Theme')) {
-                                setTheme(selectedTheme);
-                                } else {
+                    <div class="card" id="normalmode3">
+                        <div class="card-title" id="stuff-path"></div>
+                        <div class="about-me">
+                            <div class="bio">
+                                <button class="button" linkto="QMGHeaderParser/index.html" id="mainbtn-1"></button>
+                                <button class="button" linkto="QMG/index.html" id="mainbtn-2"></button>
+                                <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"I was bored"</button>  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="settings" style="height: 350px;">
+                        <div class="topcard" style="cursor: pointer; width: 300px; margin-bottom: 8px;" id="settingsclose">
+                            <div class="back" id="backbtn"></div>
+                        </div>
+                        <div class="card" style="width: 300px; height: 350px;">
+                            <div class="card-title" id="settings-path"></div>
+                            <div class="options" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <h3 id="languagetxt"></h3>
+                                <select id="language2" class="drpdwnbtn" name="language2">
+                                    <option
+                                        value="unselected"
+                                        disabled
+                                        selected
+                                        id="selopt"
+                                    ></option>
+                                    <option value="en-US">English</option>
+                                    <option value="zh-CN">中文</option>
+                                </select>
+                                <h3 id="themetxt"></h3>
+                                <select id="themeoption" class="drpdwnbtn" name="themeoption">
+                                    <option
+                                        value="unselectedtheme"
+                                        disabled
+                                        selected
+                                        id="selopt2"
+                                    ></option>
+                                    <option value="default-dark" id="darkthmopt"></option>
+                                    <option value="default-light" id="lightthmopt"></option>
+                                </select>
+                                <button class="buttonalt2" id="savebtn" style="position: absolute; bottom: 0;"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                    document.getElementById('savebtn').addEventListener('click', function () {
+                        var selectedLanguage = document.getElementById('language2').value;
+                        var selectedTheme = document.getElementById('themeoption').value;
+                        var currentTheme = getThemeCookie('Theme');
+                        var currentLanguage = getLang();
+                        if (selectedLanguage !== getLang() && selectedLanguage !== 'unselected') {
+                            var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
+                            document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
+                            actuallySetLanguage();
+                            checkLang();
+                        } else {
+                        }
+                        if (selectedTheme !== getThemeCookie('Theme') && selectedTheme !== 'unselectedtheme') {
+                            setTheme(selectedTheme);
+                        } else {
 
-                                }
-                            });
-                        </script>
-                                  <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        var toggleButton = document.getElementById('settingsbtn');
-                                        var normalmode = document.querySelector('#normalmode');
-                                        var normalmode1 = document.querySelector('#normalmode1');
-                                        var normalmode2 = document.querySelector('#normalmode2');
-                                        var normalmode3 = document.querySelector('#normalmode3');
-                                        var closesettingsbtn = document.getElementById('settingsclose');
-                                        var settingsPage = document.getElementById('settings');
-                                
-                                        settingsPage.style.display = 'none';
-                                
-                                        closesettingsbtn.addEventListener('click', function() {
-                                            normalmode.style.display = 'block';
-                                            normalmode1.style.display = 'block';
-                                            normalmode2.style.display = 'block';
-                                            normalmode3.style.display = 'block';
-                                            toggleButton.style.display = 'block';
-                                            settingsPage.style.display = 'none';
-                                        });
-                                        savebtn.addEventListener('click', function() {
-                                            normalmode.style.display = 'block';
-                                            normalmode1.style.display = 'block';
-                                            normalmode2.style.display = 'block';
-                                            normalmode3.style.display = 'block';
-                                            toggleButton.style.display = 'block';
-                                            settingsPage.style.display = 'none';
-                                        });
-                                    });
-                                </script>
+                        }
+                    });
+                    </script>
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var toggleButton = document.getElementById('settingsbtn');
+                        var normalmode = document.querySelector('#normalmode');
+                        var normalmode1 = document.querySelector('#normalmode1');
+                        var normalmode2 = document.querySelector('#normalmode2');
+                        var normalmode3 = document.querySelector('#normalmode3');
+                        var closesettingsbtn = document.getElementById('settingsclose');
+                        var settingsPage = document.getElementById('settings');
+
+                        settingsPage.style.display = 'none';
+
+                        closesettingsbtn.addEventListener('click', function () {
+                            normalmode.style.display = 'block';
+                            normalmode1.style.display = 'block';
+                            normalmode2.style.display = 'block';
+                            normalmode3.style.display = 'block';
+                            toggleButton.style.display = 'block';
+                            settingsPage.style.display = 'none';
+                        });
+                        savebtn.addEventListener('click', function () {
+                            normalmode.style.display = 'block';
+                            normalmode1.style.display = 'block';
+                            normalmode2.style.display = 'block';
+                            normalmode3.style.display = 'block';
+                            toggleButton.style.display = 'block';
+                            settingsPage.style.display = 'none';
+                        });
+                    });
+                    </script>
                 </div>
             </div>
         </div>
-    </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->
-    <div class="topright">
-          <button class="buttonalt" id="settingsbtn"></button>
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
+        <div class="topright">
+            <button class="buttonalt" id="settingsbtn"></button>
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
                 var normalmode = document.querySelector('#normalmode');
                 var normalmode1 = document.querySelector('#normalmode1');
                 var normalmode2 = document.querySelector('#normalmode2');
                 var normalmode3 = document.querySelector('#normalmode3');
                 var toggleButton = document.getElementById('settingsbtn');
                 var settingsPage = document.getElementById('settings');
-        
+
                 settingsPage.style.display = 'none';
-        
-                toggleButton.addEventListener('click', function() {
+
+                toggleButton.addEventListener('click', function () {
                     normalmode.style.display = 'none';
                     normalmode1.style.display = 'none';
                     normalmode2.style.display = 'none';
@@ -244,10 +277,13 @@
                     settingsPage.style.display = 'block';
                 });
             });
-        </script>
-        
-            
-    </div>
-    </div>
-</body>
+            </script>
+        </div>
+        <a
+            rel="me"
+            href="https://mastodon.social/@Dexrn"
+            class="mastodon"
+            style="visibility: none;"
+        >Mastodon</a>
+    </body>
 </html>

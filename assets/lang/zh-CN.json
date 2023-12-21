@@ -31,10 +31,16 @@
     "IdleText": "离开",
     "DoNotDisturbText": "请勿打扰",
     "OfflineText": "离线",
+    "UnknownText": "未知",
     "NoActivityText": "无活动",
     "LightThemeOption": "亮",
     "DarkThemeOption": "暗",
     "SelectOptionText": "选择一个选项",
     "ThemeText": "主题",
-    "FirstTimeLoadThemeText": "选择一个主题"
+    "FirstTimeLoadThemeText": "选择一个主题",
+    "PlatformsInUseText": "正在使用的平台：",
+    "PlatformMobile": " 移动",
+    "PlatformDesktop": "桌面",
+    "PlatformWeb": " 网络",
+    "TimeElapsedText": "已经过时间："
 }

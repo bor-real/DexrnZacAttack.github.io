@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Dexrn's Hell Hole > QMG Header Parser</title>
-    <link id="theme" rel="stylesheet" href="">
-    <script src="../js/localization.js"></script>
+    <link id="theme" rel="stylesheet" href="" />
+    <script src="../js/settings.js"></script>
     <meta content="Dexrn's Hell Hole > QMG Header Parser" property="og:title" />
-    <script defer src="../js/lang.js"></script>
     <meta content="QMG Header Parser" property="og:description" />
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
-    <meta content="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMGDecoderIcon.png?raw=true" property="og:image" />
-    <meta content="#0078D7" data-react-helmet="true" name="theme-color"/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="QMG Header Parser">
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
+    <meta
+      content="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMGDecoderIcon.png?raw=true"
+      property="og:image"
+    />
+    <meta content="#0078D7" data-react-helmet="true" name="theme-color" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="QMG Header Parser" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png"
+    />
     <script src="../js/background.js"></script>
     <script src="../js/fadeout.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="loadingcontainer">
-        <div class="loading">
-            <img id="loading-light" src="../assets/loader.gif">
-            <img id="loading-dark" src="../assets/loader-dark.gif">
-        </div>
+      <div class="loading">
+        <img id="loading-light" src="../assets/loader.gif" />
+        <img id="loading-dark" src="../assets/loader-dark.gif" />
+      </div>
     </div>
     <div class="contentcontainer"></div>
     <div class="bg">
-        <div class="wrapper" id="wrapper">
-            <div class="topcard" style="cursor: pointer;" id="back" linkto="../index.html" style="width: 55%;">
-                <div class="back" id="backbtn"></div>
-            </div>
-            <div class="card" style="width: 55%; height: 500px">
-                <div class="card-title" id="qmghp-path"></div>
-				<div class="center">
-					<label for="fileInput" class="button2" id="fileselectbtn"></label>
-                    <input type="file" id="fileInput" accept=".qmg, .spi, .spr, .bmp" style="display: none;">
-				</div>
-				 <pre id="output"></pre>
-       </div>
-       <!-- <div class="card" id="headercard">
+      <div class="wrapper" id="wrapper">
+        <div
+          class="topcard"
+          style="cursor: pointer"
+          id="back"
+          linkto="../index.html"
+          style="width: 55%"
+        >
+          <div class="back" id="backbtn"></div>
+        </div>
+        <div class="card" style="width: 55%; height: 500px">
+          <div class="card-title" id="qmghp-path"></div>
+          <div class="center">
+            <label for="fileInput" class="button2" id="fileselectbtn"></label>
+            <input
+              type="file"
+              id="fileInput"
+              accept=".qmg, .spi, .spr, .bmp"
+              style="display: none"
+            />
+          </div>
+          <pre id="output"></pre>
+        </div>
+        <!-- <div class="card" id="headercard">
         <pre id="header"></pre>
        </div> -->
-    </div>
-    </div>
+      </div>
     </div>
     <script src="../js/QMGParser.js"></script>
     <script>
-                backgroundfade(true);
+      backgroundfade(true);
     </script>
-</body>
+  </body>
 </html>

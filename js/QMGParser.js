@@ -6,9 +6,11 @@
 var DLog = false;
 console.log('QMGParser.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
 function DexrnsFunnyLogger(message) {
-	if (DLog) {
-		console.log('QMGParser.js: ' + message);
-	}
+  if (DLog) {
+    console.log("lanyard.js: " + message);
+  } else {
+    return;
+  }
 }
 
 const unknownversions = [

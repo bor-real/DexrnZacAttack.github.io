@@ -31,11 +31,17 @@
     "IdleText": "Idle",
     "DoNotDisturbText": "Do not disturb",
     "OfflineText": "Offline",
+    "UnknownText": "Unknown",
     "NoActivityText": "No activity",
     "LightThemeOption": "Light",
     "DarkThemeOption": "Dark",
     "SelectOptionText": "Select an option",
     "ThemeText": "Theme",
-    "FirstTimeLoadThemeText": "Choose a theme"
+    "FirstTimeLoadThemeText": "Choose a theme",
+    "PlatformsInUseText": "Platforms in use:",
+    "PlatformMobile": " Mobile",
+    "PlatformDesktop": " Desktop",
+    "PlatformWeb": " Web",
+    "TimeElapsedText": "Time elapsed: "
 }
   
