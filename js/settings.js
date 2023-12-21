@@ -4,7 +4,7 @@ console.log(
   );
 function DexrnsFunnyLogger(message) {
   if (DLog) {
-    console.log("lanyard.js: " + message);
+    console.log("settings.js: " + message);
   } else {
     return;
   }

@@ -46,6 +46,11 @@ body {
   color: #000;
 }
 
+.readingcard {
+    background: rgba(229, 229, 229, 1);
+    color: rgba(31, 31, 31, 1);
+}
+
 .topcard {
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.2);

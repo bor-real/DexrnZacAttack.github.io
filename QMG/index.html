@@ -26,95 +26,93 @@
 <div class="contentcontainer">
     <div class="bg">
         <div class="wrapper" id="wrapper">
-            <div class="card" style="cursor: pointer; width: 95%;" id="back" linkto="../index.html">
+            <div class="card readingcard" style="cursor: pointer; width: 50%;" id="back" linkto="../index.html">
             <div class="back" id="backbtn"></div>
             </div>
-            <div class="card" style="width: 95%;">
+            <div class="card readingcard" style="width: 50%; h1, h2, h3, p {margin-block: 10px;}">
             <div class="card-title" id="qmgr-path"></div>
-        <h1>Introduction</h1>
-			<h2>QMG is a file format made by Quram which is meant to be a faster, less space-expensive alternative to PNG, with one of the main selling points being compression without the major loss of resolution.</h2>
-			<h2>Samsung uses this format for assets, such as the boot animation, and images in APKs.</h2>
-			<h3>This investigation is ongoing, more information will be added to this webpage as we find out new things.</h3>
-			<h2>If you have ANY information about the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></h2>
-			<h2>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></h2>
-		    <h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
+        <h3>Introduction</h3>
+			<p><b>QMG is a file format made by Quram which is meant to be a faster, less space-expensive alternative to PNG, with one of the main selling points being compression without the major loss of resolution. Samsung uses this format for assets, such as the boot animation, and images in APKs.</b></p>
+			<p>This investigation is ongoing, more information will be added to this webpage as we find out new things.</p>
+			<p>Alot of the information we got was from this <a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">website.</a></p>
+			<p><b>If you have ANY information about the QMG format, please contact me here: <a href="https://forum.xda-developers.com/m/dexrn.10032235">XDA Developers Forum</a></b></p>
+		    <h3><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h3>
 		<hr id="dark">
-		<h1>11/13/2023</h1>
+		<h3>11/13/2023</h3>
 		<hr id="dotted">
-		    <h2>Here are a bunch of propriatary files, in theory the Samsung Internet browser should be able to embed them.</h2>
-		    <h2>QM</h2>
-		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/BST_bootsamsung.qmg" alt="QM">
-		    <h2>QG</h2>
-		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/bugdroid.qmg" alt="QG">
-		    <h2>SPR (BMP)</h2>
-		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/test.bmp" alt="SPR (BMP)">
-		    <h2>SPR</h2>
-		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/tw_numberpicker_prev_mtrl.spr" alt="SPR">
+		    <p><b>Here are a bunch of propriatary files, in theory the Samsung Internet browser should be able to embed them.</b></p>
+			<p>Note that the un-embedded ones will just be text.</p>
+		    <p>QM:</p>
+		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/BST_bootsamsung.qmg" alt="Embedded QM">
+		    <p>QG:</p>
+		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/bugdroid.qmg" alt="Embedded QG">
+		    <p>SPR (BMP):</p>
+		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/test.bmp" alt="Embedded SPR (BMP)">
+		    <p>SPR:</p>
+		    <img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/EmbedTest/tw_numberpicker_prev_mtrl.spr" alt="Embedded SPR">
 		<hr id="full">    
-		<h1>11/02/2023</h1>
+		<h3>11/02/2023</h3>
 		<hr id="dotted">
-		      <h2>We found about a new file format, SPR (Thanks GenericPnPMonitor)</h2>
-		      <h2>There is also a propriatary BMP format they use which also uses the same SPR header.</h2>
-		      <h3>By the looks of it, Skia should be able to decode it too...</h3>
-		      <h3>However our current code doesnt seem to work with it.</h3>
+		      <p>We found about a new file format, SPR (Thanks GenericPnPMonitor)</p>
+		      <p>There is also a propriatary BMP format they use which also uses the same SPR header, and is probably just the same file format with a different extension.</p>
+		      <p>By the looks of it, Skia should be able to decode it too... However our current code doesnt seem to work with it.</p>
 		<hr id="full">
-		<h1>10/28/2023</h1>
+		<h3>10/28/2023</h3>
 		<hr id="dotted">
-		      <h2>We now have access to aarch64 and aarch32 hardware!
-		      <h3>Thanks CarPBon and NeRdTheNed!</h3>
+		      <p>We now have access to aarch64 and aarch32 hardware!</p>
+		      <p>Thanks CarPBon and NeRdTheNed!</p>
 		<hr id="full">
-		<h1>10/20/2023</h1>
+		<h3>10/20/2023</h3>
 		<hr id="dotted">
-			<h2>Animated QM files can now be decoded! (Thanks NeRdTheNed!)
-			<h2>Currently the code isnt finished so if you build and test it there might be some issues, but the fact that it works is insane and so amazing to me.</h2>
-			<img src="https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bootsamsung.gif?raw=true" width="400" height="640">
-			<h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
+			<p><b>Animated QM files can now be decoded! (NeRdTheNed got it working!)</b></p>
+			<p>Currently the code isnt finished so if you build and test it there might be some issues, but the fact that it works is insane and so amazing to me.</p>
+			<img src="https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bootsamsung.gif?raw=true" width="200" height="320">
+			<h3><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h3>
 		<hr id="full">
-		<h1>10/16/2023</h1>
+		<h3>10/16/2023</h3>
 		<hr id="dotted">
-			<h2>There is now code in the repo to find and extract all ZLib headers and decompress them.</h2>
-			<h2><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></h2>
-			<h3>Note: this extractor is made with some ChatGPT and some of me trying to understand what the fuck I am doing, all at 5 AM. I'm not very good at C/C++.</h3>
+			<p>There is now code in the repo to find and extract all ZLib headers and decompress them.</p>
+			<p><b><a href="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib">https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMG-ExtractAndDecompressZLib</a></b></p>
+			<p>Note: this extractor is made with some ChatGPT and some of me trying to understand what the fuck I am doing, all at 5 AM. I'm not very good at C/C++.</p>
 		<hr id="full">
-		<h1>10/14/2023</h1>
+		<h3>10/14/2023</h3>
 		<hr id="dotted">
-			<h2>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NeRdTheNed)</h2>
-			<h3>We were able to uncompress it and got a sort of readable image</h3>
+			<p><b>Found out that QMG files (atleast the static ones) use ZLib compression. (Thanks NeRdTheNed)</b></p>
+			<p>We were able to decompress it and got a sort of readable image</p>
 			<img src="https://github.com/DexrnZacAttack/DexrnZacAttack.github.io/blob/main/assets/QMG/bugdroid-rawpixels.png?raw=true">
-			<h3><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></h3>
-			<h3>The fact that we can even see the image is insane to me.</h3>
-			<h3>As you can see it is a little distorted though, since we do not yet know how to get the colors.</h3>
+			<p><a href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/bugdroid.qmg">Original QMG File</a></p>
+			<p>The fact that we can even see the image is insane to me.</p>
+			<p>As you can see it is a little distorted though, since we do not yet know how to get the colors.</p>
 			<br>
-			<h2>How to get a sort of readable image from a Static QMG file</h2>
-			<h3>1 - Grab your QMG of choice, must start with QG in the header.</h3>
-			<h3>2 - Flate' it with zlib-flate</h3>
-			<h3>3 - Put it into https://rawpixels.net/ to see the image data.</h3>
+			<p><b>How to get a sort of readable image from a Static QMG file</b></p>
+			<p>1 - Grab your QMG of choice, must start with QG in the header.</p>
+			<p>2 - Flate' it with zlib-flate</p>
+			<p>3 - Put it into https://rawpixels.net/ to see the image data.</p>
 			<br>
-			<h2>We are still working on finding out how to get proper colors and getting animations as well.</h2>
+			<p><b>We are still working on finding out how to get proper colors and getting animations as well.</b></p>
 		<hr id="full">
-		<h1>7/9/2023</h1>
+		<h3>7/9/2023</h3>
 		<hr id="dotted">
-			<h2>Header of bootsamsung.qmg from the SM-T280</h2>
+			<p><b>Header of bootsamsung.qmg from the SM-T280</b></p>
 			<img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/QMG-SMT280-HEADER.png" alt="Header of bootsamsung.qmg from the SM-T280">
-			<h2>How can we attempt to read a QMG Animation file?</h2>
-			<h2>First, to get a "preview" of the animation's frames, we can open the file in a <a href="https://rawpixels.net">raw data to image viewer</a></h2>
-                  	<h3>Make sure you use these settings: RGB565, Little Endian</h3>
+			<p><b>How can we attempt to read this QMG Animation file?</b></p>
+			<p>First, to get a "preview" of the animation's frames, we can open the file in a <a href="https://rawpixels.net">raw data to image viewer</a></p>
+                  	<p>Make sure you use these settings: RGB565, Little Endian</p>
 			<br>
-			<h2>Here is what we got from doing that</h2>
+			<p><b>Here is what we got from doing that</b></p>
 			<img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/rawpixels.png">
-			<h2>It may not look like much, but the purple and orange pixels are the animation, unfortunately they are compressed or something... (Yep it is... Thanks NedTheNerd!)</h2>
-			<h3>Note: I didn't show the full image due to the full image being very tall</h3>
-			<br>
-			<h2>I decided to try a different QMG file... this time from the Note 5.</h2>
-			<h2>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</h2>
+			<p>It may not look like much, but the purple and orange pixels are the frames of the animation, unfortunately they are compressed or something... (Yep it is... Thanks NeRdTheNed!)</p>
+			<p>Note: I didn't show the full image due to the full image being very tall</p>
+			<p><b>I decided to try a different QMG file... this time from the Note 5.</b></p>
+			<p>What I found out is that there are different versions of the QMG boot animation file, with the SM-T280's being a variation of (or most similar to) bootsamsungmini.qmg</p>
 			<img src="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/QMG/FileVariations.png">
 		<hr id="full">
-		<h1>6/28/2023</h1>
+		<h3>6/28/2023</h3>
 		<hr id="dotted">
 			<!--- D: Header Info --->
-			<h1>Header</h1>
-			<h2>The header of a QMG file contains basic information like the resolution, quality, and version.</h2>
-			<h3>Note: this seems to be the header for the static version of the QMG format, I will try to update this and add/replace with the animation version's header.</h3>
+			<p><b>Header</b></p>
+			<p>The header of a QMG file contains basic information like the resolution, quality, and version.</p>
+			<p>Note: this seems to be the header for the static version of the QMG format, I will try to update this and add/replace with the animation version's header.</p>
 			<!--- D: ewwww --->
 			<!--- D: Tried to make it a little bit nicer to look at... --->
 						 <table style="border-collapse: collapse; border: none; table-layout: fixed; width: 100%;">
@@ -279,9 +277,9 @@
 							</tbody>
 						</table>
 						
-			<h3><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></h3>
+			<p><a href="https://googleprojectzero.blogspot.com/2020/07/mms-exploit-part-1-introduction-to-qmage.html">Source</a></p>
 			<hr id="dark">
-			<h1><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h1>
+			<h3><a href="https://github.com/DexrnZacAttack/QmageDecoder">https://github.com/DexrnZacAttack/QmageDecoder</a></h3>
 			</div>  
         </div>
     </div>
