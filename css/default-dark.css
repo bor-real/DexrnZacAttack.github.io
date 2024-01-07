@@ -19,6 +19,13 @@
   }
 }
 
+
+@media (max-width: 900px) {
+  .readingcard {
+    width: 90% !important;
+  }
+}
+
 @media (max-height: 665px) {
   #normalmode2 {
     display: none;
