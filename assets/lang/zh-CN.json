@@ -42,5 +42,6 @@
     "PlatformMobile": " 移动",
     "PlatformDesktop": "桌面",
     "PlatformWeb": " 网络",
-    "TimeElapsedText": "已经过时间："
+    "TimeElapsedText": "已经过时间：",
+    "BlogButtonText": "博客"
 }

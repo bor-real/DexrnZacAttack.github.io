@@ -5,7 +5,6 @@
     "ActivityDetail": "Loading...",
     "Status2": "Loading...",
     "ActivityPath": "@Dexrn > Activity",
-    "HomePath": "@Dexrn > Home",
     "AboutPath": "@Dexrn > About",
     "LinksPath": "@Dexrn > Random shit",
     "MainPageButton1": "QMG Header Parser",
@@ -42,6 +41,9 @@
     "PlatformMobile": " Mobile",
     "PlatformDesktop": " Desktop",
     "PlatformWeb": " Web",
-    "TimeElapsedText": "Time elapsed: "
+    "TimeElapsedText": "Time elapsed: ",
+    "BlogButtonText": "Blog",
+    "DiscordPath": "@Dexrn > Home",
+    "SteamPath": "@Dexrn > Steam"
 }
   

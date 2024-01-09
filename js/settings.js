@@ -20,12 +20,10 @@ function setTheme(theme) {
 function applyTheme(theme) {
   const stylesheetElement = document.getElementById("theme");
   switch (theme) {
-    case "default-dark":
-      stylesheetElement.href = "/css/default-dark.css";
-      break;
     case "default-light":
       stylesheetElement.href = "/css/default-light.css";
       break;
+    case "default-dark":
     default:
       stylesheetElement.href = "/css/default-dark.css";
       break;
@@ -47,24 +45,36 @@ const savedTheme = getThemeCookie("Theme");
 
 applyTheme(savedTheme);
 
-function checkLang() {
+function checkLang(syslang = undefined) {
   const lang = getLang();
   DexrnsFunnyLogger(`Language: ${lang}`);
   let langFilePath;
-
-  switch (lang) {
-    case "zh-CN":
+  if (lang) {
+      DexrnsFunnyLogger(`Not using system language`);
+  switch (lang.toLowerCase()) {
+    case "zh-cn":
       langFilePath = "/assets/lang/zh-CN.json";
       break;
-    case "en-US":
-      langFilePath = "/assets/lang/en-US.json";
-      break;
+    case "en-us":
     default:
       langFilePath = "/assets/lang/en-US.json";
       break;
-  }
+  }} else if (syslang) {
+    DexrnsFunnyLogger(`Using system language: ${syslang}`);
+    switch (syslang.toLowerCase()) {
+      case "zh-cn":
+        langFilePath = "/assets/lang/zh-CN.json";
+        break;
+      case "en-us":
+      default:
+        langFilePath = "/assets/lang/en-US.json";
+        break;
+    }} else {
+      langFilePath = "/assets/lang/en-US.json";
+    }
   setLang(langFilePath);
 }
+
 
 checkLang();
 
@@ -75,9 +85,9 @@ function getLang() {
     if (name === "lang") {
       return value;
     }
-  }
-  return null; // Cookie not found
+  } 
   DexrnsFunnyLogger(`Language cookie not found`);
+  return null; // Cookie not found
 }
 
 // Dexrn: Localization! (Kinda janky.)
@@ -91,7 +101,8 @@ function setLang(langFilePath) {
       checkIfExists("activity-state", data.ActivityState);
       checkIfExists("activity-detail", data.ActivityDetail);
       checkIfExists("activity-path", data.ActivityPath);
-      checkIfExists("home-path", data.HomePath);
+      checkIfExists("discord-path", data.DiscordPath);
+      checkIfExists("steam-path", data.SteamPath);
       checkIfExists("about-path", data.AboutPath);
       checkIfExists("stuff-path", data.LinksPath);
       checkIfExists("mainbtn-1", data.MainPageButton1);
@@ -120,6 +131,7 @@ function setLang(langFilePath) {
       checkIfExists("lightthmopt", data.LightThemeOption);
       checkIfExists("themetxt", data.ThemeText);
       checkIfExists("ftlThemeTxt", data.FirstTimeLoadThemeText);
+      checkIfExists("blogbtntxt", data.BlogButtonText);
     })
     .catch((error) => console.error("Error whilst loading lang file:", error));
 }

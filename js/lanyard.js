@@ -48,14 +48,17 @@ async function lanyardGetLang() {
 }
 
 async function lanyardCheckLang(lang) {
+  let langPath;
   switch (lang) {
     case "zh-CN":
-      return "/assets/lang/zh-CN.json";
+      langPath = "/assets/lang/zh-CN.json";
+      break;
     case "en-US":
-      return "/assets/lang/en-US.json";
     default:
-      return "/assets/lang/en-US.json";
+      langPath = "/assets/lang/en-US.json";
+      break;
   }
+  return langPath;
 }
 async function lanyardSetLang(langFilePath) {
   try {
@@ -126,7 +129,7 @@ async function setAvatarFrame() {
     case "online":
       DexrnsFunnyLogger("Online");
       statusDot.style.background = "#3ba45d";
-      status2.innerHTML = localizedText.lyonline;
+      status2.innerText = localizedText.lyonline;
       statusDot.title = localizedText.lyonline;
       pfp.style.border = "2px solid #3ba45d";
       pfp.style.boxShadow = "0 0 20px #3ba45d";
@@ -139,7 +142,7 @@ async function setAvatarFrame() {
       pfp.style.border = "2px solid #ed4245";
       pfp.style.boxShadow = "0 0 20px #ed4245";
       statusDot.title = localizedText.lydnd;
-      status2.innerHTML = localizedText.lydnd;
+      status2.innerText = localizedText.lydnd;
       status2.style.cssText = "color: #ed4245; opacity: 1;";
       status3.style.cssText = "color: #ed4245; opacity: 1;";
       break;
@@ -147,7 +150,7 @@ async function setAvatarFrame() {
       DexrnsFunnyLogger("Idle");
       statusDot.style.background = "#faa81a";
       statusDot.title = localizedText.lyidle;
-      status2.innerHTML = localizedText.lyidle;
+      status2.innerText = localizedText.lyidle;
       pfp.style.border = "2px solid #faa81a";
       pfp.style.boxShadow = "0 0 20px #faa81a";
       status2.style.cssText = "color: #faa81a; opacity: 1;";
@@ -157,7 +160,7 @@ async function setAvatarFrame() {
       DexrnsFunnyLogger("Offline");
       statusDot.style.background = "#747e8c";
       statusDot.title = localizedText.lyoffline;
-      status2.innerHTML = localizedText.lyoffline;
+      status2.innerText = localizedText.lyoffline;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
       status2.style.cssText = "color: unset; opacity: 0.5;";
@@ -167,7 +170,7 @@ async function setAvatarFrame() {
       DexrnsFunnyLogger("Unknown (default)");
       statusDot.style.background = "#747e8c";
       statusDot.title = localizedText.lyunknown;
-      status2.innerHTML = localizedText.lyunknown;
+      status2.innerText = localizedText.lyunknown;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
       status2.style.cssText = "color: unset; opacity: 0.5;";
@@ -196,7 +199,7 @@ async function setAvatarFrame() {
 
   if (disc_isOffline != true)
     // Dexrn: Best way I could think of doing it.
-    status3.innerHTML = `${localizedText.lypin}${disc_platform}`;
+    status3.innerText = `${localizedText.lypin}${disc_platform}`;
 }
 
 // Dexrn: Maybe I'll get this working one day.
@@ -301,12 +304,12 @@ async function setActivityName() {
   const mostRecent = activities.filter((m) => m.type !== 4).shift();
   if (!mostRecent?.name) {
     DexrnsFunnyLogger("No activity name");
-    name.innerHTML = localizedText.lyna;
+    name.innerText = localizedText.lyna;
     return;
   }
   DexrnsFunnyLogger("activity name set");
   name.style.display = "block";
-  name.innerHTML = mostRecent.name;
+  name.innerText = mostRecent.name;
 }
 async function setActivityState() {
   const response = await fetchResponse(USERID);
@@ -322,7 +325,7 @@ async function setActivityState() {
   }
 
   state.style.display = "block";
-  state.innerHTML = mostRecent.state;
+  state.innerText = mostRecent.state;
 }
 
 async function setTimestamp() {
@@ -341,7 +344,7 @@ async function setTimestamp() {
     const formattime = `${hours.toString().padStart(2, "0")}:${minutes
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    elapsed.innerHTML = `${localizedText.lytimee}` + formattime;
+    elapsed.innerText = `${localizedText.lytimee}` + formattime;
     DexrnsFunnyLogger(`Start Time: ${created}`);
     DexrnsFunnyLogger(`Current Time: ${current}`);
     DexrnsFunnyLogger(`Diff (current - created): ${diff}`);
@@ -365,7 +368,7 @@ async function setActivityDetails() {
     return;
   }
   details.style.display = "block";
-  details.innerHTML = mostRecent.details;
+  details.innerText = mostRecent.details;
 }
 
 function presenceInvoke() {

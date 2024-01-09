@@ -3,18 +3,20 @@
     <head>
         <title>Dexrn's Hell Hole</title>
         <link id="theme" rel="stylesheet" href="">
+        <link id="theme" rel="stylesheet" href="css/all.css">
         <script src="/js/settings.js"></script>
         <meta charset="utf-8">
         <script defer src="js/lanyard.js"></script>
+        <!-- <script defer src="js/steam.js"></script> -->
         <meta content="Dexrn's Hell Hole" property="og:title">
         <meta content="What the FUCK am I doing" property="og:description">
         <meta content="https://DexrnZacAttack.github.io" property="og:url">
         <meta content="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png" property="og:image">
         <meta content="#0078D7" data-react-helmet="true" name="theme-color">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="What the FUCK am I doing">
         <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
         <script src="js/background.js"></script>
+        <script src="js/tabs.js"></script>
         <script>
 
 
@@ -24,11 +26,12 @@
             languageValue = getLang();
             if (languageValue === null || languageValue === undefined || languageValue === "undefined") {
                 console.log("Setting up for first time load");
+                checkLang(navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage || undefined);
                 document.getElementById('firsttimeload').style.display = 'flex';
                 document.getElementById('loading-light').style.display = 'none';
                 document.getElementById('loading-dark').style.display = 'none';
                 backgroundfade(false);
-            } else if (languageValue !== null) {
+            } else {
                 document.getElementById('firsttimeload').style.display = 'none';
                 showLoadingText();
                 backgroundfade(true);
@@ -38,13 +41,13 @@
 
 
         // Dexrn: This is for the text that shows on the loading screen.
-        function showLoadingText() {
-            setTimeout(function () {
-                var loadingText = document.querySelector('.loadingtext');
-                if (loadingText) {
-                    loadingText.classList.remove('hidden');
-                }
-            }, 5000);
+        async function showLoadingText() {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            var loadingText = document.querySelector('.loadingtext');
+            if (loadingText) {
+                loadingText.classList.remove('hidden');
+            }
         }
         </script>
         <script src="js/fadeout.js"></script>
@@ -96,8 +99,36 @@
         <div class="contentcontainer" id="content2">
             <div class="bg" id="homepage">
                 <div class="wrapper">
-                    <div class="card" id="normalmode">
-                        <div class="card-title" id="home-path"></div>
+                    <div class="maincontainer" id="maincontainer" style="display:flex;flex-direction: column;">
+                        <div id="tabsreal"style="display:flex;flex-direction: row;">
+                        <button class="tabbuttonclicked" id="dcbutton" onclick="changeMainCard('Discord');">Discord</button>
+                        <!-- <button class="tabbutton" id="steambutton" style="align-self: baseline; margin-left:2%;" onclick="changeMainCard('Steam');">Steam</button> -->
+                        <button class="tabbutton" id="settingsbtn" style="margin-right:0;margin-left:auto;"></button>
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var normalmode1 = document.querySelector('#normalmode1');
+                            var normalmode2 = document.querySelector('#normalmode2');
+                            var normalmode3 = document.querySelector('#normalmode3');
+                            var toggleButton = document.getElementById('settingsbtn');
+                            var settingsPage = document.getElementById('settings');
+                            var tabContainer = document.getElementById('maincontainer');
+            
+                            settingsPage.style.display = 'none';
+            
+                            toggleButton.addEventListener('click', function () {
+                                tabContainer.style.display = 'none';
+                                normalmode1.style.display = 'none';
+                                normalmode2.style.display = 'none';
+                                normalmode3.style.display = 'none';
+                                toggleButton.style.display = 'none';
+                                settingsPage.style.display = 'block';
+                            });
+                        });
+                        </script>
+                        </div>
+                    <div class="card" id="normalmode" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
+
+                        <div class="card-title" id="discord-path"></div>
                         <div class="user-profile">
                             <div class="Profile-pic">
                                 <img id="pfp" src="assets/loader.gif" alt="">
@@ -133,6 +164,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card" id="steamcard" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
+                        <!--Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour-->
+                        <div class="card-title" id="steam-path"></div>
+                        <div class="activity-wrapper">
+                            <div class="activity-images">
+                                <img id="steampfp" src="assets/loader.gif">
+                            </div>
+                            <div class="activity-info">
+                                <div id="stmusername" class="username"></div>
+                                <div id="stmstatus"></div>
+                                <div id="stmcreatedate" class="graytxt">Member since July 13, 2017</div>
+                                <div id="lastPlayed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <div class="activity card" id="normalmode1">
                         <div class="card-title" id="activity-path"></div>
                         <div class="activity-wrapper">
@@ -230,11 +277,13 @@
                         var normalmode3 = document.querySelector('#normalmode3');
                         var closesettingsbtn = document.getElementById('settingsclose');
                         var settingsPage = document.getElementById('settings');
+                        var tabButtons = document.getElementById('tabbutton');
+                        var tabContainer = document.getElementById('maincontainer');
 
                         settingsPage.style.display = 'none';
 
                         closesettingsbtn.addEventListener('click', function () {
-                            normalmode.style.display = 'block';
+                            tabContainer.style.display = 'block';
                             normalmode1.style.display = 'block';
                             normalmode2.style.display = 'block';
                             normalmode3.style.display = 'block';
@@ -242,7 +291,7 @@
                             settingsPage.style.display = 'none';
                         });
                         savebtn.addEventListener('click', function () {
-                            normalmode.style.display = 'block';
+                            tabContainer.style.display = 'block';
                             normalmode1.style.display = 'block';
                             normalmode2.style.display = 'block';
                             normalmode3.style.display = 'block';
@@ -256,28 +305,6 @@
         </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->
         <div class="topright">
-            <button class="buttonalt" id="settingsbtn"></button>
-            <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var normalmode = document.querySelector('#normalmode');
-                var normalmode1 = document.querySelector('#normalmode1');
-                var normalmode2 = document.querySelector('#normalmode2');
-                var normalmode3 = document.querySelector('#normalmode3');
-                var toggleButton = document.getElementById('settingsbtn');
-                var settingsPage = document.getElementById('settings');
-
-                settingsPage.style.display = 'none';
-
-                toggleButton.addEventListener('click', function () {
-                    normalmode.style.display = 'none';
-                    normalmode1.style.display = 'none';
-                    normalmode2.style.display = 'none';
-                    normalmode3.style.display = 'none';
-                    toggleButton.style.display = 'none';
-                    settingsPage.style.display = 'block';
-                });
-            });
-            </script>
         </div>
         <a
             rel="me"
