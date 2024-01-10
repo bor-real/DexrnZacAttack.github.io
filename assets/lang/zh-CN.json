@@ -5,7 +5,7 @@
     "ActivityDetail": "加载中...",
     "Status2": "加载中...",
     "ActivityPath": "@Dexrn > 活动",
-    "HomePath": "@Dexrn > 主页",
+    "DiscordPath": "@Dexrn > 主页",
     "AboutPath": "@Dexrn > 关于",
     "LinksPath": "@Dexrn > 随机内容",
     "MainPageButton1": "QMG 头部解析器",
@@ -43,5 +43,7 @@
     "PlatformDesktop": "桌面",
     "PlatformWeb": " 网络",
     "TimeElapsedText": "已经过时间：",
-    "BlogButtonText": "博客"
+    "BlogButtonText": "博客",
+    "MyStuffPath": "@Dexrn > 我的东西",
+    "StuffText": "我的东西"
 }
