@@ -1,33 +1,622 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&family=Roboto:wght@100;300;400;500;700&display=swap");
+
+@font-face { 
+  font-family: 'Minecraft';
+  src: url('/assets/minecraft.woff') format('woff');
+  }
+  
 #pfp {
-    width: 128px;
-    height: 128px;
-    transition: box-shadow 0.3s ease, border 0.3s ease;
-    border-radius: 10%;
+  width: 128px;
+  height: 128px;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
+  border-radius: 10%;
 }
 
 #steampfp {
-    width: 128px;
-    height: 128px;
-    transition: box-shadow 0.3s ease, border 0.3s ease;
-    border-radius: 10%;
+  width: 128px;
+  height: 128px;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
+  border-radius: 10%;
+}
+
+.topcard {
+  /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  padding: 12px;
+  width: 55%;
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+@media (min-width: 2559px) and (min-height: 1439px) {
+    .card, .maincontainer, .topcard{
+        width: 70% !important;
+        height: 70% !important;
+    }
+
+    a, h1, h2, h3, h4, h5, h6, p, body, .card-title {
+        font-size: 125% !important;
+    }
+
+    li, button, #back, .back {
+        font-size: 100% !important;
+    }
+
+    #pfp, .Profile-pic, #activity-big-image, .activity-images {
+        width: 256px !important;
+        height: 256px !important;
+    }
+
+    #activity-small-image {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    #normalmode, #abmcard {
+        width: 100% !important;
+    }
+
+}
+
+.bookbtn {
+  width: 160px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#bookbtnicon {
+  margin-bottom: 10px !important;
+  margin: auto;
+}
+
+.bookname {
+  font-family: Minecraft;
+  font-size: 20px !important;
+}
+
+.bookname a {
+  text-decoration: none !important;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+.maincontainer {
+  border-radius: 10px;
+  border: none;
+  padding: 0px;
+  width: 50%;
+  animation: 1s ease-out 0s 1 fadeIn;
+  background: none;
+}
+
+.container2 {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: none;
+  padding: 0px;
+  width: 50%;
+  animation: 1s ease-out 0s 1 fadeIn;
+  background: none;
+}
+
+.tabbutton {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: none;
+  padding: 12px;
+  width: 12%;
+  animation: 1s ease-out 0s 1 fadeIn;
+  cursor: pointer;
+}
+
+.buttonalt {
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(1000px);
+  -webkit-backdrop-filter: blur(1000px);
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.buttonalt2 {
+  transition: transform 0.3s ease;
+  background-color: transparent;
+  backdrop-filter: blur(1000px);
+  -webkit-backdrop-filter: blur(1000px);
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.drpdwnbtn {
+  background-color: transparent;
+  backdrop-filter: blur(1000px);
+  -webkit-backdrop-filter: blur(1000px);
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.tabbuttonclicked {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: none;
+  padding: 12px;
+  width: 12%;
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.about-me {
+  margin-left: 2%;
+}
+
+.button {
+  background-color: transparent;
+  backdrop-filter: blur(1000px);
+  -webkit-backdrop-filter: blur(1000px);
+  border: none;
+  transition: transform 0.3s ease;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.bg {
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  background-repeat: repeat-x;
+  animation: panorama 60s linear infinite;
+  opacity: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.loadingcontainer .loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* hide on mobile devices or devices with a small screen. */
+@media (max-width: 1200px) {
+  .connection-icon2 {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .card {
+    width: 98%;
+  }
+
+  .maincontainer {
+    width: 98%;
+  }
+
+  .heading {
+    font-size: 30px;
+  }
+}
+
+.hidden {
+    display: none;
+  }
+
+@media (min-width: 1001px) and (max-width: 1100px) {
+  .card {
+    width: 75%;
+  }
+
+  .maincontainer {
+    width: 75%;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+}
+
+.details {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.expandcard.active .details {
+  max-height: 1000px;
+}
+
+.expandcard {
+  border-radius: 20px;
+  cursor: pointer;
+  animation: 1s ease-in-out 0s 1 fadeIn;
+}
+
+@media (max-width: 1100px) {
+  #normalmode {
+    background-image: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .readingcard {
+    width: 90% !important;
+  }
+}
+
+@media (max-height: 665px) {
+  #normalmode2 {
+    display: none;
+  }
+}
+
+@media (max-height: 450px) {
+  #normalmode1 {
+    display: none;
+  }
 }
 
 #pfp2 {
-    width: 128px;
-    height: 128px;
-    border-radius: 10%;
+  width: 128px;
+  height: 128px;
+  border-radius: 10%;
 }
 
-#username {
-    font-size: 28px;
-    font-weight: bold;
+.center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.button2 {
+  backdrop-filter: blur(1000px);
+  -webkit-backdrop-filter: blur(1000px);
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+  transition: transform 0.3s ease;
+}
+
+.card-title {
+  font-size: 12px;
+  font-weight: thin;
+  margin-bottom: 16px;
+  font-family: monospace;
+  opacity: 0.5;
+}
+
+#userLevels {
+  max-height: 300px; 
+  width: 100%;
+  overflow-y: auto; 
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.back {
+  transition: opacity 0.2s ease;
+  font-size: 12px;
+  font-weight: thin;
+  font-family: monospace;
+  opacity: 0.5;
+}
+
+.user-profile {
+  display: flex;
+  gap: 1em;
+}
+
+.Profile-pic {
+  position: relative;
+}
+
+#status2,
+#status {
+  opacity: 0.5;
+  transition: all 0.6s ease;
+}
+
+#status-dot {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.bottomright {
+  position: fixed;
+  opacity: 0.5;
+  right: 0px;
+  bottom: 0px;
+  text-decoration: none;
+  border: none;
+  width: 325px;
+  height: 28px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.loadingtext {
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.loadingcontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+
+#loading {
+  text-align: center;
+  width: 128px;
+  display: block;
+  margin: 0 auto;
+  height: 128px;
+  border-radius: 10%;
+  transition: opacity 0.5s;
+}
+
+.mastodon {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.subcard {
+  border-radius: 10px;
+  padding: 12px;
+  width: 100%;
+}
+
+.card {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  width: 50%;
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  /* color: #fff; */
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.loadingcontainer {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#normalmode {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right center;
 }
 
 .username {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .graytxt {
-    opacity: 0.7;
+  opacity: 0.7;
+}
+
+#activity-small-image-alt {
+  width: 128px;
+  height: 128px;
+  border-radius: 10%;
+}
+
+#activity-name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+#activity-state {
+  font-size: 20px;
+  opacity: 0.7;
+  margin-left: 15px;
+}
+
+#activity-detail {
+  opacity: 0.5;
+  margin-left: 15px;
+}
+
+#activity-elapsed {
+  opacity: 0.7;
+  margin-left: 15px;
+}
+
+/* \ Activity / */
+
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ul,
+li {
+  padding: 0%;
+  margin: 0;
+  list-style: none;
+}
+
+.connections {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.connection-icon {
+  height: 30px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.connection-icon2 {
+  height: 30px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.project-icon {
+  height: 28px;
+  width: auto;
+}
+
+.project {
+  height: 28px;
+  width: auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  gap: 10px;
+}
+
+.topright {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  width: 100px;
+  height: 5%;
+  padding: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+.activity-wrapper {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.activity-info {
+  width: 100%;
+}
+
+.activity-images {
+  position: relative;
+}
+
+#activity-big-image {
+  width: 128px;
+  height: 128px;
+  border-radius: 10%;
+}
+
+#activity-small-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: -20%;
+  right: 0px;
+  transform: translate(50%, -50%);
+}
+
+@keyframes panorama {
+  0% {
+    background-position: 0;
+  }
+
+  100% {
+    background-position: calc(100vh / 144 * -820);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

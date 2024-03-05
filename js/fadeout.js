@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadingContainer.style.display = "flex";
     fade(background);
-    fade(topright);
     setTimeout(() => {
       const targetURL = button.getAttribute("linkto");
       window.location.href = targetURL;

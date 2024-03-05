@@ -46,6 +46,8 @@
     "DiscordPath": "@Dexrn > Home",
     "SteamPath": "@Dexrn > Steam",
     "MyStuffPath": "@Dexrn > My Stuff",
-    "StuffText": "My stuff"
+    "StuffText": "My stuff",
+    "InitialSetupDarkThemeOption": "Dark",
+    "InitialSetupLightThemeOption": "Light"
 }
   

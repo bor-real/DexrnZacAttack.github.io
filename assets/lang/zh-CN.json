@@ -45,5 +45,7 @@
     "TimeElapsedText": "已经过时间：",
     "BlogButtonText": "博客",
     "MyStuffPath": "@Dexrn > 我的东西",
-    "StuffText": "我的东西"
+    "StuffText": "我的东西",
+    "InitialSetupDarkThemeOption": "深色",
+    "InitialSetupLightThemeOption": "浅色"
 }

@@ -23,14 +23,15 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Check if the cookie is set
+            // Dexrn: Check language and setup first time load
             languageValue = getLang();
             if (languageValue === null || languageValue === undefined || languageValue === "undefined") {
-                console.log("Setting up for first time load");
+                DexrnsFunnyLogger("Setting up for first time load");
                 checkLang(navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage || undefined);
-                document.getElementById('firsttimeload').style.display = 'flex';
+                document.getElementById('loadingcontainer').style.backgroundImage = 'url("/assets/bgdark.webp")';
                 document.getElementById('loading-light').style.display = 'none';
                 document.getElementById('loading-dark').style.display = 'none';
+                document.getElementById('firsttimeload').style.display = 'flex';
                 backgroundfade(false);
             } else {
                 document.getElementById('firsttimeload').style.display = 'none';
@@ -54,7 +55,7 @@
         <script src="js/fadeout.js"></script>
     </head>
     <body>
-        <div class="loadingcontainer">
+        <div class="loadingcontainer" id="loadingcontainer">
             <div class="loading">
                 <img id="loading-light" src="assets/loader.gif">
                 <img id="loading-dark" src="assets/loader-dark.gif">
@@ -76,8 +77,8 @@
                     </select>
                     <h3 id="ftlThemeTxt"></h3>
                     <select id="themeoption2" class="drpdwnbtn" name="themeoption2">
-                        <option value="default-dark">Dark</option>
-                        <option value="default-light">Light</option>
+                        <option value="default-dark" id="darkopt">Dark</option>
+                        <option value="default-light" id="lightopt">Light</option>
                     </select>
                     <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
                 </div>
@@ -129,7 +130,14 @@
                         </script>
                         </div>
                     <div class="card" id="normalmode" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
-
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                        <div class="side top"></div>
+                        <div class="side right"></div>
+                        <div class="side bottom"></div>
+                        <div class="side left"></div>
                         <div class="card-title" id="discord-path"></div>
                         <div class="user-profile">
                             <div class="Profile-pic">
@@ -182,7 +190,7 @@
                         </div>
                     </div>
                     <div class="card" id="abmcard" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
-                        <div id="expandcard" class="expandcard" style="text-align: center;">
+                        <div class="expandcard" style="text-align: center;">
                             <h2>PC Specs</h2>
                             <div class="details" style="text-align: center;">
                                 <h3>Components</h3>
@@ -209,18 +217,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var expandcard = document.querySelectorAll('.expandcard');
-
-                            expandcard.forEach(function (expandcard) {
-
-                                expandcard.addEventListener('click', function () {
-                                    this.classList.toggle('active');
-                                });
-                            });
-                        });
-                    </script>
+                    <script src="/js/expandable.js"></script>
                 </div>
                     <div class="activity card" id="normalmode1">
                         <div class="card-title" id="activity-path"></div>
@@ -253,6 +250,7 @@
                             <div class="bio">
                                 <button class="button" linkto="QMGHeaderParser/index.html" id="mainbtn-1"></button>
                                 <button class="button" linkto="QMG/index.html" id="mainbtn-2"></button>
+                                <!-- <button class="button" linkto="MM2D/index.html" id="mainbtn-3"></button> -->
                                 <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"I was bored"</button>  -->
                             </div>
                         </div>

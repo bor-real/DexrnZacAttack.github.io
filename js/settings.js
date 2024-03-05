@@ -134,6 +134,8 @@ function setLang(langFilePath) {
       checkIfExists("blogbtntxt", data.BlogButtonText);
       checkIfExists("abbutton", data.StuffText);
       checkIfExists("stuff2-path", data.MyStuffPath);
+      checkIfExists("darkopt", data.InitialSetupDarkThemeOption);
+      checkIfExists("lightopt", data.InitialSetupLightThemeOption);
     })
     .catch((error) => console.error("Error whilst loading lang file:", error));
 }
