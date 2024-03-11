@@ -87,7 +87,7 @@ function getLang() {
     }
   } 
   DexrnsFunnyLogger(`Language cookie not found`);
-  return null; // Cookie not found
+  return null;
 }
 
 // Dexrn: Localization! (Kinda janky.)
@@ -95,7 +95,7 @@ function setLang(langFilePath) {
   fetch(langFilePath)
     .then((response) => response.json())
     .then((data) => {
-      checkIfExists("loadingtext", data.LoadingText);
+      checkIfExists("loadingText", data.LoadingText);
       checkIfExists("status2", data.Status2);
       checkIfExists("activity-name", data.ActivityName);
       checkIfExists("activity-state", data.ActivityState);

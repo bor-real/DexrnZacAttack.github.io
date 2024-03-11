@@ -23,28 +23,28 @@ function setBGTime(hour) {
   } 
 }
 
-function backgroundfade(bgload) {
+function fadeBG(bgload) {
   if (bgload == true) {
     DexrnsFunnyLogger("bgload is true");
     let now = new Date();
     let hour = now.getHours();
     let bgElement = document.querySelector(".bg");
-    let maincontainer = document.querySelector(".contentcontainer");
-    let loadingcontainer = document.querySelector(".loadingcontainer");
+    let maincontainer = document.querySelector(".mainContent");
+    let loadingScreen = document.querySelector(".loadingScreen");
     if (bgElement) {
       setBGTime(hour);
       maincontainer.style.display = "none";
-      const bgImage = new Image();
-      bgImage.src = bgElement.style.backgroundImage.slice(5, -2);
+      const bg = new Image();
+      bg.src = bgElement.style.backgroundImage.slice(5, -2);
 
       const loadingfade = function() {
-        loadingcontainer.style.opacity = 0;
+        loadingScreen.style.opacity = 0;
         setTimeout(() => {
-          loadingcontainer.style.display = "none";
+          loadingScreen.style.display = "none";
         }, 500);
       };
       
-      bgImage.onload = function () {
+      bg.onload = function () {
         maincontainer.style.display = "block";
         loadingfade();
         const duration = 1000;
@@ -70,5 +70,5 @@ function backgroundfade(bgload) {
   }
 }
 
-window.onload = backgroundfade;
+window.onload = fadeBG;
 

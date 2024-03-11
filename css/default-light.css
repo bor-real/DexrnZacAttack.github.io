@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&family=Roboto:wght@100;300;400;500;700&display=swap");
 
+body {
+  background: url('/assets/bglight.webp');
+  background-size: cover;
+  background-attachment: fixed;
+}
 
-.loadingcontainer {
+.loadingScreen {
   background: rgba(255, 255, 255, 1);
+  background: url('/assets/bglight.webp');
 }
 
 body {
@@ -27,12 +33,14 @@ body {
 }
 
 .topcard {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 10px 5px rgba(100, 100, 100, 0.3);
   color: #000;
 }
 
 .drpdwnbtn {
+  border: 1px solid rgba(200, 200, 200, 0.2);
   color: black;
 }
 
@@ -49,11 +57,11 @@ a:hover {
     color: #00385e;
 }
 
-.loadingcontainer .loading #loading-light {
+.loadingScreen .loading #lightLSpinner {
   display: none;
 }
 
-.loadingcontainer .loading #loading-dark {
+.loadingScreen .loading #darkLSpinner {
   display: block;
   animation: 1s ease-out 0s 1 fadeIn;
 }
@@ -62,7 +70,7 @@ a:hover {
   background-image: url("https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner-dark.png");
 }
 
-.maincontainer {
+.mainCardsContainer {
   color: #fff;
 }
 
@@ -71,21 +79,30 @@ a:hover {
 }
 
 .tabbutton {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   background: rgba(200, 200, 200, 0.3);
   color: #000;
 }
 
 .tabbuttonclicked {
+  border: 2px solid rgba(200, 200, 200, 0.1);
   background: rgba(255, 255, 255, 0.3);
   color: #000;
 }
 
 
 .button {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+#savebtn {
+  border: 2px solid rgba(200, 200, 200, 0.2);
+  color: white;
+}
+
 .buttonalt {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   color: black;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -192,12 +209,14 @@ a:hover {
 }
 
 .card {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 10px 5px rgba(100, 100, 100, 0.3);
   color: #000;
 }
 
 .expandcard {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.5);
   color: black;
@@ -209,6 +228,7 @@ a:hover {
 
 
 .button2 {
+  border: 2px solid rgba(200, 200, 200, 0.2);
   background-color: transparent;
 }
 

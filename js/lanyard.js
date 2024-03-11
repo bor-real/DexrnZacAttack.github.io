@@ -332,7 +332,11 @@ async function setTimestamp() {
   const response = await fetchResponse(USERID);
   const activities = response.data.activities.filter((m) => m.type !== 4);
   const mostRecent = activities.shift();
+  try {
   const created = mostRecent.timestamps.start;
+  } catch {
+    // stop yelling at me :(
+  }
   try {
     const current = new Date().getTime();
     const diff = current - created;

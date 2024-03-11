@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Dexrn's Hell Hole</title>
-        <link id="theme" rel="stylesheet" href="">
+        <link id="theme" rel="stylesheet" href>
         <link id="theme" rel="stylesheet" href="css/all.css">
         <script src="/js/settings.js"></script>
         <meta charset="utf-8">
@@ -12,10 +12,14 @@
         <meta content="Dexrn's Hell Hole" property="og:title">
         <meta content="What the FUCK am I doing" property="og:description">
         <meta content="https://DexrnZacAttack.github.io" property="og:url">
-        <meta content="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png" property="og:image">
+        <meta
+            content="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png"
+            property="og:image">
         <meta content="#0078D7" data-react-helmet="true" name="theme-color">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="What the FUCK am I doing">
-        <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
+        <link rel="icon" type="image/x-icon"
+            href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
         <script src="js/background.js"></script>
         <script src="js/tabs.js"></script>
         <script>
@@ -23,24 +27,15 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Dexrn: Check language and setup first time load
-            languageValue = getLang();
-            if (languageValue === null || languageValue === undefined || languageValue === "undefined") {
-                DexrnsFunnyLogger("Setting up for first time load");
-                checkLang(navigator.language || navigator.userLanguage || navigator.browserLanguage || navigator.systemLanguage || undefined);
-                document.getElementById('loadingcontainer').style.backgroundImage = 'url("/assets/bgdark.webp")';
-                document.getElementById('loading-light').style.display = 'none';
-                document.getElementById('loading-dark').style.display = 'none';
-                document.getElementById('firsttimeload').style.display = 'flex';
-                backgroundfade(false);
-            } else {
-                document.getElementById('firsttimeload').style.display = 'none';
+            // thx actuallyaridan
                 showLoadingText();
-                backgroundfade(true);
-            }
+                fadeBG(true);
+                // this may still be broken on Webkit, hopefully not though... Thanks, Apple.
+                actuallySetLanguage();
+                checkLang();
         });
 
-
+        curTab = 1;
 
         // Dexrn: This is for the text that shows on the loading screen.
         async function showLoadingText() {
@@ -55,177 +50,182 @@
         <script src="js/fadeout.js"></script>
     </head>
     <body>
-        <div class="loadingcontainer" id="loadingcontainer">
+        <div class="loadingScreen" id="loadingScreen">
             <div class="loading">
-                <img id="loading-light" src="assets/loader.gif">
-                <img id="loading-dark" src="assets/loader-dark.gif">
-                <h1 class="loadingtext hidden" id="loadingtext"></h1>
-                <div id="ftlloading" class="ftlloading" style="height: 350px; width: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; position: fixed; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 9999; border-radius: 10px; animation: 1s ease-out 0s 1 fadeIn;">
-                    <img id="loading-light" src="assets/loader.gif">
-                    <img id="loading-dark" src="assets/loader-dark.gif">
-                </div>
-                <div class="card" id="firsttimeload" style="height: 350px; width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <h3 id="ftlLanguageTxt"></h3>
-                    <select
-                        id="language"
-                        class="drpdwnbtn"
-                        name="language"
-                        style="margin-bottom: 10px;"
-                    >
-                        <option value="en-US">English</option>
-                        <option value="zh-CN">中文</option>
-                    </select>
-                    <h3 id="ftlThemeTxt"></h3>
-                    <select id="themeoption2" class="drpdwnbtn" name="themeoption2">
-                        <option value="default-dark" id="darkopt">Dark</option>
-                        <option value="default-light" id="lightopt">Light</option>
-                    </select>
-                    <button class="buttonalt" id="ftlcbtn-1" style="margin-top: auto;"></button>
-                </div>
+                <img id="lightLSpinner" src="assets/loader.gif">
+                <img id="darkLSpinner" src="assets/loader-dark.gif">
+                <h1 class="loadingText hidden" id="loadingText"></h1>
+                <div class="lBG"></div>
             </div>
-            <script>
-            document.getElementById('ftlcbtn-1').addEventListener('click', function () {
-                var selectedLanguage = document.getElementById('language').value;
-                var selectedTheme = document.getElementById('themeoption2').value;
-
-                var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
-                document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-                actuallySetLanguage();
-                checkLang();
-                document.querySelector('.ftlloading').style.display = 'flex';
-                backgroundfade(true);
-                setTheme(selectedTheme);
-            });
-            </script>
         </div>
-        <div class="contentcontainer" id="content2">
+        <div class="mainContent" id="content2">
             <div class="bg" id="homepage">
                 <div class="wrapper">
-                    <div class="maincontainer" id="maincontainer" style="display:flex;flex-direction: column;">
-                        <div id="tabsreal"style="display:flex;flex-direction: row;">
-                        <button class="tabbuttonclicked" id="dcbutton" onclick="changeMainCard('Discord');">Discord</button>
-                        <button class="tabbutton" id="abbutton" onclick="changeMainCard('About');" style="margin-left:10px;">My stuff</button>
-                        <!-- <button class="tabbutton" id="steambutton" style="align-self: baseline; margin-left:2%;" onclick="changeMainCard('Steam');">Steam</button> -->
-                        <button class="tabbutton" id="settingsbtn" style="margin-right:0;margin-left:auto;"></button>
-                        <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var normalmode1 = document.querySelector('#normalmode1');
-                            var normalmode2 = document.querySelector('#normalmode2');
-                            var normalmode3 = document.querySelector('#normalmode3');
-                            var toggleButton = document.getElementById('settingsbtn');
-                            var settingsPage = document.getElementById('settings');
-                            var tabContainer = document.getElementById('maincontainer');
-            
-                            settingsPage.style.display = 'none';
-            
-                            toggleButton.addEventListener('click', function () {
-                                tabContainer.style.display = 'none';
-                                normalmode1.style.display = 'none';
-                                normalmode2.style.display = 'none';
-                                normalmode3.style.display = 'none';
-                                toggleButton.style.display = 'none';
-                                settingsPage.style.display = 'block';
-                            });
-                        });
-                        </script>
+                    <div class="mainCardsContainer" id="mainCardsContainer"
+                        style="display:flex;flex-direction: column;">
+                        <div id="tabs"
+                            style="display:flex;flex-direction: row;">
+                            <button class="tabbuttonclicked" id="dcbutton"
+                                onclick="changeMainCard('Discord');">Discord</button>
+                            <button class="tabbutton" id="abbutton"
+                                onclick="changeMainCard('About');"
+                                style="margin-left:10px;">My stuff</button>
+                            <!-- <button class="tabbutton" id="steambutton" style="align-self: baseline; margin-left:2%;" onclick="changeMainCard('Steam');">Steam</button> -->
+                            <button class="tabbutton" id="settingsbtn"
+                                style="margin-right:0;margin-left:auto;"></button>
                         </div>
-                    <div class="card" id="normalmode" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
-                        <div class="corner top-left"></div>
-                        <div class="corner top-right"></div>
-                        <div class="corner bottom-left"></div>
-                        <div class="corner bottom-right"></div>
-                        <div class="side top"></div>
-                        <div class="side right"></div>
-                        <div class="side bottom"></div>
-                        <div class="side left"></div>
-                        <div class="card-title" id="discord-path"></div>
-                        <div class="user-profile">
-                            <div class="Profile-pic">
-                                <img id="pfp" src="assets/loader.gif" alt="">
-                                <div id="status-dot"></div>
-                            </div>
-                            <div class="user-info">
-                                <div id="username">Dexrn ZacAttack</div>
-                                <!--Dexrn: Do not localize this... this is a username!-->
-                                <div id="status"></div>
-                                <div id="status2"></div>
-                                <div id="status3"></div>
-                                <!-- <div id="status4"></div> -->
-                                <div class="connections">
-                                    <a title="YouTube" href="https://youtube.com/@DZac">
-                                        <img class="connection-icon" src="assets/icons/youtube.png" alt="YouTube">
-                                    </a>
-                                    <a title="Discord" href="https://discord.com/users/485504221781950465/">
-                                        <img class="connection-icon" src="assets/icons/discord.svg" alt="Discord">
-                                    </a>
-                                    <a title="GitHub" href="https://github.com/DexrnZacAttack/">
-                                        <img class="connection-icon" src="assets/icons/github.svg" alt="GitHub">
-                                    </a>
-                                    <a title="Twitter" href="https://twitter.com/DexrnZacAttack/">
-                                        <img class="connection-icon" src="assets/icons/twitter.png" alt="Twitter">
-                                    </a>
-                                    <a title="Steam" href="https://steamcommunity.com/id/Dexrn">
-                                        <img class="connection-icon2" src="assets/icons/steam.png" alt="Steam">
-                                    </a>
-                                    <a title="Archive.org" href="https://archive.org/details/@dexrnzacattack">
-                                        <img class="connection-icon2" src="assets/icons/archive.org.png" alt="Archive.org">
-                                    </a>
+                        <div class="card" id="mainCard"
+                            style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                            <div class="side top"></div>
+                            <div class="side right"></div>
+                            <div class="side bottom"></div>
+                            <div class="side left"></div>
+                            <div class="card-title" id="discord-path"></div>
+                            <div class="user-profile">
+                                <div class="Profile-pic">
+                                    <img id="pfp" src="assets/loader.gif" alt>
+                                    <div id="status-dot"></div>
+                                </div>
+                                <div class="user-info">
+                                    <div id="username">Dexrn ZacAttack</div>
+                                    <!--Dexrn: Do not localize this... this is a username!-->
+                                    <div id="status"></div>
+                                    <div id="status2"></div>
+                                    <div id="status3"></div>
+                                    <!-- <div id="status4"></div> -->
+                                    <div class="connections">
+                                        <a title="YouTube"
+                                            href="https://youtube.com/@DZac">
+                                            <img class="connection-icon"
+                                                src="assets/icons/youtube.png"
+                                                alt="YouTube">
+                                        </a>
+                                        <a title="Discord"
+                                            href="https://discord.com/users/485504221781950465/">
+                                            <img class="connection-icon"
+                                                src="assets/icons/discord.svg"
+                                                alt="Discord">
+                                        </a>
+                                        <a title="GitHub"
+                                            href="https://github.com/DexrnZacAttack/">
+                                            <img class="connection-icon"
+                                                src="assets/icons/github.svg"
+                                                alt="GitHub">
+                                        </a>
+                                        <a title="Twitter"
+                                            href="https://twitter.com/DexrnZacAttack/">
+                                            <img class="connection-icon"
+                                                src="assets/icons/twitter.png"
+                                                alt="Twitter">
+                                        </a>
+                                        <a title="Steam"
+                                            href="https://steamcommunity.com/id/Dexrn">
+                                            <img class="connection-icon2"
+                                                src="assets/icons/steam.png"
+                                                alt="Steam">
+                                        </a>
+                                        <a title="Archive.org"
+                                            href="https://archive.org/details/@dexrnzacattack">
+                                            <img class="connection-icon2"
+                                                src="assets/icons/archive.org.png"
+                                                alt="Archive.org">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card" id="steamcard" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
-                        <!--Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour-->
-                        <div class="card-title" id="steam-path"></div>
-                        <div class="activity-wrapper">
-                            <div class="activity-images">
-                                <img id="steampfp" src="assets/loader.gif">
-                            </div>
-                            <div class="activity-info">
-                                <div id="stmusername" class="username"></div>
-                                <div id="stmstatus"></div>
-                                <div id="stmcreatedate" class="graytxt">Member since July 13, 2017</div>
-                                <div id="lastPlayed"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" id="abmcard" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
-                        <div class="expandcard" style="text-align: center;">
-                            <h2>PC Specs</h2>
-                            <div class="details" style="text-align: center;">
-                                <h3>Components</h3>
-                                <p><b>CPU</b></p>
-                                <p><a href="https://www.amd.com/en/product/8456">Ryzen 5 3600</a></p>
-                                <p><b>GPU</b></p>
-                                <p><a href="https://www.amazon.com/EVGA-GeForce-08G-P5-3553-KR-Dual-Fan-Backplate/dp/B09QLCFNRV">Nvidia GeForce RTX 3050 (EVGA)</a></p>
-                                <p><b>Motherboard</b></p>
-                                <p><a href="https://www.asrock.com/mb/AMD/B550M%20Phantom%20Gaming%204/">ASRock B550M Phantom Gaming 4</a></p>
-                                <p><b>Memory</b></p>
-                                <p><a href="https://www.amazon.com/G-SKILL-Ripjaws-PC4-25600-3200MHz-F4-3200C16D-16GVKB/dp/B015FXXBW0">16GB GSkill RipJaws</a> @ 3200MHz</p>
-                                <p><a href="https://www.amazon.com/CORSAIR-Vengeance-2x8GB-2400MHz-Memory/dp/B00S51XHUQ">16GB Corsair Vengeance LPX</a> @ 3200MHz</p>
-                                <p>The Corsair RAM is meant to be 2400MHz but my motherboard let me XMP it to 3200MHz anyways lmao</p>
-                                <h3>Accessories</h3>
-                                <p><b>Monitor(s)</b></p>
-                                <p><a href="https://www.amazon.com/MSI-Non-Glare-FreeSync-Optix-MAG241C/dp/B07FB6SY6Z?th=1">MSI Optix MAG241C</a> (1920x1080 144hz)</p>
-                                <p><a href="https://www.amazon.com/HP-W2072a-20-Inch-LED-lit-Monitor/dp/B0085H66NU">HP W2072a</a> (1600x900 60hz)</p>
-                                <p><b>Audio</b></p>
-                                <p><a href="https://www.amazon.com/Blue-Microphone-Streaming-Podcasting-Play-Silver/dp/B002VA464S">Blue Yeti</a> Microphone</p>
-                                <p><a href="https://www.amazon.com/Razer-Kraken-7-1-Retractable-Noise-Cancelling/dp/B072DRCM1Q">Razer Kraken 7.1 V2</a> Headphones</p>
-                                <p><b>Input</b></p>
-                                <p><a href="https://www.amazon.com/Logitech-G502-Performance-Gaming-Mouse/dp/B07GBZ4Q68">Logitech G502</a> Mouse</p>
-                                <p><a href="https://www.amazon.com/Razer-Huntsman-Tournament-Tenkeyless-Keyboard/dp/B082J1961J">Razer Huntsman Tournament Edition</a> Keyboard</p>
+                        <div class="card" id="steamcard"
+                            style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
+                            <!--Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour-->
+                            <div class="card-title" id="steam-path"></div>
+                            <div class="activity-wrapper">
+                                <div class="activity-images">
+                                    <img id="steampfp" src="assets/loader.gif">
+                                </div>
+                                <div class="activity-info">
+                                    <div id="stmusername"
+                                        class="username"></div>
+                                    <div id="stmstatus"></div>
+                                    <div id="stmcreatedate"
+                                        class="graytxt">Member since July 13,
+                                        2017</div>
+                                    <div id="lastPlayed"></div>
+                                </div>
                             </div>
                         </div>
+                        <div class="card" id="stuffTab"
+                            style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
+                            <div class="expandcard" style="text-align: center;">
+                                <h2>PC Specs</h2>
+                                <div class="details"
+                                    style="text-align: center;">
+                                    <h3>Components</h3>
+                                    <p><b>CPU</b></p>
+                                    <p><a
+                                            href="https://www.amd.com/en/product/8456">Ryzen
+                                            5 3600</a></p>
+                                    <p><b>GPU</b></p>
+                                    <p><a
+                                            href="https://www.amazon.com/EVGA-GeForce-08G-P5-3553-KR-Dual-Fan-Backplate/dp/B09QLCFNRV">Nvidia
+                                            GeForce RTX 3050 (EVGA)</a></p>
+                                    <p><b>Motherboard</b></p>
+                                    <p><a
+                                            href="https://www.asrock.com/mb/AMD/B550M%20Phantom%20Gaming%204/">ASRock
+                                            B550M Phantom Gaming 4</a></p>
+                                    <p><b>Memory</b></p>
+                                    <p><a
+                                            href="https://www.amazon.com/G-SKILL-Ripjaws-PC4-25600-3200MHz-F4-3200C16D-16GVKB/dp/B015FXXBW0">16GB
+                                            GSkill RipJaws</a> @ 3200MHz</p>
+                                    <p><a
+                                            href="https://www.amazon.com/CORSAIR-Vengeance-2x8GB-2400MHz-Memory/dp/B00S51XHUQ">16GB
+                                            Corsair Vengeance LPX</a> @
+                                        3200MHz</p>
+                                    <p>The Corsair RAM is meant to be 2400MHz
+                                        but my motherboard let me XMP it to
+                                        3200MHz anyways lmao</p>
+                                    <h3>Accessories</h3>
+                                    <p><b>Monitor(s)</b></p>
+                                    <p><a
+                                            href="https://www.amazon.com/MSI-Non-Glare-FreeSync-Optix-MAG241C/dp/B07FB6SY6Z?th=1">MSI
+                                            Optix MAG241C</a> (1920x1080
+                                        144hz)</p>
+                                    <p><a
+                                            href="https://www.amazon.com/HP-W2072a-20-Inch-LED-lit-Monitor/dp/B0085H66NU">HP
+                                            W2072a</a> (1600x900 60hz)</p>
+                                    <p><b>Audio</b></p>
+                                    <p><a
+                                            href="https://www.amazon.com/Blue-Microphone-Streaming-Podcasting-Play-Silver/dp/B002VA464S">Blue
+                                            Yeti</a> Microphone</p>
+                                    <p><a
+                                            href="https://www.amazon.com/Razer-Kraken-7-1-Retractable-Noise-Cancelling/dp/B072DRCM1Q">Razer
+                                            Kraken 7.1 V2</a> Headphones</p>
+                                    <p><b>Input</b></p>
+                                    <p><a
+                                            href="https://www.amazon.com/Logitech-G502-Performance-Gaming-Mouse/dp/B07GBZ4Q68">Logitech
+                                            G502</a> Mouse</p>
+                                    <p><a
+                                            href="https://www.amazon.com/Razer-Huntsman-Tournament-Tenkeyless-Keyboard/dp/B082J1961J">Razer
+                                            Huntsman Tournament Edition</a>
+                                        Keyboard</p>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="/js/expandable.js"></script>
                     </div>
-                    <script src="/js/expandable.js"></script>
-                </div>
-                    <div class="activity card" id="normalmode1">
+                    <div class="activity card" id="activityCard">
                         <div class="card-title" id="activity-path"></div>
                         <div class="activity-wrapper">
                             <div class="activity-images">
-                                <img id="activity-big-image" src="assets/loader.gif" alt="">
-                                <img id="activity-small-image" src="assets/loader.gif" alt="">
-                                <img id="activity-small-image-alt" src="assets/loader.gif" alt="">
+                                <img id="activity-big-image"
+                                    src="assets/loader.gif" alt>
+                                <img id="activity-small-image"
+                                    src="assets/loader.gif" alt>
+                                <img id="activity-small-image-alt"
+                                    src="assets/loader.gif" alt>
                             </div>
                             <div class="activity-info">
                                 <div id="activity-name"></div>
@@ -235,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card" id="normalmode2">
+                    <div class="card" id="aboutCard">
                         <div class="card-title" id="about-path"></div>
                         <div class="about-me">
                             <ul>
@@ -244,47 +244,56 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card" id="normalmode3">
+                    <div class="card" id="linksCard">
                         <div class="card-title" id="stuff-path"></div>
                         <div class="about-me">
                             <div class="bio">
-                                <button class="button" linkto="QMGHeaderParser/index.html" id="mainbtn-1"></button>
-                                <button class="button" linkto="QMG/index.html" id="mainbtn-2"></button>
+                                <button class="button"
+                                    linkto="QMGHeaderParser/index.html"
+                                    id="mainbtn-1"></button>
+                                <button class="button" linkto="QMG/index.html"
+                                    id="mainbtn-2"></button>
                                 <!-- <button class="button" linkto="MM2D/index.html" id="mainbtn-3"></button> -->
                                 <!-- <button class="button" onclick='window.location.href = "https://DexrnZacAttack.github.io/404/";'>"I was bored"</button>  -->
                             </div>
                         </div>
                     </div>
                     <div id="settings" style="height: 350px;">
-                        <div class="topcard" style="cursor: pointer; width: 300px; margin-bottom: 8px;" id="settingsclose">
+                        <div class="topcard"
+                            style="cursor: pointer; width: 300px; margin-bottom: 8px;"
+                            id="settingsclose">
                             <div class="back" id="backbtn"></div>
                         </div>
-                        <div class="card" style="width: 300px; height: 350px;">
+                        <div class="card" style="width: 300px !important; height: 350px;">
                             <div class="card-title" id="settings-path"></div>
-                            <div class="options" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                            <div class="options"
+                                style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                                 <h3 id="languagetxt"></h3>
-                                <select id="language2" class="drpdwnbtn" name="language2">
+                                <select id="language2" class="drpdwnbtn"
+                                    name="language2">
                                     <option
                                         value="unselected"
                                         disabled
                                         selected
-                                        id="selopt"
-                                    ></option>
+                                        id="selopt"></option>
                                     <option value="en-US">English</option>
                                     <option value="zh-CN">中文</option>
                                 </select>
                                 <h3 id="themetxt"></h3>
-                                <select id="themeoption" class="drpdwnbtn" name="themeoption">
+                                <select id="themeoption" class="drpdwnbtn"
+                                    name="themeoption">
                                     <option
                                         value="unselectedtheme"
                                         disabled
                                         selected
-                                        id="selopt2"
-                                    ></option>
-                                    <option value="default-dark" id="darkthmopt"></option>
-                                    <option value="default-light" id="lightthmopt"></option>
+                                        id="selopt2"></option>
+                                    <option value="default-dark"
+                                        id="darkthmopt"></option>
+                                    <option value="default-light"
+                                        id="lightthmopt"></option>
                                 </select>
-                                <button class="buttonalt2" id="savebtn" style="position: absolute; bottom: 0;"></button>
+                                <button class="buttonalt2" id="savebtn"
+                                    style="position: absolute; bottom: 0;"></button>
                             </div>
                         </div>
                     </div>
@@ -309,43 +318,86 @@
                     });
                     </script>
                     <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var activityCard = document.querySelector('#activityCard');
+                            var aboutCard = document.querySelector('#aboutCard');
+                            var linksCard = document.querySelector('#linksCard');
+                            var abm = document.querySelector('#stuffTab');
+                            var toggleButton = document.getElementById('settingsbtn');
+                            var settingsPage = document.getElementById('settings');
+                            var tabContainer = document.getElementById('mainCardsContainer');
+            
+                            settingsPage.style.display = 'none';
+            
+                            toggleButton.addEventListener('click', function () {
+                                tabContainer.style.display = 'none';
+                                activityCard.style.display = 'none';
+                                aboutCard.style.display = 'none';
+                                linksCard.style.display = 'none';
+                                abm.style.display = 'none';
+                                toggleButton.style.display = 'none';
+                                settingsPage.style.display = 'block';
+                            });
+                        });
+                    </script>
+                    <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         var toggleButton = document.getElementById('settingsbtn');
-                        var normalmode = document.querySelector('#normalmode');
-                        var normalmode1 = document.querySelector('#normalmode1');
-                        var normalmode2 = document.querySelector('#normalmode2');
-                        var normalmode3 = document.querySelector('#normalmode3');
+                        var mainCard = document.querySelector('#mainCard');
+                        var activityCard = document.querySelector('#activityCard');
+                        var aboutCard = document.querySelector('#aboutCard');
+                        var linksCard = document.querySelector('#linksCard');
+                        var abm = document.querySelector('#stuffTab');
                         var closesettingsbtn = document.getElementById('settingsclose');
                         var settingsPage = document.getElementById('settings');
                         var tabButtons = document.getElementById('tabbutton');
-                        var tabContainer = document.getElementById('maincontainer');
+                        var tabContainer = document.getElementById('mainCardsContainer');
 
                         settingsPage.style.display = 'none';
 
                         closesettingsbtn.addEventListener('click', function () {
+                            curTab = curTab;
                             tabContainer.style.display = 'block';
-                            normalmode1.style.display = 'block';
-                            normalmode2.style.display = 'block';
-                            normalmode3.style.display = 'block';
+                            console.log("init curTab: " + curTab);
+                            if (curTab === 1) {
+                                console.log(1)
+                                activityCard.style.display = 'block';
+                                aboutCard.style.display = 'block';
+                                linksCard.style.display = 'block';
+                            } else if (curTab === 2) {
+                                console.log(2)
+                                abm.style.display = 'block';
+                            }
                             toggleButton.style.display = 'block';
                             settingsPage.style.display = 'none';
                         });
                         savebtn.addEventListener('click', function () {
+                            curTab = curTab;
                             tabContainer.style.display = 'block';
-                            normalmode1.style.display = 'block';
-                            normalmode2.style.display = 'block';
-                            normalmode3.style.display = 'block';
+                            console.log("init curTab: " + curTab);
+                            if (curTab === 1) {
+                                console.log(1)
+                                activityCard.style.display = 'block';
+                                aboutCard.style.display = 'block';
+                                linksCard.style.display = 'block';
+                            } else if (curTab === 2) {
+                                console.log(2)
+                                abm.style.display = 'block';
+                            }
                             toggleButton.style.display = 'block';
                             settingsPage.style.display = 'none';
                         });
                     });
                     </script>
                 </div>
+                <!-- Last update date -->
+                <p class="lastUpdated">03/10/2024</p>
             </div>
         </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->
         <div class="topright">
         </div>
-        <a rel="me" href="https://wetdry.world/@zach" style="display:none;">Mastodon</a>
+        <a rel="me" href="https://wetdry.world/@zach"
+            style="display:none;">Mastodon</a>
     </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
     <title>Dexrn's Hell Hole</title>
     <link id="theme" rel="stylesheet" href="">
+	<link id="theme" rel="stylesheet" href="/css/all.css">
     <script src="../js/settings.js"></script>
     <meta content="Dexrn's Hell Hole" property="og:title" />
     <meta content="What the FUCK am I doing" property="og:description" />
@@ -16,25 +17,23 @@
 </head>
 <body>
     <!-- 403 -->
-    <div class="loadingcontainer">
+    <div class="loadingScreen">
         <div class="loading">
-            <img id="loading-light" src="../assets/loader.gif">
-            <img id="loading-dark" src="../assets/loader-dark.gif">
-        </div>
-    </div>
-    <div class="contentcontainer"></div>
-    <div class="bg" id="homepage">
-        <div class="wrapper">
-            <div class="card">
-                <div class="card-title">@Dexrn > 403</div>
-                <div style="font-size:3vh; text-align:center" id="403msg">
+            <div class="wrapper">
+                <div class="card">
+                    <div class="card-title">@Dexrn > 403</div>
+                    <div style="font-size:3vh; text-align:center" id="403msg">
+                    </div>
+                    <center><button class="button" onclick="history.go(-1);" id="backbtn2"></button><button class="button" onclick='window.location.href = "../index.html";' id="homebtn"></button></center>
                 </div>
-                <center><button class="button" onclick="history.go(-1);" id="backbtn2"></button><button class="button" onclick='window.location.href = "../index.html";' id="homebtn"></button></center>
             </div>
         </div>
     </div>
+    <div class="mainContent"></div>
+    <div class="bg" id="homepage">
+    </div>
 </body>
 <script>
-	backgroundfade(true);
+	fadeBG(false);
 </script>
 </html>

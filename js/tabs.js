@@ -1,3 +1,5 @@
+let curTab;
+
 function changeMainCard(whatToChangeTo) {
 
 switch (whatToChangeTo) {
@@ -6,36 +8,38 @@ switch (whatToChangeTo) {
     //     console.log("Steam");
     //     document.getElementById('dcbutton').className = 'tabbutton';
     //     document.getElementById('steambutton').className = 'tabbuttonclicked';
-    //     document.getElementById('normalmode').style.display = 'none';
+    //     document.getElementById('mainCard').style.display = 'none';
     //     document.getElementById('steamcard').style.display = 'block';
     //     }
     //     break;
     case "Discord":
+        curTab = 1;
         if (document.getElementById('dcbutton').className !== 'tabbuttonclicked') {
         console.log("Discord");
         document.getElementById('dcbutton').className = 'tabbuttonclicked';
         // document.getElementById('steambutton').className = 'tabbutton';
         document.getElementById('abbutton').className = 'tabbutton';
-        document.getElementById('normalmode').style.display = 'block';
-        document.getElementById('normalmode1').style.display = 'block';
-        document.getElementById('normalmode2').style.display = 'block';
-        document.getElementById('normalmode3').style.display = 'block';
+        document.getElementById('mainCard').style.display = 'block';
+        document.getElementById('activityCard').style.display = 'block';
+        document.getElementById('aboutCard').style.display = 'block';
+        document.getElementById('linksCard').style.display = 'block';
         document.getElementById('steamcard').style.display = 'none';
-        document.getElementById('abmcard').style.display = 'none';
+        document.getElementById('stuffTab').style.display = 'none';
         }
         break;
     case "About":
+        curTab = 2;
         if (document.getElementById('abbutton').className !== 'tabbuttonclicked') {
-            console.log("Discord");
+            console.log("About");
             document.getElementById('abbutton').className = 'tabbuttonclicked';
             // document.getElementById('steambutton').className = 'tabbutton';
             document.getElementById('dcbutton').className = 'tabbutton';
-            document.getElementById('normalmode').style.display = 'none';
-            document.getElementById('normalmode1').style.display = 'none';
-            document.getElementById('normalmode2').style.display = 'none';
-            document.getElementById('normalmode3').style.display = 'none';
+            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('activityCard').style.display = 'none';
+            document.getElementById('aboutCard').style.display = 'none';
+            document.getElementById('linksCard').style.display = 'none';
             document.getElementById('steamcard').style.display = 'none';
-            document.getElementById('abmcard').style.display = 'block';
+            document.getElementById('stuffTab').style.display = 'block';
 
             }
             break;

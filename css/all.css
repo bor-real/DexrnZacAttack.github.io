@@ -1,5 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&family=Roboto:wght@100;300;400;500;700&display=swap");
 
+/* CONTROLS */
+.drpdwnbtn {
+  background-color: transparent;
+  backdrop-filter: blur(1000px);
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.tabbuttonclicked {
+  backdrop-filter: blur(3px);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 12px;
+  width: 12%;
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.button {
+  background-color: transparent;
+  backdrop-filter: blur(1000px);
+  transition: transform 0.3s ease;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.tabbutton {
+  backdrop-filter: blur(3px);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 12px;
+  width: 12%;
+  animation: 1s ease-out 0s 1 fadeIn;
+  cursor: pointer;
+}
+
+.buttonalt {
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(1000px);
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.buttonalt2 {
+  transition: transform 0.3s ease;
+  background-color: transparent;
+  border: none;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 1%;
+}
+
+.tabbuttonclicked {
+  z-index: 9999;
+}
+
+#settingsclose {
+  width: 300px !important;
+}
+
+@media (max-width: 575px) {
+  #tabs button {
+    width: 18%;
+  }
+}
+
 @font-face { 
   font-family: 'Minecraft';
   src: url('/assets/minecraft.woff') format('woff');
@@ -22,15 +110,16 @@
 .topcard {
   /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
   border-radius: 10px;
   padding: 12px;
   width: 55%;
   animation: 1s ease-out 0s 1 fadeIn;
 }
 
+
+
 @media (min-width: 2559px) and (min-height: 1439px) {
-    .card, .maincontainer, .topcard{
+    .card, .mainCardsContainer, .topcard {
         width: 70% !important;
         height: 70% !important;
     }
@@ -53,7 +142,7 @@
         height: 80px !important;
     }
 
-    #normalmode, #abmcard {
+    #mainCard, #stuffTab {
         width: 100% !important;
     }
 
@@ -85,7 +174,7 @@
 *::before {
   box-sizing: border-box;
 }
-.maincontainer {
+.mainCardsContainer {
   border-radius: 10px;
   border: none;
   padding: 0px;
@@ -104,94 +193,20 @@
   background: none;
 }
 
-.tabbutton {
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border: none;
-  padding: 12px;
-  width: 12%;
-  animation: 1s ease-out 0s 1 fadeIn;
-  cursor: pointer;
+.lastUpdated {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  color:rgba(255,255,255,0.1);
 }
 
-.buttonalt {
-  transition: transform 0.3s ease;
-  backdrop-filter: blur(1000px);
-  -webkit-backdrop-filter: blur(1000px);
-  border: none;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 1%;
-}
-
-.buttonalt2 {
-  transition: transform 0.3s ease;
-  background-color: transparent;
-  backdrop-filter: blur(1000px);
-  -webkit-backdrop-filter: blur(1000px);
-  border: none;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 1%;
-}
-
-.drpdwnbtn {
-  background-color: transparent;
-  backdrop-filter: blur(1000px);
-  -webkit-backdrop-filter: blur(1000px);
-  border: none;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 1%;
-}
-
-.tabbuttonclicked {
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border: none;
-  padding: 12px;
-  width: 12%;
-  animation: 1s ease-out 0s 1 fadeIn;
-}
 
 .about-me {
   margin-left: 2%;
 }
 
-.button {
-  background-color: transparent;
-  backdrop-filter: blur(1000px);
-  -webkit-backdrop-filter: blur(1000px);
-  border: none;
-  transition: transform 0.3s ease;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 1%;
-}
+
 
 .bg {
   background-size: cover;
@@ -207,7 +222,7 @@ a {
     text-decoration: none;
 }
 
-.loadingcontainer .loading {
+.loadingScreen .loading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,12 +238,13 @@ a {
 }
 
 @media (max-width: 1000px) {
-  .card {
-    width: 98%;
+
+  .card, .mainCardsContainer, .topcard {
+    width: 98% !important;
   }
 
-  .maincontainer {
-    width: 98%;
+  #mainCard, #stuffTab {
+    width: 100% !important;
   }
 
   .heading {
@@ -240,13 +256,12 @@ a {
     display: none;
   }
 
-@media (min-width: 1001px) and (max-width: 1100px) {
-  .card {
-    width: 75%;
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .card, .mainCardsContainer, .topcard {
+    width: 75% !important;
   }
-
-  .maincontainer {
-    width: 75%;
+  #mainCard, #stuffTab {
+    width: 100% !important;
   }
 
   .heading {
@@ -272,7 +287,7 @@ a {
 }
 
 @media (max-width: 1100px) {
-  #normalmode {
+  #mainCard {
     background-image: none;
   }
 }
@@ -284,13 +299,13 @@ a {
 }
 
 @media (max-height: 665px) {
-  #normalmode2 {
+  #aboutCard {
     display: none;
   }
 }
 
 @media (max-height: 450px) {
-  #normalmode1 {
+  #activityCard {
     display: none;
   }
 }
@@ -312,8 +327,6 @@ a {
 
 .button2 {
   backdrop-filter: blur(1000px);
-  -webkit-backdrop-filter: blur(1000px);
-  border: none;
   padding: 12px 20px;
   text-align: center;
   text-decoration: none;
@@ -387,11 +400,11 @@ a {
   cursor: pointer;
 }
 
-.loadingtext {
+.loadingText {
   animation: 1s ease-out 0s 1 fadeIn;
 }
 
-.loadingcontainer {
+.loadingScreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -432,10 +445,10 @@ a {
 }
 
 .card {
+  /* Another example of Apple's WebShit engine being fucky, if I use -webkit-backdrop-filter, the background of anything that uses it will freeze (as in the background won't move behind it) until the screen is updated (e.g scolled or tapped)
+  "Oh no what will I do" you might ask... we're just NOT GOING TO USE IT */
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
   border-radius: 10px;
-  border: none;
   padding: 12px;
   width: 50%;
   animation: 1s ease-out 0s 1 fadeIn;
@@ -455,12 +468,12 @@ body {
 }
 
 
-.loadingcontainer {
+.loadingScreen {
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-#normalmode {
+#mainCard {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;

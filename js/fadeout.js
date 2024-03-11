@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleClick(button) {
     const delay = 350;
-    const loadingContainer = document.querySelector(".loadingcontainer");
+    const loadingScreen = document.querySelector(".loadingScreen");
 
-    loadingContainer.style.display = "flex";
+    loadingScreen.style.display = "flex";
     fade(background);
     setTimeout(() => {
       const targetURL = button.getAttribute("linkto");
