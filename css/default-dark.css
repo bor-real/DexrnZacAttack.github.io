@@ -242,12 +242,7 @@ body {
   background-color: transparent;
 }
 
-#status-dot {
-  background-color: #fff;
-  border: 2px solid rgba(15, 15, 15, 0.3);
-}
-
-#activity-small-image {
+#activityImageSmall {
   border: 2px solid rgba(15, 15, 15, 0.3);
 }
 

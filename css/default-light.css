@@ -216,8 +216,7 @@ a:hover {
 }
 
 .expandcard {
-  border: 2px solid rgba(200, 200, 200, 0.2);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(255, 255, 255, 0.5);
   color: black;
 }
@@ -232,12 +231,8 @@ a:hover {
   background-color: transparent;
 }
 
-#status-dot {
-  background-color: #fff;
-  border: 2px solid rgba(15, 15, 15, 0.3);
-}
 
-#activity-small-image {
+#activityImageSmall {
   border: 2px solid rgba(15, 15, 15, 0.3);
 }
 

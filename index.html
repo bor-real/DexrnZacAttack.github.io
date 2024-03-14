@@ -3,7 +3,7 @@
     <head>
         <title>Dexrn's Hell Hole</title>
         <link id="theme" rel="stylesheet" href>
-        <link id="theme" rel="stylesheet" href="css/all.css">
+        <link id="theme" rel="stylesheet" href="/css/all.css">
         <script src="/js/settings.js"></script>
         <meta charset="utf-8">
         <script defer src="js/lanyard.js"></script>
@@ -52,13 +52,14 @@
     <body>
         <div class="loadingScreen" id="loadingScreen">
             <div class="loading">
-                <img id="lightLSpinner" src="assets/loader.gif">
-                <img id="darkLSpinner" src="assets/loader-dark.gif">
+                <img id="lightLSpinner" src="assets/loader.gif" alt="Loading...">
+                <img id="darkLSpinner" src="assets/loader-dark.gif" alt="Loading...">
                 <h1 class="loadingText hidden" id="loadingText"></h1>
                 <div class="lBG"></div>
             </div>
         </div>
         <div class="mainContent" id="content2">
+            <!--TODO: reduce the amount of containers -->
             <div class="bg" id="homepage">
                 <div class="wrapper">
                     <div class="mainCardsContainer" id="mainCardsContainer"
@@ -76,27 +77,16 @@
                         </div>
                         <div class="card" id="mainCard"
                             style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
-                            <div class="corner top-left"></div>
-                            <div class="corner top-right"></div>
-                            <div class="corner bottom-left"></div>
-                            <div class="corner bottom-right"></div>
-                            <div class="side top"></div>
-                            <div class="side right"></div>
-                            <div class="side bottom"></div>
-                            <div class="side left"></div>
-                            <div class="card-title" id="discord-path"></div>
+                            <div class="cardTitle" id="discord-path"></div>
                             <div class="user-profile">
                                 <div class="Profile-pic">
                                     <img id="pfp" src="assets/loader.gif" alt>
-                                    <div id="status-dot"></div>
                                 </div>
                                 <div class="user-info">
                                     <div id="username">Dexrn ZacAttack</div>
-                                    <!--Dexrn: Do not localize this... this is a username!-->
-                                    <div id="status"></div>
-                                    <div id="status2"></div>
-                                    <div id="status3"></div>
-                                    <!-- <div id="status4"></div> -->
+                                    <div id="customStatus"></div>
+                                    <div id="onlineState"></div>
+                                    <div id="platforms"></div>
                                     <div class="connections">
                                         <a title="YouTube"
                                             href="https://youtube.com/@DZac">
@@ -138,15 +128,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" id="steamcard"
+                        <!---
+                            Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour 
+                            <div class="card" id="steamcard"
                             style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
-                            <!--Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour-->
-                            <div class="card-title" id="steam-path"></div>
-                            <div class="activity-wrapper">
-                                <div class="activity-images">
+                            <div class="cardTitle" id="steam-path"></div>
+                            <div class="activities">
+                                <div class="activityImages">
                                     <img id="steampfp" src="assets/loader.gif">
                                 </div>
-                                <div class="activity-info">
+                                <div class="activityInfo">
                                     <div id="stmusername"
                                         class="username"></div>
                                     <div id="stmstatus"></div>
@@ -156,7 +147,7 @@
                                     <div id="lastPlayed"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --->
                         <div class="card" id="stuffTab"
                             style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
                             <div class="expandcard" style="text-align: center;">
@@ -217,26 +208,26 @@
                         <script src="/js/expandable.js"></script>
                     </div>
                     <div class="activity card" id="activityCard">
-                        <div class="card-title" id="activity-path"></div>
-                        <div class="activity-wrapper">
-                            <div class="activity-images">
-                                <img id="activity-big-image"
+                        <div class="cardTitle" id="activity-path"></div>
+                        <div class="activities">
+                            <div class="activityImages">
+                                <img id="activityImageBig"
                                     src="assets/loader.gif" alt>
-                                <img id="activity-small-image"
+                                <img id="activityImageSmall"
                                     src="assets/loader.gif" alt>
-                                <img id="activity-small-image-alt"
+                                <img id="activityAlternateImageSmall"
                                     src="assets/loader.gif" alt>
                             </div>
-                            <div class="activity-info">
-                                <div id="activity-name"></div>
-                                <div id="activity-state"></div>
-                                <div id="activity-detail"></div>
-                                <div id="activity-elapsed"></div>
+                            <div class="activityInfo">
+                                <div id="activityName"></div>
+                                <div id="activityState"></div>
+                                <div id="activityDetail"></div>
+                                <div id="activityTimeElapsed"></div>
                             </div>
                         </div>
                     </div>
                     <div class="card" id="aboutCard">
-                        <div class="card-title" id="about-path"></div>
+                        <div class="cardTitle" id="about-path"></div>
                         <div class="about-me">
                             <ul>
                                 <li id="abm-1"></li>
@@ -245,7 +236,7 @@
                         </div>
                     </div>
                     <div class="card" id="linksCard">
-                        <div class="card-title" id="stuff-path"></div>
+                        <div class="cardTitle" id="stuff-path"></div>
                         <div class="about-me">
                             <div class="bio">
                                 <button class="button"
@@ -265,7 +256,7 @@
                             <div class="back" id="backbtn"></div>
                         </div>
                         <div class="card" style="width: 300px !important; height: 350px;">
-                            <div class="card-title" id="settings-path"></div>
+                            <div class="cardTitle" id="settings-path"></div>
                             <div class="options"
                                 style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                                 <h3 id="languagetxt"></h3>
@@ -391,7 +382,8 @@
                     </script>
                 </div>
                 <!-- Last update date -->
-                <p class="lastUpdated">03/10/2024 (v1.2.22)</p>
+                <p class="lastUpdated" id="lastUpdated"></p>
+                <script src="/js/ver.js"></script>
             </div>
         </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->

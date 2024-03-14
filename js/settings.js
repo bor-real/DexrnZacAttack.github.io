@@ -96,10 +96,10 @@ function setLang(langFilePath) {
     .then((response) => response.json())
     .then((data) => {
       checkIfExists("loadingText", data.LoadingText);
-      checkIfExists("status2", data.Status2);
-      checkIfExists("activity-name", data.ActivityName);
-      checkIfExists("activity-state", data.ActivityState);
-      checkIfExists("activity-detail", data.ActivityDetail);
+      checkIfExists("onlineState", data.Status2);
+      checkIfExists("activityName", data.ActivityName);
+      checkIfExists("activityState", data.ActivityState);
+      checkIfExists("activityDetail", data.ActivityDetail);
       checkIfExists("activity-path", data.ActivityPath);
       checkIfExists("discord-path", data.DiscordPath);
       checkIfExists("steam-path", data.SteamPath);

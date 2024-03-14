@@ -15,7 +15,7 @@
 }
 
 .tabbuttonclicked {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(30px);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding: 12px;
@@ -38,7 +38,7 @@
 }
 
 .tabbutton {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(30px);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding: 12px;
@@ -88,17 +88,18 @@
   }
 }
 
-@font-face { 
+/* @font-face { 
   font-family: 'Minecraft';
   src: url('/assets/minecraft.woff') format('woff');
   }
-  
+   */
 #pfp {
   width: 128px;
   height: 128px;
   transition: box-shadow 0.3s ease, border 0.3s ease;
   border-radius: 10%;
 }
+
 
 #steampfp {
   width: 128px;
@@ -109,7 +110,7 @@
 
 .topcard {
   /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(30px);
   border-radius: 10px;
   padding: 12px;
   width: 55%;
@@ -124,7 +125,7 @@
         height: 70% !important;
     }
 
-    a, h1, h2, h3, h4, h5, h6, p, body, .card-title {
+    a, h1, h2, h3, h4, h5, h6, p, body, .cardTitle {
         font-size: 125% !important;
     }
 
@@ -132,12 +133,12 @@
         font-size: 100% !important;
     }
 
-    #pfp, .Profile-pic, #activity-big-image, .activity-images {
+    #pfp, .Profile-pic, #activityImageBig, .activityImages {
         width: 256px !important;
         height: 256px !important;
     }
 
-    #activity-small-image {
+    #activityImageSmall {
         width: 80px !important;
         height: 80px !important;
     }
@@ -174,6 +175,7 @@
 *::before {
   box-sizing: border-box;
 }
+
 .mainCardsContainer {
   border-radius: 10px;
   border: none;
@@ -338,7 +340,7 @@ a {
   transition: transform 0.3s ease;
 }
 
-.card-title {
+.cardTitle {
   font-size: 12px;
   font-weight: thin;
   margin-bottom: 16px;
@@ -371,21 +373,12 @@ a {
   position: relative;
 }
 
-#status2,
-#status {
+#onlineState,
+#customStatus {
   opacity: 0.5;
   transition: all 0.6s ease;
 }
 
-#status-dot {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  transform: translate(50%, -50%);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-}
 
 .bottomright {
   position: fixed;
@@ -444,10 +437,15 @@ a {
   width: 100%;
 }
 
+#stuffTab {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 .card {
   /* Another example of Apple's WebShit engine being fucky, if I use -webkit-backdrop-filter, the background of anything that uses it will freeze (as in the background won't move behind it) until the screen is updated (e.g scolled or tapped)
   "Oh no what will I do" you might ask... we're just NOT GOING TO USE IT */
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(30px);
   border-radius: 10px;
   padding: 12px;
   width: 50%;
@@ -488,30 +486,30 @@ body {
   opacity: 0.7;
 }
 
-#activity-small-image-alt {
+#activityAlternateImageSmall {
   width: 128px;
   height: 128px;
   border-radius: 10%;
 }
 
-#activity-name {
+#activityName {
   font-size: 25px;
   font-weight: bold;
   margin-left: 15px;
 }
 
-#activity-state {
+#activityState {
   font-size: 20px;
   opacity: 0.7;
   margin-left: 15px;
 }
 
-#activity-detail {
+#activityDetail {
   opacity: 0.5;
   margin-left: 15px;
 }
 
-#activity-elapsed {
+#activityTimeElapsed {
   opacity: 0.7;
   margin-left: 15px;
 }
@@ -585,27 +583,27 @@ li {
   width: 5px;
 }
 
-.activity-wrapper {
+.activities {
   display: flex;
   gap: 8px;
   width: 100%;
 }
 
-.activity-info {
+.activityInfo {
   width: 100%;
 }
 
-.activity-images {
+.activityImages {
   position: relative;
 }
 
-#activity-big-image {
+#activityImageBig {
   width: 128px;
   height: 128px;
   border-radius: 10%;
 }
 
-#activity-small-image {
+#activityImageSmall {
   border-radius: 50%;
   width: 40px;
   height: 40px;

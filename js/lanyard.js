@@ -13,20 +13,17 @@ function DexrnsFunnyLogger(message) {
 const API_URL = "https://api.lanyard.rest/v1";
 const USERID = "485504221781950465";
 const pfp = document.getElementById("pfp");
-// const pfp2 = document.getElementById('pfp2');
-const status = document.getElementById("status");
-const statusDot = document.getElementById("status-dot");
-const status2 = document.getElementById("status2");
-const status3 = document.getElementById("status3");
-// const status4 = document.getElementById('status4');
+const customStatus = document.getElementById("customStatus");
+const onlineState = document.getElementById("onlineState");
+const platforms = document.getElementById("platforms");
 const username = document.getElementById("username");
-const bigImage = document.getElementById("activity-big-image");
-const smallImage = document.getElementById("activity-small-image");
-const name = document.getElementById("activity-name");
-const smallImageAlt = document.getElementById("activity-small-image-alt");
-const state = document.getElementById("activity-state");
-const details = document.getElementById("activity-detail");
-const elapsed = document.getElementById("activity-elapsed");
+const bigImage = document.getElementById("activityImageBig");
+const smallImage = document.getElementById("activityImageSmall");
+const name = document.getElementById("activityName");
+const smallImageAlt = document.getElementById("activityAlternateImageSmall");
+const state = document.getElementById("activityState");
+const details = document.getElementById("activityDetail");
+const elapsed = document.getElementById("activityTimeElapsed");
 // Dexrn -----
 // It is currently 10:09 PM as I am writing this.
 // Wanted to have more info about my Discord status on the website.
@@ -128,52 +125,52 @@ async function setAvatarFrame() {
   switch (discord_status) {
     case "online":
       DexrnsFunnyLogger("Online");
-      statusDot.style.background = "#3ba45d";
-      status2.innerText = localizedText.lyonline;
-      statusDot.title = localizedText.lyonline;
+      // statusDot.style.background = "#3ba45d";
+      onlineState.innerText = localizedText.lyonline;
+      // statusDot.title = localizedText.lyonline;
       pfp.style.border = "2px solid #3ba45d";
       pfp.style.boxShadow = "0 0 20px #3ba45d";
-      status2.style.cssText = "color: #3ba45d; opacity: 1;";
-      status3.style.cssText = "color: #3ba45d; opacity: 1;";
+      onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
+      platforms.style.cssText = "color: #3ba45d; opacity: 1;";
       break;
     case "dnd":
       DexrnsFunnyLogger("DND (Do not disturb)");
-      statusDot.style.background = "#ed4245";
+      // statusDot.style.background = "#ed4245";
       pfp.style.border = "2px solid #ed4245";
       pfp.style.boxShadow = "0 0 20px #ed4245";
-      statusDot.title = localizedText.lydnd;
-      status2.innerText = localizedText.lydnd;
-      status2.style.cssText = "color: #ed4245; opacity: 1;";
-      status3.style.cssText = "color: #ed4245; opacity: 1;";
+      // statusDot.title = localizedText.lydnd;
+      onlineState.innerText = localizedText.lydnd;
+      onlineState.style.cssText = "color: #ed4245; opacity: 1;";
+      platforms.style.cssText = "color: #ed4245; opacity: 1;";
       break;
     case "idle":
       DexrnsFunnyLogger("Idle");
-      statusDot.style.background = "#faa81a";
-      statusDot.title = localizedText.lyidle;
-      status2.innerText = localizedText.lyidle;
+      // statusDot.style.background = "#faa81a";
+      // statusDot.title = localizedText.lyidle;
+      onlineState.innerText = localizedText.lyidle;
       pfp.style.border = "2px solid #faa81a";
       pfp.style.boxShadow = "0 0 20px #faa81a";
-      status2.style.cssText = "color: #faa81a; opacity: 1;";
-      status3.style.cssText = "color: #faa81a; opacity: 1;";
+      onlineState.style.cssText = "color: #faa81a; opacity: 1;";
+      platforms.style.cssText = "color: #faa81a; opacity: 1;";
       break;
     case "offline":
       DexrnsFunnyLogger("Offline");
-      statusDot.style.background = "#747e8c";
-      statusDot.title = localizedText.lyoffline;
-      status2.innerText = localizedText.lyoffline;
+      // statusDot.style.background = "#747e8c";
+      // statusDot.title = localizedText.lyoffline;
+      onlineState.innerText = localizedText.lyoffline;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
-      status2.style.cssText = "color: unset; opacity: 0.5;";
+      onlineState.style.cssText = "color: unset; opacity: 0.5;";
       disc_isOffline = true;
       break;
     default:
       DexrnsFunnyLogger("Unknown (default)");
-      statusDot.style.background = "#747e8c";
-      statusDot.title = localizedText.lyunknown;
-      status2.innerText = localizedText.lyunknown;
+      // statusDot.style.background = "#747e8c";
+      // statusDot.title = localizedText.lyunknown;
+      onlineState.innerText = localizedText.lyunknown;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
-      status2.style.cssText = "color: unset; opacity: 0.5;";
+      onlineState.style.cssText = "color: unset; opacity: 0.5;";
       disc_isOffline = true;
   }
 
@@ -199,13 +196,9 @@ async function setAvatarFrame() {
 
   if (disc_isOffline != true)
     // Dexrn: Best way I could think of doing it.
-    status3.innerText = `${localizedText.lypin}${disc_platform}`;
+    platforms.innerText = `${localizedText.lypin}${disc_platform}`;
 }
 
-// Dexrn: Maybe I'll get this working one day.
-/* if (custom) {
-    status4.innerHTML = `Custom Status: ${custom}`
-} */
 
 async function setStatus() {
   const {
@@ -222,7 +215,7 @@ async function setStatus() {
     if (activityOfType4) {
       const { state } = activityOfType4;
       if (state) {
-        status.innerHTML = `${state}`;
+        customStatus.innerHTML = `${state}`;
       }
     }
   }
@@ -335,7 +328,7 @@ async function setTimestamp() {
   try {
   const created = mostRecent.timestamps.start;
   } catch {
-    // stop yelling at me :(
+    // stop yelling at me ;(
   }
   try {
     const current = new Date().getTime();
