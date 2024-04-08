@@ -26,6 +26,7 @@ SOFTWARE.
     <title>Dexrn's Hell Hole > Legacy Console Edition file extractor</title>
     <link id="theme" rel="stylesheet" href="" />
     <link id="theme" rel="stylesheet" href="/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako_inflate.min.js"></script>
     <script src="../js/settings.js"></script>
     <meta content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor" property="og:title" />
     <meta content="LCE Savegame extractor" property="og:description" />
@@ -65,6 +66,19 @@ SOFTWARE.
           <div class="cardTitle" id="lcee-path"></div>
           <h3>This is unfinished ATM UX/UI wise, but functionally it's basically finished minus a few things.</h3>
           <div class="center">
+            <script>
+              let i = 0;
+              function incrementI() {
+                // only thing I could think to name it...
+                if (i > 0) {
+                  i = 0;
+                } else {
+                  i++;
+                }
+                switchCompressionMode(i);
+              }
+            </script>
+            <button class="button" id="CompModeBtn" onclick="incrementI();">Compression Mode: None</button>
             <label for="fileInput" class="button2" id="lcefileselectbtn"></label>
             <input
               type="file"

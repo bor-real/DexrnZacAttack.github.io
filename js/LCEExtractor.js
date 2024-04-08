@@ -60,8 +60,28 @@ document.addEventListener("drop", (e) => {
 });
 
 let fuck = 0;
+let compressionMode = "none";
+
+function switchCompressionMode(mode) {
+    
+    switch (mode) {
+        case 0:
+            document.getElementById('CompModeBtn').innerText = "Compression Mode: None";
+            compressionMode = "none";
+            break;
+        case 1:
+            document.getElementById('CompModeBtn').innerText = "Compression Mode: ZLib";
+            compressionMode = "ZLib"
+            break;
+    }
+}
 
 function readFile(data) {
+    if (compressionMode == "ZLib") {
+        data = data.slice(8);
+        data = pako.inflate(data);
+    }
+
     // there is no error handling LMAO
     let offset = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
     let count = (data[4] << 24) | (data[5] << 16) | (data[6] << 8) | data[7];

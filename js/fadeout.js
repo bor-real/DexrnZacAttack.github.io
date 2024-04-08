@@ -27,7 +27,7 @@ SOFTWARE.
 // You can probably see what the AI made and what I made.
 
 document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".button");
+  const buttons = document.querySelectorAll(".buttonRedirect");
   const backbutton = document.querySelector("#back");
   const background = document.querySelector(".bg");
   const topright = document.querySelector(".topright");
