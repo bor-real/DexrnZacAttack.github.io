@@ -23,21 +23,17 @@ SOFTWARE.
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Dexrn's Hell Hole > QMG Header Parser</title>
+    <title>Dexrn's Hell Hole > Legacy Console Edition file extractor</title>
     <link id="theme" rel="stylesheet" href="" />
     <link id="theme" rel="stylesheet" href="/css/all.css">
     <script src="../js/settings.js"></script>
-    <meta content="Dexrn's Hell Hole > QMG Header Parser" property="og:title" />
-    <meta content="QMG Header Parser" property="og:description" />
+    <meta content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor" property="og:title" />
+    <meta content="LCE Savegame extractor" property="og:description" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
-    <meta
-      content="https://github.com/DexrnZacAttack/QmageDecoder/blob/main/QMGDecoderIcon.png?raw=true"
-      property="og:image"
-    />
     <meta content="#0078D7" data-react-helmet="true" name="theme-color" />
     <meta charset="utf-8" />
-    <meta name="description" content="QMG Header Parser" />
+    <meta name="description" content="Legacy Console Edition savegame extractor" />
     <link
       rel="icon"
       type="image/x-icon"
@@ -66,17 +62,18 @@ SOFTWARE.
           <div class="back" id="backbtn"></div>
         </div>
         <div class="card" style="width: 55%; height: 500px">
-          <div class="cardTitle" id="qmghp-path"></div>
+          <div class="cardTitle" id="lcee-path"></div>
+          <h3>This is unfinished ATM UX/UI wise, but functionally it's basically finished minus a few things.</h3>
           <div class="center">
-            <label for="fileInput" class="button2" id="fileselectbtn"></label>
+            <label for="fileInput" class="button2" id="lcefileselectbtn"></label>
             <input
               type="file"
               id="fileInput"
-              accept=".qmg, .spi, .spr, .bmp"
               style="display: none"
             />
           </div>
           <pre id="output"></pre>
+          <div id="files"></div>
         </div>
         <!-- <div class="card" id="headercard">
         <pre id="header"></pre>
@@ -86,7 +83,7 @@ SOFTWARE.
       <p class="lastUpdated" id="lastUpdated"></p>
       <script src="/js/ver.js"></script>
     </div>
-    <script src="../js/QMGParser.js"></script>
+    <script src="../js/LCEExtractor.js"></script>
     <script>
       fadeBG(true);
     </script>
