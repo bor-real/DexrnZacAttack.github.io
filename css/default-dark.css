@@ -221,6 +221,20 @@ body {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.6);
 }
 
+#files {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+}
+
+.LCEFolder {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+}
+
 .hidden {
   display: none;
 }

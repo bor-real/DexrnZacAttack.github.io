@@ -15,7 +15,7 @@
     "BackButton": "<-- Back",
     "QMGHeaderParserPath": "@Dexrn > QMG Header Parser",
     "LCEExtractorPath": "@Dexrn > LCE Save Extractor",
-    "LCEFileSelectButton": "Select a save (must be decompressed!)",
+    "LCEFileSelectButton": "Select a save",
     "FileSelectButton": "Select a .qmg File",
     "QMGHPOutputText": "Please select a file.",
     "SettingsSaveButton": "Save",

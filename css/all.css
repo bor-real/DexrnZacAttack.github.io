@@ -170,6 +170,12 @@
   text-decoration: none !important;
 }
 
+#files {
+  max-height: 320px;
+  overflow-y: auto;
+  display: none;
+}
+
 *,
 *::after,
 *::before {
