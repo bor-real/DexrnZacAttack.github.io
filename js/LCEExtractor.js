@@ -66,7 +66,7 @@ function switchCompressionMode(mode) {
       endianness = "big";
       break;
     case 1:
-      document.getElementById("CompModeBtn").innerText = "Save type: Switch";
+      document.getElementById("CompModeBtn").innerText = "Save type: Switch, PS4";
       endianness = "little";
       break;
   }

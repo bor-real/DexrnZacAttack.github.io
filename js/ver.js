@@ -21,6 +21,6 @@ SOFTWARE.
 */
 
 updDate = "04/08/2024"
-verString = "v1.2.50"
+verString = "v1.2.51"
 
 document.getElementById('lastUpdated').innerText = `${updDate} (${verString})`
