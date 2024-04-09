@@ -27,13 +27,22 @@ SOFTWARE.
 // You can probably see what the AI made and what I made.
 
 document.addEventListener("DOMContentLoaded", function () {
+  /** @type {NodeListOf<HTMLButtonElement>} */
   const buttons = document.querySelectorAll(".buttonRedirect");
+  /** @type {HTMLDivElement} */
   const backbutton = document.querySelector("#back");
+  /** @type {HTMLDivElement} */
   const background = document.querySelector(".bg");
+  /** @type {HTMLDivElement} */
   const topright = document.querySelector(".topright");
 
+  /**
+   * @param {HTMLButtonElement | HTMLDivElement} button
+   * @returns {void}
+   */
   function handleClick(button) {
     const delay = 350;
+    /** @type {HTMLDivElement} */
     const loadingScreen = document.querySelector(".loadingScreen");
 
     loadingScreen.style.display = "flex";
@@ -58,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+/**
+ * @param {HTMLDivElement} element
+ * @returns {void}
+ */
 function fade(element) {
   if (element) {
     let opacity = 1;
@@ -68,7 +81,7 @@ function fade(element) {
         clearInterval(timer);
         element.style.display = "none";
       }
-      element.style.opacity = opacity;
+      element.style.opacity = `${opacity}`;
       opacity -= 1 / (duration / interval);
     }, interval);
   }

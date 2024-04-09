@@ -22,17 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/** @type {"big" | "little"} */
 let endianness;
 let littleEndian;
 
-document.getElementById("fileInput").addEventListener("change", onFileSelected);
+/** @type {HTMLInputElement} */ (document.getElementById("fileInput")).addEventListener("change", onFileSelected);
 
+/**
+ * @this {HTMLInputElement}
+ * @param {Event} event
+ * @returns {void}
+ */
 function onFileSelected(event) {
-  const file = event.target.files[0];
+  const file = /** @type {typeof this} */ (event.target).files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const data = new Uint8Array(event.target.result);
+      const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
       readFile(data);
     };
     reader.readAsArrayBuffer(file);
@@ -49,7 +55,7 @@ document.addEventListener("drop", (e) => {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const data = new Uint8Array(event.target.result);
+      const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
       readFile(data);
     };
     reader.readAsArrayBuffer(file);
@@ -59,6 +65,10 @@ document.addEventListener("drop", (e) => {
 let fuck = 0;
 let compressionMode = "none";
 
+/**
+ * @param {0 | 1} mode
+ * @returns {void}
+ */
 function switchCompressionMode(mode) {
   switch (mode) {
     case 0:
@@ -72,6 +82,10 @@ function switchCompressionMode(mode) {
   }
 }
 
+/**
+ * @param {Uint8Array} data
+ * @returns {void}
+ */
 function readFile(data) {
   try {
     document.getElementById("output").textContent = "";
@@ -88,7 +102,7 @@ function readFile(data) {
     }
 
     try {
-      dataToDecompress = data.slice(8);
+      let dataToDecompress = data.slice(8);
       if (endianness == "little") {
         decompressedData = pako.inflate(dataToDecompress, { endian: "little" });
       } else {
@@ -181,7 +195,7 @@ function readFile(data) {
       document.getElementById("files").style.display = "block";
     }
   } catch (e) {
-    document.getElementById("output").textContent = e;
+    document.getElementById("output").textContent = `${e}`;
     console.error(e);
   }
 }

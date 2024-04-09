@@ -20,8 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/**
+ * @param {SnazzahAPI} steamData
+ * @returns {void}
+ */
 function updateSteamInfo(steamData) {
-    const steamPfp = document.getElementById('steampfp');
+    const steamPfp = /** @type {HTMLImageElement} */ (document.getElementById('steampfp'));
     
     const avatar = steamData.avatar;
     const status = steamData.status;
@@ -55,9 +59,13 @@ function updateSteamInfo(steamData) {
     }
   }
   
+  /**
+   * @returns {Promise<void>}
+   */
   async function fetchSteamData() {
     try {
       const response = await fetch('https://api.snaz.in/v2/steam/user-profile/76561198403988969');
+      /** @type {SnazzahAPI} */
       const data = await response.json();
   
       updateSteamInfo(data);

@@ -24,6 +24,10 @@ var DLog = false;
 console.log(
   'lanyard.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
 );
+/**
+ * @param {string} message
+ * @returns {void}
+ */
 function DexrnsFunnyLogger(message) {
   if (DLog) {
     console.log("lanyard.js: " + message);
@@ -34,27 +38,45 @@ function DexrnsFunnyLogger(message) {
 
 const API_URL = "https://api.lanyard.rest/v1";
 const USERID = "485504221781950465";
-const pfp = document.getElementById("pfp");
-const customStatus = document.getElementById("customStatus");
-const onlineState = document.getElementById("onlineState");
-const platforms = document.getElementById("platforms");
-const username = document.getElementById("username");
-const bigImage = document.getElementById("activityImageBig");
-const smallImage = document.getElementById("activityImageSmall");
-const name = document.getElementById("activityName");
-const smallImageAlt = document.getElementById("activityAlternateImageSmall");
-const state = document.getElementById("activityState");
-const details = document.getElementById("activityDetail");
-const elapsed = document.getElementById("activityTimeElapsed");
+/** @type {HTMLImageElement} */
+const pfp = document.querySelector("#pfp");
+/** @type {HTMLDivElement} */
+const customStatus = document.querySelector("#customStatus");
+/** @type {HTMLDivElement} */
+const onlineState = document.querySelector("#onlineState");
+/** @type {HTMLDivElement} */
+const platforms = document.querySelector("#platforms");
+/** @type {HTMLDivElement} */
+const username = document.querySelector("#username");
+/** @type {HTMLImageElement} */
+const bigImage = document.querySelector("#activityImageBig");
+/** @type {HTMLImageElement} */
+const smallImage = document.querySelector("#activityImageSmall");
+/** @type {HTMLDivElement} */
+const name = document.querySelector("#activityName");
+/** @type {HTMLImageElement} */
+const smallImageAlt = document.querySelector("#activityAlternateImageSmall");
+/** @type {HTMLDivElement} */
+const state = document.querySelector("#activityState");
+/** @type {HTMLDivElement} */
+const details = document.querySelector("#activityDetail");
+/** @type {HTMLDivElement} */
+const elapsed = document.querySelector("#activityTimeElapsed");
 // Dexrn -----
 // It is currently 10:09 PM as I am writing this.
 // Wanted to have more info about my Discord status on the website.
 var disc_status;
+/** @type {string[]} */
 var disc_platform;
+/** @type {boolean} */
 var disc_isOffline;
+/** @type {LocalizedText} */
 let localizedText;
 
 // Dexrn: This is really, really janky.
+/**
+ * @returns {Promise<string | null>}
+ */
 async function lanyardGetLang() {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
@@ -66,7 +88,12 @@ async function lanyardGetLang() {
   return null; // Cookie not found
 }
 
+/**
+ * @param {string} lang
+ * @returns {Promise<`/assets/lang/${keyof LanyardLangNameMap}.json`>}
+ */
 async function lanyardCheckLang(lang) {
+  /** @type {`/assets/lang/${keyof LanyardLangNameMap}.json`} */
   let langPath;
   switch (lang) {
     case "zh-CN":
@@ -79,9 +106,15 @@ async function lanyardCheckLang(lang) {
   }
   return langPath;
 }
+/**
+ * @template {keyof LanyardLangNameMap} T
+ * @param {`/assets/lang/${T}.json`} langFilePath
+ * @returns {Promise<LocalizedText<T> | null>}
+ */
 async function lanyardSetLang(langFilePath) {
   try {
     const response = await fetch(langFilePath);
+    /** @type {LanyardLang<T>} */
     const data = await response.json();
 
     return {
@@ -100,10 +133,13 @@ async function lanyardSetLang(langFilePath) {
     };
   } catch (error) {
     console.error("Error whilst loading lang file:", error);
-    return {};
+    return null;
   }
 }
 
+/**
+ * @returns {Promise<void>}
+ */
 async function actuallySetLanguage() {
   const lang = await lanyardGetLang();
   const langFilePath = await lanyardCheckLang(lang);
@@ -114,14 +150,21 @@ async function actuallySetLanguage() {
 
 DexrnsFunnyLogger("Dexrn: I hate this so I am adding debug logging here...");
 DexrnsFunnyLogger("variables set");
+/**
+ * @param {string} userId
+ * @returns {Promise<LanyardAPI>} Needs a proper return type based on the API usage.
+ */
 async function fetchResponse(userId) {
   try {
     const res = await fetch(`${API_URL}/users/${userId}`);
-    return await res.json();
+    return await res.json(); // this is where the type would come from
   } catch (err) {
     console.error(err);
   }
 }
+/**
+ * @returns {Promise<void>}
+ */
 async function setAvatar() {
   const {
     data: {
@@ -133,6 +176,9 @@ async function setAvatar() {
   DexrnsFunnyLogger("setAvatar");
   // pfp2.src = fullUrl;
 }
+/**
+ * @returns {Promise<void>}
+ */
 async function setAvatarFrame() {
   const {
     data: {
@@ -222,6 +268,9 @@ async function setAvatarFrame() {
 }
 
 
+/**
+ * @returns {Promise<void>}
+ */
 async function setStatus() {
   const {
     data: { discord_status, activities },
@@ -233,7 +282,7 @@ async function setStatus() {
 
   if (activities) {
     DexrnsFunnyLogger("activities is true");
-    const activityOfType4 = activities.find((m) => m.type == 4);
+    const activityOfType4 = activities.find(/** @returns {m is LanyardActivity4} */ (m) => m.type == 4);
     if (activityOfType4) {
       const { state } = activityOfType4;
       if (state) {
@@ -243,6 +292,9 @@ async function setStatus() {
   }
 }
 
+/**
+ * @returns {Promise<void>}
+ */
 async function setActivityBigImage() {
   const {
     data: { activities, spotify },
@@ -271,6 +323,9 @@ async function setActivityBigImage() {
     bigImage.title = mostRecent.assets.large_text;
   }
 }
+/**
+ * @returns {Promise<void>}
+ */
 async function setActivitySmallImage() {
   const {
     data: { activities },
@@ -312,6 +367,9 @@ async function setActivitySmallImage() {
   }
 }
 
+/**
+ * @returns {Promise<void>}
+ */
 async function setActivityName() {
   const {
     data: { activities },
@@ -326,6 +384,9 @@ async function setActivityName() {
   name.style.display = "block";
   name.innerText = mostRecent.name;
 }
+/**
+ * @returns {Promise<void>}
+ */
 async function setActivityState() {
   const response = await fetchResponse(USERID);
   const activities = response.data.activities.filter((m) => m.type !== 4);
@@ -343,12 +404,17 @@ async function setActivityState() {
   state.innerText = mostRecent.state;
 }
 
+/**
+ * @returns {Promise<void>}
+ */
 async function setTimestamp() {
   const response = await fetchResponse(USERID);
   const activities = response.data.activities.filter((m) => m.type !== 4);
   const mostRecent = activities.shift();
+  /** @type {number} */
+  let created;
   try {
-  const created = mostRecent.timestamps.start;
+  created = mostRecent.timestamps.start;
   } catch {
     // stop yelling at me ;(
   }
@@ -373,6 +439,9 @@ async function setTimestamp() {
     elapsed.innerHTML = "";
   }
 }
+/**
+ * @returns {Promise<void>}
+ */
 async function setActivityDetails() {
   const response = await fetchResponse(USERID);
 
@@ -390,6 +459,9 @@ async function setActivityDetails() {
   details.innerText = mostRecent.details;
 }
 
+/**
+ * @returns {void}
+ */
 function presenceInvoke() {
   setActivityBigImage();
   setActivitySmallImage();
@@ -398,11 +470,17 @@ function presenceInvoke() {
   setActivityDetails();
 }
 
+/**
+ * @returns {void}
+ */
 function statusInvoke() {
   setStatus();
   setAvatarFrame();
 }
 
+/**
+ * @returns {void}
+ */
 function invoke() {
   setInterval(() => {
     setTimestamp();

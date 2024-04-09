@@ -24,6 +24,10 @@ var DLog = false;
 console.log(
     'settings.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
   );
+/**
+ * @param {string} message
+ * @returns {void}
+ */
 function DexrnsFunnyLogger(message) {
   if (DLog) {
     console.log("settings.js: " + message);
@@ -32,6 +36,10 @@ function DexrnsFunnyLogger(message) {
   }
 }
 
+/**
+ * @param {"default-light" | "default-dark"} theme
+ * @returns {void}
+ */
 function setTheme(theme) {
   var expirationDate = new Date("Fri, 31 Dec 9999 23:59:59 GMT");
   document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;
@@ -39,8 +47,12 @@ function setTheme(theme) {
   applyTheme(theme);
 }
 
+/**
+ * @param {"default-light" | "default-dark"} theme
+ * @returns {void}
+ */
 function applyTheme(theme) {
-  const stylesheetElement = document.getElementById("theme");
+  const stylesheetElement = /** @type {HTMLLinkElement} */ (document.getElementById("theme"));
   switch (theme) {
     case "default-light":
       stylesheetElement.href = "/css/default-light.css";
@@ -52,11 +64,17 @@ function applyTheme(theme) {
   }
 }
 
+/**
+ * @template {string} K
+ * @param {K} name
+ * @returns {K extends "Theme" ? "default-light" | "default-dark" : string | null}
+ */
 function getThemeCookie(name) {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split("=");
     if (cookieName === name) {
+      // @ts-expect-error - type inference, TS overloads would work better to solve this
       return cookieValue;
     }
   }
@@ -67,7 +85,11 @@ const savedTheme = getThemeCookie("Theme");
 
 applyTheme(savedTheme);
 
-function checkLang(syslang = undefined) {
+/**
+ * @param {keyof LanyardLangNameMap} [syslang]
+ * @returns {void}
+ */
+function checkLang(syslang) {
   const lang = getLang();
   DexrnsFunnyLogger(`Language: ${lang}`);
   let langFilePath;
@@ -100,6 +122,9 @@ function checkLang(syslang = undefined) {
 
 checkLang();
 
+/**
+ * @returns {string}
+ */
 function getLang() {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
@@ -113,6 +138,10 @@ function getLang() {
 }
 
 // Dexrn: Localization! (Kinda janky.)
+/**
+ * @param {string} langFilePath
+ * @return {void}
+ */
 function setLang(langFilePath) {
   fetch(langFilePath)
     .then((response) => response.json())
@@ -166,6 +195,11 @@ function setLang(langFilePath) {
 }
 
 // Dexrn: This makes sure that the element exists before setting it... otherwise it will throw an error.
+/**
+ * @param {string} elementId
+ * @param {string} value
+ * @returns {void}
+ */
 function checkIfExists(elementId, value) {
   const element = document.getElementById(elementId);
   if (element) {

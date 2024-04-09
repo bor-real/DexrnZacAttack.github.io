@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-updDate = "04/08/2024"
-verString = "v1.2.51"
+const updDate = "04/08/2024"
+const verString = "v1.2.51"
 
 document.getElementById('lastUpdated').innerText = `${updDate} (${verString})`

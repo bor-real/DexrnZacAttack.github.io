@@ -20,9 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/** @type {1 | 2} */
 let curTab;
+/** @type {number} */
 let height;
 
+/**
+ * @param {"Discord" | "About"} whatToChangeTo
+ * @returns {void}
+ */
 function changeMainCard(whatToChangeTo) {
 
 switch (whatToChangeTo) {

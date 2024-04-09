@@ -24,6 +24,10 @@ var DLog = false;
 console.log(
   'background.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
 );
+/**
+ * @param {string} message
+ * @returns {void}
+ */
 function DexrnsFunnyLogger(message) {
   if (DLog) {
     console.log("background.js: " + message);
@@ -32,7 +36,12 @@ function DexrnsFunnyLogger(message) {
   }
 }
 
+/**
+ * @param {number} hour
+ * @returns {void}
+ */
 function setBGTime(hour) {
+  /** @type {HTMLDivElement} */
   let bgElement = document.querySelector(".bg");
   if (hour >= 6 && hour < 20 ) {
     DexrnsFunnyLogger("day time");
@@ -45,13 +54,20 @@ function setBGTime(hour) {
   } 
 }
 
+/**
+ * @param {boolean | Event} bgload
+ * @returns {void}
+ */
 function fadeBG(bgload) {
   if (bgload == true) {
     DexrnsFunnyLogger("bgload is true");
     let now = new Date();
     let hour = now.getHours();
+    /** @type {HTMLDivElement} */
     let bgElement = document.querySelector(".bg");
+    /** @type {HTMLDivElement} */
     let maincontainer = document.querySelector(".mainContent");
+    /** @type {HTMLDivElement} */
     let loadingScreen = document.querySelector(".loadingScreen");
     if (bgElement) {
       setBGTime(hour);
@@ -60,7 +76,7 @@ function fadeBG(bgload) {
       bg.src = bgElement.style.backgroundImage.slice(5, -2);
 
       const loadingfade = function() {
-        loadingScreen.style.opacity = 0;
+        loadingScreen.style.opacity = "0";
         setTimeout(() => {
           loadingScreen.style.display = "none";
         }, 500);
@@ -71,14 +87,14 @@ function fadeBG(bgload) {
         loadingfade();
         const duration = 1000;
         const startTime = performance.now();
-        bgElement.style.opacity = 0;
+        bgElement.style.opacity = "0";
 
         function animate() {
           const currenttime = performance.now();
           const elapsedtime = currenttime - startTime;
           const opacity = elapsedtime / duration;
           if (opacity <= 1) {
-            bgElement.style.opacity = opacity;
+            bgElement.style.opacity = `${opacity}`;
             requestAnimationFrame(animate);
           }
         }
