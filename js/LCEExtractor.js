@@ -62,7 +62,6 @@ document.addEventListener("drop", (e) => {
   }
 });
 
-let fuck = 0;
 let compressionMode = "none";
 
 /**

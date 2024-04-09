@@ -20,7 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const updDate = "04/08/2024"
-const verString = "v1.2.51"
+/**
+ * Retrieves version info for the specified file.
+ * @param {string} type - The file to return info for.
+ * @returns {string} - A JSON string containing the version and date information.
+ */
+function getVer(type) {
+    switch (type) {
+        case "le":
+            // LCE Savegame Extractor
+            return JSON.stringify({ "version": "1.1.10", "date": "04/08/2024"});
+        case "qd":
+            // QMG Header Parser
+            return JSON.stringify({ "version": "1.2.10", "date": "12/21/2023"});
+        case "default":
+        default:
+            return JSON.stringify({ "version": "1.2.52", "date": "04/09/2024"});
+    }
+}
 
-document.getElementById('lastUpdated').innerText = `${updDate} (${verString})`
+/**
+ * Sets the version information in the current HTML.
+ * @param {string} type - The file to use the information from when setting the info.
+ * @returns {void}
+ */
+function setVer(type) {
+    let json = JSON.parse(getVer(type));
+    document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
+}
+
