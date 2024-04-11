@@ -106,34 +106,39 @@ function readByte(dataIn) {
 }
 
 /**
- * @param {Uint8Array} dataIn - The compressed data
- * @param {number} sizeIn - Size of the compressed data
- * @param {Uint8Array} dataOut - The decompressed data that will be outputted in an array
- * @returns {number} - The size of the decompressed data.
+ * @param {Uint8Array} data - The compressed data
+ * @returns {Uint8Array} - The size of the decompressed data.
  */
 /*
  * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
  * https://github.com/zugebot/LegacyEditor
  */
-function RLEVITA_DECOMPRESS(dataIn, sizeIn, dataOut) {
-  /** @type {number} */
-  let outByteIndex = 0;
-
-  while (inByteIndex < sizeIn) {
-    /** @type {number} */
-    let byte = readByte(dataIn);
-
-    if (byte !== 0x00) {
-      dataOut[outByteIndex++] = byte;
-    } else {
-      const numZeros = readByte(dataIn);
-      memset(dataOut, 0, outByteIndex, numZeros);
-      outByteIndex += numZeros;
+// Big thanks to Offroaders for helping out with this, would've been barely possible without them!
+function runLengthDecode(data) {
+    const compressedLength = data.byteLength;
+    const result = [];
+    let readOffset = 0;
+    let writeOffset = 0;
+  
+    while (readOffset < compressedLength){
+      const suspectedTag = data[readOffset];
+      readOffset++;
+  
+      if (suspectedTag !== 0){
+        result[writeOffset] = suspectedTag;
+        writeOffset++;
+      } else {
+        const length = data[readOffset];
+        readOffset++;
+        for (let i = 0; i < length; i++){
+          result.push(0);
+          writeOffset++;
+        }
+      }
     }
+  
+    return new Uint8Array(result);
   }
-
-  return outByteIndex;
-}
 
 let compressionMode = "none";
 
@@ -155,11 +160,11 @@ function switchCompressionMode(mode) {
       endianness = "little";
       vita = false;
       break;
-    // case 2:
-    //   document.getElementById("CompModeBtn").innerText = "Save type: Vita";
-    //   endianness = "little";
-    //   vita = true;
-    //   break;
+    case 2:
+      document.getElementById("CompModeBtn").innerText = "Save type: Vita";
+      endianness = "little";
+      vita = true;
+      break;
   }
 }
 
@@ -181,6 +186,7 @@ function readFile(data) {
     } else {
       littleEndian = false;
     }
+    let offsetToRead;
     if (data) {
       if (vita !== true) {
         try {
@@ -196,16 +202,14 @@ function readFile(data) {
           }
 
           if (decompressedData) data = decompressedData;
-          console.log("This is ZLib compressed.");
+          console.log("This is ZLib/Deflate compressed.");
           console.log(decompressedData);
         } catch {
           console.log("This is not ZLib compressed.");
         }
       } else {
         /** @type {Uint8Array} */
-        let unVita = [];
-        RLEVITA_DECOMPRESS(data, data.length, unVita);
-        data = unVita;
+        data = runLengthDecode(data.slice(8));
       }
     } else {
       console.error("No data received...");
@@ -240,9 +244,9 @@ function readFile(data) {
         littleEndian
       );
 
-      const sgBlob = new Blob(
+    const sgBlob = new Blob(
         new Array(data.slice(fileoffset, fileoffset + filelength))
-      );
+        );
       const blobUrl = URL.createObjectURL(sgBlob);
       var file = document.createElement("a");
       file.className = "LCEFile";
