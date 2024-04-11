@@ -186,6 +186,12 @@ function readFile(data) {
     } else {
       littleEndian = false;
     }
+
+    if (endianness == 'big') {
+      if (new TextDecoder().decode(data).substring(0, 3).replace(/\x00/g, "") == "CON") {
+        console.log('This is an Xbox 360 package!!!');
+      }
+    }
     let offsetToRead;
     if (data) {
       if (vita !== true) {
