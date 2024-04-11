@@ -24,9 +24,15 @@ SOFTWARE.
 
 /** @type {"big" | "little"} */
 let endianness;
+/** @type {boolean} */
 let littleEndian;
 
-/** @type {HTMLInputElement} */ (document.getElementById("fileInput")).addEventListener("change", onFileSelected);
+/** @type {boolean} */
+let vita = false;
+
+/** @type {HTMLInputElement} */ (
+  document.getElementById("fileInput")
+).addEventListener("change", onFileSelected);
 
 /**
  * @this {HTMLInputElement}
@@ -38,7 +44,9 @@ function onFileSelected(event) {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
+      const data = new Uint8Array(
+        /** @type {ArrayBuffer} */ (event.target.result)
+      );
       readFile(data);
     };
     reader.readAsArrayBuffer(file);
@@ -55,29 +63,103 @@ document.addEventListener("drop", (e) => {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
+      const data = new Uint8Array(
+        /** @type {ArrayBuffer} */ (event.target.result)
+      );
       readFile(data);
     };
     reader.readAsArrayBuffer(file);
   }
 });
 
+/** @type {number} */
+let inByteIndex = 0;
+
+/**
+ * Fills a portion of an array with a specified value.
+ * @param {Uint8Array} array
+ * @param {number} value
+ * @param {number} start
+ * @param {number} length
+ */
+function memset(array, value, start, length) {
+  for (let i = start; i < start + length; i++) {
+    array[i] = value;
+  }
+}
+
+/**
+ * @param {Uint8Array} dataIn - The array
+ * @param {number} offset - how far to seek
+ * @returns {Uint8Array} - the array after seeking
+ */
+function seek(dataIn, offset) {
+  return dataIn.slice(offset);
+}
+
+/**
+ * @param {Uint8Array} dataIn - The data
+ * @returns {number} - The byte.
+ */
+function readByte(dataIn) {
+  return dataIn[inByteIndex++];
+}
+
+/**
+ * @param {Uint8Array} dataIn - The compressed data
+ * @param {number} sizeIn - Size of the compressed data
+ * @param {Uint8Array} dataOut - The decompressed data that will be outputted in an array
+ * @returns {number} - The size of the decompressed data.
+ */
+/*
+ * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
+ * https://github.com/zugebot/LegacyEditor
+ */
+function RLEVITA_DECOMPRESS(dataIn, sizeIn, dataOut) {
+  /** @type {number} */
+  let outByteIndex = 0;
+
+  while (inByteIndex < sizeIn) {
+    /** @type {number} */
+    let byte = readByte(dataIn);
+
+    if (byte !== 0x00) {
+      dataOut[outByteIndex++] = byte;
+    } else {
+      const numZeros = readByte(dataIn);
+      memset(dataOut, 0, outByteIndex, numZeros);
+      outByteIndex += numZeros;
+    }
+  }
+
+  return outByteIndex;
+}
+
 let compressionMode = "none";
 
 /**
- * @param {0 | 1} mode
+ * @param {0 | 1 | 2} mode
  * @returns {void}
  */
 function switchCompressionMode(mode) {
   switch (mode) {
     case 0:
-      document.getElementById("CompModeBtn").innerText = "Save type: Wii U, PS3, Decompressed Xbox 360";
+      document.getElementById("CompModeBtn").innerText =
+        "Save type: Wii U, PS3, Decompressed Xbox 360";
       endianness = "big";
+      vita = false;
       break;
     case 1:
-      document.getElementById("CompModeBtn").innerText = "Save type: Switch, PS4";
+      document.getElementById("CompModeBtn").innerText =
+        "Save type: Switch, PS4";
       endianness = "little";
+      vita = false;
       break;
+    // case 2:
+    //   document.getElementById("CompModeBtn").innerText = "Save type: Vita";
+    //   endianness = "little";
+    //   vita = true;
+    //   break;
   }
 }
 
@@ -99,20 +181,34 @@ function readFile(data) {
     } else {
       littleEndian = false;
     }
+    if (data) {
+      if (vita !== true) {
+        try {
+          let dataToDecompress = seek(data, 8);
+          if (endianness == "little") {
+            decompressedData = pako.inflate(dataToDecompress, {
+              endian: "little",
+            });
+          } else {
+            decompressedData = pako.inflate(dataToDecompress, {
+              endian: "big",
+            });
+          }
 
-    try {
-      let dataToDecompress = data.slice(8);
-      if (endianness == "little") {
-        decompressedData = pako.inflate(dataToDecompress, { endian: "little" });
+          if (decompressedData) data = decompressedData;
+          console.log("This is ZLib compressed.");
+          console.log(decompressedData);
+        } catch {
+          console.log("This is not ZLib compressed.");
+        }
       } else {
-        decompressedData = pako.inflate(dataToDecompress, { endian: "big" });
+        /** @type {Uint8Array} */
+        let unVita = [];
+        RLEVITA_DECOMPRESS(data, data.length, unVita);
+        data = unVita;
       }
-
-      if (decompressedData) data = decompressedData;
-      console.log("This is ZLib compressed.");
-      console.log(decompressedData);
-    } catch {
-      console.log("This is not ZLib compressed.");
+    } else {
+      console.error("No data received...");
     }
 
     // there is no error handling LMAO
@@ -132,7 +228,9 @@ function readFile(data) {
       offset += 144;
 
       const line = new TextDecoder().decode(bytes);
-      const fileNameFromSaveGame = line.substring(0, 80).replace(/\x00/g, "");
+      var fileNameFromSaveGame = line.substring(0, 80).replace(/\x00/g, "");
+      if (fileNameFromSaveGame === "")
+        fileNameFromSaveGame = "Corrupted or unreadable";
       const filelength = new DataView(bytes.buffer, 128, 4).getInt32(
         0,
         littleEndian
@@ -163,28 +261,28 @@ function readFile(data) {
         folderName.innerText = newName[0];
         folderName.className = "LCEFolderName";
         if (!document.getElementById("LCEFolder_" + newName[0])) {
-            // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
-            lceFolder.appendChild(folderName);
-            lceFolder.className = "LCEFolder";
-            lceFolder.id = "LCEFolder_" + newName[0];
+          // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
+          lceFolder.appendChild(folderName);
+          lceFolder.className = "LCEFolder";
+          lceFolder.id = "LCEFolder_" + newName[0];
         }
 
         // add the folder into the upper files div
         document.getElementById("files").appendChild(lceFolder);
         if (!document.getElementById("LCEFolder_" + newName[0]))
-        lceFolder.appendChild(file);
+          lceFolder.appendChild(file);
         else
-        document.getElementById("LCEFolder_" + newName[0]).appendChild(file);
+          document.getElementById("LCEFolder_" + newName[0]).appendChild(file);
         // line break because yes
         if (!document.getElementById("LCEFolder_" + newName[0])) {
-            var lineBreak = document.createElement("br"); 
-            document.getElementById("lceFolder").appendChild(lineBreak);
+          var lineBreak = document.createElement("br");
+          document.getElementById("lceFolder").appendChild(lineBreak);
         } else {
-            var lineBreak = document.createElement("br"); 
-            document.getElementById("LCEFolder_" + newName[0]).appendChild(lineBreak);
+          var lineBreak = document.createElement("br");
+          document
+            .getElementById("LCEFolder_" + newName[0])
+            .appendChild(lineBreak);
         }
-        
-
       } else {
         file.innerText = fileNameFromSaveGame;
         document.getElementById("lceRoot").appendChild(file);

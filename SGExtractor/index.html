@@ -27,6 +27,7 @@ SOFTWARE.
     <link id="theme" rel="stylesheet" href="" />
     <link id="theme" rel="stylesheet" href="/css/all.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako_inflate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.100/Ice.min.js"></script>
     <script src="../js/settings.js"></script>
     <meta content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor" property="og:title" />
     <meta content="LCE Savegame extractor" property="og:description" />
@@ -62,9 +63,11 @@ SOFTWARE.
         >
           <div class="back" id="backbtn"></div>
         </div>
-        <div class="card" style="width: 55%; height: 500px">
+        <div class="card" style="width: 55%; height: 500px;display:flex;flex-direction:column;">
           <div class="cardTitle" id="lcee-path"></div>
           <h3>NOTE: This is unfinished UX/UI wise.</h3>
+          <pre id="output"></pre>
+          <div id="files"></div>
           <div class="center">
             <script>
               let i = 0;
@@ -86,12 +89,14 @@ SOFTWARE.
               style="display: none"
             />
           </div>
-          <pre id="output"></pre>
-          <div id="files"></div>
         </div>
         <!-- <div class="card" id="headercard">
         <pre id="header"></pre>
        </div> -->
+       <div class="topcard"style="cursor: pointer"style="width: 55%">
+       <div class="back buttonRedirect" 
+       linkto="https://github.com/zugebot/LegacyEditor" style="text-align:center;font-weight: unset;font-family: unset;font-size:16px;opacity: 1;"><a>This project uses code from another project by Zugebot (jerrinth3glitch)</a></h2>
+       </div>
       </div>
       <!-- Last update date -->
       <p class="lastUpdated" id="lastUpdated"></p>

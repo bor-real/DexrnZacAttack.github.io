@@ -325,13 +325,10 @@ a {
 }
 
 .center {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 100%;
+  margin-top: auto;
+  text-align: center; 
 }
+
 
 .button2 {
   backdrop-filter: blur(1000px);
