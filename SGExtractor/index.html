@@ -69,7 +69,8 @@ SOFTWARE.
           <pre id="output"></pre>
           <div id="files"></div>
           <div class="center">
-            <script>
+            <script type="module">
+              import { switchCompressionMode } from '/js/LCEExtractor.js';
               let i = 0;
               function incrementI() {
                 // only thing I could think to name it...
@@ -80,8 +81,9 @@ SOFTWARE.
                 }
                 switchCompressionMode(i);
               }
+              document.querySelector('#CompModeBtn').addEventListener('click', incrementI)
             </script>
-            <button class="button" id="CompModeBtn" onclick="incrementI();">Save type: Wii U, PS3, Decompressed Xbox 360</button>
+            <button class="button" id="CompModeBtn">Save type: Wii U, PS3, Decompressed Xbox 360</button>
             <label for="fileInput" class="button2" id="lcefileselectbtn"></label>
             <input
               type="file"
@@ -102,7 +104,7 @@ SOFTWARE.
       <p class="lastUpdated" id="lastUpdated"></p>
       <script src="/js/ver.js"></script>
     </div>
-    <script src="../js/LCEExtractor.js"></script>
+    <script type="module" src="../js/LCEExtractor.js"></script>
     <script>
       fadeBG(true);
     </script>

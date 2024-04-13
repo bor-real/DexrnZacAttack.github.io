@@ -1,4 +1,4 @@
-// Dexrn: THIS IS CURSED AND IN PROGRESS ITS 2 AM AAAAAAAAAAAAAAA
+import { vitaRLEDecode } from './modules/compression.js';
 
 /*
 Copyright 2024 Dexrn ZacAttack
@@ -26,6 +26,8 @@ SOFTWARE.
 let endianness;
 /** @type {boolean} */
 let littleEndian;
+/** @type {boolean} */
+let doNotSaveDOM = false;
 
 /** @type {boolean} */
 let vita = false;
@@ -105,41 +107,6 @@ function readByte(dataIn) {
   return dataIn[inByteIndex++];
 }
 
-/**
- * @param {Uint8Array} data - The compressed data
- * @returns {Uint8Array} - The size of the decompressed data.
- */
-/*
- * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
- * https://github.com/zugebot/LegacyEditor
- */
-// Big thanks to Offroaders for helping out with this, would've been barely possible without them!
-function runLengthDecode(data) {
-    const compressedLength = data.byteLength;
-    const result = [];
-    let readOffset = 0;
-    let writeOffset = 0;
-  
-    while (readOffset < compressedLength){
-      const suspectedTag = data[readOffset];
-      readOffset++;
-  
-      if (suspectedTag !== 0){
-        result[writeOffset] = suspectedTag;
-        writeOffset++;
-      } else {
-        const length = data[readOffset];
-        readOffset++;
-        for (let i = 0; i < length; i++){
-          result.push(0);
-          writeOffset++;
-        }
-      }
-    }
-  
-    return new Uint8Array(result);
-  }
-
 let compressionMode = "none";
 
 /**
@@ -209,19 +176,17 @@ function readFile(data) {
 
           if (decompressedData) data = decompressedData;
           console.log("This is ZLib/Deflate compressed.");
-          console.log(decompressedData);
         } catch {
           console.log("This is not ZLib compressed.");
         }
       } else {
         /** @type {Uint8Array} */
-        data = runLengthDecode(data.slice(8));
+        data = vitaRLEDecode(data.slice(8));
       }
     } else {
       console.error("No data received...");
     }
 
-    // there is no error handling LMAO
     let offset, count;
     if (endianness === "little") {
       offset = (data[3] << 24) | (data[2] << 16) | (data[1] << 8) | data[0];
@@ -230,9 +195,16 @@ function readFile(data) {
       offset = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
       count = (data[4] << 24) | (data[5] << 16) | (data[6] << 8) | data[7];
     }
+
+    console.log(count);
+    if (count > 100 && doNotSaveDOM !== true) {
+      alert('It looks like you may have had the wrong save type set. Wanna try anyway? Set "doNotSaveDOM" to true and resubmit.');
+      return;
+    }
     var lceRoot = document.createElement("div");
     lceRoot.id = "lceRoot";
     document.getElementById("files").appendChild(lceRoot);
+    for (var i = 0; i < count; i++) {
     while (offset + 144 <= data.byteLength) {
       const bytes = data.slice(offset, offset + 144);
       offset += 144;
@@ -261,7 +233,6 @@ function readFile(data) {
       if (fileNameFromSaveGame.includes("/")) {
         // split the name between folder and filename
         let newName = fileNameFromSaveGame.split("/");
-        console.log(newName);
         // create an element with filename (notice the 1)
         file.innerText = newName[1];
         // create a div to hold the files in their respective folders
@@ -275,6 +246,10 @@ function readFile(data) {
           lceFolder.appendChild(folderName);
           lceFolder.className = "LCEFolder";
           lceFolder.id = "LCEFolder_" + newName[0];
+          var lineBreak1 = document.createElement("br");
+          document
+            .getElementById("files")
+            .appendChild(lineBreak1);
         }
 
         // add the folder into the upper files div
@@ -301,8 +276,11 @@ function readFile(data) {
       }
       document.getElementById("files").style.display = "block";
     }
+  }
   } catch (e) {
     document.getElementById("output").textContent = `${e}`;
     console.error(e);
   }
 }
+
+export { switchCompressionMode };
