@@ -209,6 +209,10 @@
   color:rgba(255,255,255,0.1);
 }
 
+codeblock {
+  font-family: Consolas,monaco,monospace; 
+  border-radius: 10px;
+}
 
 .about-me {
   margin-left: 2%;
