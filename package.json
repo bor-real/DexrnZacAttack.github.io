@@ -1,0 +1,8 @@
+{
+  "name": "dexrnzacattack.github.io",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "nbtify": "1.90.1"
+  }
+}
