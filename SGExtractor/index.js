@@ -1,4 +1,4 @@
-import { switchCompressionMode } from '/js/LCEExtractor.js';
+import { switchCompressionMode } from '../js/LCEExtractor.js';
 let i = 0;
 function incrementI() {
   // only thing I could think to name it...

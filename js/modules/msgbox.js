@@ -118,6 +118,12 @@ export function createMSGBox(title, message, buttons = []) {
     msgboxShown = true;
 }
 
+/**
+ * @param {string} title
+ * @param {string} message
+ * @param {string[]} [buttons]
+ * @returns {void}
+ */
 export function useMSGBox(title, message, buttons = []) {
     if (!msgboxExists) {
         createMSGBox(title, message, buttons);

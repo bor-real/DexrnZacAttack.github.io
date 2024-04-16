@@ -20,14 +20,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify/dist/index.min.js";
+import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
 
 
 /**
  * @param {File[]} fileArray
- * @param {string} fName 
+ * @param {string} fName
+ * @returns {Promise<NBTData>}
 */
-async function readNBTfromFile(fileArray, fName) {
+export async function readNBTfromFile(fileArray, fName) {
     try {
     console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer()));
     return await read(await fileArray.find(file => file.name === fName).arrayBuffer());
@@ -38,9 +39,10 @@ async function readNBTfromFile(fileArray, fName) {
 
 /**
  * @param {File[]} fileArray
- * @param {string} fName 
+ * @param {string} fName
+ * @returns {Promise<boolean>}
 */
-async function isReadable(fileArray, fName) {
+export async function isReadable(fileArray, fName) {
     try {
         if (await read(await fileArray.find(file => file.name === fName).arrayBuffer())) {
             return true;
@@ -51,5 +53,3 @@ async function isReadable(fileArray, fName) {
             return false;
     }
 }
-
-export { readNBTfromFile, isReadable };
