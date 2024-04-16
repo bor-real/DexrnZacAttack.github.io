@@ -1,4 +1,5 @@
-import { vitaRLEDecode } from './modules/compression.js';
+import { vitaRLEDecode } from "./modules/compression.js";
+import { readNBTfromFile, isReadable } from "./modules/openNBT.js";
 
 /*
 Copyright 2024 Dexrn ZacAttack
@@ -74,39 +75,6 @@ document.addEventListener("drop", (e) => {
   }
 });
 
-/** @type {number} */
-let inByteIndex = 0;
-
-/**
- * Fills a portion of an array with a specified value.
- * @param {Uint8Array} array
- * @param {number} value
- * @param {number} start
- * @param {number} length
- */
-function memset(array, value, start, length) {
-  for (let i = start; i < start + length; i++) {
-    array[i] = value;
-  }
-}
-
-/**
- * @param {Uint8Array} dataIn - The array
- * @param {number} offset - how far to seek
- * @returns {Uint8Array} - the array after seeking
- */
-function seek(dataIn, offset) {
-  return dataIn.slice(offset);
-}
-
-/**
- * @param {Uint8Array} dataIn - The data
- * @returns {number} - The byte.
- */
-function readByte(dataIn) {
-  return dataIn[inByteIndex++];
-}
-
 let compressionMode = "none";
 
 /**
@@ -141,6 +109,8 @@ function switchCompressionMode(mode) {
  */
 function readFile(data) {
   try {
+    /** @type {File[]} */
+    let files = [];
     document.getElementById("output").textContent = "";
     document.getElementById("files").innerHTML = "";
     document.getElementById("files").style.display = "none";
@@ -154,16 +124,19 @@ function readFile(data) {
       littleEndian = false;
     }
 
-    if (endianness == 'big') {
-      if (new TextDecoder().decode(data).substring(0, 3).replace(/\x00/g, "") == "CON") {
-        console.log('This is an Xbox 360 package!!!');
+    if (endianness == "big") {
+      if (
+        new TextDecoder().decode(data).substring(0, 3).replace(/\x00/g, "") ==
+        "CON"
+      ) {
+        console.log("This is an Xbox 360 package!!!");
       }
     }
     let offsetToRead;
     if (data) {
       if (vita !== true) {
         try {
-          let dataToDecompress = seek(data, 8);
+          let dataToDecompress = data.slice(8);
           if (endianness == "little") {
             decompressedData = pako.inflate(dataToDecompress, {
               endian: "little",
@@ -198,88 +171,110 @@ function readFile(data) {
 
     console.log(count);
     if (count > 100 && doNotSaveDOM !== true) {
-      alert('It looks like you may have had the wrong save type set. Wanna try anyway? Set "doNotSaveDOM" to true and resubmit.');
+      alert(
+        'It looks like you may have had the wrong save type set. Wanna try anyway? Set "doNotSaveDOM" to true and resubmit.'
+      );
       return;
     }
     var lceRoot = document.createElement("div");
     lceRoot.id = "lceRoot";
     document.getElementById("files").appendChild(lceRoot);
     for (var i = 0; i < count; i++) {
-    while (offset + 144 <= data.byteLength) {
-      const bytes = data.slice(offset, offset + 144);
-      offset += 144;
+      while (offset + 144 <= data.byteLength) {
+        const bytes = data.slice(offset, offset + 144);
+        offset += 144;
 
-      const line = new TextDecoder().decode(bytes);
-      var fileNameFromSaveGame = line.substring(0, 80).replace(/\x00/g, "");
-      if (fileNameFromSaveGame === "")
-        fileNameFromSaveGame = "Corrupted or unreadable";
-      const filelength = new DataView(bytes.buffer, 128, 4).getInt32(
-        0,
-        littleEndian
-      );
-      const fileoffset = new DataView(bytes.buffer, 132, 4).getInt32(
-        0,
-        littleEndian
-      );
-
-    const sgBlob = new Blob(
-        new Array(data.slice(fileoffset, fileoffset + filelength))
+        const line = new TextDecoder().decode(bytes);
+        /** @type {string} */
+        var fileNameFromSaveGame = line.substring(0, 80).replace(/\x00/g, "");
+        if (fileNameFromSaveGame === "")
+          fileNameFromSaveGame = "Corrupted or unreadable";
+        const filelength = new DataView(bytes.buffer, 128, 4).getInt32(
+          0,
+          littleEndian
         );
-      const blobUrl = URL.createObjectURL(sgBlob);
-      var file = document.createElement("a");
-      file.className = "LCEFile";
-      file.href = blobUrl;
-      file.download = fileNameFromSaveGame;
-      if (fileNameFromSaveGame.includes("/")) {
-        // split the name between folder and filename
-        let newName = fileNameFromSaveGame.split("/");
-        // create an element with filename (notice the 1)
-        file.innerText = newName[1];
-        // create a div to hold the files in their respective folders
-        var lceFolder = document.createElement("div");
-        // create a header with the foldername (newName[0])
-        var folderName = document.createElement("h3");
-        folderName.innerText = newName[0];
-        folderName.className = "LCEFolderName";
-        if (!document.getElementById("LCEFolder_" + newName[0])) {
-          // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
-          lceFolder.appendChild(folderName);
-          lceFolder.className = "LCEFolder";
-          lceFolder.id = "LCEFolder_" + newName[0];
-          var lineBreak1 = document.createElement("br");
-          document
-            .getElementById("files")
-            .appendChild(lineBreak1);
-        }
-
-        // add the folder into the upper files div
-        document.getElementById("files").appendChild(lceFolder);
-        if (!document.getElementById("LCEFolder_" + newName[0]))
-          lceFolder.appendChild(file);
-        else
-          document.getElementById("LCEFolder_" + newName[0]).appendChild(file);
-        // line break because yes
-        if (!document.getElementById("LCEFolder_" + newName[0])) {
-          var lineBreak = document.createElement("br");
-          document.getElementById("lceFolder").appendChild(lineBreak);
-        } else {
-          var lineBreak = document.createElement("br");
-          document
-            .getElementById("LCEFolder_" + newName[0])
-            .appendChild(lineBreak);
-        }
-      } else {
-        file.innerText = fileNameFromSaveGame;
-        document.getElementById("lceRoot").appendChild(file);
-        var lineBreak = document.createElement("br");
-        document.getElementById("lceRoot").appendChild(lineBreak);
+        const fileoffset = new DataView(bytes.buffer, 132, 4).getInt32(
+          0,
+          littleEndian
+        );
+        files.push(
+          new File(
+            [data.slice(fileoffset, fileoffset + filelength)],
+            fileNameFromSaveGame
+          )
+        );
       }
-      document.getElementById("files").style.display = "block";
     }
-  }
+    render(files);
   } catch (e) {
     document.getElementById("output").textContent = `${e}`;
     console.error(e);
+  }
+}
+
+/**
+ * @param {File[]} files
+ */
+async function render(files) {
+  for (const file of files) {
+    const blobUrl = URL.createObjectURL(file);
+    var LCEFileContainer = document.createElement('div');
+    var LCEFile = document.createElement("a");
+    LCEFile.className = "LCEFile";
+    LCEFile.href = blobUrl;
+    LCEFile.download = file.name;
+    if (file.name.includes("/")) {
+      // split the name between folder and filename
+      let lceFileFolder = file.name.split("/");
+      // create an element with filename (notice the 1)
+      LCEFile.innerText = lceFileFolder[1];
+      // create a div to hold the files in their respective folders
+      var lceFolder = document.createElement("div");
+      // create a header with the foldername (newName[0])
+      var folderName = document.createElement("h3");
+      folderName.innerText = lceFileFolder[0];
+      folderName.className = "LCEFolderName";
+      if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
+        // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
+        lceFolder.appendChild(folderName);
+        lceFolder.className = "LCEFolder";
+        lceFolder.id = "LCEFolder_" + lceFileFolder[0];
+        var lineBreak1 = document.createElement("br");
+        document.getElementById("files").appendChild(lineBreak1);
+      }
+
+      // add the folder into the upper files div
+      document.getElementById("files").appendChild(lceFolder);
+      if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
+        LCEFileContainer.appendChild(LCEFile);
+        lceFolder.appendChild(LCEFileContainer);
+      } else {
+      LCEFileContainer.appendChild(LCEFile);
+        document.getElementById("LCEFolder_" + lceFileFolder[0]).appendChild(LCEFileContainer);
+      }
+      // line break because yes
+      if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
+        var lineBreak = document.createElement("br");
+        document.getElementById("lceFolder").appendChild(lineBreak);
+      } else {
+        var lineBreak = document.createElement("br");
+        document.getElementById("LCEFolder_" + lceFileFolder[0]).appendChild(lineBreak);
+      }
+
+    } else {
+      LCEFile.innerText = file.name;
+      LCEFileContainer.appendChild(LCEFile);
+      document.getElementById("lceRoot").appendChild(LCEFileContainer);
+      var lineBreak = document.createElement("br");
+      document.getElementById("lceRoot").appendChild(lineBreak);
+    }
+    if (await isReadable(files, file.name) == true) {
+      var viewNBTButton = document.createElement("button");
+      viewNBTButton.onclick = async () => { await readNBTfromFile(files, file.name); };
+      viewNBTButton.innerText = "View NBT";
+      LCEFileContainer.appendChild(viewNBTButton);
+    }
+    document.getElementById("files").style.display = "block";
   }
 }
 
