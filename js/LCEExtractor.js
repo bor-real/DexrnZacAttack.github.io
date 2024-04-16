@@ -81,7 +81,7 @@ let compressionMode = "none";
  * @param {0 | 1 | 2} mode
  * @returns {void}
  */
-function switchCompressionMode(mode) {
+export function switchCompressionMode(mode) {
   switch (mode) {
     case 0:
       document.getElementById("CompModeBtn").innerText =
@@ -277,5 +277,3 @@ async function render(files) {
     document.getElementById("files").style.display = "block";
   }
 }
-
-export { switchCompressionMode };
