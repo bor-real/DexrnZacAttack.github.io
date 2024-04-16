@@ -1,3 +1,15 @@
+// These imports are here because they use side-effects, rather than
+// import-based function calls. Ideally modules don't add side-effects, rather
+// they can export functionality that can be called from the module that imports it.
+
+import "./js/settings.js"; // sets theme and lang
+import "./js/lanyard.js"; // lanyard setup
+import "./js/modules/msgbox.js"; // unused? not used yet, at least
+// import "./js/steam.js"; // unused
+import "./js/background.js"; // this sets an 'onload' handler
+import "./js/fadeout.js"; // this sets a 'DOMContentLoaded' handler
+import "./js/expandable.js"; // component setup
+
 import { fadeBG } from "./js/background.js";
 import { actuallySetLanguage } from "./js/lanyard.js";
 import { checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"

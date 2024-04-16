@@ -1,6 +1,12 @@
+import "../js/settings.js"; // sets theme and lang
+import "../js/background.js"; // this sets an 'onload' handler
+import "../js/fadeout.js"; // this sets a 'DOMContentLoaded' handler
+import "../js/LCEExtractor.js"; // component setup
+
 import { switchCompressionMode } from '../js/LCEExtractor.js';
 import { fadeBG } from '../js/background.js';
 import { setVer } from '../js/ver.js';
+
 let i = 0;
 function incrementI() {
   // only thing I could think to name it...
