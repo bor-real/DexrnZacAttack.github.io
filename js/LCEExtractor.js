@@ -1,5 +1,6 @@
 import { inflate, vitaRLEDecode } from "./modules/compression.js";
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
+import { showNBTCard } from "../SGExtractor/index.js";
 
 /*
 Copyright 2024 Dexrn ZacAttack
@@ -270,7 +271,7 @@ async function render(files) {
     }
     if (await isReadable(files, file.name) == true) {
       var viewNBTButton = document.createElement("button");
-      viewNBTButton.onclick = async () => { await readNBTfromFile(files, file.name); };
+      viewNBTButton.onclick = async () => { showNBTCard(await readNBTfromFile(files, file.name)); };
       viewNBTButton.innerText = "View NBT";
       LCEFileContainer.appendChild(viewNBTButton);
     }

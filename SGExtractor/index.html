@@ -24,20 +24,22 @@ SOFTWARE.
 <html lang="en">
   <head>
     <title>Dexrn's Hell Hole > Legacy Console Edition file extractor</title>
-    <link id="theme" rel="stylesheet" href="" />
+    <link id="theme" rel="stylesheet" href />
     <link id="theme" rel="stylesheet" href="/css/all.css">
-    <meta content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor" property="og:title" />
+    <meta
+      content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor"
+      property="og:title" />
     <meta content="LCE Savegame extractor" property="og:description" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <meta content="https://DexrnZacAttack.github.io" property="og:url" />
     <meta content="#0078D7" data-react-helmet="true" name="theme-color" />
     <meta charset="utf-8" />
-    <meta name="description" content="Legacy Console Edition savegame extractor" />
+    <meta name="description"
+      content="Legacy Console Edition savegame extractor" />
     <link
       rel="icon"
       type="image/x-icon"
-      href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png"
-    />
+      href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png" />
   </head>
   <body>
     <div class="loadingScreen">
@@ -54,36 +56,46 @@ SOFTWARE.
           style="cursor: pointer"
           id="back"
           linkto="../index.html"
-          style="width: 55%"
-        >
+          style="width: 55%">
           <div class="back" id="backbtn"></div>
         </div>
-        <div class="card" style="width: 55%; height: 500px;display:flex;flex-direction:column;">
+        <div class="card" id="nbtCard" style="width: 55%; height: 500px;display:none;flex-direction:column;">
+          <div class="cardTitle" id="lcee-nbt-path"></div>
+          <div id="nbtData" style="overflow-y:auto;overflow-x:auto;"></div>
+          <div class="center">
+            <button class="button" id="hideNBTData">Back</button>
+          </div>
+        </div>
+        <div class="card" id="lceCard"
+          style="width: 55%; height: 500px;display:flex;flex-direction:column;">
           <div class="cardTitle" id="lcee-path"></div>
           <h3>NOTE: This is unfinished UX/UI wise.</h3>
           <pre id="output"></pre>
           <div id="files"></div>
           <div class="center">
-            <button class="button" id="CompModeBtn">Save type: Wii U, PS3, Decompressed Xbox 360</button>
-            <label for="fileInput" class="button2" id="lcefileselectbtn"></label>
+            <button class="button" id="CompModeBtn">Save type: Wii U, PS3,
+              Decompressed Xbox 360</button>
+            <label for="fileInput" class="button2"
+              id="lcefileselectbtn"></label>
             <input
               type="file"
               id="fileInput"
-              style="display: none"
-            />
+              style="display: none" />
           </div>
         </div>
         <!-- <div class="card" id="headercard">
         <pre id="header"></pre>
        </div> -->
-       <div class="topcard"style="cursor: pointer"style="width: 55%">
-       <div class="back buttonRedirect" 
-       linkto="https://github.com/zugebot/LegacyEditor" style="text-align:center;font-weight: unset;font-family: unset;font-size:16px;opacity: 1;"><a>This project uses code from another project by Zugebot (jerrinth3glitch)</a></h2>
-       </div>
+        <div class="topcard" style="cursor: pointer" style="width: 55%">
+          <div class="back buttonRedirect"
+            linkto="https://github.com/zugebot/LegacyEditor"
+            style="text-align:center;font-weight: unset;font-family: unset;font-size:16px;opacity: 1;"><a>The VitaRLE parsing code was ported from another project by Zugebot
+              (jerrinth3glitch)</a></h2>
+        </div>
       </div>
       <!-- Last update date -->
       <p class="lastUpdated" id="lastUpdated"></p>
     </div>
   </body>
-  <script type="module" src="./index.js"></script>
+  <script type="module" src="/SGExtractor/index.js"></script>
 </html>

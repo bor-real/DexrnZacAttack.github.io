@@ -20,6 +20,27 @@ function incrementI() {
   switchCompressionMode(i);
 }
 document.querySelector('#CompModeBtn').addEventListener('click', incrementI);
-
 fadeBG(true);
 setVer("le");
+
+
+export function showNBTCard(data) {
+    if (data == undefined)
+        throw new Error("Data is undefined!");
+
+    if (document.getElementById("nbtCard").style.display == "none") {
+        document.getElementById("lceCard").style.display = "none";
+        document.getElementById("nbtCard").style.display = "flex";
+        document.getElementById("nbtData").innerText = JSON.stringify(data);
+    }
+
+}
+
+export function hideNBTCard() {
+    if (document.getElementById("nbtCard").style.display !== "none") {
+        document.getElementById("lceCard").style.display = "flex";
+        document.getElementById("nbtCard").style.display = "none";
+    }
+}
+
+document.querySelector('#hideNBTData').addEventListener('click', hideNBTCard);
