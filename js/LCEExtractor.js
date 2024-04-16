@@ -1,5 +1,5 @@
 import { vitaRLEDecode } from "./modules/compression.js";
-import { readNBTfromFile, isReadable } from "./modules/openNBT.js";
+import { readNBTfromFile, isReadable } from "./modules/NBT.js";
 
 /*
 Copyright 2024 Dexrn ZacAttack
