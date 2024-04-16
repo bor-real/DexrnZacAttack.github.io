@@ -29,6 +29,7 @@ SOFTWARE.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako_inflate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.100/Ice.min.js"></script>
     <script src="../js/settings.js"></script>
+    <script defer src="index.js"></script>
     <meta content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor" property="og:title" />
     <meta content="LCE Savegame extractor" property="og:description" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
@@ -69,20 +70,7 @@ SOFTWARE.
           <pre id="output"></pre>
           <div id="files"></div>
           <div class="center">
-            <script type="module">
-              import { switchCompressionMode } from '/js/LCEExtractor.js';
-              let i = 0;
-              function incrementI() {
-                // only thing I could think to name it...
-                if (i > 1) {
-                  i = 0;
-                } else {
-                  i++;
-                }
-                switchCompressionMode(i);
-              }
-              document.querySelector('#CompModeBtn').addEventListener('click', incrementI)
-            </script>
+            <script type="module" src="index.js"></script>
             <button class="button" id="CompModeBtn">Save type: Wii U, PS3, Decompressed Xbox 360</button>
             <label for="fileInput" class="button2" id="lcefileselectbtn"></label>
             <input
@@ -105,11 +93,5 @@ SOFTWARE.
       <script src="/js/ver.js"></script>
     </div>
     <script type="module" src="../js/LCEExtractor.js"></script>
-    <script>
-      fadeBG(true);
-    </script>
   </body>
-  <script>
-    setVer("le");
-</script>
 </html>

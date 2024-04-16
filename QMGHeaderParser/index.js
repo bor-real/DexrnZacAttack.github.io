@@ -1,0 +1,2 @@
+setVer("qd");
+fadeBG(true);
