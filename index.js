@@ -1,4 +1,8 @@
-
+import { fadeBG } from "./js/background.js";
+import { actuallySetLanguage } from "./js/lanyard.js";
+import { checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
+import { curTab, setCurTab } from "./js/tabs.js";
+import { setVer } from "./js/ver.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     // thx actuallyaridan
@@ -9,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         checkLang();
 });
 
-curTab = 1;
+setCurTab(1);
 
 // Dexrn: This is for the text that shows on the loading screen.
 async function showLoadingText() {
@@ -78,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     settingsPage.style.display = 'none';
 
     closesettingsbtn.addEventListener('click', function () {
-        curTab = curTab;
+        setCurTab(previous => previous);
         tabContainer.style.display = 'block';
         console.log("init curTab: " + curTab);
         if (curTab === 1) {
@@ -94,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         settingsPage.style.display = 'none';
     });
     savebtn.addEventListener('click', function () {
-        curTab = curTab;
+        setCurTab(previous => previous);
         tabContainer.style.display = 'block';
         console.log("init curTab: " + curTab);
         if (curTab === 1) {

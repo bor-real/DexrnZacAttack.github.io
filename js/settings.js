@@ -40,7 +40,7 @@ function DexrnsFunnyLogger(message) {
  * @param {"default-light" | "default-dark"} theme
  * @returns {void}
  */
-function setTheme(theme) {
+export function setTheme(theme) {
   var expirationDate = new Date("Fri, 31 Dec 9999 23:59:59 GMT");
   document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;
 
@@ -69,7 +69,7 @@ function applyTheme(theme) {
  * @param {K} name
  * @returns {K extends "Theme" ? "default-light" | "default-dark" : string | null}
  */
-function getThemeCookie(name) {
+export function getThemeCookie(name) {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split("=");
@@ -89,7 +89,7 @@ applyTheme(savedTheme);
  * @param {keyof LanyardLangNameMap} [syslang]
  * @returns {void}
  */
-function checkLang(syslang) {
+export function checkLang(syslang) {
   const lang = getLang();
   DexrnsFunnyLogger(`Language: ${lang}`);
   let langFilePath;
@@ -125,7 +125,7 @@ checkLang();
 /**
  * @returns {string}
  */
-function getLang() {
+export function getLang() {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");

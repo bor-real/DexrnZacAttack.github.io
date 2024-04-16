@@ -1,4 +1,6 @@
 import { switchCompressionMode } from '../js/LCEExtractor.js';
+import { fadeBG } from '../js/background.js';
+import { setVer } from '../js/ver.js';
 let i = 0;
 function incrementI() {
   // only thing I could think to name it...

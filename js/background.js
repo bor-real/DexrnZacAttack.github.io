@@ -58,7 +58,7 @@ function setBGTime(hour) {
  * @param {boolean | Event} bgload
  * @returns {void}
  */
-function fadeBG(bgload) {
+export function fadeBG(bgload) {
   if (bgload == true) {
     DexrnsFunnyLogger("bgload is true");
     let now = new Date();

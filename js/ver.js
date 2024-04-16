@@ -44,7 +44,7 @@ function getVer(type) {
  * @param {string} type - The file to use the information from when setting the info.
  * @returns {void}
  */
-function setVer(type) {
+export function setVer(type) {
     let json = JSON.parse(getVer(type));
     document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
 }
