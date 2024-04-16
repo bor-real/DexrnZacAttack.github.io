@@ -1,3 +1,5 @@
+import "https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.100/Ice.min.js";
+
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler
 import "../js/fadeout.js"; // this sets a 'DOMContentLoaded' handler

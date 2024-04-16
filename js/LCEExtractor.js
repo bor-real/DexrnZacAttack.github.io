@@ -1,4 +1,4 @@
-import { vitaRLEDecode } from "./modules/compression.js";
+import { inflate, vitaRLEDecode } from "./modules/compression.js";
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
 
 /*
@@ -138,11 +138,11 @@ function readFile(data) {
         try {
           let dataToDecompress = data.slice(8);
           if (endianness == "little") {
-            decompressedData = pako.inflate(dataToDecompress, {
+            decompressedData = inflate(dataToDecompress, {
               endian: "little",
             });
           } else {
-            decompressedData = pako.inflate(dataToDecompress, {
+            decompressedData = inflate(dataToDecompress, {
               endian: "big",
             });
           }
