@@ -48,7 +48,7 @@ SOFTWARE.
                 <img id="darkLSpinner" src="assets/loader-dark.gif" alt="Loading...">
                 <h1 class="loadingText hidden" id="loadingText"></h1>
                 <div class="lBG"></div>
-            </div>
+            </div> 
         </div>
         <div class="mainContent" id="content2">
             <!--TODO: reduce the amount of containers -->
@@ -67,6 +67,7 @@ SOFTWARE.
                             <button class="tabbutton" id="settingsbtn"
                                 style="margin-right:0;margin-left:auto;"></button>
                         </div>
+                        <!-- MAIN CARD -->
                         <div class="card" id="mainCard"
                             style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
                             <div class="cardTitle" id="discord-path"></div>
@@ -120,26 +121,7 @@ SOFTWARE.
                                 </div>
                             </div>
                         </div>
-                        <!---
-                            Dexrn: UNUSED since no API key and the API I am using has rate limiting + only updates once an hour 
-                            <div class="card" id="steamcard"
-                            style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
-                            <div class="cardTitle" id="steam-path"></div>
-                            <div class="activities">
-                                <div class="activityImages">
-                                    <img id="steampfp" src="assets/loader.gif">
-                                </div>
-                                <div class="activityInfo">
-                                    <div id="stmusername"
-                                        class="username"></div>
-                                    <div id="stmstatus"></div>
-                                    <div id="stmcreatedate"
-                                        class="graytxt">Member since July 13,
-                                        2017</div>
-                                    <div id="lastPlayed"></div>
-                                </div>
-                            </div>
-                        </div> --->
+                        <!-- "STUFF" CARD -->
                         <div class="card" id="stuffTab"
                             style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%; display:none; box-shadow: none;">
                             <div class="expandcard" style="text-align: center;">
@@ -198,6 +180,7 @@ SOFTWARE.
                             </div>
                         </div>
                     </div>
+                    <!-- DISCORD ACTIVITY CARD -->
                     <div class="activity card" id="activityCard">
                         <div class="cardTitle" id="activity-path"></div>
                         <div class="activities">
@@ -217,6 +200,7 @@ SOFTWARE.
                             </div>
                         </div>
                     </div>
+                    <!-- ABOUT ME CARD -->
                     <div class="card" id="aboutCard">
                         <div class="cardTitle" id="about-path"></div>
                         <div class="about-me">
@@ -226,6 +210,7 @@ SOFTWARE.
                             </ul>
                         </div>
                     </div>
+                    <!-- LINKS CARD -->
                     <div class="card" id="linksCard">
                         <div class="cardTitle" id="stuff-path"></div>
                         <div class="about-me">
@@ -243,6 +228,7 @@ SOFTWARE.
                             </div>
                         </div>
                     </div>
+                    <!-- SETTINGS CARD -->
                     <div id="settings" style="height: 350px;">
                         <div class="topcard"
                             style="cursor: pointer; width: 300px; margin-bottom: 8px;"

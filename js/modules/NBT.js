@@ -30,8 +30,8 @@ import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/i
 */
 export async function readNBTfromFile(fileArray, fName) {
     try {
-    console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer()));
-    return await read(await fileArray.find(file => file.name === fName).arrayBuffer());
+    console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false }));
+    return await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false });
     } catch {
         console.log('Couldn\'t open this file!')
     }
@@ -44,7 +44,7 @@ export async function readNBTfromFile(fileArray, fName) {
 */
 export async function isReadable(fileArray, fName) {
     try {
-        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer())) {
+        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false })) {
             return true;
         } else {
             return false;
