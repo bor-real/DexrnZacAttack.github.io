@@ -21,15 +21,31 @@ SOFTWARE.
 */
 
 /** @type {1 | 2} */
-let curTab;
+export let curTab;
 /** @type {number} */
 let height;
+
+/**
+ * @param {typeof curTab | ((previous: typeof curTab) => typeof curTab)} newValueOrSetter
+ * @returns {typeof curTab}
+ */
+export function setCurTab(newValueOrSetter) {
+    if (typeof newValueOrSetter === "number"){
+        curTab = newValueOrSetter;
+        return newValueOrSetter;
+    }
+    const previous = curTab;
+    return newValueOrSetter(previous);
+}
+
+// Currently, this is used globally within event handlers inlined in `index.html`
+globalThis.changeMainCard = changeMainCard;
 
 /**
  * @param {"Discord" | "About"} whatToChangeTo
  * @returns {void}
  */
-function changeMainCard(whatToChangeTo) {
+export function changeMainCard(whatToChangeTo) {
 
 switch (whatToChangeTo) {
     // case "Steam":

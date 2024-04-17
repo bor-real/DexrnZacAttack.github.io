@@ -140,7 +140,7 @@ async function lanyardSetLang(langFilePath) {
 /**
  * @returns {Promise<void>}
  */
-async function actuallySetLanguage() {
+export async function actuallySetLanguage() {
   const lang = await lanyardGetLang();
   const langFilePath = await lanyardCheckLang(lang);
   try {

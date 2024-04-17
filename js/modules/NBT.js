@@ -20,32 +20,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
+
+
 /**
- * Retrieves version info for the specified file.
- * @param {string} type - The file to return info for.
- * @returns {string} - A JSON string containing the version and date information.
- */
-function getVer(type) {
-    switch (type) {
-        case "le":
-            // LCE Savegame Extractor
-            return JSON.stringify({ "version": "1.1.20", "date": "04/16/2024"});
-        case "qd":
-            // QMG Header Parser
-            return JSON.stringify({ "version": "1.2.10", "date": "12/21/2023"});
-        case "default":
-        default:
-            return JSON.stringify({ "version": "1.2.52", "date": "04/09/2024"});
+ * @param {File[]} fileArray
+ * @param {string} fName
+ * @returns {Promise<NBTData>}
+*/
+export async function readNBTfromFile(fileArray, fName) {
+    try {
+    console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer()));
+    return await read(await fileArray.find(file => file.name === fName).arrayBuffer());
+    } catch {
+        console.log('Couldn\'t open this file!')
     }
 }
 
 /**
- * Sets the version information in the current HTML.
- * @param {string} type - The file to use the information from when setting the info.
- * @returns {void}
- */
-export function setVer(type) {
-    let json = JSON.parse(getVer(type));
-    document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
+ * @param {File[]} fileArray
+ * @param {string} fName
+ * @returns {Promise<boolean>}
+*/
+export async function isReadable(fileArray, fName) {
+    try {
+        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer())) {
+            return true;
+        } else {
+            return false;
+        }
+        } catch {
+            return false;
+    }
 }
-

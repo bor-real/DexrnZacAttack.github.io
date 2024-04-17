@@ -26,7 +26,6 @@ SOFTWARE.
     <title>Dexrn's Hell Hole > QMG Header Parser</title>
     <link id="theme" rel="stylesheet" href="" />
     <link id="theme" rel="stylesheet" href="/css/all.css">
-    <script src="../js/settings.js"></script>
     <meta content="Dexrn's Hell Hole > QMG Header Parser" property="og:title" />
     <meta content="QMG Header Parser" property="og:description" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
@@ -43,8 +42,6 @@ SOFTWARE.
       type="image/x-icon"
       href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png"
     />
-    <script src="../js/background.js"></script>
-    <script src="../js/fadeout.js"></script>
   </head>
   <body>
     <div class="loadingScreen">
@@ -67,7 +64,7 @@ SOFTWARE.
         </div>
         <div class="card" style="width: 55%; height: 500px;display:flex;flex-direction:column;">
           <div class="cardTitle" id="qmghp-path"></div>
-          <pre id="output"></pre>
+          <pre id="output" style="overflow-y:auto;overflow-x:auto;"></pre>
           <div class="center">
             <label for="fileInput" class="button2" id="fileselectbtn"></label>
             <input
@@ -84,14 +81,7 @@ SOFTWARE.
       </div>
       <!-- Last update date -->
       <p class="lastUpdated" id="lastUpdated"></p>
-      <script src="/js/ver.js"></script>
     </div>
-    <script src="../js/QMGParser.js"></script>
-    <script>
-      fadeBG(true);
-    </script>
   </body>
-  <script>
-    setVer("qd");
-</script>
+  <script type="module" src="/QMGHeaderParser/index.js"></script>
 </html>

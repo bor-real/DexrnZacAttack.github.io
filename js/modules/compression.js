@@ -20,16 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// https://www.jsdelivr.com/package/npm/pako
+
+export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "https://cdn.jsdelivr.net/npm/pako@2.1.0/+esm";
+
 /**
+ * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
+ * https://github.com/zugebot/LegacyEditor
+ * 
+ * Big thanks to Offroaders for helping out with this, would've been barely possible without them!
+ * 
  * @param {Uint8Array} data - The compressed data
  * @returns {Uint8Array} - The decompressed data
  */
-/*
- * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
- * https://github.com/zugebot/LegacyEditor
- */
-// Big thanks to Offroaders for helping out with this, would've been barely possible without them!
-function vitaRLEDecode(data) {
+export function vitaRLEDecode(data) {
     const compressedLength = data.byteLength;
     const result = [];
     let readOffset = 0;
@@ -54,6 +58,3 @@ function vitaRLEDecode(data) {
   
     return new Uint8Array(result);
   }
-
-  
-export { vitaRLEDecode };

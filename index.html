@@ -26,10 +26,7 @@ SOFTWARE.
         <title>Dexrn's Hell Hole</title>
         <link id="theme" rel="stylesheet" href>
         <link id="theme" rel="stylesheet" href="/css/all.css">
-        <script src="/js/settings.js"></script>
         <meta charset="utf-8">
-        <script defer src="js/lanyard.js"></script>
-        <!-- <script defer src="js/steam.js"></script> -->
         <meta name="theme-color" content="#72e5fc">
         <meta content="Dexrn's Hell Hole" property="og:title">
         <meta content="What the FUCK am I doing" property="og:description">
@@ -43,34 +40,6 @@ SOFTWARE.
         <meta name="description" content="Dexrn ZacAttack's website">
         <link rel="icon" type="image/x-icon"
             href="https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/favicon.png">
-        <script src="js/background.js"></script>
-        <script src="js/tabs.js"></script>
-        <script>
-
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            // thx actuallyaridan
-                showLoadingText();
-                fadeBG(true);
-                // this may still be broken on Webkit, hopefully not though... Thanks, Apple.
-                actuallySetLanguage();
-                checkLang();
-        });
-
-        curTab = 1;
-
-        // Dexrn: This is for the text that shows on the loading screen.
-        async function showLoadingText() {
-            await new Promise(resolve => setTimeout(resolve, 5000));
-
-            var loadingText = document.querySelector('.loadingtext');
-            if (loadingText) {
-                loadingText.classList.remove('hidden');
-            }
-        }
-        </script>
-        <script src="js/fadeout.js"></script>
     </head>
     <body>
         <div class="loadingScreen" id="loadingScreen">
@@ -228,7 +197,6 @@ SOFTWARE.
                                 </div>
                             </div>
                         </div>
-                        <script src="/js/expandable.js"></script>
                     </div>
                     <div class="activity card" id="activityCard">
                         <div class="cardTitle" id="activity-path"></div>
@@ -314,102 +282,9 @@ SOFTWARE.
                             </div>
                         </div>
                     </div>
-                    <script>
-                    document.getElementById('savebtn').addEventListener('click', function () {
-                        var selectedLanguage = document.getElementById('language2').value;
-                        var selectedTheme = document.getElementById('themeoption').value;
-                        var currentTheme = getThemeCookie('Theme');
-                        var currentLanguage = getLang();
-                        if (selectedLanguage !== getLang() && selectedLanguage !== 'unselected') {
-                            var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
-                            document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
-                            actuallySetLanguage();
-                            checkLang();
-                        } else {
-                        }
-                        if (selectedTheme !== getThemeCookie('Theme') && selectedTheme !== 'unselectedtheme') {
-                            setTheme(selectedTheme);
-                        } else {
-
-                        }
-                    });
-                    </script>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var activityCard = document.querySelector('#activityCard');
-                            var aboutCard = document.querySelector('#aboutCard');
-                            var linksCard = document.querySelector('#linksCard');
-                            var abm = document.querySelector('#stuffTab');
-                            var toggleButton = document.getElementById('settingsbtn');
-                            var settingsPage = document.getElementById('settings');
-                            var tabContainer = document.getElementById('mainCardsContainer');
-            
-                            settingsPage.style.display = 'none';
-            
-                            toggleButton.addEventListener('click', function () {
-                                tabContainer.style.display = 'none';
-                                activityCard.style.display = 'none';
-                                aboutCard.style.display = 'none';
-                                linksCard.style.display = 'none';
-                                abm.style.display = 'none';
-                                toggleButton.style.display = 'none';
-                                settingsPage.style.display = 'block';
-                            });
-                        });
-                    </script>
-                    <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var toggleButton = document.getElementById('settingsbtn');
-                        var mainCard = document.querySelector('#mainCard');
-                        var activityCard = document.querySelector('#activityCard');
-                        var aboutCard = document.querySelector('#aboutCard');
-                        var linksCard = document.querySelector('#linksCard');
-                        var abm = document.querySelector('#stuffTab');
-                        var closesettingsbtn = document.getElementById('settingsclose');
-                        var settingsPage = document.getElementById('settings');
-                        var tabButtons = document.getElementById('tabbutton');
-                        var tabContainer = document.getElementById('mainCardsContainer');
-
-                        settingsPage.style.display = 'none';
-
-                        closesettingsbtn.addEventListener('click', function () {
-                            curTab = curTab;
-                            tabContainer.style.display = 'block';
-                            console.log("init curTab: " + curTab);
-                            if (curTab === 1) {
-                                console.log(1)
-                                activityCard.style.display = 'block';
-                                aboutCard.style.display = 'block';
-                                linksCard.style.display = 'block';
-                            } else if (curTab === 2) {
-                                console.log(2)
-                                abm.style.display = 'block';
-                            }
-                            toggleButton.style.display = 'block';
-                            settingsPage.style.display = 'none';
-                        });
-                        savebtn.addEventListener('click', function () {
-                            curTab = curTab;
-                            tabContainer.style.display = 'block';
-                            console.log("init curTab: " + curTab);
-                            if (curTab === 1) {
-                                console.log(1)
-                                activityCard.style.display = 'block';
-                                aboutCard.style.display = 'block';
-                                linksCard.style.display = 'block';
-                            } else if (curTab === 2) {
-                                console.log(2)
-                                abm.style.display = 'block';
-                            }
-                            toggleButton.style.display = 'block';
-                            settingsPage.style.display = 'none';
-                        });
-                    });
-                    </script>
                 </div>
                 <!-- Last update date -->
                 <p class="lastUpdated" id="lastUpdated"></p>
-                <script src="/js/ver.js"></script>
             </div>
         </div>
         <!-- These look bad on mobile devices and HiDPI devices. -->
@@ -418,7 +293,5 @@ SOFTWARE.
         <a rel="me" href="https://wetdry.world/@zach"
             style="display:none;">Mastodon</a>
     </body>
-    <script>
-        setVer("default");
-    </script>
+    <script type="module" src="./index.js"></script>
 </html>
