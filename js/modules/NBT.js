@@ -26,12 +26,13 @@ import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/i
 /**
  * @param {File[]} fileArray
  * @param {string} fName
+ * @param {string} endianness
  * @returns {Promise<NBTData>}
 */
-export async function readNBTfromFile(fileArray, fName) {
+export async function readNBTfromFile(fileArray, fName, endianness) {
     try {
-    console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false }));
-    return await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false });
+    console.log(await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { rootName: true, endian: endianness, bedrockLevel: false, strict: false }));
+    return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: endianness, bedrockLevel: false, strict: false });
     } catch {
         console.log('Couldn\'t open this file!')
     }
@@ -40,11 +41,12 @@ export async function readNBTfromFile(fileArray, fName) {
 /**
  * @param {File[]} fileArray
  * @param {string} fName
+ * @param {string} endianness
  * @returns {Promise<boolean>}
 */
-export async function isReadable(fileArray, fName) {
+export async function isReadable(fileArray, fName, endianness) {
     try {
-        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { strict: false })) {
+        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { rootName: true, endian: endianness, bedrockLevel: false, strict: false })) {
             return true;
         } else {
             return false;

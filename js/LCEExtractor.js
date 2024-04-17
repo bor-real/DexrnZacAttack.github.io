@@ -284,10 +284,10 @@ async function render(files) {
       LCEFileContainer.appendChild(LCEFile);
       document.getElementById("lceRoot").appendChild(LCEFileContainer);
     }
-    if ((await isReadable(files, file.name)) == true) {
+    if ((await isReadable(files, file.name, endianness)) == true) {
       var viewNBTButton = document.createElement("button");
       viewNBTButton.onclick = async () => {
-        showNBTCard(await readNBTfromFile(files, file.name));
+        showNBTCard(await readNBTfromFile(files, file.name, endianness));
       };
       viewNBTButton.innerText = "View NBT";
       viewNBTButton.className = "button";
