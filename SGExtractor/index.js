@@ -48,5 +48,3 @@ export function hideNBTCard() {
         document.getElementById("nbtCard").style.display = "none";
     }
 }
-
-document.querySelector('#hideNBTData').addEventListener('click', hideNBTCard);

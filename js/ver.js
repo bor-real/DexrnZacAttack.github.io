@@ -29,7 +29,7 @@ function getVer(type) {
     switch (type) {
         case "le":
             // LCE Savegame Extractor
-            return JSON.stringify({ "version": "1.1.10", "date": "04/08/2024"});
+            return JSON.stringify({ "version": "1.1.20", "date": "04/16/2024"});
         case "qd":
             // QMG Header Parser
             return JSON.stringify({ "version": "1.2.10", "date": "12/21/2023"});
