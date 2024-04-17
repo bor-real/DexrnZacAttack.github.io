@@ -1,6 +1,7 @@
 import { inflate, vitaRLEDecode } from "./modules/compression.js";
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
 import { showNBTCard } from "../SGExtractor/index.js";
+import "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
 
 /*
 Copyright 2024 Dexrn ZacAttack
@@ -30,6 +31,8 @@ let endianness;
 let littleEndian;
 /** @type {boolean} */
 let doNotSaveDOM = false;
+/** @type {string} */
+let savegameName;
 
 /** @type {boolean} */
 let vita = false;
@@ -46,6 +49,7 @@ let vita = false;
 function onFileSelected(event) {
   const file = /** @type {typeof this} */ (event.target).files[0];
   if (file) {
+    savegameName = file.name;
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(
@@ -65,6 +69,7 @@ document.addEventListener("drop", (e) => {
   e.preventDefault();
   const file = e.dataTransfer.files[0];
   if (file) {
+    savegameName = file.name;
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(
@@ -102,6 +107,20 @@ export function switchCompressionMode(mode) {
       vita = true;
       break;
   }
+}
+
+async function downloadZip(zip) {
+  zip.generateAsync({ type: 'blob' })
+  .then(function(file) {
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(file);
+    link.download = `${savegameName}.zip`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
 }
 
 /**
@@ -217,9 +236,16 @@ function readFile(data) {
  * @param {File[]} files
  */
 async function render(files) {
+  var zip = new JSZip();
   for (const file of files) {
     const blobUrl = URL.createObjectURL(file);
-    var LCEFileContainer = document.createElement('div');
+    // may or may not make some of these elements their own function
+    var LCEFileContainer = document.createElement("div");
+    LCEFileContainer.className = "LCEFileContainer";
+    LCEFileContainer.style.display = "flex";
+    LCEFileContainer.style.flexDirection = "row";
+    LCEFileContainer.style.backgroundColor = "rgba(50, 50, 50, 0.5)";
+    LCEFileContainer.style.marginBottom = "10px";
     var LCEFile = document.createElement("a");
     LCEFile.className = "LCEFile";
     LCEFile.href = blobUrl;
@@ -240,8 +266,6 @@ async function render(files) {
         lceFolder.appendChild(folderName);
         lceFolder.className = "LCEFolder";
         lceFolder.id = "LCEFolder_" + lceFileFolder[0];
-        var lineBreak1 = document.createElement("br");
-        document.getElementById("files").appendChild(lineBreak1);
       }
 
       // add the folder into the upper files div
@@ -250,31 +274,39 @@ async function render(files) {
         LCEFileContainer.appendChild(LCEFile);
         lceFolder.appendChild(LCEFileContainer);
       } else {
-      LCEFileContainer.appendChild(LCEFile);
-        document.getElementById("LCEFolder_" + lceFileFolder[0]).appendChild(LCEFileContainer);
+        LCEFileContainer.appendChild(LCEFile);
+        document
+          .getElementById("LCEFolder_" + lceFileFolder[0])
+          .appendChild(LCEFileContainer);
       }
-      // line break because yes
-      if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
-        var lineBreak = document.createElement("br");
-        document.getElementById("lceFolder").appendChild(lineBreak);
-      } else {
-        var lineBreak = document.createElement("br");
-        document.getElementById("LCEFolder_" + lceFileFolder[0]).appendChild(lineBreak);
-      }
-
     } else {
       LCEFile.innerText = file.name;
       LCEFileContainer.appendChild(LCEFile);
       document.getElementById("lceRoot").appendChild(LCEFileContainer);
-      var lineBreak = document.createElement("br");
-      document.getElementById("lceRoot").appendChild(lineBreak);
     }
-    if (await isReadable(files, file.name) == true) {
+    if ((await isReadable(files, file.name)) == true) {
       var viewNBTButton = document.createElement("button");
-      viewNBTButton.onclick = async () => { showNBTCard(await readNBTfromFile(files, file.name)); };
+      viewNBTButton.onclick = async () => {
+        showNBTCard(await readNBTfromFile(files, file.name));
+      };
       viewNBTButton.innerText = "View NBT";
+      viewNBTButton.className = "button";
+      viewNBTButton.style.padding = "unset";
+      viewNBTButton.style.margin = "unset";
+      viewNBTButton.style.marginLeft = "auto";
       LCEFileContainer.appendChild(viewNBTButton);
     }
+    zip.file(file.name, file);
     document.getElementById("files").style.display = "block";
   }
+  if (document.querySelector("#downloadArchiveButton"))
+    document.querySelector("#downloadArchiveButton").remove();
+  var downloadArchiveButton = document.createElement("button");
+  downloadArchiveButton.onclick = async () => {
+    await downloadZip(zip);
+  };
+  downloadArchiveButton.innerText = "Download all";
+  downloadArchiveButton.className = "button";
+  downloadArchiveButton.id = "downloadArchiveButton";
+  document.querySelector(".center").appendChild(downloadArchiveButton);
 }
