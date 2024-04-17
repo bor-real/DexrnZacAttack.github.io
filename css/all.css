@@ -20,7 +20,6 @@
   border-top-left-radius: 10px;
   padding: 12px;
   width: 12%;
-  animation: 1s ease-out 0s 1 fadeIn;
 }
 
 .button {
@@ -43,7 +42,6 @@
   border-top-left-radius: 10px;
   padding: 12px;
   width: 12%;
-  animation: 1s ease-out 0s 1 fadeIn;
   cursor: pointer;
 }
 
@@ -114,7 +112,6 @@
   border-radius: 10px;
   padding: 12px;
   width: 55%;
-  animation: 1s ease-out 0s 1 fadeIn;
 }
 
 
@@ -187,7 +184,6 @@
   border: none;
   padding: 0px;
   width: 50%;
-  animation: 1s ease-out 0s 1 fadeIn;
   background: none;
 }
 
@@ -197,7 +193,6 @@
   border: none;
   padding: 0px;
   width: 50%;
-  animation: 1s ease-out 0s 1 fadeIn;
   background: none;
 }
 
@@ -295,7 +290,6 @@ a {
 .expandcard {
   border-radius: 20px;
   cursor: pointer;
-  animation: 1s ease-in-out 0s 1 fadeIn;
 }
 
 @media (max-width: 1100px) {
@@ -456,7 +450,6 @@ a {
   border-radius: 10px;
   padding: 12px;
   width: 50%;
-  animation: 1s ease-out 0s 1 fadeIn;
 }
 
 body {
