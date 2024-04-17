@@ -276,6 +276,10 @@ a {
   }
 }
 
+.LCEFolder {
+  margin-bottom: 10px;
+}
+
 .details {
   display: block;
   max-height: 0;

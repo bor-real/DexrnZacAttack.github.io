@@ -4,6 +4,7 @@
   "type": "module",
   "devDependencies": {
     "@types/pako": "^2.0.3",
-    "nbtify": "1.90.1"
+    "nbtify": "1.90.1",
+    "jszip": "3.10.1"
   }
 }
