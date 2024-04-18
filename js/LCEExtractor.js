@@ -109,18 +109,22 @@ export function switchCompressionMode(mode) {
   }
 }
 
+/**
+ * @param {import("jszip")} zip
+ * @returns {Promise<void>}
+ */
 async function downloadZip(zip) {
-  zip.generateAsync({ type: 'blob' })
-  .then(function(file) {
+  try {
+    /** @type {Blob} */
+    const file = await zip.generateAsync({ type: 'blob' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(file);
     link.download = `${savegameName}.zip`;
     link.click();
     URL.revokeObjectURL(link.href);
-  })
-  .catch(function(error) {
+  } catch (error) {
     console.error(error);
-  });
+  }
 }
 
 /**
