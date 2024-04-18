@@ -27,7 +27,7 @@ import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/i
  * @param {File[]} fileArray
  * @param {string} fName
  * @param {import("nbtify").Endian} endianness
- * @returns {Promise<NBTData>}
+ * @returns {Promise<NBTData | undefined>}
 */
 export async function readNBTfromFile(fileArray, fName, endianness) {
     try {

@@ -1,5 +1,5 @@
 import "https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.100/Ice.min.js";
-import { stringify } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
+import { NBTData, stringify } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
 
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler
@@ -26,6 +26,9 @@ fadeBG(true);
 setVer("le");
 
 
+/**
+ * @param {NBTData | undefined} data
+ */
 export function showNBTCard(data) {
     if (data == undefined)
         throw new Error("Data is undefined!");
@@ -40,6 +43,9 @@ export function showNBTCard(data) {
 
 }
 
+/**
+ * @returns {void}
+ */
 export function hideNBTCard() {
     if (document.getElementById("nbtCard").style.display !== "none") {
         document.getElementById("back").style.display = "block";
