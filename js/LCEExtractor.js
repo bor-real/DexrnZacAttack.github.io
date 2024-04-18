@@ -161,15 +161,7 @@ function readFile(data) {
       if (vita !== true) {
         try {
           let dataToDecompress = data.slice(8);
-          if (endianness == "little") {
-            decompressedData = inflate(dataToDecompress, {
-              endian: "little",
-            });
-          } else {
-            decompressedData = inflate(dataToDecompress, {
-              endian: "big",
-            });
-          }
+          decompressedData = inflate(dataToDecompress);
 
           if (decompressedData) data = decompressedData;
           console.log("This is ZLib/Deflate compressed.");
