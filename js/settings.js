@@ -20,6 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import defaultLight from "../css/default-light.css?url";
+import defaultDark from "../css/default-dark.css?url";
+import langEN from "../assets/lang/en-US.json?url";
+import langCN from "../assets/lang/zh-CN.json?url";
+
 var DLog = false;
 console.log(
     'settings.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
@@ -55,11 +60,11 @@ function applyTheme(theme) {
   const stylesheetElement = /** @type {HTMLLinkElement} */ (document.getElementById("theme"));
   switch (theme) {
     case "default-light":
-      stylesheetElement.href = "/css/default-light.css";
+      stylesheetElement.href = defaultLight;
       break;
     case "default-dark":
     default:
-      stylesheetElement.href = "/css/default-dark.css";
+      stylesheetElement.href = defaultDark;
       break;
   }
 }
@@ -97,24 +102,24 @@ export function checkLang(syslang) {
       DexrnsFunnyLogger(`Not using system language`);
   switch (lang.toLowerCase()) {
     case "zh-cn":
-      langFilePath = "/assets/lang/zh-CN.json";
+      langFilePath = langCN;
       break;
     case "en-us":
     default:
-      langFilePath = "/assets/lang/en-US.json";
+      langFilePath = langEN;
       break;
   }} else if (syslang) {
     DexrnsFunnyLogger(`Using system language: ${syslang}`);
     switch (syslang.toLowerCase()) {
       case "zh-cn":
-        langFilePath = "/assets/lang/zh-CN.json";
+        langFilePath = langCN;
         break;
       case "en-us":
       default:
-        langFilePath = "/assets/lang/en-US.json";
+        langFilePath = langEN;
         break;
     }} else {
-      langFilePath = "/assets/lang/en-US.json";
+      langFilePath = langEN;
     }
   setLang(langFilePath);
 }

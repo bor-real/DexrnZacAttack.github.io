@@ -20,6 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import langEN from "../assets/lang/en-US.json?url";
+import langCN from "../assets/lang/zh-CN.json?url";
+
 var DLog = false;
 console.log(
   'lanyard.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
@@ -88,6 +91,8 @@ async function lanyardGetLang() {
   return null; // Cookie not found
 }
 
+
+// langPath type is broken rn, will fix later.
 /**
  * @param {string} lang
  * @returns {Promise<`/assets/lang/${keyof LanyardLangNameMap}.json`>}
@@ -97,11 +102,11 @@ async function lanyardCheckLang(lang) {
   let langPath;
   switch (lang) {
     case "zh-CN":
-      langPath = "/assets/lang/zh-CN.json";
+      langPath = langCN;
       break;
     case "en-US":
     default:
-      langPath = "/assets/lang/en-US.json";
+      langPath = langEN;
       break;
   }
   return langPath;

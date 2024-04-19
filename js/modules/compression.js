@@ -22,7 +22,7 @@ SOFTWARE.
 
 // https://www.jsdelivr.com/package/npm/pako
 
-export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "https://cdn.jsdelivr.net/npm/pako@2.1.0/+esm";
+export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "pako";
 
 /**
  * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
