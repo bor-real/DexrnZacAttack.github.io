@@ -22,7 +22,7 @@ SOFTWARE.
 
 let expandcards: NodeListOf<HTMLDivElement>
 
-function expandCard(): void {
+function expandCard() {
     expandcards = document.querySelectorAll('.expandcard');
  
     expandcards.forEach(function (expandcard) {

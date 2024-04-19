@@ -12,7 +12,7 @@ import "./js/expandable.js"; // component setup
 
 import { fadeBG } from "./js/background.js";
 import { actuallySetLanguage } from "./js/lanyard.js";
-import { type Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
+import { Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
 import { curTab, setCurTab } from "./js/tabs.js";
 import { setVer } from "./js/ver.js";
 
@@ -38,10 +38,8 @@ async function showLoadingText() {
 }
 
 document.getElementById('savebtn').addEventListener('click', function () {
-    var selectedLanguage: string = (document.getElementById('language2') as HTMLSelectElement).value;
+    var selectedLanguage = (document.getElementById('language2') as HTMLInputElement).value;
     var selectedTheme: Theme = (document.getElementById('themeoption') as HTMLSelectElement).value as Theme;
-    var currentTheme: Theme = getThemeCookie('Theme');
-    var currentLanguage: string = getLang();
     if (selectedLanguage !== getLang() && selectedLanguage !== 'unselected') {
         var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
         document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';
@@ -58,13 +56,13 @@ document.getElementById('savebtn').addEventListener('click', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    var activityCard = document.querySelector('#activityCard');
-    var aboutCard = document.querySelector('#aboutCard');
-    var linksCard = document.querySelector('#linksCard');
-    var abm = document.querySelector('#stuffTab');
-    var toggleButton = document.getElementById('settingsbtn');
-    var settingsPage = document.getElementById('settings');
-    var tabContainer = document.getElementById('mainCardsContainer');
+    var activityCard: HTMLElement = document.querySelector('#activityCard');
+    var aboutCard: HTMLElement = document.querySelector('#aboutCard');
+    var linksCard: HTMLElement = document.querySelector('#linksCard');
+    var abm: HTMLElement = document.querySelector('#stuffTab');
+    var toggleButton: HTMLElement = document.getElementById('settingsbtn');
+    var settingsPage: HTMLElement = document.getElementById('settings');
+    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer');
 
     settingsPage.style.display = 'none';
 
@@ -80,16 +78,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var toggleButton = document.getElementById('settingsbtn');
-    var mainCard = document.querySelector('#mainCard');
-    var activityCard = document.querySelector('#activityCard');
-    var aboutCard = document.querySelector('#aboutCard');
-    var linksCard = document.querySelector('#linksCard');
-    var abm = document.querySelector('#stuffTab');
-    var closesettingsbtn = document.getElementById('settingsclose');
-    var settingsPage = document.getElementById('settings');
-    var tabButtons = document.getElementById('tabbutton');
-    var tabContainer = document.getElementById('mainCardsContainer');
+    var toggleButton: HTMLElement = document.getElementById('settingsbtn');
+    var activityCard: HTMLElement = document.querySelector('#activityCard');
+    var aboutCard: HTMLElement = document.querySelector('#aboutCard');
+    var linksCard: HTMLElement = document.querySelector('#linksCard');
+    var abm: HTMLElement = document.querySelector('#stuffTab');
+    var closesettingsbtn: HTMLElement = document.getElementById('settingsclose');
+    var settingsPage: HTMLElement = document.getElementById('settings');
+    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer');
+    var savebtn: HTMLElement = document.getElementById('savebtn');
 
     settingsPage.style.display = 'none';
 

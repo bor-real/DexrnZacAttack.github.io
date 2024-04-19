@@ -20,34 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-var DLog = false;
-console.log(
-  'background.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
-);
-function DexrnsFunnyLogger(message: string): void {
-  if (DLog) {
-    console.log("background.js: " + message);
-  } else {
-    return;
-  }
-}
 
-function setBGTime(hour: number): void {
+function setBGTime(hour: number) {
   let bgElement: HTMLDivElement = document.querySelector(".bg");
   if (hour >= 6 && hour < 20 ) {
-    DexrnsFunnyLogger("day time");
     bgElement.style.backgroundImage =
       "url('https://api.itzpeto.com/dexrn/day')";
   } else {
-    DexrnsFunnyLogger("night time");
     bgElement.style.backgroundImage =
       "url('https://api.itzpeto.com/dexrn/night')";
   } 
 }
 
-export function fadeBG(bgload: boolean | Event): void {
+export function fadeBG(bgload: boolean | Event) {
   if (bgload == true) {
-    DexrnsFunnyLogger("bgload is true");
     let now = new Date();
     let hour = now.getHours();
     let bgElement: HTMLDivElement = document.querySelector(".bg");

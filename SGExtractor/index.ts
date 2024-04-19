@@ -1,5 +1,5 @@
 import "ice";
-import { stringify } from "nbtify";
+import { NBTData, stringify } from "nbtify";
 
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler
@@ -10,8 +10,6 @@ import { switchCompressionMode } from '../js/LCEE-Core.js';
 import { fadeBG } from '../js/background.js';
 import { setVer } from '../js/ver.js';
 import { readFile } from "../js/LCEE-Core.js";
-
-import type { NBTData } from "nbtify";
 
 let i = 0;
 function incrementI() {
@@ -29,7 +27,7 @@ fadeBG(true);
 setVer("le");
 
 
-export function showNBTCard(data: NBTData | undefined): void {
+export function showNBTCard(data: NBTData | undefined) {
     if (data == undefined)
         throw new Error("Data is undefined!");
 
@@ -43,7 +41,7 @@ export function showNBTCard(data: NBTData | undefined): void {
 
 }
 
-export function hideNBTCard(): void {
+export function hideNBTCard() {
     if (document.getElementById("nbtCard").style.display !== "none") {
         document.getElementById("back").style.display = "block";
         document.getElementById("backNBTBtn").style.display = "none";
@@ -54,17 +52,15 @@ export function hideNBTCard(): void {
 
 
 (
-  document.getElementById("fileInput") as HTMLInputElement
+  document.getElementById("fileInput")
 ).addEventListener("change", onFileSelected);
 
-function onFileSelected(this: HTMLInputElement, event: Event): void {
-  const file: File | undefined = (event.target as typeof this).files[0];
+function onFileSelected(this: HTMLInputElement) {
+  const file = this.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const data = new Uint8Array(
-        event.target.result as ArrayBuffer
-      );
+      const data = new Uint8Array((event.target.result as ArrayBuffer));
       readFile(data, file.name);
     };
     reader.readAsArrayBuffer(file);
@@ -82,7 +78,7 @@ document.addEventListener("drop", (e) => {
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(
-        event.target.result as ArrayBuffer
+        /** @type {ArrayBuffer} */ (event.target.result as ArrayBuffer)
       );
       readFile(data, file.name);
     };

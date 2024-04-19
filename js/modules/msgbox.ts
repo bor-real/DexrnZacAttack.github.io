@@ -24,9 +24,9 @@ let msgboxExists = false;
 let msgboxShown = false;
 
 /**
- * Shows a messagebox
+ * Updates a messagebox
  */
-export function updateMSGBox(title: string, message: string, buttons: string[] = []): void {
+export function updateMSGBox(title: string, message: string, buttons: Array<string> = []): void {
 
     if (buttons === undefined) {
         buttons = [];
@@ -50,10 +50,8 @@ export function updateMSGBox(title: string, message: string, buttons: string[] =
     }
 }
 
-/**
- * Shows a messagebox
- */
-export function createMSGBox(title: string, message: string, buttons: string[] = []): void {
+/** Creates a messagebox */
+export function createMSGBox(title: string, message: string, buttons: Array<string> = []) {
     if (buttons === undefined) {
         buttons = [];
     }
@@ -114,7 +112,8 @@ export function createMSGBox(title: string, message: string, buttons: string[] =
     msgboxShown = true;
 }
 
-export function useMSGBox(title: string, message: string, buttons: string[] = []): void {
+/** Creates the messagebox if it doesn't exist, updates it if it does. */
+export function useMSGBox(title: string, message: string, buttons: Array<string> = []) {
     if (!msgboxExists) {
         createMSGBox(title, message, buttons);
         return;

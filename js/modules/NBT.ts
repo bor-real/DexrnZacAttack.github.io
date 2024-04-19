@@ -27,7 +27,7 @@ import type { NBTData } from "nbtify";
 
 export async function readNBTfromFile(fileArray: File[], fName: string): Promise<NBTData | undefined> {
     try {
-    return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
+        return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
     } catch {
         console.log('Couldn\'t open this file!')
     }

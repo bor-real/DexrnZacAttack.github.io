@@ -33,9 +33,7 @@ let savegameName: string;
 
 let vita: boolean = false;
 
-let compressionMode = "none";
-
-export function switchCompressionMode(mode: 0 | 1 | 2): void {
+export function switchCompressionMode(mode: number): void {
   switch (mode) {
     case 0:
       document.getElementById("CompModeBtn").innerText =
@@ -95,7 +93,6 @@ export function readFile(data: Uint8Array, sgName: string): void {
         console.log("This is an Xbox 360 package!!!");
       }
     }
-    let offsetToRead;
     if (data) {
       if (vita !== true) {
         try {

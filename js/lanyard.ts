@@ -23,25 +23,12 @@ SOFTWARE.
 import langEN from "../assets/lang/en-US.json?url";
 import langCN from "../assets/lang/zh-CN.json?url";
 
-var DLog = false;
-console.log(
-  'lanyard.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
-);
-function DexrnsFunnyLogger(message: string): void {
-  if (DLog) {
-    console.log("lanyard.js: " + message);
-  } else {
-    return;
-  }
-}
-
 const API_URL = "https://api.lanyard.rest/v1";
 const USERID = "485504221781950465";
 const pfp: HTMLImageElement = document.querySelector("#pfp");
 const customStatus: HTMLDivElement = document.querySelector("#customStatus");
 const onlineState: HTMLDivElement = document.querySelector("#onlineState");
 const platforms: HTMLDivElement = document.querySelector("#platforms");
-const username: HTMLDivElement = document.querySelector("#username");
 const bigImage: HTMLImageElement = document.querySelector("#activityImageBig");
 const smallImage: HTMLImageElement = document.querySelector("#activityImageSmall");
 const name: HTMLDivElement = document.querySelector("#activityName");
@@ -49,10 +36,6 @@ const smallImageAlt: HTMLImageElement = document.querySelector("#activityAlterna
 const state: HTMLDivElement = document.querySelector("#activityState");
 const details: HTMLDivElement = document.querySelector("#activityDetail");
 const elapsed: HTMLDivElement = document.querySelector("#activityTimeElapsed");
-// Dexrn -----
-// It is currently 10:09 PM as I am writing this.
-// Wanted to have more info about my Discord status on the website.
-var disc_status;
 var disc_platform: string[];
 var disc_isOffline: boolean;
 let localizedText: LocalizedText;
@@ -66,13 +49,11 @@ async function lanyardGetLang(): Promise<string | null> {
       return value;
     }
   }
-  return null; // Cookie not found
+  return null;
 }
 
-
-// langPath type is broken rn, will fix later.
-async function lanyardCheckLang(lang: string): Promise<`/assets/lang/${keyof LanyardLangNameMap}.json`> {
-  let langPath: `/assets/lang/${keyof LanyardLangNameMap}.json`;
+async function lanyardCheckLang(lang: string) {
+  let langPath: string;
   switch (lang) {
     case "zh-CN":
       langPath = langCN;
@@ -84,7 +65,7 @@ async function lanyardCheckLang(lang: string): Promise<`/assets/lang/${keyof Lan
   }
   return langPath;
 }
-async function lanyardSetLang<T extends keyof LanyardLangNameMap>(langFilePath: `/assets/lang/${T}.json`): Promise<LocalizedText<T> | null> {
+async function lanyardSetLang<T extends keyof LanyardLangNameMap>(langFilePath: string): Promise<LocalizedText<T> | null> {
   try {
     const response = await fetch(langFilePath);
     const data: LanyardLang<T> = await response.json();
@@ -117,11 +98,6 @@ export async function actuallySetLanguage(): Promise<void> {
   } catch {}
 }
 
-DexrnsFunnyLogger("Dexrn: I hate this so I am adding debug logging here...");
-DexrnsFunnyLogger("variables set");
-/**
- * @returns Needs a proper return type based on the API usage. (I think this does now, right? Want to double-check.)
- */
 async function fetchResponse(userId: string): Promise<LanyardAPI> {
   try {
     const res = await fetch(`${API_URL}/users/${userId}`);
@@ -138,7 +114,6 @@ async function setAvatar(): Promise<void> {
   } = await fetchResponse(USERID);
   const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=512`;
   pfp.src = fullUrl;
-  DexrnsFunnyLogger("setAvatar");
   // pfp2.src = fullUrl;
 }
 async function setAvatarFrame(): Promise<void> {
@@ -154,29 +129,20 @@ async function setAvatarFrame(): Promise<void> {
   // Dexrn: Jank incoming!
   switch (discord_status) {
     case "online":
-      DexrnsFunnyLogger("Online");
-      // statusDot.style.background = "#3ba45d";
       onlineState.innerText = localizedText.lyonline;
-      // statusDot.title = localizedText.lyonline;
       pfp.style.border = "2px solid #3ba45d";
       pfp.style.boxShadow = "0 0 20px #3ba45d";
       onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
       platforms.style.cssText = "color: #3ba45d; opacity: 1;";
       break;
     case "dnd":
-      DexrnsFunnyLogger("DND (Do not disturb)");
-      // statusDot.style.background = "#ed4245";
       pfp.style.border = "2px solid #ed4245";
       pfp.style.boxShadow = "0 0 20px #ed4245";
-      // statusDot.title = localizedText.lydnd;
       onlineState.innerText = localizedText.lydnd;
       onlineState.style.cssText = "color: #ed4245; opacity: 1;";
       platforms.style.cssText = "color: #ed4245; opacity: 1;";
       break;
     case "idle":
-      DexrnsFunnyLogger("Idle");
-      // statusDot.style.background = "#faa81a";
-      // statusDot.title = localizedText.lyidle;
       onlineState.innerText = localizedText.lyidle;
       pfp.style.border = "2px solid #faa81a";
       pfp.style.boxShadow = "0 0 20px #faa81a";
@@ -184,9 +150,6 @@ async function setAvatarFrame(): Promise<void> {
       platforms.style.cssText = "color: #faa81a; opacity: 1;";
       break;
     case "offline":
-      DexrnsFunnyLogger("Offline");
-      // statusDot.style.background = "#747e8c";
-      // statusDot.title = localizedText.lyoffline;
       onlineState.innerText = localizedText.lyoffline;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
@@ -194,9 +157,6 @@ async function setAvatarFrame(): Promise<void> {
       disc_isOffline = true;
       break;
     default:
-      DexrnsFunnyLogger("Unknown (default)");
-      // statusDot.style.background = "#747e8c";
-      // statusDot.title = localizedText.lyunknown;
       onlineState.innerText = localizedText.lyunknown;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
@@ -208,17 +168,14 @@ async function setAvatarFrame(): Promise<void> {
 
   // Dexrn: I should make it show pictures instead.
   if (active_on_discord_desktop == true) {
-    DexrnsFunnyLogger("Platform(s): Desktop");
     platformarray.push(`${localizedText.lyplatd}`);
   }
 
   if (active_on_discord_mobile == true) {
-    DexrnsFunnyLogger("Platform(s): Mobile");
     platformarray.push(`${localizedText.lyplatm}`);
   }
 
   if (active_on_discord_web == true) {
-    DexrnsFunnyLogger("Platform(s): Web");
     platformarray.push(`${localizedText.lyplatw}`);
   }
 
@@ -240,7 +197,6 @@ async function setStatus(): Promise<void> {
   }
 
   if (activities) {
-    DexrnsFunnyLogger("activities is true");
     const activityOfType4 = activities.find((m): m is LanyardActivity4 => m.type == 4);
     if (activityOfType4) {
       const { state } = activityOfType4;
@@ -255,9 +211,8 @@ async function setActivityBigImage(): Promise<void> {
   const {
     data: { activities, spotify },
   } = await fetchResponse(USERID);
-  const mostRecent = activities.filter((m) => m.type !== 4).shift();
+  const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (!mostRecent?.assets?.large_image) {
-    DexrnsFunnyLogger("No large_image");
     bigImage.style.display = "none";
     return;
   } else {
@@ -267,14 +222,12 @@ async function setActivityBigImage(): Promise<void> {
         }`
       : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.large_image}.png?size=256`;
     if (mostRecent.assets.large_image.includes("spotify")) {
-      DexrnsFunnyLogger("spotify");
       bigImage.style.display = "block";
       bigImage.src = spotify.album_art_url;
       bigImage.title = spotify.album;
       return;
     }
     bigImage.style.display = "block";
-    DexrnsFunnyLogger("large_image set");
     bigImage.src = imageLink;
     bigImage.title = mostRecent.assets.large_text;
   }
@@ -284,7 +237,7 @@ async function setActivitySmallImage(): Promise<void> {
     data: { activities },
   } = await fetchResponse(USERID);
 
-  const mostRecent = activities.filter((m) => m.type !== 4).shift();
+  const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
 
   if (
     !mostRecent ||
@@ -292,13 +245,10 @@ async function setActivitySmallImage(): Promise<void> {
     mostRecent.assets.small_image.includes("spotify")
   ) {
     smallImage.style.display = "none";
-    DexrnsFunnyLogger('small_image false or large_image includes "spotify"');
-    // Dexrn: I was a dumbass and forgot to also not display if smallImage is false.
     smallImageAlt.style.display = "none";
     return;
   }
 
-  DexrnsFunnyLogger("small_image true");
   const imageLink = mostRecent.assets.small_image.includes("external")
     ? `https://media.discordapp.net/external/${
         mostRecent.assets.small_image.split("mp:external/")[1]
@@ -310,13 +260,11 @@ async function setActivitySmallImage(): Promise<void> {
     smallImageAlt.src = imageLink;
     smallImageAlt.title = mostRecent.assets.small_text;
     smallImage.style.display = "none";
-    DexrnsFunnyLogger("show small image as large.");
   } else {
     smallImageAlt.style.display = "none";
     smallImage.style.display = "block";
     smallImage.src = imageLink;
     smallImage.title = mostRecent.assets.small_text;
-    DexrnsFunnyLogger("show small image on top of large image.");
   }
 }
 
@@ -324,13 +272,11 @@ async function setActivityName(): Promise<void> {
   const {
     data: { activities },
   } = await fetchResponse(USERID);
-  const mostRecent = activities.filter((m) => m.type !== 4).shift();
+  const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (!mostRecent?.name) {
-    DexrnsFunnyLogger("No activity name");
     name.innerText = localizedText.lyna;
     return;
   }
-  DexrnsFunnyLogger("activity name set");
   name.style.display = "block";
   name.innerText = mostRecent.name;
 }
@@ -353,7 +299,7 @@ async function setActivityState(): Promise<void> {
 
 async function setTimestamp(): Promise<void> {
   const response = await fetchResponse(USERID);
-  const activities = response.data.activities.filter((m) => m.type !== 4);
+  const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   const mostRecent = activities.shift();
   let created: number;
   try {
@@ -373,19 +319,14 @@ async function setTimestamp(): Promise<void> {
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     elapsed.innerText = `${localizedText.lytimee}` + formattime;
-    DexrnsFunnyLogger(`Start Time: ${created}`);
-    DexrnsFunnyLogger(`Current Time: ${current}`);
-    DexrnsFunnyLogger(`Diff (current - created): ${diff}`);
-    DexrnsFunnyLogger(`Formatted Time: ${formattime}`);
   } catch {
-    DexrnsFunnyLogger("No start time");
     elapsed.innerHTML = "";
   }
 }
 async function setActivityDetails(): Promise<void> {
   const response = await fetchResponse(USERID);
 
-  const activities = response.data.activities.filter((m) => m.type !== 4);
+  const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   if (!activities.length) {
     details.style.display = "none";
     return;

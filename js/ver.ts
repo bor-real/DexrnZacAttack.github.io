@@ -35,7 +35,7 @@ function getVer(type: string): string {
             return JSON.stringify({ "version": "1.2.10", "date": "12/21/2023"});
         case "default":
         default:
-            return JSON.stringify({ "version": "1.2.54", "date": "04/17/2024"});
+            return JSON.stringify({ "version": "1.3.00", "date": "04/17/2024"});
     }
 }
 

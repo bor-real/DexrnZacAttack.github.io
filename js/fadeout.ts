@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".buttonRedirect");
   const backbutton: HTMLDivElement = document.querySelector("#back");
   const background: HTMLDivElement = document.querySelector(".bg");
-  const topright: HTMLDivElement = document.querySelector(".topright");
 
   function handleClick(button: HTMLButtonElement | HTMLDivElement): void {
     const delay = 350;
@@ -58,11 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function fade(element: HTMLDivElement): void {
+function fade(element: HTMLDivElement) {
   if (element) {
-    let opacity = 1;
-    const duration = 300;
-    const interval = 10;
+    let opacity: number = 1;
+    const duration: number = 300;
+    const interval: number = 10;
     const timer = setInterval(function () {
       if (opacity <= 0) {
         clearInterval(timer);

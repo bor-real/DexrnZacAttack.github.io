@@ -25,35 +25,22 @@ SOFTWARE.
 // Saw that vlOd made a header parser in C# and decided to make one in JS so that people who don't run Windows can run this straight in their browser.
 // This script is JANK.
 
-var DLog = false;
-console.log('QMGParser.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
-function DexrnsFunnyLogger(message: string): void {
-  if (DLog) {
-    console.log("QMGParser.js: " + message);
-  } else {
-    return;
-  }
-}
-
 const unknownversions = [
     'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ'
 ];
 const magictypes = [
     'QM', 'QG', 'IM', 'QC', 'QW', 'IF', 'IT', 'PF', 'AU', 'NQ', 'SP'
 ];
-// Dexrn: this probably won't be used.
-const knownversions = [
-    'QM', 'QG', 'SP'
-];
-(document.getElementById('fileInput') as HTMLInputElement).addEventListener('change', onfileselected);
 
-function onfileselected(this: HTMLInputElement, event: Event): void {
-    const file = (event.target as typeof this).files[0];
+(document.getElementById('fileInput')! as HTMLInputElement).addEventListener('change', onfileselected);
+
+function onfileselected(this: HTMLInputElement) {
+    const file = this.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            const data = new Uint8Array(event.target.result as ArrayBuffer);
-            readfile(data, file.name); 
+            const data = new Uint8Array((event.target.result as ArrayBuffer));
+            readfile(data); 
         };
         reader.readAsArrayBuffer(file);
     }
@@ -68,8 +55,8 @@ document.addEventListener("drop", (e) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            const data = new Uint8Array(event.target.result as ArrayBuffer);
-            readfile(data, file.name);
+            const data = new Uint8Array((event.target.result as ArrayBuffer));
+            readfile(data);
             const fileInput = document.getElementById('fileInput');
             fileInput.dispatchEvent(new Event('change'));
         };
@@ -130,32 +117,25 @@ document.addEventListener("drop", (e) => {
 //     container1.appendChild(container);
 // }
 
-function readfile(data: Uint8Array, filename: string): void {
+function readfile(data: Uint8Array) {
 
-    DexrnsFunnyLogger(`File: ${filename}`)
-    DexrnsFunnyLogger(`Parsing started...`);
     // Dexrn: if the file doesn't have at least 12 bytes, it can't even fit the header lmao
     if (data.length < 12) {
-        DexrnsFunnyLogger(`The parser encountered an error: Invalid file: File is too small, Must be atleast 12 bytes in length. File size was ${data.length}`);
         document.getElementById('output').textContent = `Invalid file: File is too small, Must be atleast 12 bytes in length.\n` +
         `File size was ${data.length}`;
         throw new Error("Invalid file: File is too small")
     }
 
     // Dexrn: Check if the first 2 bytes are QM or QG or one of the unknown ones
-    DexrnsFunnyLogger(`Checking magic...`)
     const magic = String.fromCharCode(data[0], data[1]);
     const magicraw = data[0].toString(16).padStart(2, '0') + ' ' + data[1].toString(16).padStart(2, '0');
 
     if (!magictypes.includes(magic) && magicraw !== '14 00') {
-        DexrnsFunnyLogger(`The parser encountered an error: Invalid file: Invalid magic. Expected one of: QM, QG, IM, QC, '14 00', got "${magic}" (${magicraw}) instead.`);
         document.getElementById('output').textContent = `Invalid file: Invalid magic.\n` +
             `Expected one of: QM, QG, IM, QC, QW, '14 00', got "${magic}" (${magicraw}) instead.`;
         throw new Error("Invalid file: Invalid magic");
     }
     
-    DexrnsFunnyLogger(`Magic is ${magic}`)
-    DexrnsFunnyLogger(`Magic (raw) is ${magicraw}`)
 
     // Dexrn: THE JANKNESS STARTS HERE!
     // Dexrn: parse
@@ -173,19 +153,15 @@ function readfile(data: Uint8Array, filename: string): void {
     const encmode = data[5].toString(16).padStart(2, '0');
     // let sprfiletype;
     if (magic != "QM") {
-        DexrnsFunnyLogger(`Looking for ZLib streams`);
         for (let i = 0; i < data.length - 1; i++) {
             if (data[i] === 0x78 && data[i + 1] === 0xDA) {
                 zlibstreamcount++;
-                DexrnsFunnyLogger(`ZLib stream found at offset ${zliboffset}`);
             }
             zliboffset++;
         }
-        DexrnsFunnyLogger(`ZLib Stream Count: ${zlibstreamcount}`);
     }
     
 
-    DexrnsFunnyLogger(`Setting variables...`);
     let flags;
     let flag1;
     let flag2;
@@ -193,26 +169,17 @@ function readfile(data: Uint8Array, filename: string): void {
     let flag1noraw;
     if (magic === 'QG' || magic === 'IM' || magic === 'QC' || magicraw === '14 00' || magic === 'QW' || magic === 'SP') {
         flags = data[5].toString(16).padStart(2, '0');
-        DexrnsFunnyLogger(`flags: ${flags}`)
         qual = data[6];
-        DexrnsFunnyLogger(`qual: ${qual}`)
         majorversion = data[2];
-        DexrnsFunnyLogger(`majorversion: ${majorversion}`)
         minorversion = data[3];
-        DexrnsFunnyLogger(`minorversion: ${minorversion}`)
         revision = data[4];
-        DexrnsFunnyLogger(`revision: ${revision}`)
     } else if (magic === 'QM') {
         // Dexrn: this is jank
         flag1 = data[4].toString(16).padStart(2, '0');
-        DexrnsFunnyLogger(`flag1: ${flag1}`)
         flag1noraw = data[4];
         flag2 = data[5].toString(16).padStart(2, '0');
-        DexrnsFunnyLogger(`flag2: ${flag2}`)
         majorversion = data[2];
-        DexrnsFunnyLogger(`majorversion: ${majorversion}`)
         offset = -1; // Dexrn: Offset because I originally had this and don't want to redo this yet.
-        DexrnsFunnyLogger(`offset (for the parser): ${offset}`)
     }   
 
     const width = (data[7 + offset] | (data[8 + offset] << 8));
@@ -220,8 +187,10 @@ function readfile(data: Uint8Array, filename: string): void {
 
     let animated: 0 | 1;
     if (magic == "QM") {
-        animated = (flag1noraw >> 7) != 0;
-        DexrnsFunnyLogger(`animated: ${animated}`)
+        if ((flag1noraw >> 7) !== 0)
+            animated = 1;
+        else
+            animated = 0;
     } else {
         animated = 0;  
     }
@@ -237,26 +206,14 @@ function readfile(data: Uint8Array, filename: string): void {
     // DexrnsFunnyLogger(`flag1 == ${flag1}`);
 
 
-    // Dexrn: this might not work...
-    DexrnsFunnyLogger(`Checking version... (to see if we have to offset alphapos)`)
     let alphapos: number;
     if (majorversion > 11 && animated != 0 && currentFramecount <= 2) {
-        DexrnsFunnyLogger(`offset alphapos`)
         alphapos = (data[12] | (data[13] << 8)) << 2;
-        DexrnsFunnyLogger(`alphapos: ${alphapos}`)
-        // alphaposver12 = true;
     } else {
-        DexrnsFunnyLogger(`don't offset alphapos`)
         alphapos = (data[12] | (data[13] << 8));
-        DexrnsFunnyLogger(`alphapos: ${alphapos}`)
-        // alphaposver12 = false;
     }
 
-    // DexrnsFunnyLogger(`alphaposver12 == ${alphaposver12}`);
-
-
     // Dexrn: pixel format detection
-    DexrnsFunnyLogger(`Detecting image pixel format...`);
     let pixelformat: string;
     let transparency: string;
     let bpp: string;
@@ -267,91 +224,50 @@ function readfile(data: Uint8Array, filename: string): void {
             transparency = "false";
             bpp = "0x10";
             raw_type = "QM_RAW_RGB565";
-            DexrnsFunnyLogger(`case 0\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 1:
             pixelformat = "RGB888";
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_RGB888";
-            DexrnsFunnyLogger(`case 1\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 2:
             pixelformat = "BGR888";
             transparency = "false";
             bpp = "0x18";
             raw_type = "QM_RAW_BGR888";
-            DexrnsFunnyLogger(`case 2\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 3:
             pixelformat = "RGBA5658";
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_RGBA5658";
-            DexrnsFunnyLogger(`case 3\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 4:
             pixelformat = "ARGB8565";
             transparency = "true";
             bpp = "0x18";
             raw_type = "QM_RAW_ARGB8565";
-            DexrnsFunnyLogger(`case 4\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 5:
             pixelformat = "ARGB8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_ARGB8888";
-            DexrnsFunnyLogger(`case 5\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 6:
             pixelformat = "RGBA8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_RGBA8888";
-            DexrnsFunnyLogger(`case 6\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         case 7:
             pixelformat = "BGRA8888";
             transparency = "true";
             bpp = "0x20";
             raw_type = "QM_RAW_BGRA8888";
-            DexrnsFunnyLogger(`case 7\n
-            pixelformat = ${pixelformat}\n
-            transparency = ${transparency}\n
-            bpp = ${bpp}\n
-            raw_type = ${raw_type}`)
             break;
         default:
-            DexrnsFunnyLogger(`Unknown`)
             pixelformat = "Unknown";
             transparency = "Unknown";
             bpp = "Unknown";

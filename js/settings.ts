@@ -25,21 +25,9 @@ import defaultDark from "../css/default-dark.css?url";
 import langEN from "../assets/lang/en-US.json?url";
 import langCN from "../assets/lang/zh-CN.json?url";
 
-var DLog = false;
-console.log(
-    'settings.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
-  );
-function DexrnsFunnyLogger(message: string): void {
-  if (DLog) {
-    console.log("settings.js: " + message);
-  } else {
-    return;
-  }
-}
-
 export type Theme = "unselectedtheme" | "default-light" | "default-dark";
 
-export function setTheme(theme: Theme): void {
+export function setTheme(theme: "default-light" | "default-dark") {
   var expirationDate = new Date("Fri, 31 Dec 9999 23:59:59 GMT");
   document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;
 
@@ -77,10 +65,8 @@ applyTheme(savedTheme);
 
 export function checkLang(syslang?: keyof LanyardLangNameMap): void {
   const lang = getLang();
-  DexrnsFunnyLogger(`Language: ${lang}`);
   let langFilePath;
   if (lang) {
-      DexrnsFunnyLogger(`Not using system language`);
   switch (lang.toLowerCase()) {
     case "zh-cn":
       langFilePath = langCN;
@@ -90,7 +76,6 @@ export function checkLang(syslang?: keyof LanyardLangNameMap): void {
       langFilePath = langEN;
       break;
   }} else if (syslang) {
-    DexrnsFunnyLogger(`Using system language: ${syslang}`);
     switch (syslang.toLowerCase()) {
       case "zh-cn":
         langFilePath = langCN;
@@ -116,7 +101,6 @@ export function getLang(): string {
       return value;
     }
   } 
-  DexrnsFunnyLogger(`Language cookie not found`);
   return null;
 }
 
@@ -180,7 +164,5 @@ function checkIfExists(elementId: string, value: string): void {
   const element = document.getElementById(elementId);
   if (element) {
     element.textContent = value;
-  } else {
-    DexrnsFunnyLogger(`Element ${element} does not exist on this page.`);
-  }
+  } 
 }
