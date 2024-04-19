@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import { read, NBTData } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
+import { read, NBTData } from "nbtify";
 
 
 /**

@@ -2,9 +2,11 @@
   "name": "dexrnzacattack.github.io",
   "private": true,
   "type": "module",
-  "devDependencies": {
-    "@types/pako": "^2.0.3",
+  "dependencies": {
     "jszip": "^3.10.1",
     "nbtify": "1.90.1"
+  },
+  "devDependencies": {
+    "@types/pako": "^2.0.3"
   }
 }

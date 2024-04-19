@@ -1,5 +1,7 @@
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
 import { showNBTCard } from "../SGExtractor/index.js";
+import { downloadZip } from "./LCEE-Core.js";
+import JSZip from "jszip";
 
 /**
  * @param {File[]} files

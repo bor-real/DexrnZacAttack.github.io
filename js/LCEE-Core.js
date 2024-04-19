@@ -1,6 +1,6 @@
 import { inflate, vitaRLEDecode } from "./modules/compression.js";
 import { render } from "./LCEE-GUI.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+import JSZip from "jszip";
 
 /*
 Copyright 2024 Dexrn ZacAttack
@@ -65,10 +65,10 @@ export function switchCompressionMode(mode) {
 }
 
 /**
- * @param {import("jszip")} zip
+ * @param {JSZip} zip
  * @returns {Promise<void>}
  */
-async function downloadZip(zip) {
+export async function downloadZip(zip) {
   try {
     /** @type {Blob} */
     const file = await zip.generateAsync({ type: 'blob' });
