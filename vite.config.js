@@ -1,18 +1,19 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
 
 export default defineConfig({
   base: "./",
   build: {
     target: "esnext",
     rollupOptions: {
-      input: [
-        "index.html",
-        "QMG/index.html",
-        "QMGHeaderParser/index.html",
-        "SGExtractor/index.html",
-        "403/index.html",
-        "404/index.html",
-      ]
+      input: {
+        index: resolve(__dirname, "index.html"),
+        QMG: resolve(__dirname, "index.html"),
+        QMGHP: resolve(__dirname, "index.html"),
+        LCEE: resolve(__dirname, "index.html"),
+        403: resolve(__dirname, "index.html"),
+        404: resolve(__dirname, "index.html"),
+      }
     }
   },
   server: {
