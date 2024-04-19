@@ -4,11 +4,12 @@ import { NBTData, stringify } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/d
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler
 import "../js/fadeout.js"; // this sets a 'DOMContentLoaded' handler
-import "../js/LCEExtractor.js"; // component setup
+import "../js/LCEE-Core.js"; // component setup
 
-import { switchCompressionMode } from '../js/LCEExtractor.js';
+import { switchCompressionMode } from '../js/LCEE-Core.js';
 import { fadeBG } from '../js/background.js';
 import { setVer } from '../js/ver.js';
+import { readFile } from "../js/LCEE-Core.js";
 
 let i = 0;
 function incrementI() {
@@ -54,3 +55,46 @@ export function hideNBTCard() {
         document.getElementById("nbtCard").style.display = "none";
     }
 }
+
+
+/** @type {HTMLInputElement} */ (
+  document.getElementById("fileInput")
+).addEventListener("change", onFileSelected);
+
+/**
+ * @this {HTMLInputElement}
+ * @param {Event} event
+ * @returns {void}
+ */
+function onFileSelected(event) {
+  const file = /** @type {typeof this} */ (event.target).files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const data = new Uint8Array(
+        /** @type {ArrayBuffer} */ (event.target.result)
+      );
+      readFile(data, file.name);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+document.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener("drop", (e) => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const data = new Uint8Array(
+        /** @type {ArrayBuffer} */ (event.target.result)
+      );
+      readFile(data, file.name);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+});
