@@ -20,6 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import defaultLight from "../css/default-light.css?url";
+import defaultDark from "../css/default-dark.css?url";
+
 var DLog = false;
 console.log(
     'settings.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
@@ -55,11 +58,11 @@ function applyTheme(theme) {
   const stylesheetElement = /** @type {HTMLLinkElement} */ (document.getElementById("theme"));
   switch (theme) {
     case "default-light":
-      stylesheetElement.href = "/css/default-light.css";
+      stylesheetElement.href = defaultLight;
       break;
     case "default-dark":
     default:
-      stylesheetElement.href = "/css/default-dark.css";
+      stylesheetElement.href = defaultDark;
       break;
   }
 }
