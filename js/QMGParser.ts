@@ -27,11 +27,7 @@ SOFTWARE.
 
 var DLog = false;
 console.log('QMGParser.js: Dexrn: I put logging in here but you\'ll have to set \"DLog\" to true.')
-/**
- * @param {string} message
- * @returns {void}
- */
-function DexrnsFunnyLogger(message) {
+function DexrnsFunnyLogger(message: string): void {
   if (DLog) {
     console.log("QMGParser.js: " + message);
   } else {
@@ -49,19 +45,14 @@ const magictypes = [
 const knownversions = [
     'QM', 'QG', 'SP'
 ];
-/** @type {HTMLInputElement} */ (document.getElementById('fileInput')).addEventListener('change', onfileselected);
+(document.getElementById('fileInput')! as HTMLInputElement).addEventListener('change', onfileselected);
 
-/**
- * @this {HTMLInputElement}
- * @param {Event} event
- * @returns {void}
- */
-function onfileselected(event) {
-    const file = /** @type {typeof this} */ (event.target).files[0];
+function onfileselected(this: HTMLInputElement, event: Event): void {
+    const file = (event.target as typeof this).files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
+            const data = new Uint8Array(event.target.result as ArrayBuffer);
             readfile(data, file.name); 
         };
         reader.readAsArrayBuffer(file);
@@ -77,7 +68,7 @@ document.addEventListener("drop", (e) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            const data = new Uint8Array(/** @type {ArrayBuffer} */ (event.target.result));
+            const data = new Uint8Array(event.target.result as ArrayBuffer);
             readfile(data, file.name);
             const fileInput = document.getElementById('fileInput');
             fileInput.dispatchEvent(new Event('change'));
@@ -139,12 +130,7 @@ document.addEventListener("drop", (e) => {
 //     container1.appendChild(container);
 // }
 
-/**
- * @param {Uint8Array} data
- * @param {string} filename
- * @returns {void}
- */
-function readfile(data, filename) {
+function readfile(data: Uint8Array, filename: string): void {
 
     DexrnsFunnyLogger(`File: ${filename}`)
     DexrnsFunnyLogger(`Parsing started...`);
@@ -232,8 +218,7 @@ function readfile(data, filename) {
     const width = (data[7 + offset] | (data[8 + offset] << 8));
     const height = (data[9 + offset] | (data[10 + offset] << 8));
 
-    /** @type {0 | 1} */
-    let animated;
+    let animated: 0 | 1;
     if (magic == "QM") {
         animated = (flag1noraw >> 7) != 0;
         DexrnsFunnyLogger(`animated: ${animated}`)
@@ -254,8 +239,7 @@ function readfile(data, filename) {
 
     // Dexrn: this might not work...
     DexrnsFunnyLogger(`Checking version... (to see if we have to offset alphapos)`)
-    /** @type {number} */
-    let alphapos;
+    let alphapos: number;
     if (majorversion > 11 && animated != 0 && currentFramecount <= 2) {
         DexrnsFunnyLogger(`offset alphapos`)
         alphapos = (data[12] | (data[13] << 8)) << 2;
@@ -273,14 +257,10 @@ function readfile(data, filename) {
 
     // Dexrn: pixel format detection
     DexrnsFunnyLogger(`Detecting image pixel format...`);
-    /** @type {string} */
-    let pixelformat;
-    /** @type {string} */
-    let transparency;
-    /** @type {string} */
-    let bpp;
-    /** @type {string} */
-    let raw_type;
+    let pixelformat: string;
+    let transparency: string;
+    let bpp: string;
+    let raw_type: string;
     switch (type) {
         case 0:
             pixelformat = "RGB565";

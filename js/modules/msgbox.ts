@@ -23,12 +23,10 @@ SOFTWARE.
 let msgboxExists = false;
 let msgboxShown = false;
 
-/** Shows a messagebox
- * @param {string} title
- * @param {string} message
- * @param {Array<string>} [buttons]
+/**
+ * Shows a messagebox
  */
-export function updateMSGBox(title, message, buttons = []) {
+export function updateMSGBox(title: string, message: string, buttons: string[] = []): void {
 
     if (buttons === undefined) {
         buttons = [];
@@ -52,12 +50,10 @@ export function updateMSGBox(title, message, buttons = []) {
     }
 }
 
-/** Shows a messagebox
- * @param {string} title
- * @param {string} message
- * @param {Array<string>} [buttons]
+/**
+ * Shows a messagebox
  */
-export function createMSGBox(title, message, buttons = []) {
+export function createMSGBox(title: string, message: string, buttons: string[] = []): void {
     if (buttons === undefined) {
         buttons = [];
     }
@@ -118,13 +114,7 @@ export function createMSGBox(title, message, buttons = []) {
     msgboxShown = true;
 }
 
-/**
- * @param {string} title
- * @param {string} message
- * @param {string[]} [buttons]
- * @returns {void}
- */
-export function useMSGBox(title, message, buttons = []) {
+export function useMSGBox(title: string, message: string, buttons: string[] = []): void {
     if (!msgboxExists) {
         createMSGBox(title, message, buttons);
         return;
@@ -137,12 +127,12 @@ export function useMSGBox(title, message, buttons = []) {
     updateMSGBox(title, message, buttons = []);
 }
 
-export function hideMSGBox() { 
+export function hideMSGBox(): void { 
     document.getElementById('msgbox').style.display = 'none';
     msgboxShown = false;
 }
 
-export function showMSGBox() { 
+export function showMSGBox(): void { 
     document.getElementById('msgbox').style.display = 'none';
     msgboxShown = true;
 }

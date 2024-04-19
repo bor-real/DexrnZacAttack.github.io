@@ -20,16 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/** @type {1 | 2} */
-export let curTab;
-/** @type {number} */
-let height;
+export let curTab: 1 | 2;
+let height: number;
 
-/**
- * @param {typeof curTab | ((previous: typeof curTab) => typeof curTab)} newValueOrSetter
- * @returns {typeof curTab}
- */
-export function setCurTab(newValueOrSetter) {
+export function setCurTab(newValueOrSetter: typeof curTab | ((previous: typeof curTab) => typeof curTab)): typeof curTab {
     if (typeof newValueOrSetter === "number"){
         curTab = newValueOrSetter;
         return newValueOrSetter;
@@ -41,11 +35,13 @@ export function setCurTab(newValueOrSetter) {
 // Currently, this is used globally within event handlers inlined in `index.html`
 globalThis.changeMainCard = changeMainCard;
 
-/**
- * @param {"Discord" | "About"} whatToChangeTo
- * @returns {void}
- */
-export function changeMainCard(whatToChangeTo) {
+type ChangeMainCard = typeof changeMainCard;
+
+declare global {
+    var changeMainCard: ChangeMainCard;
+}
+
+export function changeMainCard(whatToChangeTo: "Discord" | "About"): void {
 
 switch (whatToChangeTo) {
     case "Discord":

@@ -22,10 +22,10 @@ SOFTWARE.
 
 /**
  * Retrieves version info for the specified file.
- * @param {string} type - The file to return info for.
- * @returns {string} - A JSON string containing the version and date information.
+ * @param type The file to return info for.
+ * @returns A JSON string containing the version and date information.
  */
-function getVer(type) {
+function getVer(type: string): string {
     switch (type) {
         case "le":
             // LCE Savegame Extractor
@@ -41,10 +41,9 @@ function getVer(type) {
 
 /**
  * Sets the version information in the current HTML.
- * @param {string} type - The file to use the information from when setting the info.
- * @returns {void}
+ * @param type The file to use the information from when setting the info.
  */
-export function setVer(type) {
+export function setVer(type: string): void {
     let json = JSON.parse(getVer(type));
     document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
 }

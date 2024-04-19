@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// https://www.jsdelivr.com/package/npm/pako
-
 export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "pako";
 
 /**
@@ -30,12 +28,12 @@ export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "pako";
  * 
  * Big thanks to Offroaders for helping out with this, would've been barely possible without them!
  * 
- * @param {Uint8Array} data - The compressed data
- * @returns {Uint8Array} - The decompressed data
+ * @param data The compressed data
+ * @returns The decompressed data
  */
-export function vitaRLEDecode(data) {
+export function vitaRLEDecode(data: Uint8Array): Uint8Array {
     const compressedLength = data.byteLength;
-    const result = [];
+    const result: number[] = [];
     let readOffset = 0;
     let writeOffset = 0;
   

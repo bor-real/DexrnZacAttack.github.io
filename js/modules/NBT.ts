@@ -20,15 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import { read, NBTData } from "nbtify";
+import { read } from "nbtify";
+
+import type { NBTData } from "nbtify";
 
 
-/**
- * @param {File[]} fileArray
- * @param {string} fName
- * @returns {Promise<NBTData | undefined>}
-*/
-export async function readNBTfromFile(fileArray, fName) {
+export async function readNBTfromFile(fileArray: File[], fName: string): Promise<NBTData | undefined> {
     try {
     return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
     } catch {
@@ -36,12 +33,7 @@ export async function readNBTfromFile(fileArray, fName) {
     }
 }
 
-/**
- * @param {File[]} fileArray
- * @param {string} fName
- * @returns {Promise<boolean>}
-*/
-export async function isReadable(fileArray, fName) {
+export async function isReadable(fileArray: File[], fName: string): Promise<boolean> {
     try {
         if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
             return true;

@@ -24,11 +24,7 @@ var DLog = false;
 console.log(
   'background.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
 );
-/**
- * @param {string} message
- * @returns {void}
- */
-function DexrnsFunnyLogger(message) {
+function DexrnsFunnyLogger(message: string): void {
   if (DLog) {
     console.log("background.js: " + message);
   } else {
@@ -36,13 +32,8 @@ function DexrnsFunnyLogger(message) {
   }
 }
 
-/**
- * @param {number} hour
- * @returns {void}
- */
-function setBGTime(hour) {
-  /** @type {HTMLDivElement} */
-  let bgElement = document.querySelector(".bg");
+function setBGTime(hour: number): void {
+  let bgElement: HTMLDivElement = document.querySelector(".bg");
   if (hour >= 6 && hour < 20 ) {
     DexrnsFunnyLogger("day time");
     bgElement.style.backgroundImage =
@@ -54,21 +45,14 @@ function setBGTime(hour) {
   } 
 }
 
-/**
- * @param {boolean | Event} bgload
- * @returns {void}
- */
-export function fadeBG(bgload) {
+export function fadeBG(bgload: boolean | Event): void {
   if (bgload == true) {
     DexrnsFunnyLogger("bgload is true");
     let now = new Date();
     let hour = now.getHours();
-    /** @type {HTMLDivElement} */
-    let bgElement = document.querySelector(".bg");
-    /** @type {HTMLDivElement} */
-    let maincontainer = document.querySelector(".mainContent");
-    /** @type {HTMLDivElement} */
-    let loadingScreen = document.querySelector(".loadingScreen");
+    let bgElement: HTMLDivElement = document.querySelector(".bg");
+    let maincontainer: HTMLDivElement = document.querySelector(".mainContent");
+    let loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen");
     if (bgElement) {
       setBGTime(hour);
       maincontainer.style.display = "none";

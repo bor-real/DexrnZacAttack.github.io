@@ -20,13 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/** @type {NodeListOf<HTMLDivElement>} */
-let expandcards
+let expandcards: NodeListOf<HTMLDivElement>
 
-/**
- * @returns {void}
- */
-function expandCard() {
+function expandCard(): void {
     expandcards = document.querySelectorAll('.expandcard');
  
     expandcards.forEach(function (expandcard) {

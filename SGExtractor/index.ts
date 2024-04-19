@@ -1,5 +1,5 @@
 import "ice";
-import { NBTData, stringify } from "nbtify";
+import { stringify } from "nbtify";
 
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler
@@ -10,6 +10,8 @@ import { switchCompressionMode } from '../js/LCEE-Core.js';
 import { fadeBG } from '../js/background.js';
 import { setVer } from '../js/ver.js';
 import { readFile } from "../js/LCEE-Core.js";
+
+import type { NBTData } from "nbtify";
 
 let i = 0;
 function incrementI() {
@@ -27,10 +29,7 @@ fadeBG(true);
 setVer("le");
 
 
-/**
- * @param {NBTData | undefined} data
- */
-export function showNBTCard(data) {
+export function showNBTCard(data: NBTData | undefined): void {
     if (data == undefined)
         throw new Error("Data is undefined!");
 
@@ -44,10 +43,7 @@ export function showNBTCard(data) {
 
 }
 
-/**
- * @returns {void}
- */
-export function hideNBTCard() {
+export function hideNBTCard(): void {
     if (document.getElementById("nbtCard").style.display !== "none") {
         document.getElementById("back").style.display = "block";
         document.getElementById("backNBTBtn").style.display = "none";
@@ -57,22 +53,17 @@ export function hideNBTCard() {
 }
 
 
-/** @type {HTMLInputElement} */ (
-  document.getElementById("fileInput")
+(
+  document.getElementById("fileInput")! as HTMLInputElement
 ).addEventListener("change", onFileSelected);
 
-/**
- * @this {HTMLInputElement}
- * @param {Event} event
- * @returns {void}
- */
-function onFileSelected(event) {
-  const file = /** @type {typeof this} */ (event.target).files[0];
+function onFileSelected(this: HTMLInputElement, event: Event): void {
+  const file: File | undefined = (event.target as typeof this).files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(
-        /** @type {ArrayBuffer} */ (event.target.result)
+        event.target.result as ArrayBuffer
       );
       readFile(data, file.name);
     };
@@ -91,7 +82,7 @@ document.addEventListener("drop", (e) => {
     const reader = new FileReader();
     reader.onload = function (event) {
       const data = new Uint8Array(
-        /** @type {ArrayBuffer} */ (event.target.result)
+        event.target.result as ArrayBuffer
       );
       readFile(data, file.name);
     };

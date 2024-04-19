@@ -29,11 +29,7 @@ var DLog = false;
 console.log(
     'settings.js: Dexrn: I put logging in here but you\'ll have to set "DLog" to true.'
   );
-/**
- * @param {string} message
- * @returns {void}
- */
-function DexrnsFunnyLogger(message) {
+function DexrnsFunnyLogger(message: string): void {
   if (DLog) {
     console.log("settings.js: " + message);
   } else {
@@ -41,23 +37,15 @@ function DexrnsFunnyLogger(message) {
   }
 }
 
-/**
- * @param {"default-light" | "default-dark"} theme
- * @returns {void}
- */
-export function setTheme(theme) {
+export function setTheme(theme: "default-light" | "default-dark"): void {
   var expirationDate = new Date("Fri, 31 Dec 9999 23:59:59 GMT");
   document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;
 
   applyTheme(theme);
 }
 
-/**
- * @param {"default-light" | "default-dark"} theme
- * @returns {void}
- */
-function applyTheme(theme) {
-  const stylesheetElement = /** @type {HTMLLinkElement} */ (document.getElementById("theme"));
+function applyTheme(theme: "default-light" | "default-dark"): void {
+  const stylesheetElement = (document.getElementById("theme")! as HTMLLinkElement);
   switch (theme) {
     case "default-light":
       stylesheetElement.href = defaultLight;
@@ -69,12 +57,7 @@ function applyTheme(theme) {
   }
 }
 
-/**
- * @template {string} K
- * @param {K} name
- * @returns {K extends "Theme" ? "default-light" | "default-dark" : string | null}
- */
-export function getThemeCookie(name) {
+export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? "default-light" | "default-dark" : string | null {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split("=");
@@ -90,11 +73,7 @@ const savedTheme = getThemeCookie("Theme");
 
 applyTheme(savedTheme);
 
-/**
- * @param {keyof LanyardLangNameMap} [syslang]
- * @returns {void}
- */
-export function checkLang(syslang) {
+export function checkLang(syslang?: keyof LanyardLangNameMap): void {
   const lang = getLang();
   DexrnsFunnyLogger(`Language: ${lang}`);
   let langFilePath;
@@ -127,10 +106,7 @@ export function checkLang(syslang) {
 
 checkLang();
 
-/**
- * @returns {string}
- */
-export function getLang() {
+export function getLang(): string {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");
@@ -143,11 +119,7 @@ export function getLang() {
 }
 
 // Dexrn: Localization! (Kinda janky.)
-/**
- * @param {string} langFilePath
- * @return {void}
- */
-function setLang(langFilePath) {
+function setLang(langFilePath: string): void {
   fetch(langFilePath)
     .then((response) => response.json())
     .then((data) => {
@@ -202,12 +174,7 @@ function setLang(langFilePath) {
 }
 
 // Dexrn: This makes sure that the element exists before setting it... otherwise it will throw an error.
-/**
- * @param {string} elementId
- * @param {string} value
- * @returns {void}
- */
-function checkIfExists(elementId, value) {
+function checkIfExists(elementId: string, value: string): void {
   const element = document.getElementById(elementId);
   if (element) {
     element.textContent = value;
