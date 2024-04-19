@@ -8,11 +8,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
-        QMG: resolve(__dirname, "index.html"),
-        QMGHP: resolve(__dirname, "index.html"),
-        LCEE: resolve(__dirname, "index.html"),
-        403: resolve(__dirname, "index.html"),
-        404: resolve(__dirname, "index.html"),
+        QMG: resolve(__dirname, "QMG/index.html"),
+        QMGHP: resolve(__dirname, "QMGHeaderParser/index.html"),
+        LCEE: resolve(__dirname, "SGExtractor/index.html"),
+        403: resolve(__dirname, "403/index.html"),
+        404: resolve(__dirname, "404/index.html"),
       }
     }
   },
