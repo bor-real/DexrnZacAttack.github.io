@@ -25,17 +25,17 @@ import langCN from "../assets/lang/zh-CN.json?url";
 
 const API_URL = "https://api.lanyard.rest/v1";
 const USERID = "485504221781950465";
-const pfp: HTMLImageElement = document.querySelector("#pfp");
-const customStatus: HTMLDivElement = document.querySelector("#customStatus");
-const onlineState: HTMLDivElement = document.querySelector("#onlineState");
-const platforms: HTMLDivElement = document.querySelector("#platforms");
-const bigImage: HTMLImageElement = document.querySelector("#activityImageBig");
-const smallImage: HTMLImageElement = document.querySelector("#activityImageSmall");
-const name: HTMLDivElement = document.querySelector("#activityName");
-const smallImageAlt: HTMLImageElement = document.querySelector("#activityAlternateImageSmall");
-const state: HTMLDivElement = document.querySelector("#activityState");
-const details: HTMLDivElement = document.querySelector("#activityDetail");
-const elapsed: HTMLDivElement = document.querySelector("#activityTimeElapsed");
+const pfp: HTMLImageElement = document.querySelector("#pfp")!;
+const customStatus: HTMLDivElement = document.querySelector("#customStatus")!;
+const onlineState: HTMLDivElement = document.querySelector("#onlineState")!;
+const platforms: HTMLDivElement = document.querySelector("#platforms")!;
+const bigImage: HTMLImageElement = document.querySelector("#activityImageBig")!;
+const smallImage: HTMLImageElement = document.querySelector("#activityImageSmall")!;
+const name: HTMLDivElement = document.querySelector("#activityName")!;
+const smallImageAlt: HTMLImageElement = document.querySelector("#activityAlternateImageSmall")!;
+const state: HTMLDivElement = document.querySelector("#activityState")!;
+const details: HTMLDivElement = document.querySelector("#activityDetail")!;
+const elapsed: HTMLDivElement = document.querySelector("#activityTimeElapsed")!;
 var disc_platform: string[];
 var disc_isOffline: boolean;
 let localizedText: LocalizedText;
@@ -46,13 +46,13 @@ async function lanyardGetLang(): Promise<string | null> {
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");
     if (name === "lang") {
-      return value;
+      return value ?? null;
     }
   }
   return null;
 }
 
-async function lanyardCheckLang(lang: string) {
+async function lanyardCheckLang(lang: string | null): Promise<string> {
   let langPath: string;
   switch (lang) {
     case "zh-CN":
@@ -302,11 +302,7 @@ async function setTimestamp(): Promise<void> {
   const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   const mostRecent = activities.shift();
   let created: number;
-  try {
-  created = mostRecent.timestamps.start;
-  } catch {
-    // stop yelling at me ;(
-  }
+  created = mostRecent?.timestamps.start;
   try {
     const current = new Date().getTime();
     const diff = current - created;

@@ -1,7 +1,11 @@
+import JSZip from "jszip";
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
 import { showNBTCard } from "../SGExtractor/index.js";
 import { downloadZip } from "./LCEE-Core.js";
-import JSZip from "jszip";
+
+const filesDiv: HTMLDivElement = document.querySelector("#files")!;
+const center: HTMLDivElement = document.querySelector(".center")!;
+const lceRoot: Element = document.querySelector("#lceRoot")!;
 
 export async function render(files: File[]): Promise<void> {
     var zip = new JSZip();
@@ -37,20 +41,20 @@ export async function render(files: File[]): Promise<void> {
         }
   
         // add the folder into the upper files div
-        document.getElementById("files").appendChild(lceFolder);
+        filesDiv.appendChild(lceFolder);
         if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
           LCEFileContainer.appendChild(LCEFile);
           lceFolder.appendChild(LCEFileContainer);
         } else {
           LCEFileContainer.appendChild(LCEFile);
           document
-            .getElementById("LCEFolder_" + lceFileFolder[0])
+            .querySelector("#LCEFolder_" + lceFileFolder[0])
             .appendChild(LCEFileContainer);
         }
       } else {
         LCEFile.innerText = file.name;
         LCEFileContainer.appendChild(LCEFile);
-        document.getElementById("lceRoot").appendChild(LCEFileContainer);
+        lceRoot.appendChild(LCEFileContainer);
       }
       if ((await isReadable(files, file.name)) == true) {
         var viewNBTButton = document.createElement("button");
@@ -65,17 +69,17 @@ export async function render(files: File[]): Promise<void> {
         LCEFileContainer.appendChild(viewNBTButton);
       }
       zip.file(file.name, file);
-      document.getElementById("files").style.display = "block";
+      filesDiv.style.display = "block";
     }
-    if (document.querySelector("#downloadArchiveButton"))
-      document.querySelector("#downloadArchiveButton").remove();
-    var downloadArchiveButton = document.createElement("button");
+    let downloadArchiveButton: HTMLButtonElement | null = document.querySelector<HTMLButtonElement>("#downloadArchiveButton");
+    downloadArchiveButton?.remove();
+    downloadArchiveButton = document.createElement("button");
     downloadArchiveButton.onclick = async () => {
       await downloadZip(zip);
     };
     downloadArchiveButton.innerText = "Download all";
     downloadArchiveButton.className = "button";
     downloadArchiveButton.id = "downloadArchiveButton";
-    document.querySelector(".center").appendChild(downloadArchiveButton);
+    center.appendChild(downloadArchiveButton);
   }
   
