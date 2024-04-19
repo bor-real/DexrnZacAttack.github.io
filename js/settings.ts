@@ -37,15 +37,17 @@ function DexrnsFunnyLogger(message: string): void {
   }
 }
 
-export function setTheme(theme: "default-light" | "default-dark"): void {
+export type Theme = "unselectedtheme" | "default-light" | "default-dark";
+
+export function setTheme(theme: Theme): void {
   var expirationDate = new Date("Fri, 31 Dec 9999 23:59:59 GMT");
   document.cookie = `Theme=${theme}; expires=${expirationDate.toUTCString()}; path=/`;
 
   applyTheme(theme);
 }
 
-function applyTheme(theme: "default-light" | "default-dark"): void {
-  const stylesheetElement = (document.getElementById("theme")! as HTMLLinkElement);
+function applyTheme(theme: Theme): void {
+  const stylesheetElement = (document.getElementById("theme") as HTMLLinkElement);
   switch (theme) {
     case "default-light":
       stylesheetElement.href = defaultLight;
@@ -57,7 +59,7 @@ function applyTheme(theme: "default-light" | "default-dark"): void {
   }
 }
 
-export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? "default-light" | "default-dark" : string | null {
+export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? Theme : string | null {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split("=");

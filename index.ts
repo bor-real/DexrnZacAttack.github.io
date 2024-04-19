@@ -12,7 +12,7 @@ import "./js/expandable.js"; // component setup
 
 import { fadeBG } from "./js/background.js";
 import { actuallySetLanguage } from "./js/lanyard.js";
-import { checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
+import { type Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
 import { curTab, setCurTab } from "./js/tabs.js";
 import { setVer } from "./js/ver.js";
 
@@ -38,10 +38,10 @@ async function showLoadingText() {
 }
 
 document.getElementById('savebtn').addEventListener('click', function () {
-    var selectedLanguage = document.getElementById('language2').value;
-    var selectedTheme = document.getElementById('themeoption').value;
-    var currentTheme = getThemeCookie('Theme');
-    var currentLanguage = getLang();
+    var selectedLanguage: string = (document.getElementById('language2') as HTMLSelectElement).value;
+    var selectedTheme: Theme = (document.getElementById('themeoption') as HTMLSelectElement).value as Theme;
+    var currentTheme: Theme = getThemeCookie('Theme');
+    var currentLanguage: string = getLang();
     if (selectedLanguage !== getLang() && selectedLanguage !== 'unselected') {
         var expires = new Date('Fri, 31 Dec 9999 23:59:59 GMT').toUTCString();
         document.cookie = 'lang=' + selectedLanguage + '; expires=' + expires + '; path=/';

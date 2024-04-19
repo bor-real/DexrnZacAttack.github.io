@@ -54,7 +54,7 @@ export function hideNBTCard(): void {
 
 
 (
-  document.getElementById("fileInput")! as HTMLInputElement
+  document.getElementById("fileInput") as HTMLInputElement
 ).addEventListener("change", onFileSelected);
 
 function onFileSelected(this: HTMLInputElement, event: Event): void {

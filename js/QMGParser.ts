@@ -45,7 +45,7 @@ const magictypes = [
 const knownversions = [
     'QM', 'QG', 'SP'
 ];
-(document.getElementById('fileInput')! as HTMLInputElement).addEventListener('change', onfileselected);
+(document.getElementById('fileInput') as HTMLInputElement).addEventListener('change', onfileselected);
 
 function onfileselected(this: HTMLInputElement, event: Event): void {
     const file = (event.target as typeof this).files[0];
