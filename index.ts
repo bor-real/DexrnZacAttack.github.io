@@ -12,7 +12,7 @@ import "./js/expandable.js"; // component setup
 
 import { fadeBG } from "./js/background.js";
 import { actuallySetLanguage } from "./js/lanyard.js";
-import { Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
+import { type Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
 import { curTab, setCurTab } from "./js/tabs.js";
 import { setVer } from "./js/ver.js";
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 setCurTab(1);
 
 // Dexrn: This is for the text that shows on the loading screen.
-async function showLoadingText() {
+async function showLoadingText(): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 5000));
 
     var loadingText = document.querySelector('.loadingtext');
