@@ -2,11 +2,18 @@
   "name": "dexrnzacattack.github.io",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "tsc; vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
   "dependencies": {
+    "ice": "^3.7.100",
     "jszip": "^3.10.1",
     "nbtify": "1.90.1"
   },
   "devDependencies": {
-    "@types/pako": "^2.0.3"
+    "@types/pako": "^2.0.3",
+    "vite": "^5.2.9"
   }
 }

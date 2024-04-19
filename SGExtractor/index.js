@@ -1,5 +1,5 @@
-import "https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.100/Ice.min.js";
-import { NBTData, stringify } from "https://cdn.jsdelivr.net/npm/nbtify@1.90.1/dist/index.min.js";
+import "ice";
+import { NBTData, stringify } from "nbtify";
 
 import "../js/settings.js"; // sets theme and lang
 import "../js/background.js"; // this sets an 'onload' handler

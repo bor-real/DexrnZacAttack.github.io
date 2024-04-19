@@ -6,7 +6,11 @@
     "target": "ESNext",
     "isolatedModules": true,
     "resolveJsonModule": true,
+    "types": [
+      "vite/client"
+    ],
     "noEmit": true,
+    "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": false, // temp, remove later on
     "noImplicitOverride": true,
@@ -15,5 +19,8 @@
     "allowUnreachableCode": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true
-  }
+  },
+  "exclude": [
+    "./dist/**/*"
+  ]
 }
