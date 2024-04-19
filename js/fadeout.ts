@@ -27,23 +27,13 @@ SOFTWARE.
 // You can probably see what the AI made and what I made.
 
 document.addEventListener("DOMContentLoaded", function () {
-  /** @type {NodeListOf<HTMLButtonElement>} */
-  const buttons = document.querySelectorAll(".buttonRedirect");
-  /** @type {HTMLDivElement} */
-  const backbutton = document.querySelector("#back");
-  /** @type {HTMLDivElement} */
-  const background = document.querySelector(".bg");
-  /** @type {HTMLDivElement} */
-  const topright = document.querySelector(".topright");
+  const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".buttonRedirect");
+  const backbutton: HTMLDivElement = document.querySelector("#back");
+  const background: HTMLDivElement = document.querySelector(".bg");
 
-  /**
-   * @param {HTMLButtonElement | HTMLDivElement} button
-   * @returns {void}
-   */
-  function handleClick(button) {
+  function handleClick(button: HTMLButtonElement | HTMLDivElement): void {
     const delay = 350;
-    /** @type {HTMLDivElement} */
-    const loadingScreen = document.querySelector(".loadingScreen");
+    const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen");
 
     loadingScreen.style.display = "flex";
     fade(background);
@@ -67,15 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-/**
- * @param {HTMLDivElement} element
- * @returns {void}
- */
-function fade(element) {
+function fade(element: HTMLDivElement) {
   if (element) {
-    let opacity = 1;
-    const duration = 300;
-    const interval = 10;
+    let opacity: number = 1;
+    const duration: number = 300;
+    const interval: number = 10;
     const timer = setInterval(function () {
       if (opacity <= 0) {
         clearInterval(timer);

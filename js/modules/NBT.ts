@@ -20,41 +20,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// https://www.jsdelivr.com/package/npm/pako
+import { read } from "nbtify";
 
-export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "pako";
+import type { NBTData } from "nbtify";
 
-/**
- * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
- * https://github.com/zugebot/LegacyEditor
- * 
- * Big thanks to Offroaders for helping out with this, would've been barely possible without them!
- * 
- * @param {Uint8Array} data - The compressed data
- * @returns {Uint8Array} - The decompressed data
- */
-export function vitaRLEDecode(data) {
-    const compressedLength = data.byteLength;
-    const result = [];
-    let readOffset = 0;
-    let writeOffset = 0;
-  
-    while (readOffset < compressedLength){
-      const suspectedTag = data[readOffset];
-      readOffset++;
-  
-      if (suspectedTag !== 0){
-        result[writeOffset] = suspectedTag;
-        writeOffset++;
-      } else {
-        const length = data[readOffset];
-        readOffset++;
-        for (let i = 0; i < length; i++){
-          result.push(0);
-          writeOffset++;
-        }
-      }
+
+export async function readNBTfromFile(fileArray: File[], fName: string): Promise<NBTData | undefined> {
+    try {
+        return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
+    } catch {
+        console.log('Couldn\'t open this file!')
     }
-  
-    return new Uint8Array(result);
-  }
+}
+
+export async function isReadable(fileArray: File[], fName: string): Promise<boolean> {
+    try {
+        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
+            return true;
+        } else {
+            return false;
+        }
+        } catch {
+            return false;
+    }
+}

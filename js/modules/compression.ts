@@ -20,35 +20,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import { read, NBTData } from "nbtify";
-
-
-/**
- * @param {File[]} fileArray
- * @param {string} fName
- * @returns {Promise<NBTData | undefined>}
-*/
-export async function readNBTfromFile(fileArray, fName) {
-    try {
-    return await read(await fileArray.find(file => file.name === fName).arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
-    } catch {
-        console.log('Couldn\'t open this file!')
-    }
-}
+export { deflate, deflateRaw, gzip, inflate, inflateRaw, ungzip } from "pako";
 
 /**
- * @param {File[]} fileArray
- * @param {string} fName
- * @returns {Promise<boolean>}
-*/
-export async function isReadable(fileArray, fName) {
-    try {
-        if (await read(await fileArray.find(file => file.name === fName).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
-            return true;
-        } else {
-            return false;
+ * This is Zugebot (jerrinth3glitch)'s code ported to JS (mostly complete but not working!!!)
+ * https://github.com/zugebot/LegacyEditor
+ * 
+ * Big thanks to Offroaders for helping out with this, would've been barely possible without them!
+ * 
+ * @param data The compressed data
+ * @returns The decompressed data
+ */
+export function vitaRLEDecode(data: Uint8Array): Uint8Array {
+    const compressedLength = data.byteLength;
+    const result: number[] = [];
+    let readOffset = 0;
+    let writeOffset = 0;
+  
+    while (readOffset < compressedLength){
+      const suspectedTag = data[readOffset];
+      readOffset++;
+  
+      if (suspectedTag !== 0){
+        result[writeOffset] = suspectedTag;
+        writeOffset++;
+      } else {
+        const length = data[readOffset];
+        readOffset++;
+        for (let i = 0; i < length; i++){
+          result.push(0);
+          writeOffset++;
         }
-        } catch {
-            return false;
+      }
     }
-}
+  
+    return new Uint8Array(result);
+  }

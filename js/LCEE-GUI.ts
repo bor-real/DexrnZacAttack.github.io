@@ -3,10 +3,7 @@ import { showNBTCard } from "../SGExtractor/index.js";
 import { downloadZip } from "./LCEE-Core.js";
 import JSZip from "jszip";
 
-/**
- * @param {File[]} files
- */
-export async function render(files) {
+export async function render(files: File[]): Promise<void> {
     var zip = new JSZip();
     for (const file of files) {
       const blobUrl = URL.createObjectURL(file);

@@ -1,7 +1,3 @@
-import { inflate, vitaRLEDecode } from "./modules/compression.js";
-import { render } from "./LCEE-GUI.js";
-import JSZip from "jszip";
-
 /*
 Copyright 2024 Dexrn ZacAttack
 
@@ -24,25 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/** @type {import("nbtify").Endian} */
-let endianness;
-/** @type {boolean} */
-let littleEndian;
-/** @type {boolean} */
-let doNotSaveDOM = false;
-/** @type {string} */
-let savegameName;
+import { inflate, vitaRLEDecode } from "./modules/compression.js";
+import { render } from "./LCEE-GUI.js";
 
-/** @type {boolean} */
-let vita = false;
+import type JSZip from "jszip";
+import type { Endian } from "nbtify";
 
-let compressionMode = "none";
+let endianness: Endian;
+let littleEndian: boolean;
+let doNotSaveDOM: boolean = false;
+let savegameName: string;
 
-/**
- * @param {0 | 1 | 2} mode
- * @returns {void}
- */
-export function switchCompressionMode(mode) {
+let vita: boolean = false;
+
+export function switchCompressionMode(mode: number): void {
   switch (mode) {
     case 0:
       document.getElementById("CompModeBtn").innerText =
@@ -64,14 +55,9 @@ export function switchCompressionMode(mode) {
   }
 }
 
-/**
- * @param {JSZip} zip
- * @returns {Promise<void>}
- */
-export async function downloadZip(zip) {
+export async function downloadZip(zip: JSZip): Promise<void> {
   try {
-    /** @type {Blob} */
-    const file = await zip.generateAsync({ type: 'blob' });
+    const file: Blob = await zip.generateAsync({ type: 'blob' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(file);
     link.download = `${savegameName}.zip`;
@@ -82,16 +68,10 @@ export async function downloadZip(zip) {
   }
 }
 
-/**
- * @param {Uint8Array} data
- * @param {string} sgName
- * @returns {void}
- */
-export function readFile(data, sgName) {
+export function readFile(data: Uint8Array, sgName: string): void {
   savegameName = sgName;
   try {
-    /** @type {File[]} */
-    let files = [];
+    let files: File[] = [];
     document.getElementById("output").textContent = "";
     document.getElementById("files").innerHTML = "";
     document.getElementById("files").style.display = "none";
@@ -113,7 +93,6 @@ export function readFile(data, sgName) {
         console.log("This is an Xbox 360 package!!!");
       }
     }
-    let offsetToRead;
     if (data) {
       if (vita !== true) {
         try {
@@ -126,7 +105,6 @@ export function readFile(data, sgName) {
           console.log("This is not ZLib compressed.");
         }
       } else {
-        /** @type {Uint8Array} */
         data = vitaRLEDecode(data.slice(8));
       }
     } else {
@@ -158,8 +136,7 @@ export function readFile(data, sgName) {
         offset += 144;
 
         const line = new TextDecoder().decode(bytes);
-        /** @type {string} */
-        var fileNameFromSaveGame = line.substring(0, 80).replace(/\x00/g, "");
+        var fileNameFromSaveGame: string = line.substring(0, 80).replace(/\x00/g, "");
         if (fileNameFromSaveGame === "")
           fileNameFromSaveGame = "Corrupted or unreadable";
         const filelength = new DataView(bytes.buffer, 128, 4).getInt32(
