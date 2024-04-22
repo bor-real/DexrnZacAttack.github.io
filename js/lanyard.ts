@@ -311,10 +311,14 @@ async function setTimestamp(): Promise<void> {
     const minutes = Math.floor(diff / (1000 * 60)) % 60;
     const hours = Math.floor(diff / (1000 * 60 * 60));
 
-    const formattime = `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    elapsed.innerText = `${localizedText.lytimee}` + formattime;
+    if (seconds) {
+      const formattime = `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      elapsed.innerText = `${localizedText.lytimee}` + formattime;
+    } else {
+      elapsed.innerHTML = "";
+    }
   } catch {
     elapsed.innerHTML = "";
   }
