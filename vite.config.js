@@ -4,7 +4,7 @@ import { resolve } from "path";
 export default defineConfig({
   base: "./",
   build: {
-    target: "esnext",
+    target: "es5",
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
