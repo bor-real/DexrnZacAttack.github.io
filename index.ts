@@ -37,7 +37,7 @@ async function showLoadingText(): Promise<void> {
     }
 }
 
-document.getElementById('savebtn').addEventListener('click', function () {
+document.getElementById('savebtn')!.addEventListener('click', function () {
     var selectedLanguage = (document.getElementById('language2') as HTMLInputElement).value;
     var selectedTheme: Theme = (document.getElementById('themeoption') as HTMLSelectElement).value as Theme;
     if (selectedLanguage !== getLang() && selectedLanguage !== 'unselected') {
@@ -55,14 +55,15 @@ document.getElementById('savebtn').addEventListener('click', function () {
 });
 
 
+// Note: Made these nullable to get rid of some pesky errors + I am not sure what exactly to do to make them not null.
 document.addEventListener('DOMContentLoaded', function () {
-    var activityCard: HTMLElement = document.querySelector('#activityCard');
-    var aboutCard: HTMLElement = document.querySelector('#aboutCard');
-    var linksCard: HTMLElement = document.querySelector('#linksCard');
-    var abm: HTMLElement = document.querySelector('#stuffTab');
-    var toggleButton: HTMLElement = document.getElementById('settingsbtn');
-    var settingsPage: HTMLElement = document.getElementById('settings');
-    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer');
+    var activityCard: HTMLElement = document.querySelector('#activityCard')!;
+    var aboutCard: HTMLElement = document.querySelector('#aboutCard')!;
+    var linksCard: HTMLElement = document.querySelector('#linksCard')!;
+    var abm: HTMLElement = document.querySelector('#stuffTab')!;
+    var toggleButton: HTMLElement = document.getElementById('settingsbtn')!;
+    var settingsPage: HTMLElement = document.getElementById('settings')!;
+    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer')!;
 
     settingsPage.style.display = 'none';
 
@@ -78,15 +79,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var toggleButton: HTMLElement = document.getElementById('settingsbtn');
-    var activityCard: HTMLElement = document.querySelector('#activityCard');
-    var aboutCard: HTMLElement = document.querySelector('#aboutCard');
-    var linksCard: HTMLElement = document.querySelector('#linksCard');
-    var abm: HTMLElement = document.querySelector('#stuffTab');
-    var closesettingsbtn: HTMLElement = document.getElementById('settingsclose');
-    var settingsPage: HTMLElement = document.getElementById('settings');
-    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer');
-    var savebtn: HTMLElement = document.getElementById('savebtn');
+    var toggleButton: HTMLElement = document.getElementById('settingsbtn')!;
+    var activityCard: HTMLElement = document.querySelector('#activityCard')!;
+    var aboutCard: HTMLElement = document.querySelector('#aboutCard')!;
+    var linksCard: HTMLElement = document.querySelector('#linksCard')!;
+    var abm: HTMLElement = document.querySelector('#stuffTab')!;
+    var closesettingsbtn: HTMLElement = document.getElementById('settingsclose')!;
+    var settingsPage: HTMLElement = document.getElementById('settings')!;
+    var tabContainer: HTMLElement = document.getElementById('mainCardsContainer')!;
+    var savebtn: HTMLElement = document.getElementById('savebtn')!;
 
     settingsPage.style.display = 'none';
 

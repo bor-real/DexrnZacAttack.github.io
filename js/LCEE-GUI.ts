@@ -1,13 +1,15 @@
 import JSZip from "jszip";
 import { readNBTfromFile, isReadable } from "./modules/NBT.js";
-import { showNBTCard } from "../SGExtractor/index.js";
+import { showNBTCard } from "../LCEE/index.js";
 import { downloadZip } from "./LCEE-Core.js";
 
 const filesDiv: HTMLDivElement = document.querySelector("#files")!;
 const center: HTMLDivElement = document.querySelector(".center")!;
-const lceRoot: Element = document.querySelector("#lceRoot")!;
 
 export async function render(files: File[]): Promise<void> {
+  // had to define it here?
+  const lceRoot: Element = document.querySelector("#lceRoot")!;
+  document.querySelector("#output").style.display = "none";
     var zip = new JSZip();
     for (const file of files) {
       const blobUrl = URL.createObjectURL(file);
