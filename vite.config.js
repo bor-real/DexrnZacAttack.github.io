@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { resolve } from "path";
+import { resolve } from "node:path";
 
 export default defineConfig({
   base: "./",
@@ -8,9 +8,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
-        QMG: resolve(__dirname, "QMG/index.html"),
-        QMGHP: resolve(__dirname, "QMGHeaderParser/index.html"),
-        LCEE: resolve(__dirname, "SGExtractor/index.html"),
+        QMG: resolve(__dirname, "QMGBlog/index.html"),
+        QMGHP: resolve(__dirname, "QMGInfo/index.html"),
+        LCEE: resolve(__dirname, "LCEE/index.html"),
         403: resolve(__dirname, "403/index.html"),
         404: resolve(__dirname, "404/index.html"),
       }
