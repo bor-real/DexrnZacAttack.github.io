@@ -8,12 +8,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ice": "^3.7.100",
     "jszip": "^3.10.1",
     "nbtify": "1.90.1"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "@types/pako": "^2.0.3",
+    "typescript": "^5.4.5",
     "vite": "^5.2.9"
   }
 }

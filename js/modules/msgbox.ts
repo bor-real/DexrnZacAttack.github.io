@@ -20,6 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+const msgbox: HTMLElement = document.querySelector('#msgbox')!;
+const msgTitle: HTMLElement = document.querySelector('#msgTitle')!;
+const msgContent: HTMLElement = document.querySelector('#msgContent')!;
+const msgOK: HTMLElement = document.querySelector('#msgOK')!;
+const msgCancel: HTMLElement = document.querySelector('#msgCancel')!;
+
 let msgboxExists = false;
 let msgboxShown = false;
 
@@ -32,17 +38,17 @@ export function updateMSGBox(title: string, message: string, buttons: Array<stri
         buttons = [];
     }
 
-    document.getElementById('msgTitle').innerText = title;
-    document.getElementById('msgContent').innerText = message;
+    msgTitle.innerText = title;
+    msgContent.innerText = message;
 
-    document.getElementById('msgOK').style.display = 'none';
-    document.getElementById('msgCancel').style.display = 'none';
+    msgOK.style.display = 'none';
+    msgCancel.style.display = 'none';
 
     if (buttons.includes("msgCancel")) {
-        document.getElementById('msgCancel').style.display = 'block';
+        msgCancel.style.display = 'block';
     }
     if (buttons.includes("msgOK")) {
-        document.getElementById('msgOK').style.display = 'block';
+        msgOK.style.display = 'block';
     }
 
     if (!msgboxShown) {
@@ -51,7 +57,7 @@ export function updateMSGBox(title: string, message: string, buttons: Array<stri
 }
 
 /** Creates a messagebox */
-export function createMSGBox(title: string, message: string, buttons: Array<string> = []) {
+export function createMSGBox(title: string, message: string, buttons: Array<string> = []): void {
     if (buttons === undefined) {
         buttons = [];
     }
@@ -102,10 +108,10 @@ export function createMSGBox(title: string, message: string, buttons: Array<stri
     msgboxContainer.appendChild(msgContent);
 
     if (buttons.includes("msgCancel")) {
-        document.getElementById('msgCancel').style.display = 'block';
+        msgCancel.style.display = 'block';
     }
     if (buttons.includes("msgOK")) {
-        document.getElementById('msgOK').style.display = 'block';
+        msgOK.style.display = 'block';
     }
 
     msgboxExists = true;
@@ -113,7 +119,7 @@ export function createMSGBox(title: string, message: string, buttons: Array<stri
 }
 
 /** Creates the messagebox if it doesn't exist, updates it if it does. */
-export function useMSGBox(title: string, message: string, buttons: Array<string> = []) {
+export function useMSGBox(title: string, message: string, buttons: Array<string> = []): void {
     if (!msgboxExists) {
         createMSGBox(title, message, buttons);
         return;
@@ -127,11 +133,11 @@ export function useMSGBox(title: string, message: string, buttons: Array<string>
 }
 
 export function hideMSGBox(): void { 
-    document.getElementById('msgbox').style.display = 'none';
+    msgbox.style.display = 'none';
     msgboxShown = false;
 }
 
 export function showMSGBox(): void { 
-    document.getElementById('msgbox').style.display = 'none';
+    msgbox.style.display = 'none';
     msgboxShown = true;
 }

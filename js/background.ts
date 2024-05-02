@@ -20,9 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+const bgElement: HTMLDivElement = document.querySelector(".bg")!;
+const maincontainer: HTMLDivElement = document.querySelector(".mainContent")!;
+const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 
-function setBGTime(hour: number) {
-  let bgElement: HTMLDivElement = document.querySelector(".bg");
+function setBGTime(hour: number): void {
   if (hour >= 6 && hour < 20 ) {
     bgElement.style.backgroundImage =
       "url('https://api.itzpeto.com/dexrn/day')";
@@ -32,13 +34,10 @@ function setBGTime(hour: number) {
   } 
 }
 
-export function fadeBG(bgload: boolean | Event) {
+export function fadeBG(bgload: boolean | Event): void {
   if (bgload == true) {
     let now = new Date();
     let hour = now.getHours();
-    let bgElement: HTMLDivElement = document.querySelector(".bg");
-    let maincontainer: HTMLDivElement = document.querySelector(".mainContent");
-    let loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen");
     if (bgElement) {
       setBGTime(hour);
       maincontainer.style.display = "none";

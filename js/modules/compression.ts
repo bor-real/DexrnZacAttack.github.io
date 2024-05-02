@@ -38,14 +38,14 @@ export function vitaRLEDecode(data: Uint8Array): Uint8Array {
     let writeOffset = 0;
   
     while (readOffset < compressedLength){
-      const suspectedTag = data[readOffset];
+      const suspectedTag: number = data[readOffset]!;
       readOffset++;
   
       if (suspectedTag !== 0){
         result[writeOffset] = suspectedTag;
         writeOffset++;
       } else {
-        const length = data[readOffset];
+        const length: number = data[readOffset]!;
         readOffset++;
         for (let i = 0; i < length; i++){
           result.push(0);

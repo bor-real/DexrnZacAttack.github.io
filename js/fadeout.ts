@@ -26,19 +26,20 @@ SOFTWARE.
 // also I hate the way the AI does things aaaaa
 // You can probably see what the AI made and what I made.
 
+const backbutton: HTMLDivElement = document.querySelector("#back")!;
+const background: HTMLDivElement = document.querySelector(".bg")!;
+const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
+
 document.addEventListener("DOMContentLoaded", function () {
   const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".buttonRedirect");
-  const backbutton: HTMLDivElement = document.querySelector("#back");
-  const background: HTMLDivElement = document.querySelector(".bg");
 
   function handleClick(button: HTMLButtonElement | HTMLDivElement): void {
     const delay = 350;
-    const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen");
 
     loadingScreen.style.display = "flex";
     fade(background);
     setTimeout(() => {
-      const targetURL = button.getAttribute("linkto");
+      const targetURL: string = button.getAttribute("linkto");
       window.location.href = targetURL;
     }, delay);
   }
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function fade(element: HTMLDivElement) {
+function fade(element: HTMLDivElement): void {
   if (element) {
     let opacity: number = 1;
     const duration: number = 300;

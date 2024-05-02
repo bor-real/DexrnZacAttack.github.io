@@ -26,6 +26,10 @@ import { render } from "./LCEE-GUI.js";
 import type JSZip from "jszip";
 import type { Endian } from "nbtify";
 
+const compModeBtn: HTMLButtonElement = document.querySelector("#CompModeBtn")!;
+const output: HTMLPreElement = document.querySelector("#output")!;
+const filesDiv: HTMLDivElement = document.querySelector("#files")!;
+
 let endianness: Endian;
 let littleEndian: boolean;
 let doNotSaveDOM: boolean = false;
@@ -36,19 +40,19 @@ let vita: boolean = false;
 export function switchCompressionMode(mode: number): void {
   switch (mode) {
     case 0:
-      document.getElementById("CompModeBtn").innerText =
+      compModeBtn.innerText =
         "Save type: Wii U, PS3, Decompressed Xbox 360";
       endianness = "big";
       vita = false;
       break;
     case 1:
-      document.getElementById("CompModeBtn").innerText =
+      compModeBtn.innerText =
         "Save type: Switch, PS4";
       endianness = "little";
       vita = false;
       break;
     case 2:
-      document.getElementById("CompModeBtn").innerText = "Save type: Vita";
+      compModeBtn.innerText = "Save type: Vita";
       endianness = "little";
       vita = true;
       break;
@@ -72,9 +76,9 @@ export function readFile(data: Uint8Array, sgName: string): void {
   savegameName = sgName;
   try {
     let files: File[] = [];
-    document.getElementById("output").textContent = "";
-    document.getElementById("files").innerHTML = "";
-    document.getElementById("files").style.display = "none";
+    output.textContent = "";
+    filesDiv.innerHTML = "";
+    filesDiv.style.display = "none";
     let decompressedData = null;
 
     if (!endianness) endianness = "big";
@@ -111,7 +115,7 @@ export function readFile(data: Uint8Array, sgName: string): void {
       console.error("No data received...");
     }
 
-    let offset, count;
+    let offset: number, count: number;
     if (endianness === "little") {
       offset = (data[3] << 24) | (data[2] << 16) | (data[1] << 8) | data[0];
       count = (data[7] << 24) | (data[6] << 16) | (data[5] << 8) | data[4];
@@ -129,7 +133,7 @@ export function readFile(data: Uint8Array, sgName: string): void {
     }
     var lceRoot = document.createElement("div");
     lceRoot.id = "lceRoot";
-    document.getElementById("files").appendChild(lceRoot);
+    filesDiv.appendChild(lceRoot);
     for (var i = 0; i < count; i++) {
       while (offset + 144 <= data.byteLength) {
         const bytes = data.slice(offset, offset + 144);
@@ -157,7 +161,7 @@ export function readFile(data: Uint8Array, sgName: string): void {
     }
     render(files);
   } catch (e) {
-    document.getElementById("output").textContent = `${e}`;
+    output.textContent = `${e}`;
     console.error(e);
   }
 }

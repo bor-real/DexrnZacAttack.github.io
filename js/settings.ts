@@ -93,7 +93,7 @@ export function checkLang(syslang?: keyof LanyardLangNameMap): void {
 
 checkLang();
 
-export function getLang(): string {
+export function getLang(): string | undefined | null {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");

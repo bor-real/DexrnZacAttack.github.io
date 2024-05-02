@@ -20,11 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+export type CurrentTab = 1 | 2;
 
-export let curTab: 1 | 2;
+export let curTab: CurrentTab;
 let height: number;
 
-export function setCurTab(newValueOrSetter: typeof curTab | ((previous: typeof curTab) => typeof curTab)): typeof curTab {
+export function setCurTab(newValueOrSetter: CurrentTab | ((previous: CurrentTab) => CurrentTab)): CurrentTab {
     if (typeof newValueOrSetter === "number"){
         curTab = newValueOrSetter;
         return newValueOrSetter;
