@@ -212,7 +212,11 @@ async function setActivityBigImage(): Promise<void> {
     data: { activities, spotify },
   } = await fetchResponse(USERID);
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
-  if (!mostRecent?.assets?.large_image) {
+  if (mostRecent?.emoji && !mostRecent?.assets?.large_image) {
+    bigImage.style.display = "block";
+    bigImage.src = `https://cdn.discordapp.com/emojis/${mostRecent.emoji.id}.webp?quality=lossless`;
+    bigImage.title = mostRecent.emoji.name;
+  } else if (!mostRecent?.assets?.large_image) {
     bigImage.style.display = "none";
     return;
   } else {
@@ -232,6 +236,8 @@ async function setActivityBigImage(): Promise<void> {
     bigImage.title = mostRecent.assets.large_text;
   }
 }
+
+
 async function setActivitySmallImage(): Promise<void> {
   const {
     data: { activities },

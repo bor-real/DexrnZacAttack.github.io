@@ -37,6 +37,12 @@ declare interface LanyardAPI {
     type: number;
     application_id: string;
     state: string;
+    // for hang statuses.
+    emoji?: {
+      id: string;
+      name: string;
+      animated: boolean;
+    };
     details?: string;
     assets?: {
       small_image: string;
