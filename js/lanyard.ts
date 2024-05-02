@@ -223,8 +223,8 @@ async function setActivityBigImage(): Promise<void> {
       : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.large_image}.png?size=256`;
     if (mostRecent.assets.large_image.includes("spotify")) {
       bigImage.style.display = "block";
-      bigImage.src = spotify.album_art_url;
-      bigImage.title = spotify.album;
+      bigImage.src = spotify!.album_art_url;
+      bigImage.title = spotify!.album;
       return;
     }
     bigImage.style.display = "block";
@@ -288,13 +288,13 @@ async function setActivityState(): Promise<void> {
     return;
   }
   const mostRecent = activities.shift();
-  if (!mostRecent.state) {
+  if (!mostRecent!.state) {
     state.style.display = "none";
     return;
   }
 
   state.style.display = "block";
-  state.innerText = mostRecent.state;
+  state.innerText = mostRecent!.state ?? "";
 }
 
 async function setTimestamp(): Promise<void> {
@@ -302,7 +302,11 @@ async function setTimestamp(): Promise<void> {
   const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   const mostRecent = activities.shift();
   let created: number;
-  created = mostRecent?.timestamps.start;
+  try {
+    created = mostRecent?.timestamps.start;
+  } catch {
+    elapsed.style.display = "none";
+  }
   try {
     const current = new Date().getTime();
     const diff = current - created;
@@ -316,11 +320,14 @@ async function setTimestamp(): Promise<void> {
         .toString()
         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
       elapsed.innerText = `${localizedText.lytimee}` + formattime;
+      elapsed.style.display = "block";
     } else {
       elapsed.innerHTML = "";
+      elapsed.style.display = "none";
     }
   } catch {
     elapsed.innerHTML = "";
+    elapsed.style.display = "none";
   }
 }
 async function setActivityDetails(): Promise<void> {
@@ -332,12 +339,12 @@ async function setActivityDetails(): Promise<void> {
     return;
   }
   const mostRecent = activities.shift();
-  if (!mostRecent.details) {
+  if (!mostRecent!.details) {
     details.style.display = "none";
     return;
   }
   details.style.display = "block";
-  details.innerText = mostRecent.details;
+  details.innerText = mostRecent!.details ?? "";
 }
 
 function presenceInvoke(): void {
