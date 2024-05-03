@@ -8,8 +8,8 @@ const center: HTMLDivElement = document.querySelector(".center")!;
 
 export async function render(files: File[]): Promise<void> {
   // had to define it here?
-  const lceRoot: Element = document.querySelector("#lceRoot")!;
-  document.querySelector("#output").style.display = "none";
+  const lceRoot: HTMLDivElement = document.querySelector("#lceRoot")!;
+  (document.querySelector("#output") as HTMLDivElement)!.style.display = "none";
     var zip = new JSZip();
     for (const file of files) {
       const blobUrl = URL.createObjectURL(file);
@@ -28,12 +28,12 @@ export async function render(files: File[]): Promise<void> {
         // split the name between folder and filename
         let lceFileFolder = file.name.split("/");
         // create an element with filename (notice the 1)
-        LCEFile.innerText = lceFileFolder[1];
+        LCEFile.innerText = lceFileFolder[1] ?? "File";
         // create a div to hold the files in their respective folders
         var lceFolder = document.createElement("div");
         // create a header with the foldername (newName[0])
         var folderName = document.createElement("h3");
-        folderName.innerText = lceFileFolder[0];
+        folderName.innerText = lceFileFolder[0] ?? "Folder";
         folderName.className = "LCEFolderName";
         if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
           // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
@@ -50,7 +50,7 @@ export async function render(files: File[]): Promise<void> {
         } else {
           LCEFileContainer.appendChild(LCEFile);
           document
-            .querySelector("#LCEFolder_" + lceFileFolder[0])
+            .querySelector("#LCEFolder_" + lceFileFolder[0])!
             .appendChild(LCEFileContainer);
         }
       } else {

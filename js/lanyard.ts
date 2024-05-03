@@ -31,14 +31,14 @@ const onlineState: HTMLDivElement = document.querySelector("#onlineState")!;
 const platforms: HTMLDivElement = document.querySelector("#platforms")!;
 const bigImage: HTMLImageElement = document.querySelector("#activityImageBig")!;
 const smallImage: HTMLImageElement = document.querySelector("#activityImageSmall")!;
-const name: HTMLDivElement = document.querySelector("#activityName")!;
+const activityName: HTMLDivElement = document.querySelector("#activityName")!;
 const smallImageAlt: HTMLImageElement = document.querySelector("#activityAlternateImageSmall")!;
-const state: HTMLDivElement = document.querySelector("#activityState")!;
-const details: HTMLDivElement = document.querySelector("#activityDetail")!;
-const elapsed: HTMLDivElement = document.querySelector("#activityTimeElapsed")!;
+const activityState: HTMLDivElement = document.querySelector("#activityState")!;
+const activityDetail: HTMLDivElement = document.querySelector("#activityDetail")!;
+const timeElapsed: HTMLDivElement = document.querySelector("#activityTimeElapsed")!;
 var disc_platform: string[];
 var disc_isOffline: boolean;
-let localizedText: LocalizedText;
+let localizedText: LocalizedText | null;
 
 // Dexrn: This is really, really janky.
 async function lanyardGetLang(): Promise<string | null> {
@@ -50,6 +50,10 @@ async function lanyardGetLang(): Promise<string | null> {
     }
   }
   return null;
+}
+
+async function createActivity(id: string) {
+  // TODO: Allow multiple activities to show on website.
 }
 
 async function lanyardCheckLang(lang: string | null): Promise<string> {
@@ -129,7 +133,7 @@ async function setAvatarFrame(): Promise<void> {
   // Dexrn: Jank incoming!
   switch (discord_status) {
     case "online":
-      onlineState.innerText = localizedText.lyonline;
+      onlineState.innerText = localizedText!.lyonline;
       pfp.style.border = "2px solid #3ba45d";
       pfp.style.boxShadow = "0 0 20px #3ba45d";
       onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
@@ -138,26 +142,26 @@ async function setAvatarFrame(): Promise<void> {
     case "dnd":
       pfp.style.border = "2px solid #ed4245";
       pfp.style.boxShadow = "0 0 20px #ed4245";
-      onlineState.innerText = localizedText.lydnd;
+      onlineState.innerText = localizedText!.lydnd;
       onlineState.style.cssText = "color: #ed4245; opacity: 1;";
       platforms.style.cssText = "color: #ed4245; opacity: 1;";
       break;
     case "idle":
-      onlineState.innerText = localizedText.lyidle;
+      onlineState.innerText = localizedText!.lyidle;
       pfp.style.border = "2px solid #faa81a";
       pfp.style.boxShadow = "0 0 20px #faa81a";
       onlineState.style.cssText = "color: #faa81a; opacity: 1;";
       platforms.style.cssText = "color: #faa81a; opacity: 1;";
       break;
     case "offline":
-      onlineState.innerText = localizedText.lyoffline;
+      onlineState.innerText = localizedText!.lyoffline;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
       onlineState.style.cssText = "color: unset; opacity: 0.5;";
       disc_isOffline = true;
       break;
     default:
-      onlineState.innerText = localizedText.lyunknown;
+      onlineState.innerText = localizedText!.lyunknown;
       pfp.style.border = "2px solid #747e8c";
       pfp.style.boxShadow = "0 0 20px #747e8c";
       onlineState.style.cssText = "color: unset; opacity: 0.5;";
@@ -168,22 +172,22 @@ async function setAvatarFrame(): Promise<void> {
 
   // Dexrn: I should make it show pictures instead.
   if (active_on_discord_desktop == true) {
-    platformarray.push(`${localizedText.lyplatd}`);
+    platformarray.push(`${localizedText!.lyplatd}`);
   }
 
   if (active_on_discord_mobile == true) {
-    platformarray.push(`${localizedText.lyplatm}`);
+    platformarray.push(`${localizedText!.lyplatm}`);
   }
 
   if (active_on_discord_web == true) {
-    platformarray.push(`${localizedText.lyplatw}`);
+    platformarray.push(`${localizedText!.lyplatw}`);
   }
 
   disc_platform = platformarray;
 
   if (disc_isOffline != true)
     // Dexrn: Best way I could think of doing it.
-    platforms.innerText = `${localizedText.lypin}${disc_platform}`;
+    platforms.innerText = `${localizedText!.lypin}${disc_platform}`;
 }
 
 
@@ -280,42 +284,42 @@ async function setActivityName(): Promise<void> {
   } = await fetchResponse(USERID);
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (!mostRecent?.name) {
-    name.innerText = localizedText.lyna;
+    activityName.innerText = localizedText!.lyna;
     return;
   }
-  name.style.display = "block";
-  name.innerText = mostRecent.name;
+  activityName.style.display = "block";
+  activityName.innerText = mostRecent.name;
 }
 async function setActivityState(): Promise<void> {
   const response = await fetchResponse(USERID);
   const activities = response.data.activities.filter((m) => m.type !== 4);
   if (!activities.length) {
-    state.style.display = "none";
+    activityState.style.display = "none";
     return;
   }
   const mostRecent = activities.shift();
   if (!mostRecent!.state) {
-    state.style.display = "none";
+    activityState.style.display = "none";
     return;
   }
 
-  state.style.display = "block";
-  state.innerText = mostRecent!.state ?? "";
+  activityState.style.display = "block";
+  activityState.innerText = mostRecent!.state ?? "";
 }
 
 async function setTimestamp(): Promise<void> {
   const response = await fetchResponse(USERID);
   const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   const mostRecent = activities.shift();
-  let created: number;
+  let created: number | undefined;
   try {
     created = mostRecent?.timestamps.start;
   } catch {
-    elapsed.style.display = "none";
+    timeElapsed.style.display = "none";
   }
   try {
     const current = new Date().getTime();
-    const diff = current - created;
+    const diff = current - created!;
 
     const seconds = Math.floor(diff / 1000) % 60;
     const minutes = Math.floor(diff / (1000 * 60)) % 60;
@@ -325,15 +329,15 @@ async function setTimestamp(): Promise<void> {
       const formattime = `${hours.toString().padStart(2, "0")}:${minutes
         .toString()
         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      elapsed.innerText = `${localizedText.lytimee}` + formattime;
-      elapsed.style.display = "block";
+      timeElapsed.innerText = `${localizedText!.lytimee}` + formattime;
+      timeElapsed.style.display = "block";
     } else {
-      elapsed.innerHTML = "";
-      elapsed.style.display = "none";
+      timeElapsed.innerHTML = "";
+      timeElapsed.style.display = "none";
     }
   } catch {
-    elapsed.innerHTML = "";
-    elapsed.style.display = "none";
+    timeElapsed.innerHTML = "";
+    timeElapsed.style.display = "none";
   }
 }
 async function setActivityDetails(): Promise<void> {
@@ -341,16 +345,16 @@ async function setActivityDetails(): Promise<void> {
 
   const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
   if (!activities.length) {
-    details.style.display = "none";
+    activityDetail.style.display = "none";
     return;
   }
   const mostRecent = activities.shift();
   if (!mostRecent!.details) {
-    details.style.display = "none";
+    activityDetail.style.display = "none";
     return;
   }
-  details.style.display = "block";
-  details.innerText = mostRecent!.details ?? "";
+  activityDetail.style.display = "block";
+  activityDetail.innerText = mostRecent!.details ?? "";
 }
 
 function presenceInvoke(): void {

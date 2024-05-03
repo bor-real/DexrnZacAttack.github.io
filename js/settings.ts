@@ -47,7 +47,7 @@ function applyTheme(theme: Theme): void {
   }
 }
 
-export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? Theme : string | null {
+export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? Theme : string {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split("=");
