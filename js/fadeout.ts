@@ -27,8 +27,8 @@ SOFTWARE.
 // You can probably see what the AI made and what I made.
 
 const backbutton: HTMLDivElement = document.querySelector("#back")!;
-const background: HTMLDivElement = document.querySelector(".bg")!;
-const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
+export const background: HTMLDivElement = document.querySelector(".bg")!;
+export const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 
 document.addEventListener("DOMContentLoaded", function () {
   const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".buttonRedirect");
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadingScreen.style.display = "flex";
     fade(background);
     setTimeout(() => {
-      const targetURL: string = button.getAttribute("linkto");
+      const targetURL: string = button.getAttribute("linkto")!;
       window.location.href = targetURL;
     }, delay);
   }
@@ -58,6 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+window.addEventListener('pageshow', function(event) {
+  var hist = event.persisted || (typeof window.performance != 'undefined' && window.performance.navigation.type === 2);
+  if (hist) {
+    unFade(background);
+  }
+});
+
 function fade(element: HTMLDivElement): void {
   if (element) {
     let opacity: number = 1;
@@ -71,5 +78,23 @@ function fade(element: HTMLDivElement): void {
       element.style.opacity = `${opacity}`;
       opacity -= 1 / (duration / interval);
     }, interval);
+  }
+}
+
+export function unFade(element: HTMLDivElement) {
+  if (element) {
+      let opacity = 0;
+      const duration = 300;
+      const interval = 10;
+      element.style.display = "block"; 
+      loadingScreen.style.pointerEvents = "none"; 
+      const timer = setInterval(function () {
+          if (opacity >= 1) {
+            loadingScreen.style.display = "none"; 
+              clearInterval(timer);
+          }
+          element.style.opacity = `${opacity}`;
+          opacity += 1 / (duration / interval);
+      }, interval);
   }
 }

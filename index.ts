@@ -54,7 +54,6 @@ document.getElementById('savebtn')!.addEventListener('click', function () {
     }
 });
 
-
 // Note: Made these nullable to get rid of some pesky errors + I am not sure what exactly to do to make them not null.
 document.addEventListener('DOMContentLoaded', function () {
     var activityCard: HTMLElement = document.querySelector('#activityCard')!;
