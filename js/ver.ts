@@ -35,7 +35,7 @@ function getVer(type: string): string {
             return JSON.stringify({ "version": "1.2.10", "date": "12/21/2023"});
         case "default":
         default:
-            return JSON.stringify({ "version": "1.3.00", "date": "04/17/2024"});
+            return JSON.stringify({ "version": "1.3.10", "date": "04/17/2024"});
     }
 }
 
@@ -45,6 +45,6 @@ function getVer(type: string): string {
  */
 export function setVer(type: string): void {
     let json = JSON.parse(getVer(type));
-    document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
+    document.getElementById('lastUpdated')!.innerText = `v${json["version"]} (${json["date"]})`;
 }
 
