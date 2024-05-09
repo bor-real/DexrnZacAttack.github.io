@@ -27,10 +27,10 @@ const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 function setBGTime(hour: number): void {
   if (hour >= 6 && hour < 20 ) {
     bgElement.style.backgroundImage =
-      "url('https://api.itzpeto.com/dexrn/day')";
+      "url('https://dexrn.duckdns.org/panorama?time=day')";
   } else {
     bgElement.style.backgroundImage =
-      "url('https://api.itzpeto.com/dexrn/night')";
+      "url('https://dexrn.duckdns.org/panorama?time=night')";
   } 
 }
 

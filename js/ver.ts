@@ -45,6 +45,6 @@ function getVer(type: string): string {
  */
 export function setVer(type: string): void {
     let json = JSON.parse(getVer(type));
-    document.getElementById('lastUpdated').innerText = `v${json["version"]} (${json["date"]})`;
+    document.getElementById('lastUpdated')!.innerText = `v${json["version"]} (${json["date"]})`;
 }
 
