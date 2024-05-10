@@ -20,22 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import { index } from "liblce";
 import { read } from "nbtify";
 
 import type { NBTData } from "nbtify";
 
 
-export async function readNBTfromFile(fileArray: File[], fName: string): Promise<NBTData | undefined> {
+export async function readNBTfromFile(file: index, fName: string): Promise<NBTData | undefined> {
     try {
-        return await read(await fileArray.find(file => file.name === fName)!.arrayBuffer(),  { rootName: true, endian: "big", bedrockLevel: false, strict: false });
-    } catch {
-        console.log('Couldn\'t open this file!')
+        return await read(await new Blob([file.data]).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false });
+    } catch (e) {
+        console.log(e);
+        return undefined;
     }
 }
 
-export async function isReadable(fileArray: File[], fName: string): Promise<boolean> {
+export async function isReadable(file: index, fName: string): Promise<boolean> {
     try {
-        if (await read(await fileArray.find(file => file.name === fName)!.arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
+        if (await read(await new Blob([file.data]).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
             return true;
         } else {
             return false;

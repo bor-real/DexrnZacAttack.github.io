@@ -21,7 +21,6 @@ SOFTWARE.
 */
 
 const bgElement: HTMLDivElement = document.querySelector(".bg")!;
-const maincontainer: HTMLDivElement = document.querySelector(".mainContent")!;
 const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 
 function setBGTime(hour: number): void {
@@ -40,7 +39,6 @@ export function fadeBG(bgload: boolean | Event): void {
     let hour = now.getHours();
     if (bgElement) {
       setBGTime(hour);
-      maincontainer.style.display = "none";
       const bg = new Image();
       bg.src = bgElement.style.backgroundImage.slice(5, -2);
 
@@ -52,22 +50,7 @@ export function fadeBG(bgload: boolean | Event): void {
       };
       
       bg.onload = function () {
-        maincontainer.style.display = "block";
         loadingfade();
-        const duration = 1000;
-        const startTime = performance.now();
-        bgElement.style.opacity = "0";
-
-        function animate() {
-          const currenttime = performance.now();
-          const elapsedtime = currenttime - startTime;
-          const opacity = elapsedtime / duration;
-          if (opacity <= 1) {
-            bgElement.style.opacity = `${opacity}`;
-            requestAnimationFrame(animate);
-          }
-        }
-        requestAnimationFrame(animate);
       };
     } else {
       console.error("background.js: No bgElement!!!");
