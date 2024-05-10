@@ -20,15 +20,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import { inflate, vitaRLEDecode } from "./modules/compression.js";
 import { render } from "./LCEE-GUI.js";
+import { readSave, decompressVitaRLE } from "liblce";
 
 import type JSZip from "jszip";
 import type { Endian } from "nbtify";
 
 const compModeBtn: HTMLButtonElement = document.querySelector("#CompModeBtn")!;
-const output: HTMLPreElement = document.querySelector("#output")!;
-const filesDiv: HTMLDivElement = document.querySelector("#files")!;
 
 let endianness: Endian;
 let littleEndian: boolean;
@@ -72,15 +70,11 @@ export async function downloadZip(zip: JSZip): Promise<void> {
   }
 }
 
-export function readFile(data: Uint8Array, sgName: string): void {
+export async function readFile(data: File, sgName: string): Promise<void> {
   savegameName = sgName;
   try {
-    let files: File[] = [];
-    output.textContent = "";
-    filesDiv.innerHTML = "";
-    filesDiv.style.display = "none";
-    let decompressedData = null;
-
+    const fileArray = new Uint8Array(await data.arrayBuffer());
+    let saveFiles = {};
     if (!endianness) endianness = "big";
 
     if (endianness == "little") {
@@ -91,7 +85,7 @@ export function readFile(data: Uint8Array, sgName: string): void {
 
     if (endianness == "big") {
       if (
-        new TextDecoder().decode(data).substring(0, 3).replace(/\x00/g, "") ==
+        new TextDecoder().decode(fileArray).substring(0, 3).replace(/\x00/g, "") ==
         "CON"
       ) {
         console.log("This is an Xbox 360 package!!!");
@@ -99,69 +93,16 @@ export function readFile(data: Uint8Array, sgName: string): void {
     }
     if (data) {
       if (vita !== true) {
-        try {
-          let dataToDecompress = data.slice(8);
-          decompressedData = inflate(dataToDecompress);
-
-          if (decompressedData) data = decompressedData;
-          console.log("This is ZLib/Deflate compressed.");
-        } catch {
-          console.log("This is not ZLib compressed.");
-        }
+        saveFiles = await readSave(data, littleEndian);
       } else {
-        data = vitaRLEDecode(data.slice(8));
+        saveFiles = await readSave(new File([new Blob([decompressVitaRLE(fileArray.slice(8))])], data.name), littleEndian);
       }
     } else {
       console.error("No data received...");
     }
 
-    let offset: number, count: number;
-    if (endianness === "little") {
-      offset = (data[3] << 24) | (data[2] << 16) | (data[1] << 8) | data[0];
-      count = (data[7] << 24) | (data[6] << 16) | (data[5] << 8) | data[4];
-    } else {
-      offset = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
-      count = (data[4] << 24) | (data[5] << 16) | (data[6] << 8) | data[7];
-    }
-
-    console.log(count);
-    if (count > 100 && doNotSaveDOM !== true) {
-      alert(
-        'It looks like you may have had the wrong save type set. Wanna try anyway? Set "doNotSaveDOM" to true and resubmit.'
-      );
-      return;
-    }
-    var lceRoot = document.createElement("div");
-    lceRoot.id = "lceRoot";
-    filesDiv.appendChild(lceRoot);
-    for (var i = 0; i < count; i++) {
-      while (offset + 144 <= data.byteLength) {
-        const bytes = data.slice(offset, offset + 144);
-        offset += 144;
-
-        const line = new TextDecoder().decode(bytes);
-        var fileNameFromSaveGame: string = line.substring(0, 80).replace(/\x00/g, "");
-        if (fileNameFromSaveGame === "")
-          fileNameFromSaveGame = "Corrupted or unreadable";
-        const filelength = new DataView(bytes.buffer, 128, 4).getInt32(
-          0,
-          littleEndian
-        );
-        const fileoffset = new DataView(bytes.buffer, 132, 4).getInt32(
-          0,
-          littleEndian
-        );
-        files.push(
-          new File(
-            [data.slice(fileoffset, fileoffset + filelength)],
-            fileNameFromSaveGame
-          )
-        );
-      }
-    }
-    render(files);
+    await render(saveFiles);
   } catch (e) {
-    output.textContent = `${e}`;
     console.error(e);
   }
 }

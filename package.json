@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "jszip": "^3.10.1",
+    "liblce": "^1.2.3",
     "nbtify": "1.90.1"
   },
   "devDependencies": {

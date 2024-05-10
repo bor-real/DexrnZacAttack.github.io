@@ -27,7 +27,6 @@ SOFTWARE.
 // You can probably see what the AI made and what I made.
 
 const backbutton: HTMLDivElement = document.querySelector("#back")!;
-export const background: HTMLDivElement = document.querySelector(".bg")!;
 export const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const delay = 350;
 
     loadingScreen.style.display = "flex";
-    fade(background);
+    unFade(loadingScreen);
     setTimeout(() => {
       const targetURL: string = button.getAttribute("linkto")!;
       window.location.href = targetURL;
@@ -61,15 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener('pageshow', function(event) {
   var hist = event.persisted || (typeof window.performance != 'undefined' && window.performance.navigation.type === 2);
   if (hist) {
-    unFade(background);
+    fade(loadingScreen);
   }
 });
 
 function fade(element: HTMLDivElement): void {
   if (element) {
     let opacity: number = 1;
-    const duration: number = 300;
-    const interval: number = 10;
+    const duration: number = 20;
+    /** how much to fade per call */
+    const interval: number = 2;
     const timer = setInterval(function () {
       if (opacity <= 0) {
         clearInterval(timer);
@@ -84,13 +84,13 @@ function fade(element: HTMLDivElement): void {
 export function unFade(element: HTMLDivElement) {
   if (element) {
       let opacity = 0;
-      const duration = 300;
-      const interval = 10;
-      element.style.display = "block"; 
+      const duration = 20;
+      const interval = 2;
+      element.style.display = "flex"; 
       loadingScreen.style.pointerEvents = "none"; 
       const timer = setInterval(function () {
           if (opacity >= 1) {
-            loadingScreen.style.display = "none"; 
+            loadingScreen.style.display = "flex"; 
               clearInterval(timer);
           }
           element.style.opacity = `${opacity}`;

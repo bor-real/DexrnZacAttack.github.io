@@ -57,11 +57,11 @@ export function hideNBTCard(): void {
 
 function onFileSelected(this: HTMLInputElement): void {
   const file = this.files[0];
+  console.log(file);
   if (file) {
     const reader = new FileReader();
-    reader.onload = function (event) {
-      const data = new Uint8Array((event.target.result as ArrayBuffer));
-      readFile(data, file.name);
+    reader.onload = function () {
+      readFile(file, file.name);
     };
     reader.readAsArrayBuffer(file);
   }
@@ -76,11 +76,8 @@ document.addEventListener("drop", (e) => {
   const file = e.dataTransfer.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function (event) {
-      const data = new Uint8Array(
-        /** @type {ArrayBuffer} */ (event.target.result as ArrayBuffer)
-      );
-      readFile(data, file.name);
+    reader.onload = function () {
+      readFile(file, file.name);
     };
     reader.readAsArrayBuffer(file);
   }
