@@ -23,7 +23,9 @@ SOFTWARE.
 const bgElement: HTMLDivElement = document.querySelector(".bg")!;
 const loadingScreen: HTMLDivElement = document.querySelector(".loadingScreen")!;
 
-function setBGTime(hour: number): void {
+function setBGTime(): void {
+  let now = new Date();
+  let hour = now.getHours();
   if (hour >= 6 && hour < 20 ) {
     bgElement.style.backgroundImage =
       "url('https://dexrn.duckdns.org/panorama?time=day')";
@@ -35,10 +37,13 @@ function setBGTime(hour: number): void {
 
 export function fadeBG(bgload: boolean | Event): void {
   if (bgload == true) {
-    let now = new Date();
-    let hour = now.getHours();
     if (bgElement) {
-      setBGTime(hour);
+      // now we can use timezone stuffs to get time which should be more accurate I think?
+      // if not then I can exclude timestamp iirc and the server should localize it's timestamp to the provided timezone automatically
+      if (Date?.now() && Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone)
+        bgElement.style.backgroundImage = `url("https://dexrn.duckdns.org/panorama?timestamp=${Date.now()}&timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}")`;
+      else
+        setBGTime();
       const bg = new Image();
       bg.src = bgElement.style.backgroundImage.slice(5, -2);
 

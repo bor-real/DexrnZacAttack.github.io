@@ -159,6 +159,17 @@ function setLang(langFilePath: string): void {
     .catch((error) => console.error("Error whilst loading lang file:", error));
 }
 
+export function getLocalization(langFilePath: string, code: string) {
+  fetch(langFilePath)
+  .then((response) => response.json())
+  .then((data) => {
+    if (data[code]) {
+      return data[code];
+    }
+  })
+  .catch((error) => console.error("Error whilst loading lang file:", error));
+}
+
 // Dexrn: This makes sure that the element exists before setting it... otherwise it will throw an error.
 function checkIfExists(elementId: string, value: string): void {
   const element = document.getElementById(elementId);
