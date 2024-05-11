@@ -43,36 +43,36 @@ declare global {
     var changeMainCard: ChangeMainCard;
 }
 
-export function changeMainCard(whatToChangeTo: "Discord" | "About"): void {
+export function changeMainCard(whatToChangeTo: "Discord" | "Blog"): void {
 
 switch (whatToChangeTo) {
     case "Discord":
         curTab = 1;
         if (document.getElementById('dcbutton')!.className !== 'tabbuttonclicked') {
             document.getElementById('dcbutton')!.className = 'tabbuttonclicked';
-            document.getElementById('abbutton')!.className = 'tabbutton';
+            document.getElementById('bbutton')!.className = 'tabbutton';
             document.getElementById('mainCard')!.style.display = 'block';
             document.getElementById('activityCard')!.style.display = 'block';
             document.getElementById('aboutCard')!.style.display = 'block';
             document.getElementById('linksCard')!.style.display = 'block';
-            document.getElementById('stuffTab')!.style.display = 'none';
+            document.getElementById('blogCard')!.style.display = 'none';
         }
         break;
-    case "About":
+    case "Blog":
         curTab = 2;
-        if (document.getElementById('abbutton')!.className !== 'tabbuttonclicked') {
+        if (document.getElementById('bbutton')!.className !== 'tabbuttonclicked') {
             height = document.getElementById('mainCard')!.offsetHeight + 12;
             height += document.getElementById('activityCard')!.offsetHeight + 12;
             height += document.getElementById('aboutCard')!.offsetHeight + 5;
             height += document.getElementById('linksCard')!.offsetHeight;
-            document.getElementById('stuffTab')!.style.height = height + 'px';
-            document.getElementById('abbutton')!.className = 'tabbuttonclicked';
+            document.getElementById('blogCard')!.style.height = height + 'px';
+            document.getElementById('bbutton')!.className = 'tabbuttonclicked';
             document.getElementById('dcbutton')!.className = 'tabbutton';
             document.getElementById('mainCard')!.style.display = 'none';
             document.getElementById('activityCard')!.style.display = 'none';
             document.getElementById('aboutCard')!.style.display = 'none';
             document.getElementById('linksCard')!.style.display = 'none';
-            document.getElementById('stuffTab')!.style.display = 'block';
+            document.getElementById('blogCard')!.style.display = 'block';
         }
         break;
     default:

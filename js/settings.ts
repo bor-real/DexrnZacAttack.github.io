@@ -151,7 +151,7 @@ function setLang(langFilePath: string): void {
       checkIfExists("themetxt", data.ThemeText);
       checkIfExists("ftlThemeTxt", data.FirstTimeLoadThemeText);
       checkIfExists("blogbtntxt", data.BlogButtonText);
-      checkIfExists("abbutton", data.StuffText);
+      checkIfExists("bbutton", data.StuffText);
       checkIfExists("stuff2-path", data.MyStuffPath);
       checkIfExists("darkopt", data.InitialSetupDarkThemeOption);
       checkIfExists("lightopt", data.InitialSetupLightThemeOption);
