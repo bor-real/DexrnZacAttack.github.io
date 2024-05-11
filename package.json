@@ -10,11 +10,13 @@
   "dependencies": {
     "jszip": "^3.10.1",
     "liblce": "^1.2.3",
-    "nbtify": "1.90.1"
+    "nbtify": "1.90.1",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@types/pako": "^2.0.3",
+    "@types/validator": "^13.11.9",
     "typescript": "^5.4.5",
     "vite": "^5.2.9"
   }

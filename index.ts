@@ -9,12 +9,14 @@ import "./js/modules/msgbox.js"; // unused? not used yet, at least
 import "./js/background.js"; // this sets an 'onload' handler
 import "./js/fadeout.js"; // this sets a 'DOMContentLoaded' handler
 import "./js/expandable.js"; // component setup
+import "./js/blog.js";
 
 import { fadeBG } from "./js/background.js";
 import { actuallySetLanguage } from "./js/lanyard.js";
 import { type Theme, checkLang, getLang, getThemeCookie, setTheme } from "./js/settings.js"
 import { curTab, setCurTab } from "./js/tabs.js";
 import { setVer } from "./js/ver.js";
+import { loadBlog } from "./js/blog.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     // thx actuallyaridan
@@ -126,3 +128,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 setVer("default");
+
+document.querySelector('#bbutton').addEventListener('click', loadBlog);

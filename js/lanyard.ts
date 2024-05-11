@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import validator from 'validator';
 import langEN from "../assets/lang/en-US.json?url";
 import langCN from "../assets/lang/zh-CN.json?url";
 
@@ -52,8 +53,11 @@ async function lanyardGetLang(): Promise<string | null> {
   return null;
 }
 
-async function createActivity(id: string) {
-  // TODO: Allow multiple activities to show on website.
+async function createActivity() {
+  const {
+    data: { activities },
+  } = await fetchResponse(USERID);
+  console.log(activities.length);
 }
 
 async function lanyardCheckLang(lang: string | null): Promise<string> {
@@ -99,7 +103,7 @@ export async function actuallySetLanguage(): Promise<void> {
   const langFilePath = await lanyardCheckLang(lang);
   try {
     localizedText = await lanyardSetLang(langFilePath);
-  } catch {}
+  } catch { }
 }
 
 async function fetchResponse(userId: string): Promise<LanyardAPI> {
@@ -133,39 +137,50 @@ async function setAvatarFrame(): Promise<void> {
   // Dexrn: Jank incoming!
   switch (discord_status) {
     case "online":
-      onlineState.innerText = localizedText!.lyonline;
-      pfp.style.border = "2px solid #3ba45d";
-      pfp.style.boxShadow = "0 0 20px #3ba45d";
-      onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
-      platforms.style.cssText = "color: #3ba45d; opacity: 1;";
+      if (onlineState.innerText !== localizedText!.lyonline) {
+        onlineState.innerText = localizedText!.lyonline;
+        pfp.style.border = "2px solid #3ba45d";
+        pfp.style.boxShadow = "0 0 20px #3ba45d";
+        onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
+        platforms.style.cssText = "color: #3ba45d; opacity: 1;";
+      }
       break;
     case "dnd":
-      pfp.style.border = "2px solid #ed4245";
-      pfp.style.boxShadow = "0 0 20px #ed4245";
-      onlineState.innerText = localizedText!.lydnd;
-      onlineState.style.cssText = "color: #ed4245; opacity: 1;";
-      platforms.style.cssText = "color: #ed4245; opacity: 1;";
+      if (onlineState.innerText !== localizedText!.lydnd) {
+        pfp.style.border = "2px solid #ed4245";
+        pfp.style.boxShadow = "0 0 20px #ed4245";
+        onlineState.innerText = localizedText!.lydnd;
+        onlineState.style.cssText = "color: #ed4245; opacity: 1;";
+        platforms.style.cssText = "color: #ed4245; opacity: 1;";
+      }
       break;
     case "idle":
-      onlineState.innerText = localizedText!.lyidle;
-      pfp.style.border = "2px solid #faa81a";
-      pfp.style.boxShadow = "0 0 20px #faa81a";
-      onlineState.style.cssText = "color: #faa81a; opacity: 1;";
-      platforms.style.cssText = "color: #faa81a; opacity: 1;";
+      if (onlineState.innerText !== localizedText!.lyidle) {
+        onlineState.innerText = localizedText!.lyidle;
+        pfp.style.border = "2px solid #faa81a";
+        pfp.style.boxShadow = "0 0 20px #faa81a";
+        onlineState.style.cssText = "color: #faa81a; opacity: 1;";
+        platforms.style.cssText = "color: #faa81a; opacity: 1;";
+      }
       break;
     case "offline":
-      onlineState.innerText = localizedText!.lyoffline;
-      pfp.style.border = "2px solid #747e8c";
-      pfp.style.boxShadow = "0 0 20px #747e8c";
-      onlineState.style.cssText = "color: unset; opacity: 0.5;";
+      if (onlineState.innerText !== localizedText!.lyoffline) {
+        onlineState.innerText = localizedText!.lyoffline;
+        pfp.style.border = "2px solid #747e8c";
+        pfp.style.boxShadow = "0 0 20px #747e8c";
+        onlineState.style.cssText = "color: unset; opacity: 0.5;";
+      }
       disc_isOffline = true;
       break;
     default:
-      onlineState.innerText = localizedText!.lyunknown;
-      pfp.style.border = "2px solid #747e8c";
-      pfp.style.boxShadow = "0 0 20px #747e8c";
-      onlineState.style.cssText = "color: unset; opacity: 0.5;";
+      if (onlineState.innerText !== localizedText!.lyunknown) {
+        onlineState.innerText = localizedText!.lyunknown;
+        pfp.style.border = "2px solid #747e8c";
+        pfp.style.boxShadow = "0 0 20px #747e8c";
+        onlineState.style.cssText = "color: unset; opacity: 0.5;";
+      }
       disc_isOffline = true;
+      break;
   }
 
   const platformarray: string[] = [];
@@ -187,7 +202,8 @@ async function setAvatarFrame(): Promise<void> {
 
   if (disc_isOffline != true)
     // Dexrn: Best way I could think of doing it.
-    platforms.innerText = `${localizedText!.lypin}${disc_platform}`;
+    if (platforms.innerText !== `${localizedText!.lypin}${disc_platform}`)
+      platforms.innerText = `${localizedText!.lypin}${disc_platform}`;
 }
 
 
@@ -205,7 +221,8 @@ async function setStatus(): Promise<void> {
     if (activityOfType4) {
       const { state } = activityOfType4;
       if (state) {
-        customStatus.innerHTML = `${state}`;
+        if (customStatus.innerHTML !== validator.escape(state))
+          customStatus.innerHTML = validator.escape(state);
       }
     }
   }
@@ -217,27 +234,30 @@ async function setActivityBigImage(): Promise<void> {
   } = await fetchResponse(USERID);
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (mostRecent?.emoji && !mostRecent?.assets?.large_image) {
+    var ext = "webp";
+    mostRecent?.emoji?.animated === true ? ext = "gif" : ext = "webp";
     bigImage.style.display = "block";
-    bigImage.src = `https://cdn.discordapp.com/emojis/${mostRecent.emoji.id}.webp?quality=lossless`;
-    bigImage.title = mostRecent.emoji.name;
+    if (bigImage.src !== `https://cdn.discordapp.com/emojis/${validator.escape(mostRecent.emoji.id)}.${ext}?quality=lossless`)
+      bigImage.src = `https://cdn.discordapp.com/emojis/${validator.escape(mostRecent.emoji.id)}.${ext}?quality=lossless`;
+    bigImage.title = validator.escape(mostRecent.emoji.name);
   } else if (!mostRecent?.assets?.large_image) {
     bigImage.style.display = "none";
     return;
   } else {
     const imageLink = mostRecent.assets.large_image.includes("external")
-      ? `https://media.discordapp.net/external/${
-          mostRecent.assets.large_image.split("mp:external/")[1]
-        }`
-      : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.large_image}.png?size=256`;
+      ? `https://media.discordapp.net/external/${mostRecent.assets.large_image.split("mp:external/")[1]
+      }`
+      : `https://cdn.discordapp.com/app-assets/${validator.escape(mostRecent.application_id)}/${validator.escape(mostRecent.assets.large_image)}.png?quality=lossless`;
     if (mostRecent.assets.large_image.includes("spotify")) {
       bigImage.style.display = "block";
-      bigImage.src = spotify!.album_art_url;
-      bigImage.title = spotify!.album;
+      bigImage.src = validator.escape(spotify!.album_art_url);
+      bigImage.title = validator.escape(spotify!.album);
       return;
     }
     bigImage.style.display = "block";
-    bigImage.src = imageLink;
-    bigImage.title = mostRecent.assets.large_text;
+    if (bigImage.src !== imageLink)
+      bigImage.src = imageLink;
+    bigImage.title = validator.escape(mostRecent.assets.large_text);
   }
 }
 
@@ -254,27 +274,36 @@ async function setActivitySmallImage(): Promise<void> {
     !mostRecent?.assets?.small_image ||
     mostRecent.assets.small_image.includes("spotify")
   ) {
-    smallImage.style.display = "none";
-    smallImageAlt.style.display = "none";
+    if (smallImage.style.display !== "none")
+      smallImage.style.display = "none";
+    if (smallImageAlt.style.display !== "none")
+      smallImageAlt.style.display = "none";
     return;
   }
 
   const imageLink = mostRecent.assets.small_image.includes("external")
-    ? `https://media.discordapp.net/external/${
-        mostRecent.assets.small_image.split("mp:external/")[1]
-      }`
+    ? `https://media.discordapp.net/external/${mostRecent.assets.small_image.split("mp:external/")[1]
+    }`
     : `https://cdn.discordapp.com/app-assets/${mostRecent.application_id}/${mostRecent.assets.small_image}.png?size=256`;
 
   if (!mostRecent.assets.large_image && mostRecent.assets.small_image) {
-    smallImageAlt.style.display = "block";
-    smallImageAlt.src = imageLink;
-    smallImageAlt.title = mostRecent.assets.small_text;
-    smallImage.style.display = "none";
+    if (smallImageAlt.style.display !== "block")
+      smallImageAlt.style.display = "block";
+    if (smallImageAlt.src !== imageLink)
+      smallImageAlt.src = imageLink;
+    if (smallImageAlt.title !== validator.escape(mostRecent.assets.small_text))
+      smallImageAlt.title = validator.escape(mostRecent.assets.small_text);
+    if (smallImage.style.display !== "none")
+      smallImage.style.display = "none";
   } else {
-    smallImageAlt.style.display = "none";
-    smallImage.style.display = "block";
-    smallImage.src = imageLink;
-    smallImage.title = mostRecent.assets.small_text;
+    if (smallImageAlt.style.display !== "none")
+      smallImageAlt.style.display = "none";
+    if (smallImage.style.display !== "block")
+      smallImage.style.display = "block";
+    if (smallImage.src !== imageLink)
+      smallImage.src = imageLink;
+    if (smallImage.title !== validator.escape(mostRecent.assets.small_text))
+      smallImage.title = validator.escape(mostRecent.assets.small_text);
   }
 }
 
@@ -288,7 +317,7 @@ async function setActivityName(): Promise<void> {
     return;
   }
   activityName.style.display = "block";
-  activityName.innerText = mostRecent.name;
+  activityName.innerText = validator.escape(mostRecent.name);
 }
 async function setActivityState(): Promise<void> {
   const response = await fetchResponse(USERID);
@@ -304,7 +333,7 @@ async function setActivityState(): Promise<void> {
   }
 
   activityState.style.display = "block";
-  activityState.innerText = mostRecent!.state ?? "";
+  activityState.innerText = validator.escape(mostRecent!.state) ?? "";
 }
 
 async function setTimestamp(): Promise<void> {
@@ -354,7 +383,7 @@ async function setActivityDetails(): Promise<void> {
     return;
   }
   activityDetail.style.display = "block";
-  activityDetail.innerText = mostRecent!.details ?? "";
+  activityDetail.innerText = validator.escape(mostRecent!.details) ?? "";
 }
 
 function presenceInvoke(): void {
