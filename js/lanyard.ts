@@ -20,11 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// TODO: Create activities instead of only showing one at a time.
+
 import validator from 'validator';
 import langEN from "../assets/lang/en-US.json?url";
 import langCN from "../assets/lang/zh-CN.json?url";
 
-const API_URL = "https://api.lanyard.rest/v1";
 const USERID = "485504221781950465";
 const pfp: HTMLImageElement = document.querySelector("#pfp")!;
 const customStatus: HTMLDivElement = document.querySelector("#customStatus")!;
@@ -43,22 +44,18 @@ let localizedText: LocalizedText | null;
 
 // Dexrn: This is really, really janky.
 async function lanyardGetLang(): Promise<string | null> {
-  const cookies = document.cookie.split(";");
-  for (const cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
-    if (name === "lang") {
-      return value ?? null;
-    }
-  }
-  return null;
+  const cookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("lang="));
+  return cookie ? cookie.split("=")[1] ?? null : null;
 }
 
-async function createActivity() {
+/*
+async function createActivity(lyData: LanyardAPI) {
   const {
-    data: { activities },
-  } = await fetchResponse(USERID);
+     activities,
+  } = lyData;
   console.log(activities.length);
 }
+*/
 
 async function lanyardCheckLang(lang: string | null): Promise<string> {
   let langPath: string;
@@ -73,6 +70,7 @@ async function lanyardCheckLang(lang: string | null): Promise<string> {
   }
   return langPath;
 }
+
 async function lanyardSetLang<T extends keyof LanyardLangNameMap>(langFilePath: string): Promise<LocalizedText<T> | null> {
   try {
     const response = await fetch(langFilePath);
@@ -80,17 +78,17 @@ async function lanyardSetLang<T extends keyof LanyardLangNameMap>(langFilePath: 
 
     return {
       // Dexrn: These are the language strings.
-      lyonline: data.OnlineText,
-      lydnd: data.DoNotDisturbText,
-      lyidle: data.IdleText,
-      lyoffline: data.OfflineText,
-      lyunknown: data.UnknownText,
-      lypin: data.PlatformsInUseText,
-      lyplatm: data.PlatformMobile,
-      lyplatd: data.PlatformDesktop,
-      lyplatw: data.PlatformWeb,
-      lytimee: data.TimeElapsedText,
-      lyna: data.NoActivityText,
+      lyonline: data.OnlineText || "Online",
+      lydnd: data.DoNotDisturbText || "Do Not Disturb",
+      lyidle: data.IdleText || "Idle",
+      lyoffline: data.OfflineText || "Offline",
+      lyunknown: data.UnknownText || "Unknown",
+      lypin: data.PlatformsInUseText || "Clients:",
+      lyplatm: data.PlatformMobile || "Mobile",
+      lyplatd: data.PlatformDesktop || "Desktop",
+      lyplatw: data.PlatformWeb || "Web",
+      lytimee: data.TimeElapsedText || "Elapsed:",
+      lyna: data.NoActivityText || "No Activity",
     };
   } catch (error) {
     console.error("Error whilst loading lang file:", error);
@@ -106,111 +104,56 @@ export async function actuallySetLanguage(): Promise<void> {
   } catch { }
 }
 
-async function fetchResponse(userId: string): Promise<LanyardAPI> {
-  try {
-    const res = await fetch(`${API_URL}/users/${userId}`);
-    return await res.json(); // this is where the type would come from
-  } catch (err) {
-    console.error(err);
-  }
+async function setAvatar(lyData: LanyardAPI): Promise<void> {
+    const {
+        discord_user: { avatar },
+    } = lyData;
+    const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=512`;
+    pfp.src = fullUrl;
+    // pfp2.src = fullUrl;
 }
-async function setAvatar(): Promise<void> {
+
+async function setAvatarFrame(lyData: LanyardAPI): Promise<void> {
   const {
-    data: {
-      discord_user: { avatar },
-    },
-  } = await fetchResponse(USERID);
-  const fullUrl = `https://cdn.discordapp.com/avatars/${USERID}/${avatar}.webp?size=512`;
-  pfp.src = fullUrl;
-  // pfp2.src = fullUrl;
-}
-async function setAvatarFrame(): Promise<void> {
-  const {
-    data: {
-      discord_status,
-      active_on_discord_mobile,
-      active_on_discord_web,
-      active_on_discord_desktop,
-      // custom
-    },
-  } = await fetchResponse(USERID);
-  // Dexrn: Jank incoming!
-  switch (discord_status) {
-    case "online":
-      if (onlineState.innerText !== localizedText!.lyonline) {
-        onlineState.innerText = localizedText!.lyonline;
-        pfp.style.border = "2px solid #3ba45d";
-        pfp.style.boxShadow = "0 0 20px #3ba45d";
-        onlineState.style.cssText = "color: #3ba45d; opacity: 1;";
-        platforms.style.cssText = "color: #3ba45d; opacity: 1;";
-      }
-      break;
-    case "dnd":
-      if (onlineState.innerText !== localizedText!.lydnd) {
-        pfp.style.border = "2px solid #ed4245";
-        pfp.style.boxShadow = "0 0 20px #ed4245";
-        onlineState.innerText = localizedText!.lydnd;
-        onlineState.style.cssText = "color: #ed4245; opacity: 1;";
-        platforms.style.cssText = "color: #ed4245; opacity: 1;";
-      }
-      break;
-    case "idle":
-      if (onlineState.innerText !== localizedText!.lyidle) {
-        onlineState.innerText = localizedText!.lyidle;
-        pfp.style.border = "2px solid #faa81a";
-        pfp.style.boxShadow = "0 0 20px #faa81a";
-        onlineState.style.cssText = "color: #faa81a; opacity: 1;";
-        platforms.style.cssText = "color: #faa81a; opacity: 1;";
-      }
-      break;
-    case "offline":
-      if (onlineState.innerText !== localizedText!.lyoffline) {
-        onlineState.innerText = localizedText!.lyoffline;
-        pfp.style.border = "2px solid #747e8c";
-        pfp.style.boxShadow = "0 0 20px #747e8c";
-        onlineState.style.cssText = "color: unset; opacity: 0.5;";
-      }
-      disc_isOffline = true;
-      break;
-    default:
-      if (onlineState.innerText !== localizedText!.lyunknown) {
-        onlineState.innerText = localizedText!.lyunknown;
-        pfp.style.border = "2px solid #747e8c";
-        pfp.style.boxShadow = "0 0 20px #747e8c";
-        onlineState.style.cssText = "color: unset; opacity: 0.5;";
-      }
-      disc_isOffline = true;
-      break;
-  }
+    discord_status,
+    active_on_discord_mobile,
+    active_on_discord_web,
+    active_on_discord_desktop,
+  } = lyData;
 
-  const platformarray: string[] = [];
+  const statusMapping = {
+    online: { color: "#3ba45d", text: localizedText!.lyonline, isOffline: false },
+    dnd: { color: "#ed4245", text: localizedText!.lydnd, isOffline: false },
+    idle: { color: "#faa81a", text: localizedText!.lyidle, isOffline: false },
+    offline: { color: "#747e8c", text: localizedText!.lyoffline, isOffline: true },
+    default: { color: "#747e8c", text: localizedText!.lyunknown, isOffline: true }
+  };
 
-  // Dexrn: I should make it show pictures instead.
-  if (active_on_discord_desktop == true) {
-    platformarray.push(`${localizedText!.lyplatd}`);
+  const { color, text, isOffline } = statusMapping[discord_status] || statusMapping.default;
+  if (onlineState.innerText !== text) {
+    onlineState.innerText = text;
+    pfp.style.border = `2px solid ${color}`;
+    pfp.style.boxShadow = `0 0 20px ${color}`;
+    onlineState.style.cssText = `color: ${color}; opacity: ${isOffline ? 0.5 : 1};`;
+    platforms.style.cssText = `color: ${color}; opacity: ${isOffline ? 0.5 : 1};`;
   }
+  disc_isOffline = isOffline ?? false;
 
-  if (active_on_discord_mobile == true) {
-    platformarray.push(`${localizedText!.lyplatm}`);
-  }
-
-  if (active_on_discord_web == true) {
-    platformarray.push(`${localizedText!.lyplatw}`);
-  }
+  const platformarray = [];
+  if (active_on_discord_desktop) platformarray.push(localizedText!.lyplatd);
+  if (active_on_discord_mobile) platformarray.push(localizedText!.lyplatm);
+  if (active_on_discord_web) platformarray.push(localizedText!.lyplatw);
 
   disc_platform = platformarray;
-
-  if (disc_isOffline != true)
-    // Dexrn: Best way I could think of doing it.
-    if (platforms.innerText !== `${localizedText!.lypin}${disc_platform}`)
-      platforms.innerText = `${localizedText!.lypin}${disc_platform}`;
+  if (!disc_isOffline && platforms.innerText !== `${localizedText!.lypin}${disc_platform}`)
+    platforms.innerText = `${localizedText!.lypin}${disc_platform}`;
 }
 
 
-async function setStatus(): Promise<void> {
+async function setStatus(lyData: LanyardAPI): Promise<void> {
   const {
-    data: { discord_status, activities },
-  } = await fetchResponse(USERID);
+     discord_status, activities
+  } = lyData;
 
   if (discord_status == "offline") {
     return;
@@ -226,12 +169,13 @@ async function setStatus(): Promise<void> {
       }
     }
   }
+
 }
 
-async function setActivityBigImage(): Promise<void> {
+async function setActivityBigImage(lyData: LanyardAPI): Promise<void> {
   const {
-    data: { activities, spotify },
-  } = await fetchResponse(USERID);
+    activities, spotify
+  } = lyData;
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (mostRecent?.emoji && !mostRecent?.assets?.large_image) {
     var ext = "webp";
@@ -259,13 +203,14 @@ async function setActivityBigImage(): Promise<void> {
       bigImage.src = imageLink;
     bigImage.title = validator.escape(mostRecent.assets.large_text);
   }
+
 }
 
 
-async function setActivitySmallImage(): Promise<void> {
+async function setActivitySmallImage(lyData: LanyardAPI): Promise<void> {
   const {
-    data: { activities },
-  } = await fetchResponse(USERID);
+    activities
+  } = lyData;
 
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
 
@@ -305,12 +250,13 @@ async function setActivitySmallImage(): Promise<void> {
     if (smallImage.title !== validator.escape(mostRecent.assets.small_text))
       smallImage.title = validator.escape(mostRecent.assets.small_text);
   }
+
 }
 
-async function setActivityName(): Promise<void> {
+async function setActivityName(lyData: LanyardAPI): Promise<void> {
   const {
-    data: { activities },
-  } = await fetchResponse(USERID);
+    activities
+  } = lyData;
   const mostRecent = activities.filter((m: { type: number; }) => m.type !== 4).shift();
   if (!mostRecent?.name) {
     activityName.innerText = localizedText!.lyna;
@@ -318,10 +264,11 @@ async function setActivityName(): Promise<void> {
   }
   activityName.style.display = "block";
   activityName.innerText = validator.escape(mostRecent.name);
+
 }
-async function setActivityState(): Promise<void> {
-  const response = await fetchResponse(USERID);
-  const activities = response.data.activities.filter((m) => m.type !== 4);
+async function setActivityState(lyData: LanyardAPI): Promise<void> {
+  const response = lyData;
+  const activities = response.activities.filter((m) => m.type !== 4);
   if (!activities.length) {
     activityState.style.display = "none";
     return;
@@ -334,11 +281,12 @@ async function setActivityState(): Promise<void> {
 
   activityState.style.display = "block";
   activityState.innerText = validator.escape(mostRecent!.state) ?? "";
+
 }
 
-async function setTimestamp(): Promise<void> {
-  const response = await fetchResponse(USERID);
-  const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
+async function setTimestamp(lyData: LanyardAPI): Promise<void> {
+  const response = lyData;
+  const activities = response.activities.filter((m: { type: number; }) => m.type !== 4);
   const mostRecent = activities.shift();
   let created: number | undefined;
   try {
@@ -368,11 +316,10 @@ async function setTimestamp(): Promise<void> {
     timeElapsed.innerHTML = "";
     timeElapsed.style.display = "none";
   }
-}
-async function setActivityDetails(): Promise<void> {
-  const response = await fetchResponse(USERID);
 
-  const activities = response.data.activities.filter((m: { type: number; }) => m.type !== 4);
+}
+async function setActivityDetails(lyData: LanyardAPI): Promise<void> {
+  const activities = lyData.activities.filter((m: { type: number; }) => m.type !== 4);
   if (!activities.length) {
     activityDetail.style.display = "none";
     return;
@@ -386,27 +333,50 @@ async function setActivityDetails(): Promise<void> {
   activityDetail.innerText = validator.escape(mostRecent!.details) ?? "";
 }
 
-function presenceInvoke(): void {
-  setActivityBigImage();
-  setActivitySmallImage();
-  setActivityName();
-  setActivityState();
-  setActivityDetails();
-}
+enum PID {
+  EventBW,      // s <-> c
+  HelloS2C,     // s --> c
+  InitC2S,      // s <-- c
+  HeartbeatC2S  // s <-- c
+};
 
-function statusInvoke(): void {
-  setStatus();
-  setAvatarFrame();
-}
 
-function invoke(): void {
-  setInterval(() => {
-    setTimestamp();
-    presenceInvoke();
-    statusInvoke();
-  }, 1000);
-  setAvatar();
-}
+await actuallySetLanguage();
 
-invoke();
-actuallySetLanguage();
+const ws = await new WebSocket("wss://api.lanyard.rest/socket");
+ws.onmessage = async function (res)  { 
+  try {
+    const data = JSON.parse(res.data);
+    switch (data.op) {
+      // relogic style
+      case PID.HelloS2C:
+        ws.send(JSON.stringify({
+          op: PID.InitC2S,
+          d: { subscribe_to_id: USERID }
+        }));
+        const { hb } = data.d;
+        setInterval(() => {
+            ws.send(JSON.stringify({ op: PID.HeartbeatC2S }));
+        }, hb);
+        break;
+      case PID.EventBW:
+            console.log("init")
+            setAvatar(data.d);
+            setStatus(data.d);
+            setAvatarFrame(data.d);
+            setActivityBigImage(data.d);
+            setActivitySmallImage(data.d);
+            setActivityName(data.d);
+            setActivityState(data.d);
+            setActivityDetails(data.d);
+            setTimestamp(data.d);
+            break;
+      default:
+        console.log(`RECIEVED UNKNOWN PACKET! ID: ${data.d || "UNKNOWN"}`)
+    }
+  } catch (e) {
+    console.log(`LANYARD THREW ERROR ${e}`)
+  }
+};
+
+

@@ -141,8 +141,6 @@ function readfile(data: Uint8Array) {
     // Dexrn: parse
     let majorversion, minorversion, revision;
     let offset = 0;
-    let zlibstreamcount = 0;
-    let zliboffset = 0; 
     const type = data[3];
     const format = magic;
     const framecount = ((data[16] ?? 0) | ((data[17] ?? 0) << 8));
@@ -152,15 +150,6 @@ function readfile(data: Uint8Array) {
     const padding = (data[10]);
     const encmode = (data[5] ?? 0).toString(16).padStart(2, '0');
     // let sprfiletype;
-    if (magic != "QM") {
-        for (let i = 0; i < data.length - 1; i++) {
-            if (data[i] === 0x78 && data[i + 1] === 0xDA) {
-                zlibstreamcount++;
-            }
-            zliboffset++;
-        }
-    }
-    
 
     let flags;
     let flag1;
@@ -287,8 +276,7 @@ function readfile(data: Uint8Array) {
             `Flags (raw): ${flags}\n` +
             `Quality: ${qual}\n` +
             `Width: ${width}\n` +
-            `Height: ${height}\n` +
-            `ZLib stream count: ${zlibstreamcount}`
+            `Height: ${height}\n`;
     } else if (magic === 'QM') {
         document.getElementById('output')!.textContent =
             `Format: ${format} (appears to be an animation)\n` +
@@ -322,8 +310,7 @@ function readfile(data: Uint8Array) {
             `Height: ${height}\n` +
             `Padding: ${padding}\n` +
             `Alpha Position(?): ${alphapos}\n` +
-            `Encoder Mode (raw): ${encmode}\n` +
-            `ZLib stream count: ${zlibstreamcount}`;
+            `Encoder Mode (raw): ${encmode}\n`;
     } else if (unknownversions.includes(magic)) {
         document.getElementById('output')!.textContent =
             `You have an unknown version of the QMG format, please contact dexrn on Discord, as we currently don't have this version yet.\n` +

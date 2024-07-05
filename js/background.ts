@@ -36,6 +36,7 @@ function setBGTime(): void {
 }
 
 export function fadeBG(bgload: boolean | Event): void {
+  console.log("bg");
   if (bgload == true) {
     if (bgElement) {
       // now we can use timezone stuffs to get time which should be more accurate I think?

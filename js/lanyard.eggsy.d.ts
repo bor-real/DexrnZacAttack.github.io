@@ -1,7 +1,6 @@
 // https://lanyard.eggsy.xyz/api/getting-user-presence
 
 declare interface LanyardAPI {
-    data: {
       kv: {
         lanyardOwner: string;
       };
@@ -28,7 +27,6 @@ declare interface LanyardAPI {
       listening_to_spotify: boolean;
     };
     success: boolean;
-  }
   
   declare type LanyardActivity = LanyardActivityLike | LanyardActivity4;
   

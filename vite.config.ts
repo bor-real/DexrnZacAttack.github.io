@@ -13,7 +13,7 @@ export default defineConfig({
         LCEE: resolve(__dirname, "LCEE/index.html"),
         403: resolve(__dirname, "403/index.html"),
         404: resolve(__dirname, "404/index.html"),
-      }
+      },
     }
   },
   server: {
@@ -22,6 +22,7 @@ export default defineConfig({
     strictPort: true
   },
   preview: {
+    open: true,
     host: '127.0.0.1',
     port: 80,
     strictPort: true

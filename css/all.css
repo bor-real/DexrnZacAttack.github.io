@@ -1,5 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&family=Roboto:wght@100;300;400;500;700&display=swap");
 
+:root {
+  --loading-screen-bg: url('/bgdark.webp');
+  --prim-bg-color: rgba(0, 0, 0, 0.6);
+  --alt-bg-color: rgba(50, 50, 50, 0.6);
+  --prim-control-color: rgba(0, 0, 0, 0.5);
+  --prim-border-color: rgba(100, 100, 100, 0.2);
+  --prim-img-border-color: rgba(15, 15, 15, 0.3);
+  --prim-moreopaque-border-color: rgba(100, 100, 100, 0.5);
+  --prim-control-border-color: rgba(150, 150, 150, 0.2);
+  --prim-other-bg-color: rgba(0, 0, 0, 0.2);
+  --prim-reading-bg-color: rgba(15, 15, 15, 1);
+  --prim-color: rgba(0, 0, 0, 1);
+  --prim-hover-color: rgba(0, 120, 215, 0.3);
+  --prim-subborder-color: rgba(255, 255, 255, 0.212);
+  --prim-shadow-color: rgba(0, 0, 0, 0.6);
+  --alt-border-size: 4px;
+  --prim-border-size: 2px;
+  --prim-text-color: white;
+  --href-color: #109fff;
+  --href-hover-color: #0b6cac;
+}
+
+body, button {
+  font-family: "Roboto", sans-serif;
+}
+
+.blogPostPreview {
+  text-align: center;
+  background-color: var(--prim-control-color);
+  border-radius: 10px;
+  border: var(--prim-border-size) solid var(--prim-border-color);
+}
+
+.blogTitlePreview {
+  text-align: center;
+}
+
+.postTitle {
+  text-align: center;
+  background-color: var(--prim-control-color);
+  border-radius: 10px;
+  border: var(--prim-border-size) solid var(--prim-border-color);
+}
+
 /* CONTROLS */
 .drpdwnbtn {
   background-color: transparent;
@@ -14,7 +58,343 @@
   margin: 1%;
 }
 
+
+.imgcontainer {
+  border: solid 1px var(--prim-color);
+  border-radius: 10%;
+}
+
+body {
+  background: var(--loading-screen-bg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.imgcontaineralt {
+  border: solid 1px var(--prim-color);
+  border-radius: 10%;
+  background-color: var(--prim-other-bg-color);
+}
+
+.expandcard {
+  border: var(--prim-border-size) solid var(--prim-border-color);
+  box-shadow: 0 0 10px 5px var(--prim-control-color);
+  background-color: var(--alt-bg-color);
+  color: var(--prim-text-color);
+}
+
+#pfp {
+  background: var(--prim-other-bg-color);
+}
+
+.bookbtn {
+  background: var(--prim-control-color);
+  border-radius: 10px;
+  border: none;
+  width: 160px;
+  height: 160px;
+}
+
+.bookname:hover {
+  color: var(--prim-text-color) !important;
+}
+
+.bookname {
+  color: var(--prim-text-color);
+}
+
+.loadingScreen {
+  background: var(--loading-screen-bg);
+  background-color: var(--prim-color);
+}
+
+body {
+  background-color: var(--prim-color);
+  color: var(--prim-text-color);
+}
+
+.readingcard {
+  background: var(--prim-reading-bg-color) !important;
+}
+
+.drpdwnbtn {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  color: var(--prim-text-color);
+}
+
+.drpdwnbtn option {
+  color: initial;
+}
+
+.a {
+  color: var(--prim-text-color);
+}
+
+.loadingScreen .loading #lightLSpinner {
+  display: block;
+  animation: 1s ease-out 0s 1 fadeIn;
+}
+
+.loadingScreen .loading #darkLSpinner {
+  display: none;
+}
+
+#normalmode {
+  background-image: url("https://raw.githubusercontent.com/DexrnZacAttack/DexrnZacAttack.github.io/main/assets/webbanner.png");
+  /* background-color: rgb(12, 12, 12); */
+}
+
+.button {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  color: var(--prim-text-color);
+}
+
+.mainCardsContainer {
+  color: var(--prim-text-color);
+}
+
+.container2 {
+  color: var(--prim-text-color);
+}
+
+.tabbutton {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  background: var(--alt-bg-color);
+  color: var(--prim-text-color);
+}
+
 .tabbuttonclicked {
+  border: var(--prim-border-size) solid var(--prim-border-color);
+  background: var(--prim-bg-color);
+  color: var(--prim-text-color);
+}
+
+.buttonalt {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  color: var(--prim-text-color);
+  background: var(--prim-control-color);
+}
+
+.buttonalt2 {
+  color: var(--prim-text-color);
+}
+
+#savebtn {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  color: var(--prim-text-color);
+}
+
+/* Button pseudo classes */
+
+.button:hover {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(1.1);
+}
+
+.button2:hover {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(1.1);
+}
+
+.buttonalt:hover {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  color: var(--prim-text-color);
+  transform: scale(1.1);
+}
+
+.buttonalt2:hover {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  color: var(--prim-text-color);
+}
+
+.connection-icon:hover {
+  transform: scale(1.2);
+}
+
+.connection-icon2:hover {
+  transform: scale(1.2);
+}
+
+.back:hover {
+  opacity: 1;
+}
+
+.button:active {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(0.8);
+}
+
+.buttonalt:active {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(0.8);
+}
+
+.buttonalt2:active {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(0.8);
+}
+
+.button2:active {
+  box-shadow: 0 0 32px 0 var(--prim-hover-color);
+  transform: scale(0.5);
+}
+
+.connection-icon:active {
+  transform: scale(0.8);
+}
+
+.connection-icon2:active {
+  transform: scale(0.8);
+}
+
+.topcard {
+  border: var(--prim-border-size) solid var(--prim-border-color);
+  background: var(--prim-bg-color);
+  box-shadow: 0 0 10px 5px var(--prim-shadow-color);
+  color: var(--prim-text-color);
+}
+
+@keyframes panorama {
+  0% {
+    background-position: 0;
+  }
+
+  100% {
+    background-position: calc(100vh / 144 * -820);
+  }
+}
+
+codeblock {
+  color: var(--prim-text-color);
+  background-color: var(--prim-reading-bg-color);
+}
+
+.msgbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 560px;
+  max-height: 360px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  -webkit-box-shadow: 0 0 10px 5px var(--prim-control-color);
+     -moz-box-shadow: 0 0 10px 5px var(--prim-control-color);
+          box-shadow: 0 0 10px 5px var(--prim-control-color);
+  -webkit-animation: 1s ease-in-out 0s 1 fadeIn;
+     -moz-animation: 1s ease-in-out 0s 1 fadeIn;
+       -o-animation: 1s ease-in-out 0s 1 fadeIn;
+          animation: 1s ease-in-out 0s 1 fadeIn;
+  background-color: var(--prim-control-color);
+  -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+          border-radius: 20px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* this looks kinda cool, might change or remove later tho. */
+#normalmode {
+  box-shadow: 0 0 10px 5px var(--prim-bg-color);
+}
+
+#files {
+  background-color: var(--prim-other-bg-color);
+  backdrop-filter: blur(10px);
+  border: var(--alt-border-size) solid var(--prim-moreopaque-border-color);
+  border-radius: 10px;
+}
+
+.LCEFolder {
+  background-color: var(--prim-other-bg-color);
+  backdrop-filter: blur(10px);
+  border: var(--alt-border-size) solid var(--prim-moreopaque-border-color);
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  border: var(--prim-border-size) solid var(--prim-border-color);
+  background: var(--prim-bg-color);
+  box-shadow: 0 0 10px 5px var(--prim-shadow-color);
+  color: var(--prim-text-color);
+}
+
+.subcard {
+  border: var(--prim-border-size) solid var(--prim-subborder-color);
+}
+
+.button2 {
+  border: var(--prim-border-size) solid var(--prim-control-border-color);
+  background-color: transparent;
+}
+
+#activityImageSmall {
+  border: 2px solid var(--prim-img-border-color); /* ALWAYS USE 2PX */
+}
+
+.bottomright {
+  color: var(--prim-text-color)fff;
+}
+
+a {
+  color: var(--href-color);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--href-hover-color);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222222;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5c5c5c;
+  border-radius: 100vh;
+  margin-block: 10em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #363636;
+}
+
+
+.tabbuttonclicked {
+  border-bottom: none;
   backdrop-filter: blur(30px);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -37,6 +417,7 @@
 }
 
 .tabbutton {
+  border-bottom: none;
   backdrop-filter: blur(30px);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -107,11 +488,10 @@
 }
 
 .topcard {
-  /* box-shadow: 0 8px 32px 0 rgba(0, 120, 215, 0.1); */
   backdrop-filter: blur(30px);
   border-radius: 10px;
   padding: 12px;
-  width: 55%;
+  width: 50%;
 }
 
 
@@ -366,7 +746,7 @@ a {
   max-height: 300px; 
   width: 100%;
   overflow-y: auto; 
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--prim-other-bg-color);
   border-radius: 10px;
 }
 
@@ -468,10 +848,9 @@ a {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  /* color: #fff; */
+  /* color: var(--prim-text-color); */
   height: 100%;
   width: 100%;
   background-size: cover;

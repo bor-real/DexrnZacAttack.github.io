@@ -6,3 +6,5 @@ Thumbs.db
 mcbg.png
 /node_modules
 /dist
+/.vscode
+run.bat
