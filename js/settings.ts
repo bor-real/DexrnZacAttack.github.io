@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-import defaultLight from "../css/default-light.css?url";
-import defaultDark from "../css/default-dark.css?url";
 import langEN from "../assets/lang/en-US.json?url";
 import langCN from "../assets/lang/zh-CN.json?url";
 
@@ -35,14 +33,50 @@ export function setTheme(theme: "default-light" | "default-dark") {
 }
 
 function applyTheme(theme: Theme): void {
-  const stylesheetElement = (document.getElementById("theme") as HTMLLinkElement);
+  const root = document.documentElement;
   switch (theme) {
     case "default-light":
-      stylesheetElement.href = defaultLight;
+      root.style.setProperty('--loading-screen-bg', 'url(\'/bglight.webp\')');
+      root.style.setProperty('--prim-bg-color', 'rgba(255, 255, 255, 0.3)');
+      root.style.setProperty('--alt-bg-color', 'rgba(200, 200, 200, 0.3)');
+      root.style.setProperty('--prim-control-color', 'rgba(255, 255, 255, 0.5)');  
+      root.style.setProperty('--prim-border-color', 'rgba(255, 255, 255, 0.2)'); 
+      root.style.setProperty('--prim-img-border-color', 'rgba(15, 15, 15, 0.3)'); 
+      root.style.setProperty('--prim-moreopaque-border-color', 'rgba(200, 200, 200, 0.5)'); 
+      root.style.setProperty('--prim-control-border-color', 'rgba(200, 200, 200, 0.2)'); 
+      root.style.setProperty('--prim-other-bg-color', 'rgba(255, 255, 255, 0.2)');
+      root.style.setProperty('--prim-reading-bg-color', 'rgba(229, 229, 229, 1)');
+      root.style.setProperty('--prim-color', 'rgba(255, 255, 255, 1)');
+      root.style.setProperty('--prim-hover-color', 'rgba(0, 120, 215, 0.3)'); 
+      root.style.setProperty('--prim-subborder-color', 'rgba(255, 255, 255, 0.212)'); 
+      root.style.setProperty('--prim-shadow-color', 'rgba(100, 100, 100, 0.3)'); 
+      root.style.setProperty('--alt-border-size', '4px'); 
+      root.style.setProperty('--prim-border-size', '2px');
+      root.style.setProperty('--prim-text-color', 'black');
+      root.style.setProperty('--href-color', '#0c3485');
+      root.style.setProperty('--href-hover-color', '#07235c');
       break;
     case "default-dark":
     default:
-      stylesheetElement.href = defaultDark;
+      root.style.setProperty('--loading-screen-bg', 'url(\'/bgdark.webp\')');
+      root.style.setProperty('--prim-bg-color', 'rgba(0, 0, 0, 0.6)');
+      root.style.setProperty('--alt-bg-color', 'rgba(50, 50, 50, 0.6)');
+      root.style.setProperty('--prim-control-color', 'rgba(0, 0, 0, 0.5)');
+      root.style.setProperty('--prim-border-color', 'rgba(100, 100, 100, 0.2)');
+      root.style.setProperty('--prim-img-border-color', 'rgba(15, 15, 15, 0.3)');
+      root.style.setProperty('--prim-moreopaque-border-color', 'rgba(100, 100, 100, 0.5)');
+      root.style.setProperty('--prim-control-border-color', 'rgba(150, 150, 150, 0.2)');
+      root.style.setProperty('--prim-other-bg-color', 'rgba(0, 0, 0, 0.2)');
+      root.style.setProperty('--prim-reading-bg-color', 'rgba(15, 15, 15, 1)');
+      root.style.setProperty('--prim-color', 'rgba(0, 0, 0, 1)');
+      root.style.setProperty('--prim-hover-color', 'rgba(0, 120, 215, 0.3)');
+      root.style.setProperty('--prim-subborder-color', 'rgba(255, 255, 255, 0.212)');
+      root.style.setProperty('--prim-shadow-color', 'rgba(0, 0, 0, 0.6)');
+      root.style.setProperty('--alt-border-size', '4px'); 
+      root.style.setProperty('--prim-border-size', '2px');
+      root.style.setProperty('--prim-text-color', 'white');
+      root.style.setProperty('--href-color', '#109fff');
+      root.style.setProperty('--href-hover-color', '#0b6cac');
       break;
   }
 }
@@ -56,7 +90,7 @@ export function getThemeCookie<K extends string>(name: K): K extends "Theme" ? T
       return cookieValue;
     }
   }
-  return null;
+  return "unselectedtheme";
 }
 
 const savedTheme = getThemeCookie("Theme");
@@ -64,6 +98,10 @@ const savedTheme = getThemeCookie("Theme");
 applyTheme(savedTheme);
 
 export function checkLang(syslang?: keyof LanyardLangNameMap): void {
+  setLang(getLangFilePath(syslang));
+}
+
+export function getLangFilePath(syslang?: keyof LanyardLangNameMap): string {
   const lang = getLang();
   let langFilePath;
   if (lang) {
@@ -87,22 +125,46 @@ export function checkLang(syslang?: keyof LanyardLangNameMap): void {
     }} else {
       langFilePath = langEN;
     }
-  setLang(langFilePath);
+  return langFilePath;
 }
 
 
 checkLang();
 
-export function getLang(): string | undefined | null {
+export function getLang(): keyof LanyardLangNameMap | undefined | null {
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");
     if (name === "lang") {
-      return value;
+      return value as keyof LanyardLangNameMap;
     }
   } 
   return null;
 }
+
+export async function getTranslation(str: string): Promise<string> {
+  const langPath = getLangFilePath();
+  
+  return fetch(langPath)
+    .then((response) => {
+      if (!response.ok) {
+        return "fetch error";
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data[str]) {
+        return data[str].toString();
+      } else {
+        return "string not found";
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching translations:', error);
+      return 'translation list error';
+    });
+}
+
 
 // Dexrn: Localization! (Kinda janky.)
 function setLang(langFilePath: string): void {
@@ -151,8 +213,8 @@ function setLang(langFilePath: string): void {
       checkIfExists("themetxt", data.ThemeText);
       checkIfExists("ftlThemeTxt", data.FirstTimeLoadThemeText);
       checkIfExists("blogbtntxt", data.BlogButtonText);
-      checkIfExists("bbutton", data.StuffText);
-      checkIfExists("stuff2-path", data.MyStuffPath);
+      checkIfExists("bbutton", data.BlogText);
+      checkIfExists("stuff2-path", data.BlogPath);
       checkIfExists("darkopt", data.InitialSetupDarkThemeOption);
       checkIfExists("lightopt", data.InitialSetupLightThemeOption);
     })

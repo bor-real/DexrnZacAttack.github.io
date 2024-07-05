@@ -21,7 +21,7 @@ SOFTWARE.
 */
 
 import { render } from "./LCEE-GUI.js";
-import { readSave, decompressVitaRLE } from "liblce";
+import { readSave, decompressVitaRLE, index } from "liblce";
 
 import type JSZip from "jszip";
 import type { Endian } from "nbtify";
@@ -30,7 +30,6 @@ const compModeBtn: HTMLButtonElement = document.querySelector("#CompModeBtn")!;
 
 let endianness: Endian;
 let littleEndian: boolean;
-let doNotSaveDOM: boolean = false;
 let savegameName: string;
 
 let vita: boolean = false;
@@ -39,13 +38,13 @@ export function switchCompressionMode(mode: number): void {
   switch (mode) {
     case 0:
       compModeBtn.innerText =
-        "Save type: Wii U, PS3, Decompressed Xbox 360";
+        "Save type: Wii U, PS3, Xbox 360 (Decompressed)";
       endianness = "big";
       vita = false;
       break;
     case 1:
       compModeBtn.innerText =
-        "Save type: Switch, PS4";
+        "Save type: Switch, PS4, Xbox One";
       endianness = "little";
       vita = false;
       break;
@@ -74,7 +73,7 @@ export async function readFile(data: File, sgName: string): Promise<void> {
   savegameName = sgName;
   try {
     const fileArray = new Uint8Array(await data.arrayBuffer());
-    let saveFiles = {};
+    let saveFiles: index[] = [];
     if (!endianness) endianness = "big";
 
     if (endianness == "little") {
@@ -93,9 +92,9 @@ export async function readFile(data: File, sgName: string): Promise<void> {
     }
     if (data) {
       if (vita !== true) {
-        saveFiles = await readSave(data, littleEndian);
+        saveFiles = (await readSave(data, littleEndian)).fileIndex;
       } else {
-        saveFiles = await readSave(new File([new Blob([decompressVitaRLE(fileArray.slice(8))])], data.name), littleEndian);
+        saveFiles = (await readSave(new File([new Blob([decompressVitaRLE(fileArray.slice(8))])], data.name), littleEndian)).fileIndex;
       }
     } else {
       console.error("No data received...");

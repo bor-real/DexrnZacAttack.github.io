@@ -50,9 +50,11 @@
     "BlogButtonText": "Blog",
     "DiscordPath": "@Dexrn > Home",
     "SteamPath": "@Dexrn > Steam",
-    "MyStuffPath": "@Dexrn > My Stuff",
-    "StuffText": "My stuff",
+    "BlogPath": "@Dexrn > Blog",
+    "BlogText": "Blog",
     "InitialSetupDarkThemeOption": "Dark",
-    "InitialSetupLightThemeOption": "Light"
+    "InitialSetupLightThemeOption": "Light",
+    "BlogNoPosts": "No posts found.",
+    "UniversalLoading": "Loading..."
 }
   

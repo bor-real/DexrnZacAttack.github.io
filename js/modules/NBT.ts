@@ -26,7 +26,7 @@ import { read } from "nbtify";
 import type { NBTData } from "nbtify";
 
 
-export async function readNBTfromFile(file: index, fName: string): Promise<NBTData | undefined> {
+export async function readNBTfromFile(file: index): Promise<NBTData | undefined> {
     try {
         return await read(await new Blob([file.data]).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false });
     } catch (e) {
@@ -35,7 +35,7 @@ export async function readNBTfromFile(file: index, fName: string): Promise<NBTDa
     }
 }
 
-export async function isReadable(file: index, fName: string): Promise<boolean> {
+export async function isReadable(file: index): Promise<boolean> {
     try {
         if (await read(await new Blob([file.data]).arrayBuffer(), { rootName: true, endian: "big", bedrockLevel: false, strict: false })) {
             return true;

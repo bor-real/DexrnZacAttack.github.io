@@ -24,7 +24,6 @@ SOFTWARE.
 <html lang="en">
   <head>
     <title>Dexrn's Hell Hole > Legacy Console Edition file extractor</title>
-    <link id="theme" rel="stylesheet" href />
     <link id="theme" rel="stylesheet" href="../css/all.css">
     <meta
       content="Dexrn's Hell Hole > Legacy Console Edition savegame extractor"
@@ -54,29 +53,28 @@ SOFTWARE.
           style="cursor: pointer"
           id="back"
           linkto="../"
-          style="width: 55%">
+          >
           <div class="back" id="backbtn"></div>
         </div>
         <div
         class="topcard"
         style="cursor: pointer;display:none;"
         id="backNBTBtn"
-        style="width: 55%">
+        >
         <div class="back" id="backNBT"></div>
       </div>
-        <div class="card" id="nbtCard" style="width: 55%; height: 500px;display:none;flex-direction:column;">
+        <div class="card" id="nbtCard" style="height: 500px;display:none;flex-direction:column;">
           <div class="cardTitle" id="lcee-nbt-path"></div>
           <pre id="nbtData" style="overflow-y:auto;overflow-x:auto;"></pre>
         </div>
         <div class="card" id="lceCard"
-          style="width: 55%; height: 500px;display:flex;flex-direction:column;">
+          style="height: 500px;display:flex;flex-direction:column;">
           <div class="cardTitle" id="lcee-path"></div>
           <h3>NOTE: This is unfinished UX/UI wise.</h3>
           <pre id="output"></pre>
           <div id="files"></div>
           <div class="center">
-            <button class="button" id="CompModeBtn">Save type: Wii U, PS3,
-              Decompressed Xbox 360</button>
+            <button class="button" id="CompModeBtn">Save type: Wii U, PS3, Xbox 360 (Decompressed)</button>
             <label for="fileInput" class="button2"
               id="lcefileselectbtn"></label>
             <input
@@ -88,11 +86,10 @@ SOFTWARE.
         <!-- <div class="card" id="headercard">
         <pre id="header"></pre>
        </div> -->
-        <div class="topcard" style="cursor: pointer" style="width: 55%">
+        <div class="topcard" style="cursor: pointer" >
           <div class="back buttonRedirect"
             linkto="https://github.com/zugebot/LegacyEditor"
-            style="text-align:center;font-weight: unset;font-family: unset;font-size:16px;opacity: 1;"><a>The VitaRLE parsing code was ported from another project by Zugebot
-              (jerrinth3glitch)</a></h2>
+            style="text-align:center;font-weight: unset;font-family: unset;font-size:16px;opacity: 1;"><a>A lot of the (de)compression code was ported from Zugebot (jerrinth3glitch)'s LegacyEditor</a></h2>
       <!-- Last update date -->
       <p class="lastUpdated" id="lastUpdated"></p>
     </div>

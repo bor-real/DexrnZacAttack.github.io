@@ -18,6 +18,7 @@ export async function render(files: index[]): Promise<void> {
   (document.querySelector("#output") as HTMLDivElement)!.style.display = "none";
   var zip = new JSZip();
   for (const file of (await files)) {
+    console.log(file.name);
     const blobUrl = URL.createObjectURL(file.data);
     // may or may not make some of these elements their own function
     var LCEFileContainer = document.createElement("div");
@@ -44,9 +45,9 @@ export async function render(files: index[]): Promise<void> {
       folderName.className = "LCEFolderName";
       if (!document.getElementById("LCEFolder_" + lceFileFolder[0])) {
         // add the folderName to the lceFolder if it doesn't already exist(god this is so weird)
-        lceFolder.appendChild(folderName);
         lceFolder.className = "LCEFolder";
         lceFolder.id = "LCEFolder_" + lceFileFolder[0];
+        lceFolder.appendChild(folderName);
       }
 
       // add the folder into the upper files div
@@ -64,11 +65,10 @@ export async function render(files: index[]): Promise<void> {
       lceRoot.appendChild(LCEFileContainer);
     }
 
-    console.log(await readNBTfromFile(file, file.name));
-    if ((await isReadable(file, file.name)) == true) {
+    if ((await isReadable(file)) == true) {
       var viewNBTButton = document.createElement("button");
       viewNBTButton.onclick = async () => {
-        showNBTCard(await readNBTfromFile(file, file.name));
+        showNBTCard(await readNBTfromFile(file));
       };
       
       viewNBTButton.innerText = "View NBT";
