@@ -23,5 +23,8 @@
     "@types/validator": "^13.11.9",
     "typescript": "^5.4.5",
     "vite": "^5.3.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
